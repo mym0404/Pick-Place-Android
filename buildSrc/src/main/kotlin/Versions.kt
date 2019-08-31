@@ -26,8 +26,6 @@ object Versions {
 
   const val androidx_test: String = "1.2.0"
 
-  const val viewpager2: String = "1.0.0-beta03"
-
   const val multidex: String = "1.0.3"
 
   const val aapt2: String = "3.5.0-5435860"
@@ -53,6 +51,8 @@ object Versions {
   const val autofittextview: String = "0.2.1"
 
   const val org_jetbrains_kotlin: String = "1.3.50"
+
+  const val robolectric: String = "4.3"
 
   /**
    *

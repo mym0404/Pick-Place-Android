@@ -75,8 +75,6 @@ object Libs {
    */
   const val androidx_test_runner: String = "androidx.test:runner:" + Versions.androidx_test
 
-  const val viewpager2: String = "androidx.viewpager2:viewpager2:" + Versions.viewpager2
-
   const val multidex: String = "com.android.support:multidex:" + Versions.multidex
 
   /**
@@ -182,4 +180,9 @@ object Libs {
    */
   const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib:" +
       Versions.org_jetbrains_kotlin
+
+  /**
+   * http://robolectric.org
+   */
+  const val robolectric: String = "org.robolectric:robolectric:" + Versions.robolectric
 }

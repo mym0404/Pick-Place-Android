@@ -38,6 +38,11 @@ android {
         sourceCompatibility = constants.sourceCompatibility
         targetCompatibility = constants.targetCompatibility
     }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 //App
@@ -74,6 +79,7 @@ dependencies {
     testImplementation Libs.com_google_truth_truth
     testImplementation Libs.espresso_core
     testImplementation Libs.espresso_contrib
+    testImplementation Libs.robolectric
 }
 
 //AndroidTest

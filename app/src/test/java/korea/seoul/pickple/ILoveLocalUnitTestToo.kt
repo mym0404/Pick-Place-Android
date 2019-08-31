@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
@@ -12,16 +13,16 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import kotlin.math.abs
 import kotlin.random.Random
 
-@RunWith(AndroidJUnit4::class)
-class ILoveInstrumentationTest {
+@RunWith(RobolectricTestRunner::class)
+class ILoveLocalUnitTestToo {
 
     @Test
     fun useAppContext() {
@@ -31,6 +32,8 @@ class ILoveInstrumentationTest {
 
         scenario.onActivity {
         }
+
+        scenario.moveToState(Lifecycle.State.RESUMED)
 
         val tvInteraction = onView(withId(R.id.textView)).perform(SetTextViewText(message))
 
