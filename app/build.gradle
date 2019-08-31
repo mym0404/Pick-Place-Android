@@ -10,16 +10,17 @@ androidExtensions {
     experimental = true
 }
 android {
-    def ext = rootProject.ext
 
-    compileSdkVersion ext.targetSdkVersion
+    def constants = rootProject.ext
+    compileSdkVersion constants.targetSdkVersion
+
     defaultConfig {
-        applicationId "korea.seoul.pickple"
-        minSdkVersion ext.minSdkVersion
-        targetSdkVersion ext.targetSdkVersion
-        versionCode ext.versionCode
-        versionName ext.versionName
-        testInstrumentationRunner ext.testInstrumentationRunner
+        applicationId constants.packageName
+        minSdkVersion constants.minSdkVersion
+        targetSdkVersion constants.targetSdkVersion
+        versionCode constants.versionCode
+        versionName constants.versionName
+        testInstrumentationRunner constants.testInstrumentationRunner
 
         multiDexEnabled true
 
@@ -41,52 +42,49 @@ android {
 
 //App
 dependencies {
-    def dep = rootProject.ext.dependencies
-
     //Retrofit
-    implementation dep.retrofit
-    implementation dep.gsonConverter
-    implementation dep.scalarConverter
+    implementation Libs.retrofit
+    implementation Libs.converter_gson
+    implementation Libs.converter_scalars
 
     //Glide
-    implementation dep.glide
-    kapt dep.glideCompiler
+    implementation Libs.glide
+    kapt Libs.com_github_bumptech_glide_compiler
 
     //UI
-    implementation dep.viewpager2
-    implementation dep.constraintLayout
-    implementation dep.material
-    implementation dep.autofitTextView
+    implementation Libs.constraintlayout
+    implementation Libs.material
+    implementation Libs.autofittextview
 
     //ETC
-    implementation dep.kotlinStdLib
-    implementation dep.appCompat
-    implementation dep.dexter
-    implementation dep.multiDex
+    implementation Libs.kotlin_stdlib
+    implementation Libs.appcompat
+    implementation Libs.dexter
+    implementation Libs.multidex
 }
 
 //Test
 dependencies {
-    testImplementation 'androidx.test:core:1.2.0'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'androidx.test:runner:1.2.0'
-    testImplementation 'androidx.test:rules:1.2.0'
-    testImplementation 'androidx.test.ext:junit:1.1.1'
-    testImplementation 'androidx.test.ext:truth:1.2.0'
-    testImplementation 'com.google.truth:truth:0.43'
-    testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    testImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    testImplementation Libs.androidx_test_core
+    testImplementation Libs.junit_junit
+    testImplementation Libs.androidx_test_runner
+    testImplementation Libs.androidx_test_rules
+    testImplementation Libs.androidx_test_ext_junit
+    testImplementation Libs.androidx_test_ext_truth
+    testImplementation Libs.com_google_truth_truth
+    testImplementation Libs.espresso_core
+    testImplementation Libs.espresso_contrib
 }
 
 //AndroidTest
 dependencies {
-    androidTestImplementation 'androidx.test:core:1.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.ext:truth:1.2.0'
-    androidTestImplementation 'com.google.truth:truth:0.43'
+    androidTestImplementation Libs.androidx_test_core
+    androidTestImplementation Libs.androidx_test_runner
+    androidTestImplementation Libs.espresso_core
+    androidTestImplementation Libs.espresso_contrib
+    androidTestImplementation Libs.androidx_test_rules
+    androidTestImplementation Libs.androidx_test_ext_junit
+    androidTestImplementation Libs.androidx_test_ext_truth
+    androidTestImplementation Libs.com_google_truth_truth
 }
 
