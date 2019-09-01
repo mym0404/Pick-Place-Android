@@ -25,7 +25,7 @@ import kotlin.random.Random
 class ILoveInstrumentationTest {
 
     @Test
-    fun useAppContext() {
+    fun `이테스트는현란합니다`() {
         val message = "Hi I am MJStudio.\nI am very boring now."
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)

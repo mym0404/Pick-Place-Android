@@ -13,11 +13,13 @@ import androidx.test.espresso.ViewAction
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.filters.LargeTest
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -25,8 +27,10 @@ import kotlin.random.Random
 class ILoveLocalUnitTestToo {
 
     @Test
-    fun useAppContext() {
-        val message = "Hi I am MJStudio.\nI am very boring now."
+    @LargeTest
+    @Config(sdk = [23])
+    fun `이 로컬 유닛 테스트는 성공합니다`() {
+        val message = "I am very boring now."
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
 
@@ -37,7 +41,7 @@ class ILoveLocalUnitTestToo {
 
         val tvInteraction = onView(withId(R.id.textView)).perform(SetTextViewText(message))
 
-        Thread.sleep((message.count() + 3) * 600L)
+        Thread.sleep((message.count() + 3) * 100L)
 
         tvInteraction.check(
             matches(
@@ -80,7 +84,7 @@ class ILoveLocalUnitTestToo {
                     }
                 }
 
-                duration = message.count() * 600L
+                duration = message.count() * 100L
                 interpolator = LinearInterpolator()
                 start()
             }
