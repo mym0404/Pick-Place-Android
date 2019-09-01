@@ -1,21 +1,30 @@
 buildscript {
-    ext.kotlin_version = '1.3.50'
+    ext.androidGradlePluginVersion = '3.5.0'
+    ext.kotlinVersion = '1.3.50'
+
     repositories {
         google()
         jcenter()
         
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:$androidGradlePluginVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+/**
+ * buildSrcVersion Gradle Plugin
+ */
 plugins {
     id 'de.fayard.buildSrcVersions' version '0.4.2'
 }
 
+/**
+ * 상수
+ */
 ext {
     packageName = 'korea.seoul.pickple'
     minSdkVersion = 23

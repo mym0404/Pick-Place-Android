@@ -11,7 +11,11 @@ androidExtensions {
 }
 android {
 
+    /**
+     * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용
+     */
     def constants = rootProject.ext
+    
     compileSdkVersion constants.targetSdkVersion
 
     defaultConfig {
@@ -22,22 +26,51 @@ android {
         versionName constants.versionName
         testInstrumentationRunner constants.testInstrumentationRunner
 
+        /**
+         * MultiDex를 명시적으로 사용해줍니다. (API > 21 부턴 필요 X)
+         */
         multiDexEnabled true
 
+        /**
+         * 데이터 바인딩 사용합니다.
+         */
         dataBinding.enabled = true
 
+        /**
+         * VectorDrawable이 낮은 SDK에서 충돌이 일어나지 않게 해줍니다.
+         */
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
+            /**
+             * Release 빌드에서 코드의 shrink를 허용합니다.
+             * 3.4부터 R8이 Proguard 대신 default로 사용되고 Proguard는 쓰이지 않습니다.
+             */
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    /**
+     * 기존 src/main/java 폴더에 있는 소스 코드들을 src/main/kotlin 에서 사용할 수 있게 해줍니다.
+     * 좌측 Project 탭에서 Android 로 설정하면 그래도 java라고 표시되는 Android Studio의 오류가 있습니다.
+     * 실제 경로는 src/main/kotlin 입니다.
+     */
+    sourceSets{
+        main.java.srcDirs = ['src/main/kotlin']
+        test.java.srcDirs = ['src/test/kotlin']
+        androidTest.java.srcDirs = ['src/androidTest/kotlin']
+    }
+    /**
+     * 자바 1.8과 호환이 가능하도록 설정해줍니다.
+     */
     compileOptions {
         sourceCompatibility = constants.sourceCompatibility
         targetCompatibility = constants.targetCompatibility
     }
+    /**
+     * 테스트 코드에서 Integration 테스트를 위해 허용해줍니다.
+     */
     testOptions {
         unitTests {
             includeAndroidResources = true
@@ -45,7 +78,16 @@ android {
     }
 }
 
-//App
+/**
+ * App에서 사용할 라이브러리들
+ * buildSrcVersions 이라는 Gradle 플러그인을 사용했으며, 터미널에 ./gradlew buildSrcVersions 이라는 명령어를 이용해 실행 가능합니다.
+ * 실행 시에 자동으로 import 되어있는 의존성들을 Libs 전역 객체에 설정해주어서 우리는 마치 변수처럼 사용이 가능합니다.
+ * 그리고 Versions.kt에 최신 버전을 자동으로 찾아서 주석으로 달아주기 때문에 모든 라이브러리 페이지에 들어가서 최신 버전을 체크할 필요가 없습니다.
+ *
+ * 이는 안드로이드 스튜디오 Gradle 3.5부터 지원된 플러그인입니다.
+ * 자세한 사용법은 다음과 같은 사이트를 참조하세요.
+ * [https://github.com/jmfayard/buildSrcVersions]
+ */
 dependencies {
     //Retrofit
     implementation Libs.retrofit
@@ -68,7 +110,9 @@ dependencies {
     implementation Libs.multidex
 }
 
-//Test
+/**
+ * Local Unit Test에서 사용할 라이브러리들
+ */
 dependencies {
     testImplementation Libs.androidx_test_core
     testImplementation Libs.junit_junit
@@ -82,7 +126,9 @@ dependencies {
     testImplementation Libs.robolectric
 }
 
-//AndroidTest
+/**
+ * Instrumentation Test에서 사용할 라이브러리들
+ */
 dependencies {
     androidTestImplementation Libs.androidx_test_core
     androidTestImplementation Libs.androidx_test_runner
