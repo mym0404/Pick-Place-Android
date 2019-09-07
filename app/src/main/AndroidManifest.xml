@@ -43,7 +43,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="korea.seoul.pickple.ui.course.map.MapActivity"></activity>
+        <activity android:name="korea.seoul.pickple.ui.course.map.MapActivity"
+            android:exported="true"
+            />
     </application>
 
 </manifest>
