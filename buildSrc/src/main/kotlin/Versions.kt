@@ -1,4 +1,4 @@
-
+import kotlin.String
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
@@ -12,11 +12,13 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-  const val appcompat: String = "1.1.0-alpha04"
+  const val appcompat: String = "1.1.0-alpha04" // available: "1.1.0"
 
   const val constraintlayout: String = "1.1.3"
 
   const val androidx_databinding: String = "3.5.0"
+
+  const val androidx_room: String = "2.2.0-rc01"
 
   const val androidx_test_espresso: String = "3.2.0"
 
@@ -59,7 +61,7 @@ object Versions {
    * See issue 19: How to update Gradle itself?
    * https://github.com/jmfayard/buildSrcVersions/issues/19
    */
-  const val gradleLatestVersion: String = "5.6.1"
+  const val gradleLatestVersion: String = "5.6.2"
 
   const val gradleCurrentVersion: String = "5.4.1"
 }

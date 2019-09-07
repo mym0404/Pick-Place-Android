@@ -8,7 +8,7 @@ import kotlin.String
  */
 object Libs {
   /**
-   * http://developer.android.com/tools/extras/support-library.html
+   * https://developer.android.com/jetpack/androidx
    */
   const val appcompat: String = "androidx.appcompat:appcompat:" + Versions.appcompat
 
@@ -35,6 +35,21 @@ object Libs {
 
   const val databinding_runtime: String = "androidx.databinding:databinding-runtime:" +
       Versions.androidx_databinding
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_compiler: String = "androidx.room:room-compiler:" + Versions.androidx_room
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_ktx: String = "androidx.room:room-ktx:" + Versions.androidx_room
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_runtime: String = "androidx.room:room-runtime:" + Versions.androidx_room
 
   /**
    * https://developer.android.com/testing
