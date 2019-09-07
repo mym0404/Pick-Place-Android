@@ -12,6 +12,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath 'com.google.gms:google-services:4.3.2'
     }
 }
 
@@ -25,6 +26,7 @@ plugins {
 /**
  * 상수
  */
+//AIzaSyBeocf9dJI1E8U0bbz0Y4I11kEEjIhgk3g
 ext {
     packageName = 'korea.seoul.pickple'
     minSdkVersion = 23

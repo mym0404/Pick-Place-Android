@@ -12,10 +12,10 @@ androidExtensions {
 android {
 
     /**
-     * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용
+     * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용합니다.
      */
     def constants = rootProject.ext
-    
+
     compileSdkVersion constants.targetSdkVersion
 
     defaultConfig {
@@ -40,6 +40,8 @@ android {
          * VectorDrawable이 낮은 SDK에서 충돌이 일어나지 않게 해줍니다.
          */
         vectorDrawables.useSupportLibrary = true
+
+        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
     buildTypes {
         release {
@@ -56,7 +58,7 @@ android {
      * 좌측 Project 탭에서 Android 로 설정하면 그래도 java라고 표시되는 Android Studio의 오류가 있습니다.
      * 실제 경로는 src/main/kotlin 입니다.
      */
-    sourceSets{
+    sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
@@ -76,6 +78,7 @@ android {
             includeAndroidResources = true
         }
     }
+
 }
 
 /**
@@ -89,6 +92,11 @@ android {
  * [https://github.com/jmfayard/buildSrcVersions]
  */
 dependencies {
+    //Room
+    implementation Libs.room_runtime
+    kapt Libs.room_compiler
+    implementation Libs.room_ktx
+
     //Retrofit
     implementation Libs.retrofit
     implementation Libs.converter_gson
@@ -102,6 +110,10 @@ dependencies {
     implementation Libs.constraintlayout
     implementation Libs.material
     implementation Libs.autofittextview
+
+    //Firebase & Google
+    implementation Libs.firebase_analytics
+    implementation Libs.play_services_maps
 
     //ETC
     implementation Libs.kotlin_stdlib
@@ -140,3 +152,4 @@ dependencies {
     androidTestImplementation Libs.com_google_truth_truth
 }
 
+apply plugin: 'com.google.gms.google-services'
