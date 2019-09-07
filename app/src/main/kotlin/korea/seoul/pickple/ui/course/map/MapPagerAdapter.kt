@@ -10,7 +10,17 @@ import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ItemMapPagerBinding
 class MapPagerAdapter : RecyclerView.Adapter<MapPagerAdapter.MapPagerHolder>() {
 
-    var items: List<Place> = listOf()
+    //TODO DUMMY
+    var items: List<Place> = listOf(
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null),
+        Place(-1,Place.Type.FOOD,"name","desc",null,null,null)
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapPagerHolder {
         val inflater = LayoutInflater.from(parent.context)
