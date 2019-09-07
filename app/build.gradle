@@ -12,7 +12,7 @@ androidExtensions {
 android {
 
     /**
-     * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용
+     * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용합니다.
      */
     def constants = rootProject.ext
     
@@ -89,6 +89,11 @@ android {
  * [https://github.com/jmfayard/buildSrcVersions]
  */
 dependencies {
+    //Room
+    implementation Libs.room_runtime
+    kapt Libs.room_compiler
+    implementation Libs.room_ktx
+
     //Retrofit
     implementation Libs.retrofit
     implementation Libs.converter_gson
