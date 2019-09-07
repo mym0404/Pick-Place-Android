@@ -18,6 +18,18 @@ class MapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMapBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
+
+
+        initMapPager()
+    }
+
+    /**
+     * ViewPager2 를 초기화하는 메서드
+     */
+    private fun initMapPager() {
+        mBinding.viewPager2.apply {
+            adapter = MapPagerAdapter()
+        }
     }
 
 
