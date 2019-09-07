@@ -10,13 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name="korea.seoul.pickple.ui.course.map.MapActivity"></activity>
 
         <uses-library
             android:name="android.test.runner"
             android:required="false" />
 
-        <activity android:name=".ui.MainActivity">
-
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

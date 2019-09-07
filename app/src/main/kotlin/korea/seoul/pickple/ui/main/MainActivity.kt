@@ -1,4 +1,4 @@
-package korea.seoul.pickple.ui
+package korea.seoul.pickple.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
