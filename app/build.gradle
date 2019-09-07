@@ -115,13 +115,22 @@ dependencies {
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
 
+    //AAC
+    implementation Libs.lifecycle_viewmodel_ktx
+    implementation Libs.lifecycle_livedata
+    kapt Libs.lifecycle_compiler
+
+    //KOIN
+    implementation Libs.koin_androidx_ext
+    implementation Libs.koin_androidx_viewmodel
+    implementation Libs.koin_androidx_scope
+
     //ETC
     implementation Libs.kotlin_stdlib
     implementation Libs.appcompat
     implementation Libs.dexter
     implementation Libs.multidex
 }
-
 /**
  * Local Unit Test에서 사용할 라이브러리들
  */

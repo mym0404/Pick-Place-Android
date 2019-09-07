@@ -18,6 +18,8 @@ object Versions {
 
   const val androidx_databinding: String = "3.5.0"
 
+  const val androidx_lifecycle: String = "2.1.0"
+
   const val androidx_room: String = "2.2.0-rc01"
 
   const val androidx_test_espresso: String = "3.2.0"
@@ -42,7 +44,7 @@ object Versions {
 
   const val material: String = "1.1.0-alpha06"
 
-  const val firebase_analytics: String = "17.2.0"
+  const val firebase_analytics: String = "17.0.0"
 
   const val google_services: String = "4.3.2"
 
@@ -59,6 +61,8 @@ object Versions {
   const val autofittextview: String = "0.2.1"
 
   const val org_jetbrains_kotlin: String = "1.3.50"
+
+  const val org_koin: String = "2.0.1"
 
   const val robolectric: String = "4.3"
 

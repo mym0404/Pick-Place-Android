@@ -37,6 +37,24 @@ object Libs {
   /**
    * https://developer.android.com/topic/libraries/architecture/index.html
    */
+  const val lifecycle_compiler: String = "androidx.lifecycle:lifecycle-compiler:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val lifecycle_livedata: String = "androidx.lifecycle:lifecycle-livedata:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * http://developer.android.com/tools/extras/support-library.html
+   */
+  const val lifecycle_viewmodel_ktx: String = "androidx.lifecycle:lifecycle-viewmodel-ktx:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
   const val room_compiler: String = "androidx.room:room-compiler:" + Versions.androidx_room
 
   /**
@@ -201,6 +219,13 @@ object Libs {
    */
   const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib:" +
       Versions.org_jetbrains_kotlin
+
+  const val koin_androidx_ext: String = "org.koin:koin-androidx-ext:" + Versions.org_koin
+
+  const val koin_androidx_scope: String = "org.koin:koin-androidx-scope:" + Versions.org_koin
+
+  const val koin_androidx_viewmodel: String = "org.koin:koin-androidx-viewmodel:" +
+      Versions.org_koin
 
   /**
    * http://robolectric.org
