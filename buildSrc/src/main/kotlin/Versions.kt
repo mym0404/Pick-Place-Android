@@ -30,6 +30,8 @@ object Versions {
 
   const val androidx_test: String = "1.2.0"
 
+  const val viewpager2: String = "1.0.0-beta04"
+
   const val multidex: String = "1.0.3"
 
   const val aapt2: String = "3.5.0-5435860"
@@ -44,7 +46,7 @@ object Versions {
 
   const val material: String = "1.1.0-alpha06"
 
-  const val firebase_analytics: String = "17.0.0"
+  const val firebase_analytics: String = "17.0.0" // available: "17.2.0"
 
   const val google_services: String = "4.3.2"
 

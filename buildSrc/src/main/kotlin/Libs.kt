@@ -106,6 +106,8 @@ object Libs {
    */
   const val androidx_test_runner: String = "androidx.test:runner:" + Versions.androidx_test
 
+  const val viewpager2: String = "androidx.viewpager2:viewpager2:" + Versions.viewpager2
+
   const val multidex: String = "com.android.support:multidex:" + Versions.multidex
 
   /**

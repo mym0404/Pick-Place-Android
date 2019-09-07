@@ -110,6 +110,7 @@ dependencies {
     implementation Libs.constraintlayout
     implementation Libs.material
     implementation Libs.autofittextview
+    implementation Libs.viewpager2
 
     //Firebase & Google
     implementation Libs.firebase_analytics
