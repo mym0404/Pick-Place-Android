@@ -1,4 +1,4 @@
-package korea.seoul.pickple.data.enum
+package korea.seoul.pickple.data.enumerator
 
 enum class SeoulDistrict(val code : Int) {
     UNKNOWN(-1),

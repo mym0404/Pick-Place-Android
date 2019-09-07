@@ -1,4 +1,4 @@
-import kotlin.String
+
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
@@ -12,7 +12,7 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-  const val appcompat: String = "1.1.0-alpha04" // available: "1.1.0"
+  const val appcompat: String = "1.1.0"
 
   const val constraintlayout: String = "1.1.3"
 
@@ -38,7 +38,13 @@ object Versions {
 
   const val com_github_bumptech_glide: String = "4.9.0"
 
+  const val play_services_maps: String = "17.0.0"
+
   const val material: String = "1.1.0-alpha06"
+
+  const val firebase_analytics: String = "17.2.0"
+
+  const val google_services: String = "4.3.2"
 
   const val com_google_truth_truth: String = "1.0"
 

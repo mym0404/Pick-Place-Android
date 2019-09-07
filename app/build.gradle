@@ -40,6 +40,8 @@ android {
          * VectorDrawable이 낮은 SDK에서 충돌이 일어나지 않게 해줍니다.
          */
         vectorDrawables.useSupportLibrary = true
+
+        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
     }
     buildTypes {
         release {
@@ -76,6 +78,7 @@ android {
             includeAndroidResources = true
         }
     }
+
 }
 
 /**
@@ -107,6 +110,10 @@ dependencies {
     implementation Libs.constraintlayout
     implementation Libs.material
     implementation Libs.autofittextview
+
+    //Firebase & Google
+    implementation Libs.firebase_analytics
+    implementation Libs.play_services_maps
 
     //ETC
     implementation Libs.kotlin_stdlib
@@ -145,7 +152,4 @@ dependencies {
     androidTestImplementation Libs.com_google_truth_truth
 }
 
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
+apply plugin: 'com.google.gms.google-services'
