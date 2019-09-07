@@ -1,13 +1,24 @@
 package korea.seoul.pickple.ui.course.map
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import korea.seoul.pickple.R
+import korea.seoul.pickple.databinding.ActivityMapBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MapActivity : AppCompatActivity() {
 
+    private val TAG = MapActivity::class.java.simpleName
+
+    private lateinit var mBinding : ActivityMapBinding
+    private val mViewModel : MapViewModel by viewModel()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
+        mBinding = ActivityMapBinding.inflate(LayoutInflater.from(this))
+        setContentView(mBinding.root)
     }
+
+
 }
