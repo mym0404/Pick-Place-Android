@@ -10,10 +10,7 @@ interface DirectionsRepository {
         origin : Location,
         destination : Location,
         key : String,
-        waypoints : List<Location> = listOf(),
-        mode : String? = "driving",
-        units : String? = "metric",
-        region : String? = "ko"
+        mode : String? = "transit"
     ) : Call<DirectionsResponse>
 
     fun getGeocoding(

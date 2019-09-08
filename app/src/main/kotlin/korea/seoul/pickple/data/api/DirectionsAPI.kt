@@ -15,10 +15,7 @@ interface DirectionsAPI {
         @Query("origin") origin : String,
         @Query("destination") destination : String,
         @Query("key") key : String,
-        @Query("waypoints") waypoints : String? = null,
-        @Query("mode") mode : String = "driving",
-        @Query("units") units : String = "metric",
-        @Query("region") region : String = "ko"
+        @Query("mode") mode : String?
         ) : Call<DirectionsResponse>
 
     @GET("maps/api/geocode/json")
@@ -114,6 +111,8 @@ data class GeocodingResponse(
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class DirectionsResponse(
+    @SerializedName("available_travel_modes")
+    var available : List<String>,
     @SerializedName("status")
     var status: String,
     @SerializedName("geocoded_waypoints")
@@ -149,7 +148,9 @@ data class DirectionsResponse(
         @SerializedName("start_address")
         var startAddress: String,
         @SerializedName("end_address")
-        var endAddress: String
+        var endAddress: String,
+        @SerializedName("overview_polyline")
+        var overviewPolyline: Leg.Step.Polyline
     ) : Parcelable {
         @SuppressLint("ParcelCreator")
         @Parcelize

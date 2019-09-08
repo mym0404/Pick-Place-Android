@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.MapUtil
+import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.repository.*
 import korea.seoul.pickple.ui.course.map.MapViewModel
@@ -27,6 +28,7 @@ class PickPleApplication : Application() {
 
     private val utilModule = module {
         single { MapUtil() }
+        single { PermissionDexterUtil() }
     }
 
     private val apiModule = module {
