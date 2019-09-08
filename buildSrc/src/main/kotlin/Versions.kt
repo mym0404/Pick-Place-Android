@@ -48,6 +48,8 @@ object Versions {
 
   const val firebase_analytics: String = "17.0.0" // available: "17.2.0"
 
+  const val firebase_dynamic_links: String = "19.0.0"
+
   const val google_services: String = "4.3.2"
 
   const val com_google_truth_truth: String = "1.0"

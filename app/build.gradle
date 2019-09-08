@@ -115,6 +115,7 @@ dependencies {
     //Firebase & Google
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
+    implementation Libs.firebase_dynamic_links
 
     //AAC
     implementation Libs.lifecycle_viewmodel_ktx
