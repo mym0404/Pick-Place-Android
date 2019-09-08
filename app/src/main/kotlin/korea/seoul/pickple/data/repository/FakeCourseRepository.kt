@@ -12,10 +12,10 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
         return Calls.response(
             Course(
                 id = id,
-                name = "${listOf("명주","수민","승민","소민").random()}네 집앞 ${listOf("흡연","산책","운동")} 거리",
+                name = "${listOf("명주","수민","승민","소민").random()}네 집앞 ${listOf("흡연","산책","운동").random()} 거리",
                 description = "설명은 필요없다",
                 districtInSeoul = SeoulDistrict.getAllDistrict().random(),
-                places = List(Random.nextInt(2,100)){ it }.distinct(),
+                places = List(Random.nextInt(2,10)){ it }.distinct(),
                 likeCount = Random.nextInt(500,2000)
             )
         )

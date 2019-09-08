@@ -2,6 +2,7 @@ package korea.seoul.pickple.data.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
+import com.google.android.gms.maps.model.LatLng
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -20,4 +21,6 @@ data class Location(
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name="longitude")
     val longitude : Double
-) : Parcelable
+) : Parcelable {
+    fun toLatLng() = LatLng(latitude,longitude)
+}
