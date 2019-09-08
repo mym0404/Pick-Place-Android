@@ -1,6 +1,5 @@
 package korea.seoul.pickple.ui.course.map
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,7 +30,6 @@ class MapViewModel(private val courseRepository: CourseRepository, courseId : In
 
 
     init {
-        Log.e(TAG,courseId.toString())
         courseRepository.getCourseWithId(courseId).enqueue(object : Callback<Course> {
             override fun onFailure(call: Call<Course>, t: Throwable) {
                 _loading.value = false

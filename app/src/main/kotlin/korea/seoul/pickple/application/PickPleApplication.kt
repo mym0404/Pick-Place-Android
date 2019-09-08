@@ -51,15 +51,16 @@ class PickPleApplication : Application() {
          */
         single<Retrofit>(qualifier = named("Directions")) {
             Retrofit.Builder()
-                .baseUrl("https://maps.googleapis.com/maps/api/directions/json")
+                .baseUrl("https://maps.googleapis.com/")
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
         }
 
         //APIs
-        single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) }
+        single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) } bind DirectionsAPI::class
     }
+
 
     private val repositoryModule = module {
         single { FakePlaceRepository() } bind PlaceRepository::class
@@ -92,6 +93,7 @@ class PickPleApplication : Application() {
             modules(utilModule)
             modules(repositoryModule)
             modules(viewModelModule)
+            modules(apiModule)
 
         }
     }

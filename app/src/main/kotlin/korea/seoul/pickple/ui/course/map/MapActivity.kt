@@ -1,6 +1,7 @@
 package korea.seoul.pickple.ui.course.map
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -10,12 +11,18 @@ import com.google.android.gms.maps.model.MarkerOptions
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
 import korea.seoul.pickple.common.util.MapUtil
+import korea.seoul.pickple.data.api.DirectionsResponse
+import korea.seoul.pickple.data.api.GeocodingResponse
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.repository.DirectionsRepository
 import korea.seoul.pickple.databinding.ActivityMapBinding
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.concurrent.thread
 
 /**
@@ -126,6 +133,38 @@ class MapActivity : AppCompatActivity() {
                 mMap.moveCamera(mapUtil.autoZoomLevel(places))
             }
         }
+
+        val repo : DirectionsRepository = get()
+
+//        repo.getGeocoding(places.first().location!!,getString(R.string.google_maps_key)).enqueue(object : Callback<GeocodingResponse> {
+//            override fun onFailure(call: Call<GeocodingResponse>, t: Throwable) {
+//                Log.e(TAG,t.toString())
+//            }
+//
+//            override fun onResponse(call: Call<GeocodingResponse>, response: Response<GeocodingResponse>) {
+//                Log.e(TAG,response.toString())
+//                Log.e(TAG,response.isSuccessful.toString())
+//                Log.e(TAG,response.errorBody().toString())
+//                Log.e(TAG,response.body()?.toString())
+//            }
+//        })
+
+        repo.getRouteFromTwoPlace(
+            places.first().location!!,
+            places.last().location!!,
+            getString(R.string.google_maps_key),
+            places.drop(1).dropLast(1).map { it.location!! }).enqueue(object : Callback<DirectionsResponse> {
+            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                Log.e(TAG,t.toString())
+            }
+
+            override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
+                Log.e(TAG,response.toString())
+                Log.e(TAG,response.isSuccessful.toString())
+                Log.e(TAG,response.errorBody().toString())
+                Log.e(TAG,response.body()?.toString())
+            }
+        })
     }
 
 
