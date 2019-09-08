@@ -27,6 +27,23 @@ data class Course(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
+
+    /**
+     * 코스의 이름
+     */
+    @SerializedName("course_name")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "course_name")
+    val name : String,
+
+    /**
+     * 코스의 이름
+     */
+    @SerializedName("course_description")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "course_description")
+    val description : String,
+
     /**
      * 해당 코스가 어느 서울 행정구역에 포함되는 지에대한 정보
      *

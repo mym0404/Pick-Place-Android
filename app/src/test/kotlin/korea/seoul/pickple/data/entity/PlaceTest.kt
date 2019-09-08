@@ -22,7 +22,7 @@ class PlaceTest {
             "장소 짧은 설명",
             "010-1111-1111",
             Location(12.5,5.2),
-            38000)
+            null)
 
         val json = gson.toJson(place)
         println(json)

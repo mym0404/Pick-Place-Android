@@ -11,10 +11,10 @@ import kotlinx.android.parcel.Parcelize
  */
 @Parcelize
 data class Location(
-    @SerializedName("altitude")
+    @SerializedName("latitude")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="altitude")
-    val altitude : Double,
+    @ColumnInfo(name="latitude")
+    val latitude : Double,
 
     @SerializedName("longitude")
     @Expose(serialize = true, deserialize = true)
