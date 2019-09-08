@@ -5,10 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
-import korea.seoul.pickple.data.repository.CourseRepository
-import korea.seoul.pickple.data.repository.FakeCourseRepository
-import korea.seoul.pickple.data.repository.FakePlaceRepository
-import korea.seoul.pickple.data.repository.PlaceRepository
+import korea.seoul.pickple.data.repository.*
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -67,10 +64,11 @@ class PickPleApplication : Application() {
     private val repositoryModule = module {
         single { FakePlaceRepository() } bind PlaceRepository::class
         single { FakeCourseRepository(get()) } bind CourseRepository::class
+        single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
     }
 
     private val viewModelModule = module {
-        viewModel { (courseId : Int) -> MapViewModel(get(),courseId)}
+        viewModel { (courseId: Int) -> MapViewModel(get(), courseId) }
     }
 
 

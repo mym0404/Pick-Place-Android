@@ -10,9 +10,10 @@ interface DirectionsAPI {
         @Query("origin") origin : String,
         @Query("destination") destination : String,
         @Query("key") key : String,
+        @Query("waypoints") waypoints : String? = null,
         @Query("mode") mode : String = "driving",
-
-
+        @Query("units") units : String = "metric",
+        @Query("region") region : String = "ko"
         ) : Call<Unit>
 
 }
