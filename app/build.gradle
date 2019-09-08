@@ -99,6 +99,7 @@ dependencies {
 
     //Retrofit
     implementation Libs.retrofit
+    implementation Libs.retrofit_mock
     implementation Libs.converter_gson
     implementation Libs.converter_scalars
 

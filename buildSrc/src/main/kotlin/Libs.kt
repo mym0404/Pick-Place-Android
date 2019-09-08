@@ -181,6 +181,12 @@ object Libs {
   /**
    * https://github.com/square/retrofit/
    */
+  const val retrofit_mock: String = "com.squareup.retrofit2:retrofit-mock:" +
+      Versions.com_squareup_retrofit2
+
+  /**
+   * https://github.com/square/retrofit/
+   */
   const val retrofit: String = "com.squareup.retrofit2:retrofit:" + Versions.com_squareup_retrofit2
 
   const val de_fayard_buildsrcversions_gradle_plugin: String =
