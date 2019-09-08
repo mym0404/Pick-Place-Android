@@ -52,6 +52,8 @@ object Versions {
 
   const val google_services: String = "4.3.2"
 
+  const val android_maps_utils: String = "0.5"
+
   const val com_google_truth_truth: String = "1.0"
 
   const val dexter: String = "5.0.0"

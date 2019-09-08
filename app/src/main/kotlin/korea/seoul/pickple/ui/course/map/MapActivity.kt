@@ -6,15 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityMapBinding
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.concurrent.thread
 
 /**
@@ -36,14 +37,13 @@ class MapActivity : AppCompatActivity() {
     /**
      * ViewModel from Koin
      */
-    private val mViewModel: MapViewModel by viewModel()
-
+    private val mViewModel: MapViewModel by viewModel(MapViewModel::class, null) { parametersOf(1000) }
     /**
      * [GoogleMap] Instance
      */
     private lateinit var mMap: GoogleMap
 
-    private val mapUtil : MapUtil by inject()
+    private val mapUtil: MapUtil by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +67,7 @@ class MapActivity : AppCompatActivity() {
         val mapFrag = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFrag.getMapAsync {
             mMap = it
+            //TODO Permission add
 //            mMap.isMyLocationEnabled = true
             mMap.isBuildingsEnabled = true
             adjustMapLocation(mMap)
@@ -74,7 +75,6 @@ class MapActivity : AppCompatActivity() {
     }
 
     private fun adjustMapLocation(map: GoogleMap) {
-
     }
 
     /**
@@ -99,7 +99,7 @@ class MapActivity : AppCompatActivity() {
 
                 updateMapPositionAndScale(places)
 
-                (mBinding.viewPager2.adapter as? MapPagerAdapter)?.let {adapter->
+                (mBinding.viewPager2.adapter as? MapPagerAdapter)?.let { adapter ->
                     adapter.items = places
                     adapter.notifyDataSetChanged()
                 }
@@ -108,18 +108,21 @@ class MapActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateMapPositionAndScale(places : List<Place>) {
+    private fun updateMapPositionAndScale(places: List<Place>) {
 
+        //TODO Dirty Thread coding
         thread {
             Thread.sleep(1000)
             runOnUiThread {
+                //Clear Markers
                 mMap.clear()
-                places.map {
-                    it.location?.let {
-                        mMap.addMarker(MarkerOptions().position(LatLng(it.latitude,it.longitude)))
+                //Add Markers
+                places.map { place ->
+                    place.location?.let { location ->
+                        mMap.addMarker(MarkerOptions().position(location.toLatLng()))
                     }
                 }
-
+                //Move Camera To Center of Places
                 mMap.moveCamera(mapUtil.autoZoomLevel(places))
             }
         }

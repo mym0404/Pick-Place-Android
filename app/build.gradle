@@ -116,6 +116,7 @@ dependencies {
     //Firebase & Google
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
+    implementation Libs.android_maps_utils
     implementation Libs.firebase_dynamic_links
 
     //AAC
