@@ -1,17 +1,25 @@
 package korea.seoul.pickple.application
 
 import android.app.Application
+import korea.seoul.pickple.data.repository.CourseRepository
+import korea.seoul.pickple.data.repository.FakeCourseRepository
+import korea.seoul.pickple.data.repository.FakePlaceRepository
+import korea.seoul.pickple.data.repository.PlaceRepository
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.experimental.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 class PickPleApplication : Application() {
 
     private val appModule = module {
+
+        single { FakePlaceRepository() } bind PlaceRepository::class
+        single { FakeCourseRepository(get()) } bind CourseRepository::class
 
         viewModel<MapViewModel>()
 

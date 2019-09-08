@@ -1,4 +1,4 @@
-
+import kotlin.String
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
 
@@ -47,6 +47,8 @@ object Versions {
   const val material: String = "1.1.0-alpha06"
 
   const val firebase_analytics: String = "17.0.0" // available: "17.2.0"
+
+  const val firebase_dynamic_links: String = "19.0.0"
 
   const val google_services: String = "4.3.2"
 
