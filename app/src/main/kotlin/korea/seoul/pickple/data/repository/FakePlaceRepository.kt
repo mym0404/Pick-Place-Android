@@ -14,7 +14,7 @@ class FakePlaceRepository : PlaceRepository {
                 id = id,
                 type = Place.Type.FOOD,
                 name = "${listOf("명주","수민","승민","소민").random()}네 집",
-                description = "${listOf("깨끗","아늑","더럽기까지").random()}함",
+                description = "${listOf("깨끗","아늑","더럽기까지","기괴","심심").random()}함",
                 phoneNumber = "010-${Random.nextInt(1000,10000)}-${Random.nextInt(1000,10000)}",
                 location = listOf(
                     Location(37.6371,127.0247),
