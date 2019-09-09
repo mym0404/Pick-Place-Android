@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.JointType
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
@@ -19,7 +18,6 @@ import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
 import korea.seoul.pickple.data.api.DirectionsResponse
-import korea.seoul.pickple.data.api.GeocodingResponse
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.DirectionsRepository
 import korea.seoul.pickple.databinding.ActivityMapBinding
@@ -30,7 +28,6 @@ import org.koin.core.parameter.parametersOf
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.concurrent.thread
 
 /**
  * Activity for Course Google Map API representation
@@ -55,10 +52,15 @@ class MapActivity : AppCompatActivity() {
     /**
      * [GoogleMap] Instance
      */
-    private lateinit var mMap: GoogleMap
+    private var mMap: GoogleMap? = null
+
+    /**
+     * Because of Async [GoogleMap] retriving routine
+     */
+    private val pendingTasks: MutableList<() -> Unit> = mutableListOf()
 
     private val mapUtil: MapUtil by inject()
-    private val dexterUtil : PermissionDexterUtil by inject()
+    private val dexterUtil: PermissionDexterUtil by inject()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +68,7 @@ class MapActivity : AppCompatActivity() {
         mBinding = ActivityMapBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
-        dexterUtil.requestPermissions(this,object : PermissionListener {
+        dexterUtil.requestPermissions(this, object : PermissionListener {
             override fun onPermissionGranted() {
             }
 
@@ -75,7 +77,7 @@ class MapActivity : AppCompatActivity() {
 
             override fun onAnyPermissionsPermanentlyDeined(deniedPermissions: List<String>, permanentDeniedPermissions: List<String>) {
             }
-        },mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION,android.Manifest.permission.ACCESS_FINE_LOCATION))
+        }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
 
         initMap()
         initMapPager()
@@ -93,9 +95,12 @@ class MapActivity : AppCompatActivity() {
         val mapFrag = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFrag.getMapAsync {
             mMap = it
-            mMap.isMyLocationEnabled = true
-            mMap.isBuildingsEnabled = true
-            adjustMapLocation(mMap)
+            mMap!!.isMyLocationEnabled = true
+            mMap!!.isBuildingsEnabled = true
+            adjustMapLocation(mMap!!)
+
+            pendingTasks.forEach { it() }
+            pendingTasks.clear()
         }
     }
 
@@ -122,7 +127,10 @@ class MapActivity : AppCompatActivity() {
         mViewModel.apply {
             this.places.observe(this@MapActivity, Observer { places ->
 
-                updateMapPositionAndScale(places)
+                if(mMap == null)
+                    pendingTasks += {updateMapPositionAndScale(places)}
+                else
+                    updateMapPositionAndScale(places)
 
                 (mBinding.viewPager2.adapter as? MapPagerAdapter)?.let { adapter ->
                     adapter.items = places
@@ -135,32 +143,30 @@ class MapActivity : AppCompatActivity() {
 
     private fun updateMapPositionAndScale(places: List<Place>) {
 
+
+
         //TODO Dirty Thread coding
-        thread {
-            Thread.sleep(1000)
-            runOnUiThread {
-                //Clear Markers
+        //Clear Markers
 //                mMap.clear()
-                //Add Markers
-                places.map { place ->
-                    place.location?.let { location ->
-                        mMap.addMarker(MarkerOptions().position(location.toLatLng()))
-                    }
-                }
-                //Move Camera To Center of Places
-                mMap.moveCamera(mapUtil.autoZoomLevel(places))
+        //Add Markers
+        places.map { place ->
+            place.location?.let { location ->
+                mMap?.addMarker(MarkerOptions().position(location.toLatLng()))
             }
         }
+        //Move Camera To Center of Places
+        mMap?.moveCamera(mapUtil.autoZoomLevel(places))
 
-        val repo : DirectionsRepository = get()
+        val repo: DirectionsRepository = get()
 
         //TODO 막코딩
         repo.getRouteFromTwoPlace(
             places[0].location!!,
             places[1].location!!,
-            getString(R.string.google_maps_key)).enqueue(object : Callback<DirectionsResponse> {
+            getString(R.string.google_maps_key)
+        ).enqueue(object : Callback<DirectionsResponse> {
             override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                Log.e(TAG,t.toString())
+                Log.e(TAG, t.toString())
             }
 
             override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
@@ -168,19 +174,20 @@ class MapActivity : AppCompatActivity() {
                 val r = response.body()!!
 
                 val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                Log.e(TAG,points.toString())
+                Log.e(TAG, points.toString())
 
                 val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
-                mMap.addPolyline(option)
+                mMap?.addPolyline(option)
 
             }
         })
         repo.getRouteFromTwoPlace(
             places[1].location!!,
             places[2].location!!,
-            getString(R.string.google_maps_key)).enqueue(object : Callback<DirectionsResponse> {
+            getString(R.string.google_maps_key)
+        ).enqueue(object : Callback<DirectionsResponse> {
             override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                Log.e(TAG,t.toString())
+                Log.e(TAG, t.toString())
             }
 
             override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
@@ -188,10 +195,10 @@ class MapActivity : AppCompatActivity() {
                 val r = response.body()!!
 
                 val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                Log.e(TAG,points.toString())
+                Log.e(TAG, points.toString())
 
                 val option = PolylineOptions().color(Color.GREEN).jointType(JointType.ROUND).visible(true).width(10f).zIndex(30f).add(*points.toTypedArray())
-                mMap.addPolyline(option)
+                mMap?.addPolyline(option)
             }
         })
     }
