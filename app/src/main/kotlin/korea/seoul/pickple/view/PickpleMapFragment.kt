@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.JointType
@@ -21,15 +20,25 @@ import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.DirectionsRepository
 import korea.seoul.pickple.databinding.FragmentPickpleMapBinding
 import korea.seoul.pickple.ui.course.map.MapActivity
-import korea.seoul.pickple.ui.course.map.MapViewModel
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PickpleMapFragment  : Fragment() {
+final class PickpleMapFragment  : Fragment() {
+
+    //region Controller
+    inner class PickpleMapController {
+
+        fun updateLocationAndZoomScale(places : List<Place>) {
+            this@PickpleMapFragment.updateMapPositionAndScale(places)
+        }
+
+    }
+
+    fun getController() : PickpleMapController = this.PickpleMapController()
+    //endregion
 
     private val TAG = PickpleMapFragment::class.java.simpleName
 
@@ -37,8 +46,6 @@ class PickpleMapFragment  : Fragment() {
     private val mBinding : FragmentPickpleMapBinding
         get() = _mBinding!!
 
-
-    private val mViewModel : MapViewModel by sharedViewModel()
 
     /**
      * [GoogleMap] Instance
@@ -54,6 +61,7 @@ class PickpleMapFragment  : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         return FragmentPickpleMapBinding.inflate(inflater,container,false).also { _mBinding = it }.root
     }
 
@@ -62,7 +70,6 @@ class PickpleMapFragment  : Fragment() {
 
 
         initMap()
-        observeViewModel()
     }
 
     /**
@@ -75,25 +82,23 @@ class PickpleMapFragment  : Fragment() {
     private fun initMap() {
         val mapFrag = SupportMapFragment.newInstance()
         mapFrag.getMapAsync {map->
+            //INIT MAP
             mMap = map
-            map.mapType = GoogleMap.MAP_TYPE_SATELLITE
+            map.mapType = GoogleMap.MAP_TYPE_NORMAL
+            map.isMyLocationEnabled = true
+            map.isBuildingsEnabled = true
+            map.isTrafficEnabled = true
+            map.isIndoorEnabled = true
+
+
             adjustMapLocation(map)
 
 
-
-        }
-        //Map Add
-        childFragmentManager.beginTransaction().add(R.id.root_container,mapFrag,mapFrag.tag).commit()
-
-        mapFrag.getMapAsync {
-            mMap = it
-            mMap!!.isMyLocationEnabled = true
-            mMap!!.isBuildingsEnabled = true
-            adjustMapLocation(mMap!!)
-
-            pendingTasks.forEach { it() }
+            pendingTasks.forEach { it.invoke() }
             pendingTasks.clear()
         }
+
+        childFragmentManager.beginTransaction().add(R.id.root_container,mapFrag).commit()
     }
 
     private fun adjustMapLocation(map: GoogleMap) {
@@ -101,83 +106,61 @@ class PickpleMapFragment  : Fragment() {
     }
 
 
-
     /**
-     * Observe [LiveData]s of [ViewModel]
+     * 맵의 위치와 줌 정도를 위치들에 맞춰서 재조정한다.
+     *
+     * Marker도 찍는다.
+     *
+     * Polygon도 만든다.
      */
-    private fun observeViewModel() {
-        mViewModel.apply {
-            this.places.observe(viewLifecycleOwner, Observer { places ->
-
-                if(mMap == null)
-                    pendingTasks += {updateMapPositionAndScale(places)}
-                else
-                    updateMapPositionAndScale(places)
-
-            })
-        }
-    }
-
     private fun updateMapPositionAndScale(places: List<Place>) {
 
+        val runnable = {
 
-
-        //TODO Dirty Thread coding
-        //Clear Markers
-//                mMap.clear()
-        //Add Markers
-        places.map { place ->
-            place.location?.let { location ->
-                mMap?.addMarker(MarkerOptions().position(location.toLatLng()))
+            //Clear Markers
+            mMap?.clear()
+            //Add Markers
+            places.map { place ->
+                place.location?.let { location ->
+                    mMap?.addMarker(MarkerOptions().position(location.toLatLng()))
+                }
             }
+            //Move Camera To Center of Places
+            mMap?.moveCamera(mapUtil.autoZoomLevel(places))
+
+            val repo: DirectionsRepository = get()
+
+            for (i in 0 until places.size - 1) {
+                //TODO 막코딩
+                repo.getRouteFromTwoPlace(
+                    places[i].location!!,
+                    places[i+1].location!!,
+                    getString(R.string.google_maps_key)
+                ).enqueue(object : Callback<DirectionsResponse> {
+                    override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                        Log.e(TAG, t.toString())
+                    }
+
+                    override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
+
+                        val r = response.body()!!
+
+                        val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
+                        Log.e(TAG, points.toString())
+
+                        val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+                        mMap?.addPolyline(option)
+
+                    }
+                })
+            }
+
+
         }
-        //Move Camera To Center of Places
-        mMap?.moveCamera(mapUtil.autoZoomLevel(places))
-
-        val repo: DirectionsRepository = get()
-
-        //TODO 막코딩
-        repo.getRouteFromTwoPlace(
-            places[0].location!!,
-            places[1].location!!,
-            getString(R.string.google_maps_key)
-        ).enqueue(object : Callback<DirectionsResponse> {
-            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                Log.e(TAG, t.toString())
-            }
-
-            override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
-
-                val r = response.body()!!
-
-                val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                Log.e(TAG, points.toString())
-
-                val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
-                mMap?.addPolyline(option)
-
-            }
-        })
-        repo.getRouteFromTwoPlace(
-            places[1].location!!,
-            places[2].location!!,
-            getString(R.string.google_maps_key)
-        ).enqueue(object : Callback<DirectionsResponse> {
-            override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                Log.e(TAG, t.toString())
-            }
-
-            override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
-
-                val r = response.body()!!
-
-                val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                Log.e(TAG, points.toString())
-
-                val option = PolylineOptions().color(Color.GREEN).jointType(JointType.ROUND).visible(true).width(10f).zIndex(30f).add(*points.toTypedArray())
-                mMap?.addPolyline(option)
-            }
-        })
+        if(mMap == null)
+            pendingTasks.add(runnable)
+        else
+            runnable()
     }
 
     override fun onDestroyView() {

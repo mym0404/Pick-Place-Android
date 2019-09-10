@@ -13,6 +13,7 @@ import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.lang.ref.WeakReference
 
 /**
  * Activity for Course Google Map API representation
@@ -37,6 +38,8 @@ class MapActivity : AppCompatActivity() {
 
     private val dexterUtil: PermissionDexterUtil by inject()
 
+    private var mMapFragment : WeakReference<PickpleMapFragment?> = WeakReference(null)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +48,13 @@ class MapActivity : AppCompatActivity() {
 
         dexterUtil.requestPermissions(this, object : PermissionListener {
             override fun onPermissionGranted() {
+                //Add MapFragment
+                if(mMapFragment.get() == null) {
+                    val frag = PickpleMapFragment()
+
+                    mMapFragment = WeakReference(frag)
+                    this@MapActivity.supportFragmentManager.beginTransaction().add(R.id.map_container, frag).commit()
+                }
             }
 
             override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
@@ -55,8 +65,10 @@ class MapActivity : AppCompatActivity() {
         }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
 
 
-        //Add MapFragment
-        this.supportFragmentManager.beginTransaction().add(R.id.map_container, PickpleMapFragment()).commitNow()
+
+
+
+
 
         initMapPager()
         observeViewModel()
@@ -78,11 +90,15 @@ class MapActivity : AppCompatActivity() {
     private fun observeViewModel() {
         mViewModel.apply {
 
+
+
             this.places.observe(this@MapActivity, Observer { places ->
                 (mBinding.viewPager2.adapter as? MapPagerAdapter)?.let { adapter ->
                     adapter.items = places
                     adapter.notifyDataSetChanged()
                 }
+
+                mMapFragment.get()?.getController()?.updateLocationAndZoomScale(places)
             })
         }
 
