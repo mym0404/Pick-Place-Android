@@ -56,6 +56,9 @@
         <activity
             android:name=".ui.course.map.MapActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".ui.course.simple_intro.CourseSimpleIntroActivity"/>
     </application>
 
 </manifest>
