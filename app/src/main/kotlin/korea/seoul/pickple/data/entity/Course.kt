@@ -97,7 +97,12 @@ data class Course(
     @SerializedName("course_tags")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_tags")
-    val tagList : List<String>
+    val tagList : List<String>,
+
+    @SerializedName("course_thumbnail")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_thumbnail")
+    val thumbnail : String
 ) : Parcelable {
 
     /**
