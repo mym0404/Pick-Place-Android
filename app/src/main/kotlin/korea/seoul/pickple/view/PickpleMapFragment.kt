@@ -201,7 +201,6 @@ final class PickpleMapFragment : Fragment() {
                     val r = response.body()!!
 
                     val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                    Log.e(TAG, points.toString())
 
                     val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
                     mMap?.addPolyline(option)

@@ -27,6 +27,15 @@ data class Course(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
+    /**
+     * 코스의 타입
+     */
+    @SerializedName("course_type")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_type")
+    @JsonAdapter(CourseTypeJsonSerializer::class)
+    @TypeConverters(CourseTypeConverter::class)
+    val type : Type,
 
     /**
      * 코스의 이름
@@ -80,8 +89,53 @@ data class Course(
     @SerializedName("course_like")
     @Expose(serialize = false, deserialize = true)
     @ColumnInfo(name = "course_like")
-    val likeCount : Int
+    val likeCount : Int,
+
+    /**
+     * 코스 태그 리스트
+     */
+    @SerializedName("course_tags")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_tags")
+    val tagList : List<String>,
+
+    @SerializedName("course_thumbnail")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_thumbnail")
+    val thumbnail : String
 ) : Parcelable {
+
+    /**
+     * 장소의 타입에 해당하는 enum class
+     *
+     * e.g.)음식점, 고궁 ...
+     */
+    enum class Type(val type : Int) {
+        UNKNOWN(-1),
+        ORAEGAGE(0),
+        KOREA_TRADITIONAL(1),
+        CUSTOM(2),
+
+        ;
+
+        companion object {
+            /**
+             * [Int] 값으로 [Type] 값을 반환받을 수 있는 정적 메서드
+             *
+             * @param value int value matched with value of [type] property in [Type]
+             * @return [Type] object matched with parameter [value]
+             */
+            fun parse(value : Int) : Type {
+                return when(value) {
+                    Type.ORAEGAGE.type -> Type.ORAEGAGE
+                    Type.KOREA_TRADITIONAL.type -> Type.KOREA_TRADITIONAL
+                    Type.CUSTOM.type -> Type.CUSTOM
+                    else -> Type.UNKNOWN
+                }
+            }
+        }
+
+    }
 
     /**
      * [Room] 데이터베이스에서 [List] 형 객체를 [String] 와 형변환하기 위해 사용될 컨버터 클래스
@@ -99,6 +153,37 @@ data class Course(
             list ?: return ""
 
             return list.joinToString(",")
+        }
+    }
+
+    /**
+     * [Room] 데이터베이스에서 [Type] 형 객체를 [Int] 와 형변환하기 위해 사용될 컨버터 클래스
+     */
+    class CourseTypeConverter {
+        @TypeConverter
+        fun fromIntToType(value : Int) = Course.Type.parse(value)
+        @TypeConverter
+        fun fromTypeToIntValue(type : Course.Type) = type.type
+    }
+
+    /**
+     * [Gson]을 이용한 [Retrofit] 통신에서 [Type] 와 [Int] 를 (De)Serialization 하기위해 사용될 [JsonSerializer]
+     */
+    class CourseTypeJsonSerializer : JsonSerializer<Course.Type>, JsonDeserializer<Course.Type> {
+        override fun serialize(src: Course.Type?, typeOfSrc: java.lang.reflect.Type?, context: JsonSerializationContext?): JsonElement {
+            return try {
+                JsonPrimitive(src!!.type)
+            }catch(e: Exception) {
+                JsonPrimitive(Course.Type.UNKNOWN.type)
+            }
+        }
+
+        override fun deserialize(json: JsonElement?, typeOfT: java.lang.reflect.Type?, context: JsonDeserializationContext?): Course.Type {
+            return try{
+                Course.Type.parse(json!!.asInt)
+            }catch(e : Exception) {
+                Course.Type.UNKNOWN
+            }
         }
     }
 
@@ -131,4 +216,6 @@ data class Course(
             }
         }
     }
+
+
 }

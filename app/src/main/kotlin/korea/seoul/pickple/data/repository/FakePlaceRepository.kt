@@ -21,7 +21,9 @@ class FakePlaceRepository : PlaceRepository {
                     Location(37.4766,126.9816),
                     Location(37.4626,126.9383)
                 ).random(),
-                price = Random.nextInt(5000,300000000)
+                price = Random.nextInt(5000,300000000),
+                likeCount = 999,
+                thumbnail = "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg"
             )
         )
     }
