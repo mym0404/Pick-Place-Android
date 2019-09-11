@@ -29,7 +29,8 @@
         <!-- 테스트 라이브러리 사용 -->
         <uses-library
             android:name="android.test.runner"
-            android:required="false" /> <!-- 구글 API 라이브러리 호환성 -->
+            android:required="false" />
+        <!-- 구글 API 라이브러리 호환성 -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

@@ -26,7 +26,6 @@ plugins {
 /**
  * 상수
  */
-//AIzaSyBeocf9dJI1E8U0bbz0Y4I11kEEjIhgk3g
 ext {
     packageName = 'korea.seoul.pickple'
     minSdkVersion = 23
