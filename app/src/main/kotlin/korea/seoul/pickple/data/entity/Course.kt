@@ -89,7 +89,15 @@ data class Course(
     @SerializedName("course_like")
     @Expose(serialize = false, deserialize = true)
     @ColumnInfo(name = "course_like")
-    val likeCount : Int
+    val likeCount : Int,
+
+    /**
+     * 코스 태그 리스트
+     */
+    @SerializedName("course_tags")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_tags")
+    val tagList : List<String>
 ) : Parcelable {
 
     /**
