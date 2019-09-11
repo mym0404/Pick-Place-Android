@@ -97,6 +97,9 @@ data class Place(
     @ColumnInfo(name="place_price")
     var price : Int?,
 
+    /**
+     * 장소의 좋아요 횟수
+     */
     @SerializedName("place_like")
     @Expose(serialize = false, deserialize = true)
     @ColumnInfo(name = "place_like")
