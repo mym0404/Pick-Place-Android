@@ -95,7 +95,12 @@ data class Place(
     @SerializedName("place_price")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name="place_price")
-    var price : Int?
+    var price : Int?,
+
+    @SerializedName("place_like")
+    @Expose(serialize = false, deserialize = true)
+    @ColumnInfo(name = "place_like")
+    var likeCount : Int
 
 
     //장소, 주차, 메뉴판의 가격등 구체적인 것 추가 예정
