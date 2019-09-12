@@ -60,6 +60,8 @@ object Versions {
 
   const val dexter: String = "5.0.0"
 
+  const val pageindicatorview: String = "1.0.3"
+
   const val com_squareup_retrofit2: String = "2.6.1"
 
   const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.5.0"

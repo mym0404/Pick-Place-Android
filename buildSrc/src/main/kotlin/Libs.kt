@@ -175,6 +175,12 @@ object Libs {
   const val dexter: String = "com.karumi:dexter:" + Versions.dexter
 
   /**
+   * https://github.com/romandanylyk/PageIndicatorView
+   */
+  const val pageindicatorview: String = "com.romandanylyk:pageindicatorview:" +
+      Versions.pageindicatorview
+
+  /**
    * https://github.com/square/retrofit/
    */
   const val converter_gson: String = "com.squareup.retrofit2:converter-gson:" +

@@ -7,14 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.JointType
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
-import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
@@ -29,10 +27,6 @@ import org.koin.android.ext.android.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.google.android.gms.maps.model.LatLng
-import android.R
-
-
 
 
 final class PickpleMapFragment : Fragment() {
@@ -76,28 +70,36 @@ final class PickpleMapFragment : Fragment() {
          * 2. 지정된 장소에 마커가 찍힌다.
          *
          * 3. 전달한 [places] 리스트의 [Place] 객체의 순서대로 지도에 경로가 Polyline으로 표시된다.
+         *
+         * @param places 장소들
+         * @param drawPolyline 장소들을 잇는 선을 그을 것인지
          */
-        fun updateLocationAndZoomScale(places: List<Place>) {
+        fun updateLocationAndZoomScale(places: List<Place>,drawPolyline : Boolean = false) {
             tryMapRunnable {
-                updateMapPositionAndScale(places)
+                updateMapPositionAndScale(places,drawPolyline)
             }
         }
 
-        fun setMyLocation() {
+        /**
+         * 내 위치로 설정
+         *
+         * 비동기로 실행됨 주의
+         */
+        fun setMyLocationAsync() {
             tryMapRunnable {
-                LocationSer
-                mMap.myLo
 
-                val myLocationChangeListener = object : GoogleMap.OnMyLocationChangeListener {
-                    override fun onMyLocationChange(location: Location) {
-                        val loc = LatLng(location.getLatitude(), location.getLongitude())
-                        mMarker = mMap.addMarker(MarkerOptions().position(loc))
-                        if (mMap != null) {
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f))
-                        }
-                    }
+                fusedClient.lastLocation.addOnSuccessListener {location->
+                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude,location.longitude)))
                 }
             }
+        }
+
+        /**
+         * 마커를 클릭했을 때 마커를 반환해주는 콜백 등록
+         */
+        fun setMarkerClickedListener(callback : (marker : Marker) -> Unit) {
+            this@PickpleMapFragment.markerClickListener = callback
+
         }
 
     }
@@ -139,6 +141,12 @@ final class PickpleMapFragment : Fragment() {
 
     private val mapUtil: MapUtil by inject()
 
+    private lateinit var fusedClient : FusedLocationProviderClient
+
+    private var markerClickListener : ((Marker) -> Unit)? = null
+
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -147,6 +155,8 @@ final class PickpleMapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mBinding.lifecycleOwner = viewLifecycleOwner
+
+        fusedClient = FusedLocationProviderClient(this.context!!)
 
         dexterUtil.requestPermissions(this.activity!!, object : PermissionListener {
             override fun onPermissionGranted() {
@@ -160,6 +170,8 @@ final class PickpleMapFragment : Fragment() {
             override fun onAnyPermissionsPermanentlyDeined(deniedPermissions: List<String>, permanentDeniedPermissions: List<String>) {
             }
         }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
+
+
 
     }
 
@@ -182,18 +194,20 @@ final class PickpleMapFragment : Fragment() {
             map.isIndoorEnabled = true
 
 
-            adjustMapLocation(map)
+
+            mMap?.setOnMarkerClickListener {marker->
+                this@PickpleMapFragment.markerClickListener?.invoke(marker)
+                true
+            }
 
 
             pendingTasks.forEach { it.invoke() }
             pendingTasks.clear()
+
+
         }
 
         childFragmentManager.beginTransaction().add(korea.seoul.pickple.R.id.root_container, mapFrag).commit()
-    }
-
-    private fun adjustMapLocation(map: GoogleMap) {
-
     }
 
 
@@ -204,7 +218,7 @@ final class PickpleMapFragment : Fragment() {
      *
      * Polygon도 만든다.
      */
-    private fun updateMapPositionAndScale(places: List<Place>) {
+    private fun updateMapPositionAndScale(places: List<Place>, drawPolyline: Boolean) {
 
 
         //Clear Markers
@@ -218,34 +232,36 @@ final class PickpleMapFragment : Fragment() {
         //Move Camera To Center of Places
         mMap?.moveCamera(mapUtil.autoZoomLevel(places))
 
-        val repo: DirectionsRepository = get()
+        if(drawPolyline) {
+            val repo: DirectionsRepository = get()
 
-        for (i in 0 until places.size - 1) {
-            //TODO 막코딩
-            repo.getRouteFromTwoPlace(
-                places[i].location!!,
-                places[i + 1].location!!,
-                getString(korea.seoul.pickple.R.string.google_maps_key)
-            ).enqueue(object : Callback<DirectionsResponse> {
-                override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
-                    Log.e(TAG, t.toString())
-                }
-
-                override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
-
-                    try {
-                        val r = response.body()!!
-
-                        val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-
-                        val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
-                        mMap?.addPolyline(option)
-                    }catch(t : Throwable) {
-                        Log.e(TAG,"fail to add polyline")
+            for (i in 0 until places.size - 1) {
+                //TODO 막코딩
+                repo.getRouteFromTwoPlace(
+                    places[i].location!!,
+                    places[i + 1].location!!,
+                    getString(korea.seoul.pickple.R.string.google_maps_key)
+                ).enqueue(object : Callback<DirectionsResponse> {
+                    override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
+                        Log.e(TAG, t.toString())
                     }
 
-                }
-            })
+                    override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
+
+                        try {
+                            val r = response.body()!!
+
+                            val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
+
+                            val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+                            mMap?.addPolyline(option)
+                        } catch (t: Throwable) {
+                            Log.e(TAG, "fail to add polyline")
+                        }
+
+                    }
+                })
+            }
         }
 
 
@@ -255,6 +271,11 @@ final class PickpleMapFragment : Fragment() {
         super.onDestroyView()
 
         _mBinding = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        markerClickListener = null
     }
 
 }
