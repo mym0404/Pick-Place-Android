@@ -142,6 +142,8 @@ object Libs {
   const val play_services_maps: String = "com.google.android.gms:play-services-maps:" +
       Versions.play_services_maps
 
+  const val places: String = "com.google.android.libraries.places:places:" + Versions.places
+
   /**
    * http://developer.android.com/tools/extras/support-library.html
    */

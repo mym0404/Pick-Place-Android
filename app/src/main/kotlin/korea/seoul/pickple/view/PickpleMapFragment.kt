@@ -29,6 +29,10 @@ import org.koin.android.ext.android.inject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.google.android.gms.maps.model.LatLng
+import android.R
+
+
 
 
 final class PickpleMapFragment : Fragment() {
@@ -76,6 +80,23 @@ final class PickpleMapFragment : Fragment() {
         fun updateLocationAndZoomScale(places: List<Place>) {
             tryMapRunnable {
                 updateMapPositionAndScale(places)
+            }
+        }
+
+        fun setMyLocation() {
+            tryMapRunnable {
+                LocationSer
+                mMap.myLo
+
+                val myLocationChangeListener = object : GoogleMap.OnMyLocationChangeListener {
+                    override fun onMyLocationChange(location: Location) {
+                        val loc = LatLng(location.getLatitude(), location.getLongitude())
+                        mMarker = mMap.addMarker(MarkerOptions().position(loc))
+                        if (mMap != null) {
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 16.0f))
+                        }
+                    }
+                }
             }
         }
 
@@ -168,7 +189,7 @@ final class PickpleMapFragment : Fragment() {
             pendingTasks.clear()
         }
 
-        childFragmentManager.beginTransaction().add(R.id.root_container, mapFrag).commit()
+        childFragmentManager.beginTransaction().add(korea.seoul.pickple.R.id.root_container, mapFrag).commit()
     }
 
     private fun adjustMapLocation(map: GoogleMap) {
@@ -204,7 +225,7 @@ final class PickpleMapFragment : Fragment() {
             repo.getRouteFromTwoPlace(
                 places[i].location!!,
                 places[i + 1].location!!,
-                getString(R.string.google_maps_key)
+                getString(korea.seoul.pickple.R.string.google_maps_key)
             ).enqueue(object : Callback<DirectionsResponse> {
                 override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
                     Log.e(TAG, t.toString())

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
 import korea.seoul.pickple.view.PickpleMapFragment
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
@@ -38,6 +39,8 @@ class CourseCreateActivity : AppCompatActivity() {
             mMapFragment = WeakReference(frag)
             this.supportFragmentManager.beginTransaction().add(mBinding.mapContainer.id, frag).commit()
         }
+
+        mMapFragment.get()?.getController()?.
     }
     private fun initRecyclerView() {
         mBinding.recyclerView.apply {

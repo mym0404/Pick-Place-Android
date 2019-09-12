@@ -45,6 +45,15 @@ class CourseCreateViewModel : ViewModel() {
 
     //endregion
 
+    init {
+
+
+    }
+
+    private fun setDatas() {
+
+    }
+
 
     //region Event
     fun onClickExpandButton() {
@@ -52,6 +61,7 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     //endregion
+
 }
 
 @BindingAdapter("app:ratio_animation")

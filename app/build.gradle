@@ -115,6 +115,7 @@ dependencies {
     implementation Libs.viewpager2
 
     //Firebase & Google
+    implementation 'com.google.android.libraries.places:places:2.0.0'
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
     implementation Libs.android_maps_utils
