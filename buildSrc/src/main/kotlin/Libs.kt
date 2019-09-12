@@ -156,6 +156,12 @@ object Libs {
   const val google_services: String = "com.google.gms:google-services:" + Versions.google_services
 
   /**
+   * https://github.com/googlemaps/android-maps-utils
+   */
+  const val android_maps_utils: String = "com.google.maps.android:android-maps-utils:" +
+      Versions.android_maps_utils
+
+  /**
    * http://github.com/google/truth
    */
   const val com_google_truth_truth: String = "com.google.truth:truth:" +

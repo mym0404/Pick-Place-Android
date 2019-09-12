@@ -17,7 +17,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity(
     tableName = "Places",
     indices = arrayOf(
-        Index(value = ["place_name"],unique = true)
+        Index(value = ["place_name"], unique = true)
     )
 )
 data class Place(
@@ -41,10 +41,10 @@ data class Place(
      */
     @SerializedName("place_type")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_type")
+    @ColumnInfo(name = "place_type")
     @JsonAdapter(PlaceTypeJsonSerializer::class)
     @TypeConverters(PlaceTypeConverter::class)
-    val type : Type,
+    val type: Type,
 
     /**
      * 장소 이름, unique constraint
@@ -53,7 +53,7 @@ data class Place(
      */
     @SerializedName("place_name")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_name")
+    @ColumnInfo(name = "place_name")
     val name: String,
 
     /**
@@ -63,7 +63,7 @@ data class Place(
      */
     @SerializedName("place_description")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_description")
+    @ColumnInfo(name = "place_description")
     val description: String,
 
     /**
@@ -73,8 +73,8 @@ data class Place(
      */
     @SerializedName("place_phone")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_phone")
-    val phoneNumber : String?,
+    @ColumnInfo(name = "place_phone")
+    val phoneNumber: String?,
 
     /**
      * 장소의 위치 (nullable)
@@ -83,9 +83,9 @@ data class Place(
      */
     @SerializedName("place_location")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_location")
+    @ColumnInfo(name = "place_location")
     @Embedded
-    var location : Location?,
+    var location: Location?,
 
     /**
      * 장소 이용 가격 (nullable)
@@ -94,11 +94,22 @@ data class Place(
      */
     @SerializedName("place_price")
     @Expose(serialize = true, deserialize = true)
-    @ColumnInfo(name="place_price")
-    var price : Int?
+    @ColumnInfo(name = "place_price")
+    var price: Int?,
+
+    /**
+     * 장소의 좋아요 횟수
+     */
+    @SerializedName("place_like")
+    @Expose(serialize = false, deserialize = true)
+    @ColumnInfo(name = "place_like")
+    var likeCount: Int,
 
 
-    //장소, 주차, 메뉴판의 가격등 구체적인 것 추가 예정
+    @SerializedName("place_thumbnail")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "place_thumbnail")
+    val thumbnail: String
 
 ) : Parcelable {
     /**
@@ -106,7 +117,7 @@ data class Place(
      *
      * e.g.)음식점, 고궁 ...
      */
-    enum class Type(val type : Int) {
+    enum class Type(val type: Int) {
         UNKNOWN(-1),
         FOOD(0),
         PALACE(1),
@@ -120,8 +131,8 @@ data class Place(
              * @param value int value matched with value of [type] property in [Type]
              * @return [Type] object matched with parameter [value]
              */
-            fun parse(value : Int) : Type {
-                return when(value) {
+            fun parse(value: Int): Type {
+                return when (value) {
                     Type.FOOD.type -> Type.FOOD
                     Type.PALACE.type -> Type.PALACE
                     else -> Type.UNKNOWN
@@ -136,9 +147,10 @@ data class Place(
      */
     class PlaceTypeConverter {
         @TypeConverter
-        fun fromIntToType(value : Int) = Place.Type.parse(value)
+        fun fromIntToType(value: Int) = Place.Type.parse(value)
+
         @TypeConverter
-        fun fromTypeToIntValue(type : Type) = type.type
+        fun fromTypeToIntValue(type: Type) = type.type
     }
 
     /**
@@ -148,15 +160,15 @@ data class Place(
         override fun serialize(src: Type?, typeOfSrc: java.lang.reflect.Type?, context: JsonSerializationContext?): JsonElement {
             return try {
                 JsonPrimitive(src!!.type)
-            }catch(e: Exception) {
+            } catch (e: Exception) {
                 JsonPrimitive(Type.UNKNOWN.type)
             }
         }
 
         override fun deserialize(json: JsonElement?, typeOfT: java.lang.reflect.Type?, context: JsonDeserializationContext?): Type {
-            return try{
+            return try {
                 Type.parse(json!!.asInt)
-            }catch(e : Exception) {
+            } catch (e: Exception) {
                 Type.UNKNOWN
             }
         }

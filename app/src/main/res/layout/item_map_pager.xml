@@ -44,7 +44,7 @@
                 android:layout_marginTop="16dp"
 
 
-                android:text="덕수궁"
+                android:text="@{item.name}"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@+id/info"
                 app:layout_constraintLeft_toLeftOf="@id/index"
@@ -57,7 +57,7 @@
                 android:layout_marginTop="16dp"
 
 
-                android:text="1호선 시청역 2번 출구 도보 5분"
+                android:text="@{item.description}"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/index"
