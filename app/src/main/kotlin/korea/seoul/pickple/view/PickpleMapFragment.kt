@@ -16,6 +16,8 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.google.maps.android.PolyUtil
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.MapUtil
+import korea.seoul.pickple.common.util.PermissionDexterUtil
+import korea.seoul.pickple.common.util.PermissionListener
 import korea.seoul.pickple.data.api.DirectionsResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
@@ -102,6 +104,7 @@ final class PickpleMapFragment : Fragment() {
     private val mBinding: FragmentPickpleMapBinding
         get() = _mBinding!!
 
+    private val dexterUtil: PermissionDexterUtil by inject()
 
     /**
      * [GoogleMap] Instance
@@ -124,8 +127,19 @@ final class PickpleMapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mBinding.lifecycleOwner = viewLifecycleOwner
 
+        dexterUtil.requestPermissions(this.activity!!, object : PermissionListener {
+            override fun onPermissionGranted() {
+                //Add MapFragment
+                initMap()
+            }
 
-        initMap()
+            override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
+            }
+
+            override fun onAnyPermissionsPermanentlyDeined(deniedPermissions: List<String>, permanentDeniedPermissions: List<String>) {
+            }
+        }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
+
     }
 
     /**
@@ -198,12 +212,16 @@ final class PickpleMapFragment : Fragment() {
 
                 override fun onResponse(call: Call<DirectionsResponse>, response: Response<DirectionsResponse>) {
 
-                    val r = response.body()!!
+                    try {
+                        val r = response.body()!!
 
-                    val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
+                        val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
 
-                    val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
-                    mMap?.addPolyline(option)
+                        val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+                        mMap?.addPolyline(option)
+                    }catch(t : Throwable) {
+                        Log.e(TAG,"fail to add polyline")
+                    }
 
                 }
             })

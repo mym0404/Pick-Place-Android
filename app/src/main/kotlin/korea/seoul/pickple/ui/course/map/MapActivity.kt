@@ -6,11 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
-import korea.seoul.pickple.common.util.PermissionDexterUtil
-import korea.seoul.pickple.common.util.PermissionListener
 import korea.seoul.pickple.databinding.ActivityMapBinding
 import korea.seoul.pickple.view.PickpleMapFragment
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.lang.ref.WeakReference
@@ -36,9 +33,8 @@ class MapActivity : AppCompatActivity() {
      */
     private val mViewModel: MapViewModel by viewModel(MapViewModel::class, null) { parametersOf(1000) }
 
-    private val dexterUtil: PermissionDexterUtil by inject()
 
-    private var mMapFragment : WeakReference<PickpleMapFragment?> = WeakReference(null)
+    private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,24 +42,13 @@ class MapActivity : AppCompatActivity() {
         mBinding = ActivityMapBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
-        dexterUtil.requestPermissions(this, object : PermissionListener {
-            override fun onPermissionGranted() {
-                //Add MapFragment
-                if(mMapFragment.get() == null) {
-                    val frag = PickpleMapFragment()
 
-                    mMapFragment = WeakReference(frag)
-                    this@MapActivity.supportFragmentManager.beginTransaction().add(R.id.map_container, frag).commit()
-                }
-            }
+        if (mMapFragment.get() == null) {
+            val frag = PickpleMapFragment()
 
-            override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
-            }
-
-            override fun onAnyPermissionsPermanentlyDeined(deniedPermissions: List<String>, permanentDeniedPermissions: List<String>) {
-            }
-        }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
-
+            mMapFragment = WeakReference(frag)
+            this@MapActivity.supportFragmentManager.beginTransaction().add(R.id.map_container, frag).commit()
+        }
 
 
 
@@ -89,7 +74,6 @@ class MapActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         mViewModel.apply {
-
 
 
             this.places.observe(this@MapActivity, Observer { places ->
