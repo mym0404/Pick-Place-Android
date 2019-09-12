@@ -8,6 +8,7 @@ import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.repository.*
 import korea.seoul.pickple.ui.course.map.MapViewModel
+import korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -72,6 +73,7 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (courseId: Int) -> MapViewModel(get(), courseId) }
+        viewModel { (places: List<Int>) -> PlaceDetailViewModel(get(), places) }
     }
 
 

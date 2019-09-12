@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.course.place_detail.PlaceDetailActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerPlaceDetailImagePart"
+                android:layout_width="0dp"
+                android:layout_height="350dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#00000000"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp2PlaceDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    imageList="@{viewModel.placeImageUrls}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/toolPlaceDetailIndex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/toolPlaceDetailName"
+                    tools:text="1"
+                    android:text="@{viewModel.index.toString()}"
+                    android:textSize="29sp"
+                    />
+
+                <TextView
+                    android:id="@+id/toolPlaceDetailName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintStart_toStartOf="@id/toolPlaceDetailIndex"
+                    app:layout_constraintBottom_toTopOf="@id/toolPlaceDetailLike"
+                    tools:text="덕수궁"
+                    android:text="@{viewModel.currentPlace.name}"
+                    android:textSize="18sp"
+                    />
+
+                <ImageView
+                    android:id="@+id/toolPlaceDetailLike"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:src="@drawable/navi_btn_heart_w"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailIndex" />
+
+                <TextView
+                    android:id="@+id/toolPlaceDetailLikeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    app:layout_constraintBottom_toBottomOf="@id/toolPlaceDetailLike"
+                    app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLike"
+                    tools:text="364"
+                    android:text="@{``+ viewModel.currentPlace.likeCount}"
+                    android:textSize="11sp"
+                    />
+
+<!--                TODO [Place]에 tag 추가하고 연결 해야함 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    app:layout_constraintBottom_toBottomOf="@id/toolPlaceDetailLike"
+                    app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLikeCount"
+                    tools:text="# 덕수궁 핫 플레이스"
+                    android:textSize="11sp"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerPlaceDetailInfoPart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/containerPlaceDetailImagePart">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="덕수궁은 서울 중구 정동에 있는 조선과 대한제국의 궁궐로서, 대한민국의 사적 제124호이며 면적은 63,069m²이다. 원래의 면적은 현재보다 넓었으나, 일제강점기를 거치면서 축소되었다. 본래 이름은 경운궁이다"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="7sp"
+                    android:text="@{viewModel.currentPlace.description}"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
