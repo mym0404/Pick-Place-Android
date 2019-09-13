@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="item"
+            type="korea.seoul.pickple.data.entity.Place" />
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        app:cardUseCompatPadding="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:cardCornerRadius="8dp"
+        tools:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/imageView"
+                app:srcCompat="@drawable/ic_launcher_background"
+                android:scaleType="centerCrop"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_marginTop="19dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintLeft_toRightOf="@id/imageView"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미용실"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                 />
+
+            <TextView
+                android:textSize="16sp"
+                android:text="미용실 가야하는데"
+                app:layout_constraintLeft_toLeftOf="@id/type"
+                app:layout_constraintTop_toBottomOf="@id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</layout>

@@ -142,6 +142,8 @@ object Libs {
   const val play_services_maps: String = "com.google.android.gms:play-services-maps:" +
       Versions.play_services_maps
 
+  const val places: String = "com.google.android.libraries.places:places:" + Versions.places
+
   /**
    * http://developer.android.com/tools/extras/support-library.html
    */
@@ -171,6 +173,12 @@ object Libs {
    * https://github.com/karumi/Dexter
    */
   const val dexter: String = "com.karumi:dexter:" + Versions.dexter
+
+  /**
+   * https://github.com/romandanylyk/PageIndicatorView
+   */
+  const val pageindicatorview: String = "com.romandanylyk:pageindicatorview:" +
+      Versions.pageindicatorview
 
   /**
    * https://github.com/square/retrofit/
