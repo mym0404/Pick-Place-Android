@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 
@@ -17,9 +18,15 @@ class CourseCreateViewModel : ViewModel() {
     val bottomExpanded: LiveData<Boolean>
         get() = _bottomExpanded
 
-    private val _editMode : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-    val editMode : LiveData<Boolean>
-        get() = _editMode
+
+    val editMode = MediatorLiveData<Boolean>().apply {
+        value = false
+
+        addSource(bottomExpanded) {
+            if(!it)
+                this.value = false
+        }
+    }
 
     val detailMode : MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -49,13 +56,16 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
     //region Event
+    private val _clickPlaceAdd : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val clickPlaceAdd : LiveData<Once<Boolean>>
+        get() = _clickPlaceAdd
+
+    private val _clickAllDelete : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val clickAllDelete : LiveData<Once<Boolean>>
+        get() = _clickAllDelete
 
     //endregion
 
-    init {
-
-
-    }
 
     private fun setDatas() {
 
@@ -65,6 +75,26 @@ class CourseCreateViewModel : ViewModel() {
     //region Event
     fun onClickExpandButton() {
         _bottomExpanded.value = !(bottomExpanded.value!!)
+    }
+
+    fun onClickEditButton() {
+        editMode.value = !(editMode.value!!)
+    }
+
+    fun onClickPlaceAddButton() {
+        _clickPlaceAdd.value = Once(true)
+    }
+
+    fun onClickCourseSaveButton() {
+
+    }
+
+
+    fun onClickAllDeleteButton() {
+        _clickAllDelete.value = Once(true)
+    }
+    fun allDelete() {
+        _places.value = listOf()
     }
 
     //endregion

@@ -1,17 +1,23 @@
 package korea.seoul.pickple.ui.course.create
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
+import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
+import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
+import korea.seoul.pickple.ui.navigation.NavigationArgs
+import korea.seoul.pickple.ui.navigation.navigate
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
@@ -113,15 +119,19 @@ class CourseCreateActivity : AppCompatActivity() {
             })
 
             detailMode.observe(this@CourseCreateActivity, Observer { detailMode ->
+
+                val detailModeHeight = applicationContext.getPixelFromDP(56)
+                val defaultHeight = applicationContext.getPixelFromDP(100)
+
                 if (detailMode) {
-                    ObjectAnimator.ofFloat(mBinding.guideline,"guidelinePercent",0.14f,0.08f).apply {
+                    ObjectAnimator.ofInt(mBinding.guideline,"guidelineBegin",defaultHeight,detailModeHeight).apply {
                         setAutoCancel(true)
 
                         duration = 500L
                         start()
                     }
                 } else {
-                    ObjectAnimator.ofFloat(mBinding.guideline,"guidelinePercent",0.08f,0.14f).apply {
+                    ObjectAnimator.ofInt(mBinding.guideline,"guidelineBegin",detailModeHeight,defaultHeight).apply {
                         setAutoCancel(true)
 
                         duration = 500L
@@ -129,6 +139,20 @@ class CourseCreateActivity : AppCompatActivity() {
                     }
                 }
             })
+
+            clickPlaceAdd.observeOnce(this@CourseCreateActivity) {
+                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(),100)
+            }
+
+            clickAllDelete.observeOnce(this@CourseCreateActivity) {
+                AlertDialog.Builder(this@CourseCreateActivity)
+                    .setTitle("장소 전체 삭제")
+                    .setMessage("모든 장소를 삭제하시겠습니까?")
+                    .setPositiveButton("예"){_,_ -> mViewModel.allDelete()}
+                    .setNegativeButton("아니오"){_,_ ->}
+                    .show()
+            }
+
 
         }
     }
@@ -169,11 +193,22 @@ class CourseCreateActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == 100) {
+
+        }
+    }
+
     override fun onBackPressed() {
 
         if(mViewModel.detailMode.value == true) {
             mViewModel.detailMode.value = false
-        }else {
+        }
+        else if(mViewModel.bottomExpanded.value == true) {
+            mViewModel.onClickExpandButton()
+        }
+        else {
             super.onBackPressed()
         }
     }

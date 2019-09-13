@@ -74,6 +74,7 @@
         <activity android:name=".ui.course.unite_intro.UniteCourseActivity"
             android:exported="true"/>
 
+        <activity android:name=".ui.course.create.CourseCreateSearchActivity"/>
     </application>
 
 </manifest>

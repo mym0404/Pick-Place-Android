@@ -7,6 +7,8 @@ import korea.seoul.pickple.data.entity.Place
 
 class MapUtil {
     fun autoZoomLevel(places: List<Place>): CameraUpdate? {
+        if(places.isEmpty()) return null
+
         val locations = places.mapNotNull { it.location }
 
         if(locations.isEmpty()) return null
