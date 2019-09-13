@@ -113,8 +113,10 @@ dependencies {
     implementation Libs.material
     implementation Libs.autofittextview
     implementation Libs.viewpager2
+    implementation Libs.pageindicatorview
 
     //Firebase & Google
+    implementation Libs.places
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
     implementation Libs.android_maps_utils
