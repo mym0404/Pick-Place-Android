@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.loadImage
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.CourseRepository
 import kotlinx.android.synthetic.main.activity_course_simple_intro.*
@@ -41,12 +43,10 @@ class CourseSimpleIntroActivity : AppCompatActivity() {
 
     private fun updateCourseInfo(course: Course) {
         with(course) {
-            Glide.with(this@CourseSimpleIntroActivity)
-                .load(course.thumbnail)
-                .into(imageBackground)
+            imageBackground.loadImage(course.thumbnail)
             textCourseName.text = name
-            textCourseType.text = type.toString()
-            textHashTagList.text = tagList.toString()
+            textCourseType.text = Course.Type.display(type)
+            textHashTagList.text = tagList.toTagList()
         }
     }
 }
