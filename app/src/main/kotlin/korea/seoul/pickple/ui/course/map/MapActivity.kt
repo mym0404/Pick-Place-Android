@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
+import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.repository.FakeCourseRepository
 import korea.seoul.pickple.databinding.ActivityMapBinding
+import korea.seoul.pickple.ui.navigation.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 import java.lang.ref.WeakReference
 
@@ -31,8 +34,10 @@ class MapActivity : AppCompatActivity() {
     /**
      * ViewModel from Koin
      */
-    private val mViewModel: MapViewModel by viewModel(MapViewModel::class, null) { parametersOf(1000) }
+    private lateinit var mViewModel: MapViewModel
 
+
+    private lateinit var course: Course
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
 
@@ -42,6 +47,9 @@ class MapActivity : AppCompatActivity() {
         mBinding = ActivityMapBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
+        //TODO FakeCourse for Debug
+        course = parseIntent(intent).course ?: FakeCourseRepository.fakeCourse
+        mViewModel = getViewModel(MapViewModel::class, null) { parametersOf(course) }
 
         if (mMapFragment.get() == null) {
             val frag = PickpleMapFragment()
@@ -49,11 +57,6 @@ class MapActivity : AppCompatActivity() {
             mMapFragment = WeakReference(frag)
             this@MapActivity.supportFragmentManager.beginTransaction().add(R.id.map_container, frag).commit()
         }
-
-
-
-
-
 
         initMapPager()
         observeViewModel()
@@ -75,14 +78,13 @@ class MapActivity : AppCompatActivity() {
     private fun observeViewModel() {
         mViewModel.apply {
 
-
             this.places.observe(this@MapActivity, Observer { places ->
                 (mBinding.viewPager2.adapter as? MapPagerAdapter)?.let { adapter ->
                     adapter.items = places
                     adapter.notifyDataSetChanged()
                 }
 
-                mMapFragment.get()?.getController()?.updateLocationAndZoomScale(places)
+                mMapFragment.get()?.getController()?.updateLocationAndZoomScale(places,true)
             })
         }
 

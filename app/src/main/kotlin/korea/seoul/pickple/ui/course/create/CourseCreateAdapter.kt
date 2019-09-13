@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
+import korea.seoul.pickple.common.widget.ItemTouchHelperAdapter
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ItemCourseCreateBinding
+import java.util.*
 
-class CourseCreateAdapter : RecyclerView.Adapter<CourseCreateAdapter.CourseCreateHolder>() {
+class CourseCreateAdapter : RecyclerView.Adapter<CourseCreateAdapter.CourseCreateHolder>(), ItemTouchHelperAdapter {
 
     var items: List<Place> = listOf()
 
@@ -29,6 +31,25 @@ class CourseCreateAdapter : RecyclerView.Adapter<CourseCreateAdapter.CourseCreat
             binding.setVariable(BR.item, item)
             binding.executePendingBindings()
         }
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(items, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(items, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+        return true
+    }
+
+    override fun onItemDismiss(position: Int) {
+        items -= items[position]
+        notifyItemRemoved(position)
     }
 }
 

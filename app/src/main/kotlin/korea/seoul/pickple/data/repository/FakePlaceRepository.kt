@@ -23,7 +23,13 @@ class FakePlaceRepository : PlaceRepository {
                 ).random(),
                 price = Random.nextInt(5000,300000000),
                 likeCount = 999,
-                thumbnail = "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg"
+                thumbnail =
+                    listOf(
+                        "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg",
+                        "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
+                        "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
+                        "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
+                    ).random()
             )
         )
     }

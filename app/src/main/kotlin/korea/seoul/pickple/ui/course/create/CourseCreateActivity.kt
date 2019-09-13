@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
+import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
@@ -68,7 +70,11 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         mBinding.recyclerView.apply {
-            adapter = CourseCreateAdapter()
+            val adapter = CourseCreateAdapter()
+
+            this.adapter = adapter
+
+            ItemTouchHelper(SimpleItemTouchHelperCallback(adapter)).attachToRecyclerView(this)
         }
 
         mBinding.detailPager.apply {
