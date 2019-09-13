@@ -57,7 +57,12 @@
             android:exported="true" />
         <activity
             android:name=".ui.course.simple_intro.CourseSimpleIntroActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.course.unite_intro.UniteCourseActivity"
             android:exported="true"/>
+
     </application>
 
 </manifest>
