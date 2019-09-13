@@ -133,6 +133,19 @@ data class Course(
                     else -> Type.UNKNOWN
                 }
             }
+
+            /**
+             * Type에 해당하는 코스 한글 이름을 반환하는 정적 메서드
+             *
+             * @param type [Type] 객체
+             * @return [Type] 객체를 한글로 바꾼 것
+             * */
+            fun display(type: Type): String = when(type) {
+                ORAEGAGE -> "오래가게코스"
+                KOREA_TRADITIONAL -> "한국 전통 코스"
+                CUSTOM -> "서울 시민이 추천하는 코스"
+                UNKNOWN -> "추천 코스"
+            }
         }
 
     }
