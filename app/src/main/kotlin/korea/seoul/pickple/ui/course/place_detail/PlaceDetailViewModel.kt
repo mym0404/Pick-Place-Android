@@ -1,16 +1,30 @@
 package korea.seoul.pickple.ui.course.place_detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.PlaceRepository
 
 class PlaceDetailViewModel(
-    private val placeRepository: PlaceRepository,
-    private val placeIds: List<Int>
+    placeRepository: PlaceRepository,
+    placeIds: List<Int>
 ) : ViewModel() {
+    private val placeRepository = placeRepository
+    var placeIds: List<Int> = placeIds
+        set(value) {
+            // place 캐시 새로만들기.
+            makePlaceCache(value)
+            // place들 이미지 url 리스트 새로만들기.
+            makePlaceImageUrlList(value)
+            // index 초기화
+            _index.value = 1
+            field = value
+        }
+
     /**
      * 현재 선택된 Place
      * */
@@ -20,7 +34,7 @@ class PlaceDetailViewModel(
     /**
      * Place의 캐시, 처음에 place는 null로 저장
      */
-    private val placeList: MutableList<Place?> by lazy { MutableList<Place?>(placeIds.size) { null } }
+    private var placeList: MutableList<Place?> = mutableListOf()
 
     /**
     * Place들의 이미지 url 리스트
@@ -32,16 +46,19 @@ class PlaceDetailViewModel(
     * 현재 선택한 Place의 index 1부터 시작한다.
     * */
     private val _index: MutableLiveData<Int> = MutableLiveData()
-    val index: LiveData<Int> = _index
+    val index: LiveData<String> = Transformations.map(_index) {
+        if (it>10) it.toString() else "0$it"
+    } // 한 자리 index는 0을 붙혀서 보여준다.
 
     init {
         // 인덱스가 변경되면, 현재 서버에 있는 place 정보를 받아온다.
-        index.observeForever {
-            if (it <= 0 || it >= placeList.size) return@observeForever
+        _index.observeForever {
+            if (it < 1 || it > placeList.size) return@observeForever
             if (placeList[it-1] != null) {
                 _currentPlace.value = placeList[it-1]
             }
             else {
+                // 데이터 로드가 안되있으면 로드한다.
                 placeRepository.getPlaceWithId(it-1)
                     .callback(
                         successCallback = { place ->
@@ -51,19 +68,6 @@ class PlaceDetailViewModel(
                     )
             }
         }
-
-        placeIds.forEachIndexed { index, id ->
-            placeRepository.getPlaceWithId(id)
-                .callback (
-                    successCallback = { place ->
-                        placeList[index] = place
-                        _placeImageUrls.value = placeList.map { it?.thumbnail?:"" }
-                        _currentPlace.value = place
-                    }
-                )
-        }
-
-        _index.value = 1
     }
 
     /**
@@ -78,5 +82,31 @@ class PlaceDetailViewModel(
      * */
     fun clickPostComment() {
 
+    }
+
+    /**
+     * 사용자가 이미지를 스크롤해서 특정 index의 Place를 고름
+     * index 는 1-based index이다!
+     * @param index 1-based index
+     * */
+    fun selectPlace(index: Int) {
+        _index.value = index
+    }
+
+    private fun makePlaceCache(placeIds: List<Int>) {
+        placeList = MutableList(placeIds.size) { null }
+    }
+
+    private fun makePlaceImageUrlList(placeIds: List<Int>) {
+        // id를 기반으로 실제 데이터를 받아온다.
+        placeIds.forEachIndexed { index, id ->
+            placeRepository.getPlaceWithId(id)
+                .callback (
+                    successCallback = { place ->
+                        placeList[index] = place
+                        _placeImageUrls.value = placeList.map { it?.thumbnail?:"" }
+                    }
+                )
+        }
     }
 }

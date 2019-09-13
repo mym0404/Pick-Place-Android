@@ -7,10 +7,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar.*
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityPlaceDetailBinding
-import kotlinx.android.synthetic.main.activity_place_detail.*
-import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -22,26 +21,46 @@ import org.koin.core.parameter.parametersOf
  * @author greedy0110
  * */
 class PlaceDetailActivity : AppCompatActivity() {
-    private val viewModel: PlaceDetailViewModel by viewModel { parametersOf(listOf(1,2,3,4)) }
+    private val mViewModel: PlaceDetailViewModel by viewModel { parametersOf(listOf<Int>()) }
+
+    private lateinit var mBinding: ActivityPlaceDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityPlaceDetailBinding = DataBindingUtil.setContentView(
+        mBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_place_detail
         )
 
-        binding.vp2PlaceDetail.adapter = PlaceDetailViewPagerAdapter(this, listOf())
-        binding.viewModel = viewModel
+        mBinding.vp2PlaceDetail.apply {
+            adapter = PlaceDetailViewPagerAdapter(this@PlaceDetailActivity, listOf())
+            registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        mViewModel.selectPlace(position + 1)
+                    }
+                }
+            )
+        }
 
+        // lifecycle owner를 세팅해주어야 data binding시 LiveData를 사용해 즉각적인 업데이트를 할 수 있다.
+        mBinding.lifecycleOwner = this
+        mViewModel.placeIds = listOf(1,2,3,4)
+        mBinding.viewModel = mViewModel
+
+
+        makeAppBar()
+    }
+
+    private fun makeAppBar() {
         // 우리의 toolbar를 앱바로 지정한다
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(mBinding.toolbar)
         supportActionBar?.run {
             // DISPLAY_HOME_AS_UP을 세팅해서 뒤로가기 버튼을 보여준다.
             setDisplayOptions(
                 DISPLAY_HOME_AS_UP
                 , DISPLAY_HOME_AS_UP or DISPLAY_SHOW_TITLE) // 타이틀이 보이지 않아야한다.
         }
-
     }
 
     // app bar에 menu를 실제로 만들어 준다.

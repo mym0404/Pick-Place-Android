@@ -19,7 +19,13 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
                 places = List(3){ it }.distinct(),
                 likeCount = Random.nextInt(500,2000),
                 tagList = listOf("Tag1","Tag2","Tag3","Tag4"),
-                thumbnail = "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg"
+                thumbnail =
+                    listOf(
+                        "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg",
+                        "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
+                        "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
+                        "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
+                    ).random()
             )
         )
     }

@@ -18,25 +18,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/containerPlaceDetailImagePart"
                 android:layout_width="0dp"
                 android:layout_height="350dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="#00000000"
-                    android:elevation="4dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/vp2PlaceDetail"
@@ -58,8 +47,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/toolPlaceDetailName"
                     tools:text="1"
-                    android:text="@{viewModel.index.toString()}"
+                    android:text="@{viewModel.index}"
                     android:textSize="29sp"
+                    android:textColor="#ffffff"
                     />
 
                 <TextView
@@ -72,6 +62,7 @@
                     tools:text="덕수궁"
                     android:text="@{viewModel.currentPlace.name}"
                     android:textSize="18sp"
+                    android:textColor="#ffffff"
                     />
 
                 <ImageView
@@ -94,6 +85,7 @@
                     tools:text="364"
                     android:text="@{``+ viewModel.currentPlace.likeCount}"
                     android:textSize="11sp"
+                    android:textColor="#ffffff"
                     />
 
 <!--                TODO [Place]에 tag 추가하고 연결 해야함 -->
@@ -106,6 +98,18 @@
                     app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLikeCount"
                     tools:text="# 덕수궁 핫 플레이스"
                     android:textSize="11sp"
+                    android:textColor="#ffffff"
+                    />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/navi_btn_back_w"
+                    android:background="#00000000"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -120,6 +124,7 @@
                 app:layout_constraintTop_toBottomOf="@id/containerPlaceDetailImagePart">
 
                 <TextView
+                    android:id="@+id/toolPlaceDetailDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -131,7 +136,32 @@
                     tools:text="덕수궁은 서울 중구 정동에 있는 조선과 대한제국의 궁궐로서, 대한민국의 사적 제124호이며 면적은 63,069m²이다. 원래의 면적은 현재보다 넓었으나, 일제강점기를 거치면서 축소되었다. 본래 이름은 경운궁이다"
                     android:textSize="13sp"
                     android:lineSpacingExtra="7sp"
+                    android:textColor="#000000"
                     android:text="@{viewModel.currentPlace.description}"
+                    />
+
+                <ImageView
+                    android:id="@+id/toolPlaceDetailLocation"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailDesc"
+                    app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc"
+                    android:src="#000000"
+                    />
+
+<!--                TODO Place에 위치에 대한 상세 정보가 들어있어야함. (text로 산출 가능한, 혹은 Location으로 쿼리 가능?)-->
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분"
+                    android:lines="2"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="7sp"
+                    android:textColor="#000000"
+                    app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
+                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLocation"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
