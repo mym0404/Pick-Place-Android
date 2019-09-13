@@ -7,6 +7,7 @@ import android.view.MenuItem
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityPlaceDetailBinding
 import korea.seoul.pickple.databinding.ActivityUniteCourseBinding
+import korea.seoul.pickple.ui.BaseActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -18,20 +19,15 @@ import org.koin.core.parameter.parametersOf
  * (반드시 넘겨야한다.) courseId : 우리가 선택한 코스의 아이디 정보
  * @author greedy0110
  * */
-class UniteCourseActivity : AppCompatActivity() {
-    private lateinit var mBinding: ActivityUniteCourseBinding
+class UniteCourseActivity : BaseActivity<ActivityUniteCourseBinding>(R.layout.activity_unite_course) {
     private val mViewModel: UniteCourseViewModel by viewModel { parametersOf(0) }
     private var courseId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = ActivityUniteCourseBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
-
         courseId = intent.getIntExtra("courseId", -1)
         courseId = 1 // test 용!
 
-        mBinding.lifecycleOwner = this
         mBinding.viewModel = mViewModel.apply {
             courseId = this@UniteCourseActivity.courseId
         }

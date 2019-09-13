@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityPlaceDetailBinding
+import korea.seoul.pickple.ui.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -20,17 +21,11 @@ import org.koin.core.parameter.parametersOf
  * (반드시 넘겨야한다.) placesIds : 우리가 선택한 코스의 장소들 정보
  * @author greedy0110
  * */
-class PlaceDetailActivity : AppCompatActivity() {
+class PlaceDetailActivity : BaseActivity<ActivityPlaceDetailBinding>(R.layout.activity_place_detail) {
     private val mViewModel: PlaceDetailViewModel by viewModel { parametersOf(listOf<Int>()) }
-
-    private lateinit var mBinding: ActivityPlaceDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_place_detail
-        )
-
         mBinding.vp2PlaceDetail.apply {
             adapter = PlaceDetailViewPagerAdapter(this@PlaceDetailActivity, listOf())
             registerOnPageChangeCallback(
@@ -43,8 +38,6 @@ class PlaceDetailActivity : AppCompatActivity() {
             )
         }
 
-        // lifecycle owner를 세팅해주어야 data binding시 LiveData를 사용해 즉각적인 업데이트를 할 수 있다.
-        mBinding.lifecycleOwner = this
         mViewModel.placeIds = listOf(1,2,3,4)
         mBinding.viewModel = mViewModel
 
@@ -61,12 +54,6 @@ class PlaceDetailActivity : AppCompatActivity() {
                 DISPLAY_HOME_AS_UP
                 , DISPLAY_HOME_AS_UP or DISPLAY_SHOW_TITLE) // 타이틀이 보이지 않아야한다.
         }
-    }
-
-    // app bar에 menu를 실제로 만들어 준다.
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_place_detail_toolbar, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item?.itemId) {
