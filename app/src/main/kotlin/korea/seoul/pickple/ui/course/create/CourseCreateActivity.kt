@@ -76,7 +76,7 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         mBinding.recyclerView.apply {
-            val adapter = CourseCreateAdapter()
+            val adapter = CourseCreateAdapter(mViewModel,this@CourseCreateActivity)
 
             this.adapter = adapter
 
@@ -153,6 +153,12 @@ class CourseCreateActivity : AppCompatActivity() {
                     .show()
             }
 
+
+            syncData.observeOnce(this@CourseCreateActivity) {
+                (mBinding.recyclerView.adapter as? CourseCreateAdapter)?.let {
+                    mViewModel.syncDataWith(it.items)
+                }
+            }
 
         }
     }

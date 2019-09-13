@@ -44,14 +44,14 @@ class CourseCreateViewModel : ViewModel() {
 
     //region Data
 
-    private val _places : MutableLiveData<List<Place>> = MutableLiveData<List<Place>>(listOf(
+    private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
         Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
         Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
     ))
     val places : LiveData<List<Place>>
         get() = _places
 
-    val curPlace : MutableLiveData<Place?> = MutableLiveData<Place?>(null)
+    val curPlace : MutableLiveData<Place?> = MutableLiveData(null)
 
     //endregion
 
@@ -64,11 +64,18 @@ class CourseCreateViewModel : ViewModel() {
     val clickAllDelete : LiveData<Once<Boolean>>
         get() = _clickAllDelete
 
+    private val _syncData : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val syncData : LiveData<Once<Boolean>>
+        get() = _syncData
     //endregion
 
 
     private fun setDatas() {
 
+    }
+
+    fun syncDataWith(items : List<Place>) {
+        _places.value = items
     }
 
 
@@ -86,6 +93,7 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     fun onClickCourseSaveButton() {
+        _syncData.value = Once(true)
 
     }
 

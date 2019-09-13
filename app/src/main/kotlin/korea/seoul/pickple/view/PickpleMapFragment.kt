@@ -233,7 +233,9 @@ final class PickpleMapFragment : Fragment() {
 
         //Move Camera To Center of Places
         mapUtil.autoZoomLevel(places)?.run {
-            mMap?.moveCamera(this)
+            try {
+                mMap?.moveCamera(this)
+            }catch (t : Throwable){}
         }
 
         if(drawPolyline) {
