@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerCourseSimpleInfo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.course.simple_intro.CourseSimpleIntroActivity">
@@ -16,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ImageView
+        android:scaleType="centerCrop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/cover_gradation"/>
+
     <TextView
         android:id="@+id/textCourseType"
         android:layout_width="wrap_content"
@@ -25,6 +36,7 @@
         app:layout_constraintBottom_toTopOf="@id/textCourseName"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="14sp"
+        android:textColor="#ffffff"
         tools:text="한국 전통 코스" />
 
     <me.grantland.widget.AutofitTextView
@@ -36,8 +48,11 @@
         app:layout_constraintBottom_toTopOf="@id/textHashTagList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textCourseType"
-        app:minTextSize="20sp"
+        app:minTextSize="24sp"
+        android:lineSpacingExtra="13sp"
+        android:textColor="#ffffff"
         android:lines="2"
+        android:textStyle="bold"
         tools:text="한국의 근대가 시작된 정동길을 따라 걸어볼까?"
         />
 
@@ -51,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textCourseName"
         android:textSize="11sp"
+        android:textColor="#ffffff"
         tools:text="# 덕수궁 핫플레이스  # 한국 전통 궁 체험"
         />
 

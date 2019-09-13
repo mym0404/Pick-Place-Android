@@ -1,12 +1,16 @@
 package korea.seoul.pickple.ui.course.simple_intro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.loadImage
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.CourseRepository
+import korea.seoul.pickple.ui.course.unite_intro.UniteCourseActivity
 import kotlinx.android.synthetic.main.activity_course_simple_intro.*
 import org.koin.android.ext.android.inject
 import retrofit2.Call
@@ -37,16 +41,22 @@ class CourseSimpleIntroActivity : AppCompatActivity() {
                     updateCourseInfo(it)
                 }
             )
+
+        containerCourseSimpleInfo.setOnClickListener {
+            // 버튼을 누르면 "코스소개 - 상세보기"로 넘어가야 한다.
+            // UniteCourseActivity 는 courseId 를 필수로 넘거야한다!
+            startActivity(Intent(this, UniteCourseActivity::class.java).apply {
+                putExtra("courseId", courseId)
+            })
+        }
     }
 
     private fun updateCourseInfo(course: Course) {
         with(course) {
-            Glide.with(this@CourseSimpleIntroActivity)
-                .load(course.thumbnail)
-                .into(imageBackground)
+            imageBackground.loadImage(course.thumbnail)
             textCourseName.text = name
-            textCourseType.text = type.toString()
-            textHashTagList.text = tagList.toString()
+            textCourseType.text = Course.Type.display(type)
+            textHashTagList.text = tagList.toTagList()
         }
     }
 }

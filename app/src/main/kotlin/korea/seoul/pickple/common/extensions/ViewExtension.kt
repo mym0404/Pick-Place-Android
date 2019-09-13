@@ -1,8 +1,11 @@
 package korea.seoul.pickple.common.extensions
 
+import android.widget.ImageView
 import androidx.annotation.DimenRes
 import androidx.core.view.ViewCompat
+import androidx.databinding.BindingAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 
 
 fun ViewPager2.setShowSideItemsWithDimens(@DimenRes pageMarginPx: Int, @DimenRes offsetPx: Int) {
@@ -35,4 +38,15 @@ fun ViewPager2.setShowSideItems(pageMarginPx: Int, offsetPx: Int) {
             page.translationY = offset
         }
     }
+}
+
+/**
+ * Glide를 이용해 이미지를 로드하는 간단한 보조 함수
+ * @author greedy0110
+ * */
+@BindingAdapter("imageUrl")
+fun ImageView.loadImage(url: String?) {
+    Glide.with(context)
+        .load(url)
+        .into(this)
 }
