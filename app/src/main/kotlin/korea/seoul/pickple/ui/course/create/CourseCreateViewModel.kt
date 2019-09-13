@@ -26,7 +26,7 @@ class CourseCreateViewModel : ViewModel() {
 
     val mapRatio : MediatorLiveData<Float> = MediatorLiveData<Float>().apply {
         this.addSource(detailMode,Observer {detail->
-            this.value = if(detail) 1.2f else (if(bottomExpanded.value == true) 0.4f else 0.8f)
+            this.value = if(detail) 1.0f else (if(bottomExpanded.value == true) 0.4f else 0.8f)
         })
         this.addSource(bottomExpanded, Observer {expanded->
             this.value = if(expanded) 0.4f else 0.8f

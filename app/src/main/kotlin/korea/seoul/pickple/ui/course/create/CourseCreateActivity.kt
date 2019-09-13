@@ -87,7 +87,7 @@ class CourseCreateActivity : AppCompatActivity() {
         mViewModel.apply {
 
             places.observe(this@CourseCreateActivity, Observer { places ->
-
+                mBinding.pageIndicatorView.count = places.size
                 mMapFragment.get()?.getController()?.run {
                     updateLocationAndZoomScale(places, false)
                 }
