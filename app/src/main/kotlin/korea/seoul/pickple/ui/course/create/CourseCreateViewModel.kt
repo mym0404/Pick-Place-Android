@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 
@@ -17,9 +18,15 @@ class CourseCreateViewModel : ViewModel() {
     val bottomExpanded: LiveData<Boolean>
         get() = _bottomExpanded
 
-    private val _editMode : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-    val editMode : LiveData<Boolean>
-        get() = _editMode
+
+    val editMode = MediatorLiveData<Boolean>().apply {
+        value = false
+
+        addSource(bottomExpanded) {
+            if(!it)
+                this.value = false
+        }
+    }
 
     val detailMode : MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -37,34 +44,65 @@ class CourseCreateViewModel : ViewModel() {
 
     //region Data
 
-    private val _places : MutableLiveData<List<Place>> = MutableLiveData<List<Place>>(listOf(
+    private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
         Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
         Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
     ))
     val places : LiveData<List<Place>>
         get() = _places
 
-    val curPlace : MutableLiveData<Place?> = MutableLiveData<Place?>(null)
+    val curPlace : MutableLiveData<Place?> = MutableLiveData(null)
 
     //endregion
 
     //region Event
+    private val _clickPlaceAdd : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val clickPlaceAdd : LiveData<Once<Boolean>>
+        get() = _clickPlaceAdd
 
+    private val _clickAllDelete : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val clickAllDelete : LiveData<Once<Boolean>>
+        get() = _clickAllDelete
+
+    private val _syncData : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
+    val syncData : LiveData<Once<Boolean>>
+        get() = _syncData
     //endregion
 
-    init {
-
-
-    }
 
     private fun setDatas() {
 
+    }
+
+    fun syncDataWith(items : List<Place>) {
+        _places.value = items
     }
 
 
     //region Event
     fun onClickExpandButton() {
         _bottomExpanded.value = !(bottomExpanded.value!!)
+    }
+
+    fun onClickEditButton() {
+        editMode.value = !(editMode.value!!)
+    }
+
+    fun onClickPlaceAddButton() {
+        _clickPlaceAdd.value = Once(true)
+    }
+
+    fun onClickCourseSaveButton() {
+        _syncData.value = Once(true)
+
+    }
+
+
+    fun onClickAllDeleteButton() {
+        _clickAllDelete.value = Once(true)
+    }
+    fun allDelete() {
+        _places.value = listOf()
     }
 
     //endregion

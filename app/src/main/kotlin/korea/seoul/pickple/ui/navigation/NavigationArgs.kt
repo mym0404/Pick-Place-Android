@@ -7,6 +7,7 @@ import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
 
 sealed class NavigationArgs {
@@ -20,6 +21,10 @@ sealed class NavigationArgs {
         }
     }
 
+    class CourseCreateSearchArg() : NavigationArgs() {
+
+    }
+
 
 }
 
@@ -28,12 +33,12 @@ sealed class NavigationArgs {
  * 액티비티에서 intent를 파싱할 때 쓰셈
  */
 fun MapActivity.parseIntent(intent : Intent) =   NavigationArgs.MapActivityArg(intent.getParcelableExtra<Course?>(NavigationArgs.MapActivityArg.MAP_ARG_COURSE))
-
+fun CourseCreateSearchActivity.parseIntent(intent : Intent) = NavigationArgs.CourseCreateSearchArg()
 
 /**
  * 네비게이션 할 때 쓰셈
  */
-fun navigate(curActivity: Activity, arg: NavigationArgs,
+fun navigate(curActivity: Activity, arg: NavigationArgs,forResultStartRequestCode : Int? = null,
              @AnimRes enterResId : Int? = null,
              @AnimRes exitResId : Int? = null,
              sharedElementPairs : List<Pair<View,String>>? = null
@@ -44,19 +49,33 @@ fun navigate(curActivity: Activity, arg: NavigationArgs,
         is NavigationArgs.MapActivityArg -> Intent(curActivity, MapActivity::class.java).apply {
             putExtra(NavigationArgs.MapActivityArg.MAP_ARG_COURSE, arg.course)
         }
+        is NavigationArgs.CourseCreateSearchArg -> Intent(curActivity, CourseCreateSearchActivity::class.java)
     }
 
 
 
     if(enterResId != null && exitResId != null) {
 
-        curActivity.startActivity(intent,ActivityOptionsCompat.makeCustomAnimation(curActivity,enterResId,exitResId).toBundle())
+        if(forResultStartRequestCode != null) {
+            curActivity.startActivityForResult(intent,forResultStartRequestCode,ActivityOptionsCompat.makeCustomAnimation(curActivity,enterResId,exitResId).toBundle())
+        }else {
+            curActivity.startActivity(intent,ActivityOptionsCompat.makeCustomAnimation(curActivity,enterResId,exitResId).toBundle())
+        }
+
         return
     }else if(sharedElementPairs != null) {
-        curActivity.startActivity(intent,ActivityOptionsCompat.makeSceneTransitionAnimation(curActivity,*sharedElementPairs.toTypedArray()).toBundle())
+        if(forResultStartRequestCode != null) {
+            curActivity.startActivityForResult(intent, forResultStartRequestCode,ActivityOptionsCompat.makeSceneTransitionAnimation(curActivity, *sharedElementPairs.toTypedArray()).toBundle())
+        }else {
+            curActivity.startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(curActivity, *sharedElementPairs.toTypedArray()).toBundle())
+        }
         return
     }else {
-        curActivity.startActivity(intent)
+        if(forResultStartRequestCode != null) {
+            curActivity.startActivityForResult(intent,forResultStartRequestCode)
+        }else {
+            curActivity.startActivity(intent)
+        }
         return
     }
 }
