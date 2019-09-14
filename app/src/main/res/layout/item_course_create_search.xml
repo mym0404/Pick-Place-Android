@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="korea.seoul.pickple.data.entity.Place" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+
+        <ImageView
+            android:src="@drawable/dummy"
+            android:id="@+id/thumbnail"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="#000" />
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="2dp"
+            android:text="@{item.name}"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            app:layout_constraintRight_toLeftOf="@id/selectButton"
+            app:layout_constraintLeft_toRightOf="@id/thumbnail"
+
+            app:layout_constraintTop_toTopOf="@id/thumbnail"
+            tools:text="덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁덕수궁"
+
+            />
+
+        <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_marginRight="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="2dp"
+            android:text="@{item.description}"
+            android:textSize="12sp"
+            app:layout_constraintRight_toLeftOf="@id/selectButton"
+            app:layout_constraintLeft_toRightOf="@id/thumbnail"
+
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+            tools:text="서울특별시 중구 정동 세종대로 99"
+
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/selectButton"
+            android:padding="0dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:insetBottom="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetLeft="0dp"
+            android:textColor="@color/colorBlack"
+            android:background="@null"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:text="선택"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

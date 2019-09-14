@@ -1,4 +1,4 @@
-package korea.seoul.pickple.ui.course.create
+package korea.seoul.pickple.ui.course.create.search
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +28,15 @@ class CourseCreateSearchActivity : AppCompatActivity() {
         mBinding.lifecycleOwner = this
         mBinding.vm = mViewModel
 
+        initRecyclerView()
         observeViewModel()
+    }
+
+    private fun initRecyclerView() {
+        mBinding.recyclerView.apply {
+            adapter = CourseCreateSearchAdapter()
+
+        }
     }
 
     private fun observeViewModel() {

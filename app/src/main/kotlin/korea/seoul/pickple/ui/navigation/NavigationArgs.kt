@@ -7,7 +7,7 @@ import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.ui.course.create.CourseCreateSearchActivity
+import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
 
 sealed class NavigationArgs {

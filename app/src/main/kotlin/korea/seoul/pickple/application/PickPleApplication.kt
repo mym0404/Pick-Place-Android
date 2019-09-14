@@ -8,7 +8,7 @@ import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.*
-import korea.seoul.pickple.ui.course.create.CourseCreateSearchViewModel
+import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel

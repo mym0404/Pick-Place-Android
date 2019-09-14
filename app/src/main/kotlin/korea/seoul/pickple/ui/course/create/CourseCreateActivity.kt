@@ -16,6 +16,7 @@ import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
+import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.navigation.NavigationArgs
 import korea.seoul.pickple.ui.navigation.navigate
 import korea.seoul.pickple.view.PickpleMapFragment
@@ -141,7 +142,7 @@ class CourseCreateActivity : AppCompatActivity() {
             })
 
             clickPlaceAdd.observeOnce(this@CourseCreateActivity) {
-                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(),CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
+                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(), CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
             }
 
             clickAllDelete.observeOnce(this@CourseCreateActivity) {
