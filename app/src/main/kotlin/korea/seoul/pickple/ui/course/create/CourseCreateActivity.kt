@@ -141,7 +141,7 @@ class CourseCreateActivity : AppCompatActivity() {
             })
 
             clickPlaceAdd.observeOnce(this@CourseCreateActivity) {
-                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(),100)
+                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(),CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
             }
 
             clickAllDelete.observeOnce(this@CourseCreateActivity) {
@@ -201,9 +201,22 @@ class CourseCreateActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == 100) {
 
+
+        when(requestCode) {
+            CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE-> {
+                when(resultCode) {
+                    CourseCreateSearchActivity.COURSE_SEARCH_NONE_RESULT_CODE-> {
+
+                    }
+                    CourseCreateSearchActivity.COURSE_SEARCH_WITH_RESULT_CODE-> {
+
+                        val selectedPlace = data?.getParcelableExtra<Place>(CourseCreateSearchActivity.EXTRA_SELECTED_PLACE_CODE)
+                    }
+                }
+            }
         }
+
     }
 
     override fun onBackPressed() {
