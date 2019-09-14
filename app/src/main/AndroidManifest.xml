@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="korea.seoul.pickple">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -21,6 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.course.place_detail.PlaceDetailActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -29,10 +31,13 @@
         <!-- 테스트 라이브러리 사용 -->
         <uses-library
             android:name="android.test.runner"
-            android:required="false" /> <!-- 구글 API 라이브러리 호환성 -->
+            android:required="false" />
+
+        <!-- 구글 API 라이브러리 호환성 -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
 
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
@@ -52,9 +57,23 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".ui.course.map.MapActivity"
             android:exported="true" />
+
+
+        <activity
+            android:name=".ui.course.simple_intro.CourseSimpleIntroActivity"
+            android:exported="true" />
+
+
+        <activity android:name=".ui.course.create.CourseCreateActivity" android:exported="true"/>
+
+        <activity android:name=".ui.course.unite_intro.UniteCourseActivity"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

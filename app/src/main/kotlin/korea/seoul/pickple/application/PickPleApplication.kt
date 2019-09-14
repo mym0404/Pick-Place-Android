@@ -6,8 +6,12 @@ import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.*
+import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
+import korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel
+import korea.seoul.pickple.ui.course.unite_intro.UniteCourseViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -71,7 +75,10 @@ class PickPleApplication : Application() {
     }
 
     private val viewModelModule = module {
-        viewModel { (courseId: Int) -> MapViewModel(get(), courseId) }
+        viewModel { (course : Course) -> MapViewModel(get(), course) }
+        viewModel { (places: List<Int>) -> PlaceDetailViewModel(get(), places) }
+        viewModel { (courseId: Int) -> UniteCourseViewModel(get(), courseId) }
+        viewModel { CourseCreateViewModel() }
     }
 
 

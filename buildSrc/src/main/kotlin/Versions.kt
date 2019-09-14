@@ -44,6 +44,8 @@ object Versions {
 
   const val play_services_maps: String = "17.0.0"
 
+  const val places: String = "2.0.0"
+
   const val material: String = "1.1.0-alpha06"
 
   const val firebase_analytics: String = "17.0.0" // available: "17.2.0"
@@ -58,9 +60,11 @@ object Versions {
 
   const val dexter: String = "5.0.0"
 
+  const val pageindicatorview: String = "1.0.3"
+
   const val com_squareup_retrofit2: String = "2.6.1"
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2"
+  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.5.0"
 
   const val junit_junit: String = "4.12"
 

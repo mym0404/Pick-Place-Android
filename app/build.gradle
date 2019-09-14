@@ -84,10 +84,11 @@ android {
 /**
  * App에서 사용할 라이브러리들
  * buildSrcVersions 이라는 Gradle 플러그인을 사용했으며, 터미널에 ./gradlew buildSrcVersions 이라는 명령어를 이용해 실행 가능합니다.
- * 실행 시에 자동으로 import 되어있는 의존성들을 Libs 전역 객체에 설정해주어서 우리는 마치 변수처럼 사용이 가능합니다.
+ * 실행 시에 자동으로 import 되어있는 의존성(Sync 안해도 이 파일에 입력만 되있으면)들을 Libs 전역 객체에 설정해주어서 우리는 마치 변수처럼 사용이 가능합니다.
  * 그리고 Versions.kt에 최신 버전을 자동으로 찾아서 주석으로 달아주기 때문에 모든 라이브러리 페이지에 들어가서 최신 버전을 체크할 필요가 없습니다.
  *
  * 이는 안드로이드 스튜디오 Gradle 3.5부터 지원된 플러그인입니다.
+ * 프로젝트 구조에서 buildSrc 라고 생성된 모듈에 Libs와 Versions.kt 파일을 자동으로 만들어서 이 파일에서 참조해서 의존성을 추가할 수 있도록 돕습니다.
  * 자세한 사용법은 다음과 같은 사이트를 참조하세요.
  * [https://github.com/jmfayard/buildSrcVersions]
  */
@@ -112,8 +113,10 @@ dependencies {
     implementation Libs.material
     implementation Libs.autofittextview
     implementation Libs.viewpager2
+    implementation Libs.pageindicatorview
 
     //Firebase & Google
+    implementation Libs.places
     implementation Libs.firebase_analytics
     implementation Libs.play_services_maps
     implementation Libs.android_maps_utils
@@ -166,3 +169,13 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}

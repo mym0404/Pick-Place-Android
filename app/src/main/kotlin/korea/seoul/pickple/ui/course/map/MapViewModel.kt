@@ -10,12 +10,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapViewModel(private val courseRepository: CourseRepository, courseId : Int) : ViewModel() {
+class MapViewModel(private val courseRepository: CourseRepository, course : Course) : ViewModel() {
+
 
     private val TAG = MapViewModel::class.java.simpleName
 
     //region Datas
-    private val _course : MutableLiveData<Course> = MutableLiveData<Course>()
+    private val _course : MutableLiveData<Course> = MutableLiveData<Course>(course)
     val course : LiveData<Course>
         get() = _course
     
@@ -29,22 +30,10 @@ class MapViewModel(private val courseRepository: CourseRepository, courseId : In
     //endregion
 
 
+
+
     init {
-        courseRepository.getCourseWithId(courseId).enqueue(object : Callback<Course> {
-            override fun onFailure(call: Call<Course>, t: Throwable) {
-                _loading.value = false
-            }
-
-            override fun onResponse(call: Call<Course>, response: Response<Course>) {
-                if(response.isSuccessful) {
-                    _course.value = response.body()
-                    getPlacesForCourse(course.value!!)
-                }else {
-                    _loading.value = false
-                }
-            }
-        })
-
+        getPlacesForCourse(course)
 
     }
 
