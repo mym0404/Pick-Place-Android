@@ -64,14 +64,32 @@ class CourseCreateViewModel : ViewModel() {
     val clickAllDelete : LiveData<Once<Boolean>>
         get() = _clickAllDelete
 
+    /**
+     * For Sync with RecyclerViewAdapter because of ItemTouchHelper move
+     */
     private val _syncData : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
     val syncData : LiveData<Once<Boolean>>
         get() = _syncData
+
+    private val _appendFailDuplicatePlace : MutableLiveData<Once<Place>> = MutableLiveData()
+    val appendFailDuplicatePlace : LiveData<Once<Place>>
+        get() = _appendFailDuplicatePlace
     //endregion
 
 
     private fun setDatas() {
 
+    }
+
+    fun onAppendPlace(place : Place) {
+        _syncData.value = Once(true)
+        //중복
+        if((this.places.value ?: listOf()).any { it.id == place.id }) {
+            _appendFailDuplicatePlace.value = Once(place)
+            return
+        }
+
+        this._places.value = (this.places.value ?: listOf()) + listOf(place)
     }
 
     fun syncDataWith(items : List<Place>) {

@@ -1,10 +1,13 @@
 package korea.seoul.pickple.common.extensions
 
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.DimenRes
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 
@@ -57,4 +60,11 @@ fun ImageView.loadImage(url: String?) {
     Glide.with(context)
         .load(url)
         .into(this)
+}
+
+fun Fragment.toast(msg : String) {
+    this.context?.toast(msg)
+}
+fun Context.toast(msg : String) {
+    Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
 }

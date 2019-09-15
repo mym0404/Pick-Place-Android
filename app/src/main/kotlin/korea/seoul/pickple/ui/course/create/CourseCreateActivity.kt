@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
+import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
@@ -161,6 +162,10 @@ class CourseCreateActivity : AppCompatActivity() {
                 }
             }
 
+            appendFailDuplicatePlace.observeOnce(this@CourseCreateActivity) {place->
+                toast("중복된 장소를 추가할 수 없습니다.")
+            }
+
         }
     }
 
@@ -208,16 +213,19 @@ class CourseCreateActivity : AppCompatActivity() {
             CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE-> {
                 when(resultCode) {
                     CourseCreateSearchActivity.COURSE_SEARCH_NONE_RESULT_CODE-> {
-
                     }
                     CourseCreateSearchActivity.COURSE_SEARCH_WITH_RESULT_CODE-> {
-
                         val selectedPlace = data?.getParcelableExtra<Place>(CourseCreateSearchActivity.EXTRA_SELECTED_PLACE_CODE)
+                        selectedPlace?.let{place-> appendPlaceToList(place)}
                     }
                 }
             }
         }
 
+    }
+
+    private fun appendPlaceToList(place : Place) {
+        mViewModel.onAppendPlace(place)
     }
 
     override fun onBackPressed() {
