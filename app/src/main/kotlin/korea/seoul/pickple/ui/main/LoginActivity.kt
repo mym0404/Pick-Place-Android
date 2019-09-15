@@ -1,12 +1,13 @@
-package korea.seoul.pickple
+package korea.seoul.pickple.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import korea.seoul.pickple.R
 
-class SettingActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mypage)
+        setContentView(R.layout.activity_login)
     }
 }
