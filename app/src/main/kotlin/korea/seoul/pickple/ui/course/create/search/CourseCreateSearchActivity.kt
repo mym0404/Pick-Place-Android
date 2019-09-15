@@ -1,5 +1,6 @@
 package korea.seoul.pickple.ui.course.create.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +35,7 @@ class CourseCreateSearchActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         mBinding.recyclerView.apply {
-            adapter = CourseCreateSearchAdapter()
+            adapter = CourseCreateSearchAdapter(mViewModel,this@CourseCreateSearchActivity)
 
         }
     }
@@ -44,11 +45,17 @@ class CourseCreateSearchActivity : AppCompatActivity() {
 
             clickBack.observeOnce(this@CourseCreateSearchActivity) {
                 setResult(COURSE_SEARCH_NONE_RESULT_CODE,null)
+                onBackPressed()
+            }
+
+            clickAdd.observeOnce(this@CourseCreateSearchActivity) {place->
+                setResult(COURSE_SEARCH_WITH_RESULT_CODE, Intent().apply{putExtra(EXTRA_SELECTED_PLACE_CODE,place)})
                 finish()
             }
 
         }
     }
+
 
     override fun onBackPressed() {
         setResult(COURSE_SEARCH_NONE_RESULT_CODE)
