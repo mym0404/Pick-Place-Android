@@ -17,6 +17,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
+            android:onClick="@{() -> vm.onClickBackButton()}"
 
             android:id="@+id/backButton"
             android:layout_width="24dp"

@@ -15,7 +15,6 @@ import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
-import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
@@ -103,6 +102,10 @@ class CourseCreateActivity : AppCompatActivity() {
     private fun observeViewModel() {
         mViewModel.apply {
 
+            clickBackButton.observeOnce(this@CourseCreateActivity) {
+                onBackPressed()
+            }
+
             places.observe(this@CourseCreateActivity, Observer { places ->
                 mBinding.pageIndicatorView.count = places.size
                 mMapFragment.get()?.getController()?.run {
@@ -169,12 +172,19 @@ class CourseCreateActivity : AppCompatActivity() {
                 toast("중복된 장소를 추가할 수 없습니다.")
             }
 
+            appendPlaceSuccess.observeOnce(this@CourseCreateActivity) { place->
+                mMapFragment.get()?.getController()?.run {
+                    addMarker(place)
+                    updateLocationAndZoomScale(mViewModel.places.value!!,false)
+                }
+
+            }
+
+
+
         }
     }
 
-    private fun toLocation(location: Location) {
-
-    }
 
     private fun toLocation(place: Place) {
         place.location?.let { location ->

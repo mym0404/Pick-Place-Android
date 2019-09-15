@@ -1,6 +1,7 @@
 package korea.seoul.pickple.common.extensions
 
 import android.content.Context
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -51,6 +52,8 @@ fun View.startSimpleAnim() {
 
 }
 
+
+
 /**
  * Glide를 이용해 이미지를 로드하는 간단한 보조 함수
  * @author greedy0110
@@ -59,6 +62,17 @@ fun View.startSimpleAnim() {
 fun ImageView.loadImage(url: String?) {
     Glide.with(context)
         .load(url)
+        .into(this)
+}
+
+/**
+ * 이하동문입니다
+ * @author MJStudio
+ */
+@BindingAdapter("imageUrl")
+fun ImageView.loadImage(uri: Uri?) {
+    Glide.with(context)
+        .load(uri)
         .into(this)
 }
 

@@ -56,6 +56,10 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
     //region Event
+    private val _clickBackButton : MutableLiveData<Once<Boolean>> = MutableLiveData()
+    val clickBackButton : LiveData<Once<Boolean>>
+        get() = _clickBackButton
+
     private val _clickPlaceAdd : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
     val clickPlaceAdd : LiveData<Once<Boolean>>
         get() = _clickPlaceAdd
@@ -74,6 +78,10 @@ class CourseCreateViewModel : ViewModel() {
     private val _appendFailDuplicatePlace : MutableLiveData<Once<Place>> = MutableLiveData()
     val appendFailDuplicatePlace : LiveData<Once<Place>>
         get() = _appendFailDuplicatePlace
+
+    private val _appendPlaceSuccess : MutableLiveData<Once<Place>> = MutableLiveData()
+    val appendPlaceSuccess : LiveData<Once<Place>>
+        get() = _appendPlaceSuccess
     //endregion
 
 
@@ -90,6 +98,7 @@ class CourseCreateViewModel : ViewModel() {
         }
 
         this._places.value = (this.places.value ?: listOf()) + listOf(place)
+        _appendPlaceSuccess.value = Once(place)
     }
 
     fun syncDataWith(items : List<Place>) {
@@ -98,6 +107,10 @@ class CourseCreateViewModel : ViewModel() {
 
 
     //region Event
+    fun onClickBackButton() {
+        _clickBackButton.value = Once(true)
+    }
+
     fun onClickExpandButton() {
         _bottomExpanded.value = !(bottomExpanded.value!!)
     }
