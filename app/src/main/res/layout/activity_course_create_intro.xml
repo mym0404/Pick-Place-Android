@@ -15,6 +15,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <happy.mjstudio.widget.numbermarbleview.NumberMarbleView
+            android:id="@+id/marbleView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            app:marble_marble_radius="24dp"
+            app:marble_marble_count="4"
+            app:marble_line_color="@color/colorBlack"
+            app:marble_line_width="3dp"
+            app:marble_line_length="24dp"
+            app:marble_number_text_size="22sp"
+            app:marble_orientation_vertical="false"
+            app:marble_number_text_color="@color/colorWhite"
+
+
+
+
+            />
+
         <ImageButton
             android:id="@+id/backButton"
 
@@ -100,6 +124,7 @@
                         android:layout_height="wrap_content"/>
 
                     <ImageView
+                        android:background="?attr/selectableItemBackground"
                         android:onClick="@{() -> vm.onClickAddThumbnail()}"
                         imageUrl="@{vm.thumbnailUri}"
                         android:id="@+id/thumbnail"
