@@ -8,7 +8,7 @@ import kotlin.String
  */
 object Libs {
   /**
-   * http://developer.android.com/tools/extras/support-library.html
+   * https://developer.android.com/jetpack/androidx
    */
   const val appcompat: String = "androidx.appcompat:appcompat:" + Versions.appcompat
 
@@ -35,6 +35,39 @@ object Libs {
 
   const val databinding_runtime: String = "androidx.databinding:databinding-runtime:" +
       Versions.androidx_databinding
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val lifecycle_compiler: String = "androidx.lifecycle:lifecycle-compiler:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val lifecycle_livedata: String = "androidx.lifecycle:lifecycle-livedata:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * http://developer.android.com/tools/extras/support-library.html
+   */
+  const val lifecycle_viewmodel_ktx: String = "androidx.lifecycle:lifecycle-viewmodel-ktx:" +
+      Versions.androidx_lifecycle
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_compiler: String = "androidx.room:room-compiler:" + Versions.androidx_room
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_ktx: String = "androidx.room:room-ktx:" + Versions.androidx_room
+
+  /**
+   * https://developer.android.com/topic/libraries/architecture/index.html
+   */
+  const val room_runtime: String = "androidx.room:room-runtime:" + Versions.androidx_room
 
   /**
    * https://developer.android.com/testing
@@ -75,6 +108,8 @@ object Libs {
    */
   const val androidx_test_runner: String = "androidx.test:runner:" + Versions.androidx_test
 
+  const val viewpager2: String = "androidx.viewpager2:viewpager2:" + Versions.viewpager2
+
   const val multidex: String = "com.android.support:multidex:" + Versions.multidex
 
   /**
@@ -104,10 +139,29 @@ object Libs {
    */
   const val glide: String = "com.github.bumptech.glide:glide:" + Versions.com_github_bumptech_glide
 
+  const val play_services_maps: String = "com.google.android.gms:play-services-maps:" +
+      Versions.play_services_maps
+
+  const val places: String = "com.google.android.libraries.places:places:" + Versions.places
+
   /**
    * http://developer.android.com/tools/extras/support-library.html
    */
   const val material: String = "com.google.android.material:material:" + Versions.material
+
+  const val firebase_analytics: String = "com.google.firebase:firebase-analytics:" +
+      Versions.firebase_analytics
+
+  const val firebase_dynamic_links: String = "com.google.firebase:firebase-dynamic-links:" +
+      Versions.firebase_dynamic_links
+
+  const val google_services: String = "com.google.gms:google-services:" + Versions.google_services
+
+  /**
+   * https://github.com/googlemaps/android-maps-utils
+   */
+  const val android_maps_utils: String = "com.google.maps.android:android-maps-utils:" +
+      Versions.android_maps_utils
 
   /**
    * http://github.com/google/truth
@@ -121,6 +175,12 @@ object Libs {
   const val dexter: String = "com.karumi:dexter:" + Versions.dexter
 
   /**
+   * https://github.com/romandanylyk/PageIndicatorView
+   */
+  const val pageindicatorview: String = "com.romandanylyk:pageindicatorview:" +
+      Versions.pageindicatorview
+
+  /**
    * https://github.com/square/retrofit/
    */
   const val converter_gson: String = "com.squareup.retrofit2:converter-gson:" +
@@ -130,6 +190,12 @@ object Libs {
    * https://github.com/square/retrofit/
    */
   const val converter_scalars: String = "com.squareup.retrofit2:converter-scalars:" +
+      Versions.com_squareup_retrofit2
+
+  /**
+   * https://github.com/square/retrofit/
+   */
+  const val retrofit_mock: String = "com.squareup.retrofit2:retrofit-mock:" +
       Versions.com_squareup_retrofit2
 
   /**
@@ -180,6 +246,13 @@ object Libs {
    */
   const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib:" +
       Versions.org_jetbrains_kotlin
+
+  const val koin_androidx_ext: String = "org.koin:koin-androidx-ext:" + Versions.org_koin
+
+  const val koin_androidx_scope: String = "org.koin:koin-androidx-scope:" + Versions.org_koin
+
+  const val koin_androidx_viewmodel: String = "org.koin:koin-androidx-viewmodel:" +
+      Versions.org_koin
 
   /**
    * http://robolectric.org

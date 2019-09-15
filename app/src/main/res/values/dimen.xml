@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    PickpleView-->
+    <dimen name="pickpleview_page_margin">25dp</dimen>
+    <dimen name="pickpleview_pager_offset">0dp</dimen>
+    <dimen name="pickpleview_page_margin_and_offset">25dp</dimen>
+
+<!--    Map ViewPager2-->
+    <dimen name="map_pager_page_margin">25dp</dimen>
+    <dimen name="map_pager_pager_offset">25dp</dimen>
+    <dimen name="map_pager_page_margin_and_offset">50dp</dimen>
+
+</resources>
