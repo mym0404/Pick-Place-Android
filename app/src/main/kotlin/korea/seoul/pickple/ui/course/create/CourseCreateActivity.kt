@@ -20,6 +20,7 @@ import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.navigation.NavigationArgs
 import korea.seoul.pickple.ui.navigation.navigate
+import korea.seoul.pickple.ui.navigation.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,16 +38,17 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private val mMapUtil : MapUtil by inject()
 
+    private val args : NavigationArgs.CourseCreateArgs by lazy{parseIntent(intent)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityCourseCreateBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
-
-
         initMap()
         initRecyclerView()
 
+        mViewModel.onSetDatas(args.title,args.thumbnail,args.description,args.tagList)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel
@@ -75,6 +77,8 @@ class CourseCreateActivity : AppCompatActivity() {
                     mViewModel.detailMode.value = true
                 }
             }
+
+            setMyLocationAsync()
         }
     }
 

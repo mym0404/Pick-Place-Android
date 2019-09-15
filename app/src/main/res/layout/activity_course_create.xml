@@ -55,7 +55,9 @@
             android:layout_height="wrap_content"
 
             android:layout_marginLeft="8dp"
-            android:text="코스 이름을 입력해주세요."
+
+            tools:text = "코스 이름을 입력해주세요."
+            android:text="@{vm.title}"
 
             android:textSize="24sp"
 
@@ -70,13 +72,15 @@
 
         <me.grantland.widget.AutofitTextView
 
+            tools:text = "코스 이름을 입력해주세요."
+            android:text="@{vm.title}"
+
             android:id="@+id/title_small"
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
 
-            android:text="코스 이름을 입력해주세요."
 
 
             android:textSize="18sp"

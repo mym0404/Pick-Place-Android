@@ -9,6 +9,8 @@ import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.databinding.ActivityCourseCreateIntroBinding
+import korea.seoul.pickple.ui.navigation.NavigationArgs
+import korea.seoul.pickple.ui.navigation.navigate
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -47,7 +49,13 @@ class CourseCreateIntroActivity : AppCompatActivity() {
                 val description = pair2.first
                 val tagString = pair2.second
 
+                val tagList = tagString.filterNot { it == ',' || it == ' ' }.split('#')
 
+                navigate(this@CourseCreateIntroActivity,NavigationArgs.CourseCreateArgs(title,thumbnail,description,tagList))
+            }
+
+            toastMsg.observeOnce(this@CourseCreateIntroActivity) {
+                toast(it)
             }
         }
     }

@@ -3,12 +3,12 @@ package korea.seoul.pickple.ui.course.create
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.net.Uri
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import korea.seoul.pickple.common.widget.Once
-import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 
 class CourseCreateViewModel : ViewModel() {
@@ -43,10 +43,14 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
     //region Data
+    
+    private val _title : MutableLiveData<String> = MutableLiveData("")
+    val title : LiveData<String>
+        get() = _title
 
     private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
-        Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
-        Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
+//        Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
+//        Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
     ))
     val places : LiveData<List<Place>>
         get() = _places
@@ -85,9 +89,7 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
 
-    private fun setDatas() {
 
-    }
 
     fun onAppendPlace(place : Place) {
         _syncData.value = Once(true)
@@ -103,6 +105,10 @@ class CourseCreateViewModel : ViewModel() {
 
     fun syncDataWith(items : List<Place>) {
         _places.value = items
+    }
+
+    fun onSetDatas(title : String, thumbnail : Uri, description : String, tagList : List<String>) {
+        _title.value = title
     }
 
 

@@ -6,13 +6,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DimenRes
+import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-
-
+import me.grantland.widget.AutofitTextView
 
 
 /**
@@ -74,6 +74,19 @@ fun ImageView.loadImage(uri: Uri?) {
     Glide.with(context)
         .load(uri)
         .into(this)
+}
+
+/**
+ * AutofitTextView 에 바인딩을 위해
+ * @author MJStudio
+ */
+@BindingAdapter("android:text")
+fun AutofitTextView.setTextBinding(text : String) {
+    this.text = text
+}
+@BindingAdapter("android:text")
+fun AutofitTextView.setTextBinding(@StringRes id : Int) {
+    this.text = resources.getString(id)
 }
 
 fun Fragment.toast(msg : String) {
