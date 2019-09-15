@@ -102,6 +102,20 @@ final class PickpleMapFragment : Fragment() {
 
         }
 
+        fun addMarker(place : Place) {
+            if(place.location == null) return
+
+            addMarker(place.location!!)
+        }
+        fun addMarker(location : Location) {
+            addMarker(location.toLatLng())
+        }
+        fun addMarker(latlng : LatLng) {
+            tryMapRunnable {
+                mMap?.addMarker(MarkerOptions().position(latlng))
+            }
+        }
+
     }
 
     fun getController(): PickpleMapController = this.PickpleMapController()

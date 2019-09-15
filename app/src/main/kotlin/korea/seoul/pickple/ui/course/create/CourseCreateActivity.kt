@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
 import korea.seoul.pickple.common.extensions.toast
+import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
@@ -21,9 +22,9 @@ import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.navigation.NavigationArgs
 import korea.seoul.pickple.ui.navigation.navigate
 import korea.seoul.pickple.view.PickpleMapFragment
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
-import kotlin.math.sqrt
 
 class CourseCreateActivity : AppCompatActivity() {
 
@@ -34,6 +35,8 @@ class CourseCreateActivity : AppCompatActivity() {
     private val mViewModel: CourseCreateViewModel by viewModel()
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
+
+    private val mMapUtil : MapUtil by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,7 +187,7 @@ class CourseCreateActivity : AppCompatActivity() {
 
         if (places.isEmpty()) return
 
-        getNearestPlaceWithMarker(places, marker)?.let { place ->
+        mMapUtil.getNearestPlaceWithMarker(places, marker)?.let { place ->
             mViewModel.curPlace.value = place
             mMapFragment.get()?.getController()?.setLocation(place.location!!, true)
         }
@@ -192,18 +195,7 @@ class CourseCreateActivity : AppCompatActivity() {
 
     }
 
-    private fun getNearestPlaceWithMarker(places: List<Place>, marker: Marker): Place? {
-        return places.minBy {
-            val lat = it.location?.latitude ?: 100.0
-            val lng = it.location?.longitude ?: 100.0
 
-            val markerLat = marker.position.latitude
-            val markerLng = marker.position.longitude
-
-
-            sqrt((lat - markerLat) * (lat - markerLat) + (lng - markerLng) * (lng - markerLng))
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
