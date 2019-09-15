@@ -55,9 +55,13 @@ final class PickpleMapFragment : Fragment() {
          *
          * @param zoom 지도의 scale 정도
          */
-        fun setZoom(zoom: Float) {
+        fun setZoom(zoom: Float, animate : Boolean = false) {
             tryMapRunnable {
-                mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                if(animate) {
+                    mMap?.animateCamera(CameraUpdateFactory.zoomTo(zoom))
+                }else {
+                    mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                }
             }
         }
 

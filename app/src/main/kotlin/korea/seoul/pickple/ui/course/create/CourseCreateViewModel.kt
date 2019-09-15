@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -12,6 +13,8 @@ import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.entity.Place
 
 class CourseCreateViewModel : ViewModel() {
+
+    private val TAG = CourseCreateViewModel::class.java.simpleName
 
     //region State
     private val _bottomExpanded: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
@@ -86,18 +89,23 @@ class CourseCreateViewModel : ViewModel() {
     private val _appendPlaceSuccess : MutableLiveData<Once<Place>> = MutableLiveData()
     val appendPlaceSuccess : LiveData<Once<Place>>
         get() = _appendPlaceSuccess
+
+    private val _clickPlaceBackground : MutableLiveData<Once<Place>> = MutableLiveData()
+    val clickPlaceBackground : LiveData<Once<Place>>
+        get() = _clickPlaceBackground
     //endregion
 
 
 
 
     fun onAppendPlace(place : Place) {
-        _syncData.value = Once(true)
+
         //중복
         if((this.places.value ?: listOf()).any { it.id == place.id }) {
             _appendFailDuplicatePlace.value = Once(place)
             return
         }
+
 
         this._places.value = (this.places.value ?: listOf()) + listOf(place)
         _appendPlaceSuccess.value = Once(place)
@@ -126,12 +134,17 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     fun onClickPlaceAddButton() {
+        _syncData.value = Once(true)
         _clickPlaceAdd.value = Once(true)
     }
 
     fun onClickCourseSaveButton() {
         _syncData.value = Once(true)
 
+    }
+
+    fun onClickPlaceBackground(place : Place) {
+        _clickPlaceBackground.value = Once(place)
     }
 
 
@@ -143,6 +156,15 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     //endregion
+
+    init {
+        Log.e(TAG,object{}::class.java?.enclosingMethod?.name ?: "Method Name Not Found")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.e(TAG,object{}::class.java?.enclosingMethod?.name ?: "Method Name Not Found")
+    }
 
 }
 
