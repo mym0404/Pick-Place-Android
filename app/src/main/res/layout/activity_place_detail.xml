@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel" />
+            type="korea.seoul.pickple.ui.course.intro.CourseIntroViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.course.place_detail.PlaceDetailActivity">
+        tools:context=".ui.course.intro.place_detail.PlaceDetailActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -109,6 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:navigationIcon="@drawable/navi_btn_back_w"
+                    app:menu="@menu/menu_place_detail_toolbar"
                     android:background="#00000000"
                     />
 

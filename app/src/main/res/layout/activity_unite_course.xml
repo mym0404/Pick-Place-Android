@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="korea.seoul.pickple.ui.course.unite_intro.UniteCourseViewModel" />
+            type="korea.seoul.pickple.ui.course.intro.CourseIntroViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.course.unite_intro.UniteCourseActivity">
+        tools:context=".ui.course.intro.unite_intro.UniteCourseActivity">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -31,7 +31,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    imageUrl="@{viewModel.displayCourse.thumbnail}"
+                    imageUrl="@{viewModel.course.thumbnail}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
                     android:layout_marginBottom="16dp"
                     app:layout_constraintStart_toStartOf="@id/toolUniteCourseName"
                     app:layout_constraintBottom_toTopOf="@id/toolUniteCourseName"
-                    android:text="@{viewModel.courseType}"
+                    android:text="@{viewModel.course.type.toString()}"
                     tools:text="한국 전통 코스"
                     android:textSize="14sp"
                     android:textColor="#ffffff"
@@ -68,7 +68,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/toolUniteCourseLike"
                     tools:text="덕수궁"
-                    android:text="@{viewModel.displayCourse.name}"
+                    android:text="@{viewModel.course.name}"
                     android:lines="2"
                     android:textStyle="bold"
                     android:textSize="18sp"
@@ -93,7 +93,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/toolUniteCourseLike"
                     app:layout_constraintStart_toEndOf="@id/toolUniteCourseLike"
                     tools:text="364"
-                    android:text="@{``+ viewModel.displayCourse.likeCount}"
+                    android:text="@{``+ viewModel.course.likeCount}"
                     android:textSize="11sp"
                     android:textColor="#ffffff"
                     />
@@ -106,7 +106,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/toolUniteCourseLike"
                     app:layout_constraintStart_toEndOf="@id/toolUniteCourseLikeCount"
                     tools:text="# 덕수궁 핫 플레이스"
-                    android:text="@{viewModel.courseTag}"
+                    android:text="@{viewModel.course.tagList.toString()}"
                     android:textSize="11sp"
                     android:textColor="#ffffff"
                     />
@@ -145,7 +145,7 @@
                     android:textColor="#000000"
                     android:textSize="13sp"
                     android:lineSpacingExtra="7sp"
-                    android:text="@{viewModel.displayCourse.description}"
+                    android:text="@{viewModel.course.description}"
                     />
 
                 <TextView

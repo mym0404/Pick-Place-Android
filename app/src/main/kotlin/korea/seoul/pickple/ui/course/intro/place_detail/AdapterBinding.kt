@@ -1,4 +1,4 @@
-package korea.seoul.pickple.ui.course.place_detail
+package korea.seoul.pickple.ui.course.intro.place_detail
 
 import androidx.databinding.BindingAdapter
 import androidx.viewpager2.widget.ViewPager2
