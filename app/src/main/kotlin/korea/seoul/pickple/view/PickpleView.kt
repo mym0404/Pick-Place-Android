@@ -100,7 +100,7 @@ class PickpleView @JvmOverloads constructor(context : Context, attrs : Attribute
         mListeners.removeAll(deadList)
     }
 
-    fun notifyPageSelected(position : Int) {
+    private fun notifyPageSelected(position : Int) {
         refreshCallbacks()
         mListeners.forEach {
             it.get()?.onPageSelected(position)

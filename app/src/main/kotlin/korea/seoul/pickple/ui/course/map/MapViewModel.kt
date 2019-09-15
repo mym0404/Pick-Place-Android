@@ -12,6 +12,7 @@ import retrofit2.Response
 
 class MapViewModel(private val courseRepository: CourseRepository, course : Course) : ViewModel() {
 
+
     private val TAG = MapViewModel::class.java.simpleName
 
     //region Datas
@@ -27,6 +28,8 @@ class MapViewModel(private val courseRepository: CourseRepository, course : Cour
     val loading : LiveData<Boolean>
         get() = _loading
     //endregion
+
+
 
 
     init {

@@ -1,9 +1,8 @@
 package korea.seoul.pickple.ui.course.simple_intro
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bumptech.glide.Glide
+import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.loadImage
 import korea.seoul.pickple.common.util.callback
@@ -13,9 +12,6 @@ import korea.seoul.pickple.data.repository.CourseRepository
 import korea.seoul.pickple.ui.course.unite_intro.UniteCourseActivity
 import kotlinx.android.synthetic.main.activity_course_simple_intro.*
 import org.koin.android.ext.android.inject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 /**
  * 코스소개 - 첫화면 을 구현한 화면이다.

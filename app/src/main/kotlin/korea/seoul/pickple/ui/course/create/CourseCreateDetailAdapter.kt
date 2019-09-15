@@ -7,7 +7,7 @@ import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.data.entity.Place
-import korea.seoul.pickple.databinding.ItemCourseCreateDetaiPagerBinding
+import korea.seoul.pickple.databinding.ItemCourseCreateDetailPagerBinding
 
 class CourseCreateDetailAdapter : RecyclerView.Adapter<CourseCreateDetailAdapter.CourseCreateDetailHolder>() {
 
@@ -15,7 +15,7 @@ class CourseCreateDetailAdapter : RecyclerView.Adapter<CourseCreateDetailAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseCreateDetailHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemCourseCreateDetaiPagerBinding.inflate(inflater, parent, false)
+        val binding = ItemCourseCreateDetailPagerBinding.inflate(inflater, parent, false)
 
         return CourseCreateDetailHolder(binding)
     }
@@ -25,7 +25,7 @@ class CourseCreateDetailAdapter : RecyclerView.Adapter<CourseCreateDetailAdapter
     override fun onBindViewHolder(holder: CourseCreateDetailHolder, position: Int) = holder.bind(items[position])
 
 
-    inner class CourseCreateDetailHolder(private val binding: ItemCourseCreateDetaiPagerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class CourseCreateDetailHolder(private val binding: ItemCourseCreateDetailPagerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Any) {
             binding.setVariable(BR.item, item)
             binding.executePendingBindings()

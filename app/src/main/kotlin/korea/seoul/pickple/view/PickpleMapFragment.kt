@@ -229,8 +229,14 @@ final class PickpleMapFragment : Fragment() {
                 mMap?.addMarker(MarkerOptions().position(location.toLatLng()))
             }
         }
+
+
         //Move Camera To Center of Places
-        mMap?.moveCamera(mapUtil.autoZoomLevel(places))
+        mapUtil.autoZoomLevel(places)?.run {
+            try {
+                mMap?.moveCamera(this)
+            }catch (t : Throwable){}
+        }
 
         if(drawPolyline) {
             val repo: DirectionsRepository = get()
