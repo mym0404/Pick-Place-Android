@@ -83,7 +83,6 @@ class CourseCreateViewModel : ViewModel() {
 
     fun onAppendPlace(place : Place) {
         _syncData.value = Once(true)
-
         //중복
         if((this.places.value ?: listOf()).any { it.id == place.id }) {
             _appendFailDuplicatePlace.value = Once(place)
