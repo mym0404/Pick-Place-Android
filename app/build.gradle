@@ -15,7 +15,7 @@ android {
      * Project 레벨의 build.gradle 에 여러 상수를 정의해놓고 사용
      */
     def constants = rootProject.ext
-    
+
     compileSdkVersion constants.targetSdkVersion
 
     defaultConfig {
@@ -56,7 +56,7 @@ android {
      * 좌측 Project 탭에서 Android 로 설정하면 그래도 java라고 표시되는 Android Studio의 오류가 있습니다.
      * 실제 경로는 src/main/kotlin 입니다.
      */
-    sourceSets{
+    sourceSets {
         main.java.srcDirs = ['src/main/kotlin']
         test.java.srcDirs = ['src/test/kotlin']
         androidTest.java.srcDirs = ['src/androidTest/kotlin']
@@ -140,3 +140,27 @@ dependencies {
     androidTestImplementation Libs.com_google_truth_truth
 }
 
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
