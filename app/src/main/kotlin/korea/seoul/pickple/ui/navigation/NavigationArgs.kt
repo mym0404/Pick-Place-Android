@@ -2,14 +2,20 @@ package korea.seoul.pickple.ui.navigation
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.ui.course.create.CourseCreateActivity
+import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroActivity
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
+import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_DESCRIPTION
+import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TAGLIST
+import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_THUMBNAIL
+import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TITLE
 
 sealed class NavigationArgs {
 
@@ -22,8 +28,17 @@ sealed class NavigationArgs {
         }
     }
 
-    class CourseCreateArgs() : NavigationArgs() {
+    class CourseCreateIntroAgs() : NavigationArgs() {
 
+    }
+
+    class CourseCreateArgs(val title : String, val thumbnail : Uri, val description : String, val tagList : List<String>) : NavigationArgs() {
+        companion object {
+            const val COURSE_CREATE_ARG_TITLE = "COURSE_CREATE_ARG_TITLE"
+            const val COURSE_CREATE_ARG_THUMBNAIL = "COURSE_CREATE_ARG_THUMBNAIL"
+            const val COURSE_CREATE_ARG_DESCRIPTION = "COURSE_CREATE_ARG_DESCRIPTION"
+            const val COURSE_CREATE_ARG_TAGLIST = "COURSE_CREATE_ARG_TAGLIST"
+        }
     }
 
     class CourseCreateSearchArg() : NavigationArgs() {
@@ -39,7 +54,13 @@ sealed class NavigationArgs {
  */
 fun MapActivity.parseIntent(intent: Intent) = NavigationArgs.MapActivityArg(intent.getParcelableExtra<Course?>(NavigationArgs.MapActivityArg.MAP_ARG_COURSE))
 
-fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateArgs()
+fun CourseCreateIntroActivity.parseIntent(intent : Intent) = NavigationArgs.CourseCreateIntroAgs()
+fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateArgs(
+    intent.getStringExtra(COURSE_CREATE_ARG_TITLE),
+    intent.getParcelableExtra(COURSE_CREATE_ARG_THUMBNAIL) as Uri,
+    intent.getStringExtra(COURSE_CREATE_ARG_DESCRIPTION),
+    intent.getStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST)
+)
 fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateSearchArg()
 
 
@@ -58,7 +79,13 @@ fun navigate(
         is NavigationArgs.MapActivityArg -> Intent(curActivity, MapActivity::class.java).apply {
             putExtra(NavigationArgs.MapActivityArg.MAP_ARG_COURSE, arg.course)
         }
-        is NavigationArgs.CourseCreateArgs -> Intent(curActivity, CourseCreateActivity::class.java)
+        is NavigationArgs.CourseCreateIntroAgs -> Intent(curActivity,CourseCreateIntroActivity::class.java)
+        is NavigationArgs.CourseCreateArgs -> Intent(curActivity, CourseCreateActivity::class.java).apply {
+            putExtra(COURSE_CREATE_ARG_TITLE, arg.title)
+            putExtra(COURSE_CREATE_ARG_THUMBNAIL,arg.thumbnail)
+            putExtra(COURSE_CREATE_ARG_DESCRIPTION,arg.description)
+            putStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST,ArrayList(arg.tagList))
+        }
         is NavigationArgs.CourseCreateSearchArg -> Intent(curActivity, CourseCreateSearchActivity::class.java)
     }
 

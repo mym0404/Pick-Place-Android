@@ -26,7 +26,15 @@ class CourseCreateIntroViewModel : ViewModel() {
     private val _clickImageAdd : MutableLiveData<Once<Boolean>> = MutableLiveData()
     val clickImageAdd : LiveData<Once<Boolean>>
         get() = _clickImageAdd
+    
+    private val _clickPlaceAdd : MutableLiveData<Once<Pair<Pair<String,Uri>,Pair<String,String>>>> = MutableLiveData()
+    val clickPlaceAdd : LiveData<Once<Pair<Pair<String,Uri>,Pair<String,String>>>>
+        get() = _clickPlaceAdd
 
+
+    private val _toastMsg : MutableLiveData<Once<String>> = MutableLiveData()
+    val toastMsg : LiveData<Once<String>>
+        get() = _toastMsg
     //endregion
 
 
@@ -40,5 +48,27 @@ class CourseCreateIntroViewModel : ViewModel() {
 
     fun onClickAddThumbnail() {
         _clickImageAdd.value = Once(true)
+    }
+
+    fun onClickPlaceAddButton() {
+        if(title.value.isNullOrEmpty()) {
+            _toastMsg.value = Once("코스의 제목을 입력해주세요.")
+            return
+        }
+        else if(thumbnailUri.value == null) {
+            _toastMsg.value = Once("썸네일 사진을 등록해주세요.")
+            return
+        }
+        else if(courseDescription.value.isNullOrEmpty()) {
+            _toastMsg.value = Once("간단한 코스 설명을 입력해주세요.")
+            return
+        }else if(courseTagString.value.isNullOrEmpty()) {
+            _toastMsg.value = Once("태그를 1개이상 등록해주세요.")
+            return
+        }
+
+        _clickPlaceAdd.value = Once(
+            (title.value!! to thumbnailUri.value!!) to (courseDescription.value!! to courseTagString.value!!)
+        )
     }
 }

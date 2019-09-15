@@ -40,6 +40,15 @@ class CourseCreateIntroActivity : AppCompatActivity() {
             clickImageAdd.observeOnce(this@CourseCreateIntroActivity) {
                 mGalleryUtil.choosePhotoFromGallery(this@CourseCreateIntroActivity)
             }
+
+            clickPlaceAdd.observeOnce(this@CourseCreateIntroActivity) {(pair1, pair2) ->
+                val title = pair1.first
+                val thumbnail = pair1.second
+                val description = pair2.first
+                val tagString = pair2.second
+
+
+            }
         }
     }
 
