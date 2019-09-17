@@ -3,13 +3,15 @@ package korea.seoul.pickple.application
 import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.*
-import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
+import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroViewModel
+import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel
 import korea.seoul.pickple.ui.course.unite_intro.UniteCourseViewModel
@@ -34,6 +36,7 @@ class PickPleApplication : Application() {
     private val utilModule = module {
         single { MapUtil() }
         single { PermissionDexterUtil() }
+        single { GalleryUtil() }
     }
 
     private val apiModule = module {
@@ -81,6 +84,7 @@ class PickPleApplication : Application() {
         viewModel { (courseId: Int) -> UniteCourseViewModel(get(), courseId) }
         viewModel { CourseCreateViewModel() }
         viewModel { CourseCreateSearchViewModel() }
+        viewModel { CourseCreateIntroViewModel() }
     }
 
 

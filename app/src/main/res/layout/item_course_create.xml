@@ -16,6 +16,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> vm.onClickPlaceBackground(item)}"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
