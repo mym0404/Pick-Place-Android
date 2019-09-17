@@ -137,6 +137,7 @@ dependencies {
     implementation Libs.appcompat
     implementation Libs.dexter
     implementation Libs.multidex
+    implementation Libs.kotlin_reflect // 수민 추가
 }
 /**
  * Local Unit Test에서 사용할 라이브러리들
@@ -169,6 +170,16 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:+'
