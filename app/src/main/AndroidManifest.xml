@@ -20,6 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".NavigationActivity"/>
+        <activity android:name=".SearchActivity" />
         <activity
             android:name=".ui.course.place_detail.PlaceDetailActivity"
             android:exported="true" />

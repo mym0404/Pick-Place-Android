@@ -3,8 +3,10 @@ package korea.seoul.pickple.ui.course.create.intro
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import happy.mjstudio.widget.numbermarbleview.NumberMarbleView
 import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.widget.observeOnce
@@ -15,6 +17,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CourseCreateIntroActivity : AppCompatActivity() {
+
+    private val TAG = CourseCreateIntroActivity::class.java.simpleName
 
     private lateinit var mBinding : ActivityCourseCreateIntroBinding
 
@@ -31,6 +35,7 @@ class CourseCreateIntroActivity : AppCompatActivity() {
         mBinding.vm = mViewModel
 
         observeViewModel()
+
     }
 
     private fun observeViewModel() {
