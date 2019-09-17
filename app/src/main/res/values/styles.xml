@@ -13,4 +13,14 @@
         <item name="android:fontFamily">@font/nanum_square_font_family</item>
     </style>
 
+
+    <!-- 수민 추가 -->
+    <!--CollaspingToolbarLayout Title Styles-->
+    <style name="MyToolbarTitle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">#fff</item>
+    </style>
+    <style name="MyToolbatExpandedTitle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>
