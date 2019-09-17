@@ -147,8 +147,18 @@ class CourseCreateViewModel : ViewModel() {
         _clickPlaceBackground.value = Once(place)
     }
 
+    fun onClickItemMoreButton(place : Place) {
+
+    }
+    fun onClickItemDeleteButton(place : Place) {
+        _syncData.value = Once(true)
+
+        _places.value = places.value!! - place
+    }
+
 
     fun onClickAllDeleteButton() {
+        _syncData.value = Once(true)
         _clickAllDelete.value = Once(true)
     }
     fun allDelete() {
