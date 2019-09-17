@@ -149,4 +149,33 @@
             android:src="@drawable/btn_down_16"/>
     </RelativeLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mt_setting_ToContact"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:visibility="invisible"
+        android:layout_width="295dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="436dp"
+        android:layout_centerHorizontal="true"
+        app:boxBackgroundColor="#e6e6e6">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_ToContact_btn"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="556dp">
+
+        <ImageView
+            android:layout_width="92dp"
+            android:layout_height="32dp"
+            android:layout_centerHorizontal="true"
+            android:src="#000000"/>
+    </RelativeLayout>
+
 </RelativeLayout>
