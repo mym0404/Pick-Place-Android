@@ -14,6 +14,9 @@
         <!-- 얘의 visibiility 조절 ,,? -->
 
         <ImageView
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/toolbar_main_img_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,24 +36,33 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ImageButton
+            android:padding="4dp"
+            android:src="@drawable/main_search_icon"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/toolbar_main_course_ibtn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/toolbar_main_course_ibtn_nav"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/main_search_icon"/>
+            android:layout_marginEnd="20dp"
+            />
 
         <ImageButton
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/toolbar_main_course_ibtn_nav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/hamburger_menu_icon"/>
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/hamburger_menu_icon"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

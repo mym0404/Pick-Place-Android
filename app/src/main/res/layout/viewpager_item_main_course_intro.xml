@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/viewpager_item_img_course"
         android:layout_width="match_parent"
         android:layout_height="400dp"
