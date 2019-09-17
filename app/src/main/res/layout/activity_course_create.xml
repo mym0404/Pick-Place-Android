@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vm"
             type="korea.seoul.pickple.ui.course.create.CourseCreateViewModel" />
@@ -17,6 +17,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
+            android:onClick="@{() -> vm.onClickBackButton()}"
 
             android:id="@+id/backButton"
             android:layout_width="24dp"
@@ -28,37 +29,40 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/navi_btn_back_b" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
-            app:layout_constraintGuide_percent="0.08"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="56dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
-            app:layout_constraintGuide_percent="0.14"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="100dp" />
 
         <me.grantland.widget.AutofitTextView
-            android:visibility_animate="@{!vm.detailMode}"
-
-            android:layout_marginLeft="8dp"
-
-
             android:id="@+id/title"
 
             android:layout_width="wrap_content"
+
+
             android:layout_height="wrap_content"
 
-            android:text="코스 이름을 입력해주세요."
+            android:layout_marginLeft="8dp"
 
+            tools:text = "코스 이름을 입력해주세요."
+            android:text="@{vm.title}"
 
             android:textSize="24sp"
+
+
+            android:visibility_animate="@{!vm.detailMode}"
 
             app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintLeft_toRightOf="@id/backButton"
@@ -68,17 +72,19 @@
 
         <me.grantland.widget.AutofitTextView
 
-            android:visibility_animate="@{vm.detailMode}"
+            tools:text = "코스 이름을 입력해주세요."
+            android:text="@{vm.title}"
+
             android:id="@+id/title_small"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
-            android:text="코스 이름을 입력해주세요."
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+
 
 
             android:textSize="18sp"
-            android:layout_marginLeft="12dp"
+            android:visibility_animate="@{vm.detailMode}"
 
             app:layout_constraintBottom_toBottomOf="@+id/backButton"
             app:layout_constraintLeft_toRightOf="@id/backButton"
@@ -86,14 +92,13 @@
             app:minTextSize="18sp" />
 
 
-
         <FrameLayout
-            app:ratio_animation="@{vm.mapRatio}"
             android:id="@+id/mapContainer"
-            app:layout_constraintDimensionRatio="1:0.8"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@id/guideline">
+            app:layout_constraintDimensionRatio="1:0.8"
+            app:layout_constraintTop_toBottomOf="@id/guideline"
+            app:ratio_animation="@{vm.mapRatio}">
 
         </FrameLayout>
 
@@ -109,69 +114,71 @@
             app:layout_constraintTop_toBottomOf="@id/mapContainer">
 
 
-
             <ImageButton
-                android:visibility="@{!vm.detailMode}"
                 android:id="@+id/expandButton"
-                app:rotation_animation="@{vm.bottomExpanded ? 180 : 0}"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:onClick="@{() -> vm.onClickExpandButton()}"
                 android:src="@drawable/btn_up_44"
+                android:visibility="@{!vm.detailMode}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:rotation_animation="@{vm.bottomExpanded ? 180 : 0}" />
 
             <com.google.android.material.button.MaterialButton
-                android:textSize="13sp"
+                android:id="@+id/editDeleteButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:onClick="@{() -> vm.onClickEditButton()}"
                 android:padding="0dp"
-                tools:text="편집"
                 android:text='@{vm.editMode ? "완료" : "편집"}'
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:textSize="13sp"
+                android:visibility_animate="@{(vm.bottomExpanded &amp;&amp; !vm.detailMode) &amp;&amp; (vm.places.size >= 2)}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/expandButton"
-                android:visibility="@{vm.bottomExpanded &amp;&amp; !vm.detailMode}"
-                android:id="@+id/editDeleteButton"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                tools:text="편집" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:visibility="@{!vm.detailMode}"
-                app:app_recyclerview_course_create_items="@{vm.places}"
-
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-                android:layout_marginBottom="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editDeleteButton"
-                app:layout_constraintBottom_toTopOf="@id/materialButton2"
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"/>
+
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+
+                android:orientation="vertical"
+                android:visibility="@{!vm.detailMode}"
+                app:app_recyclerview_course_create_items="@{vm.places}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/materialButton2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editDeleteButton" />
 
             <com.google.android.material.button.MaterialButton
-                android:visibility="@{!vm.detailMode}"
                 android:id="@+id/materialButton2"
+
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_marginBottom="32dp"
-
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
-                android:insetRight="0dp"
 
+                android:insetRight="0dp"
                 android:insetBottom="0dp"
+                android:onClick="@{() -> vm.onClickPlaceAddButton()}"
 
                 android:text="장소추가"
+
                 android:textSize="14sp"
+                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode}"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/materialButton"
@@ -180,21 +187,23 @@
                 app:layout_constraintWidth_percent="0.43" />
 
             <com.google.android.material.button.MaterialButton
-                android:visibility="@{!vm.detailMode}"
                 android:id="@+id/materialButton"
+
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="36dp"
                 android:layout_marginBottom="32dp"
-
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
+
                 android:insetRight="0dp"
-
                 android:insetBottom="0dp"
-                android:text="코스저장"
+                android:onClick="@{() -> vm.onClickCourseSaveButton()}"
 
+                android:text="코스저장"
                 android:textSize="14sp"
+
+                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode}"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -202,43 +211,74 @@
                 app:layout_constraintStart_toEndOf="@+id/materialButton2"
                 app:layout_constraintWidth_percent="0.43" />
 
-            <!--            DETAIL-->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButton3"
 
-            <androidx.viewpager2.widget.ViewPager2
-                app:app_recyclerview_course_create_detail_items="@{vm.places}"
-                android:visibility="@{vm.detailMode ?? false}"
-                android:layout_marginBottom="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/detailPager"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="32dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
 
-            <com.rd.PageIndicatorView
-                android:visibility="@{vm.detailMode ?? false}"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:onClick="@{() -> vm.onClickAllDeleteButton()}"
 
-                app:layout_constraintTop_toBottomOf="@id/detailPager"
+                android:text="전체삭제"
+                android:textSize="14sp"
+
+                android:visibility="@{!vm.detailMode &amp;&amp; vm.editMode}"
+                app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintWidth_percent="0.43" />
 
-                android:id="@+id/pageIndicatorView"
+            <!--            DETAIL-->
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/detailPager"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="40dp"
+                android:visibility="@{vm.detailMode ?? false}"
+                app:app_recyclerview_course_create_detail_items="@{vm.places}"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+            <FrameLayout
+                android:elevation="10dp"
+                android:outlineProvider="none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:piv_selectedColor="#ff551a"
-                app:piv_unselectedColor="#888"
-                app:piv_count="2"
-                app:piv_animationType="slide"
-                app:piv_animationDuration="300"
-                app:piv_idleDuration="300"
-                app:piv_dynamicCount="true"
-                app:piv_padding="12dp"
-                app:piv_radius="4dp" />
+                android:visibility="@{vm.detailMode ?? false}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detailPager">
+
+                <com.rd.PageIndicatorView
 
 
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:piv_animationDuration="300"
+                    app:piv_animationType="slide"
+                    app:piv_count="2"
+                    app:piv_dynamicCount="true"
+                    app:piv_idleDuration="300"
+                    app:piv_padding="12dp"
+                    app:piv_radius="4dp"
+                    app:piv_selectedColor="#ff551a"
+                    app:piv_unselectedColor="#888" />
+
+            </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
+
 </layout>

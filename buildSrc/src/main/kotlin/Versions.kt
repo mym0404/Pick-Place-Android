@@ -14,7 +14,9 @@ import org.gradle.plugin.use.PluginDependencySpec
 object Versions {
   const val appcompat: String = "1.1.0"
 
-  const val constraintlayout: String = "1.1.3"
+  const val constraintlayout: String = "2.0.0-beta2"
+
+  const val core_ktx: String = "1.1.0"
 
   const val androidx_databinding: String = "3.5.0"
 
@@ -64,11 +66,13 @@ object Versions {
 
   const val com_squareup_retrofit2: String = "2.6.1"
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.5.0"
+  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.6.0"
 
   const val junit_junit: String = "4.12"
 
   const val autofittextview: String = "0.2.1"
+
+  const val numbermarbleview: String = "1.0"
 
   const val org_jetbrains_kotlin: String = "1.3.50"
 

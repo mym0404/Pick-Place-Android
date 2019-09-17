@@ -114,6 +114,7 @@ dependencies {
     implementation Libs.autofittextview
     implementation Libs.viewpager2
     implementation Libs.pageindicatorview
+    implementation Libs.numbermarbleview
 
     //Firebase & Google
     implementation Libs.places

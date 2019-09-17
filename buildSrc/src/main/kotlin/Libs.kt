@@ -18,6 +18,11 @@ object Libs {
   const val constraintlayout: String = "androidx.constraintlayout:constraintlayout:" +
       Versions.constraintlayout
 
+  /**
+   * http://developer.android.com/tools/extras/support-library.html
+   */
+  const val core_ktx: String = "androidx.core:core-ktx:" + Versions.core_ktx
+
   const val databinding_adapters: String = "androidx.databinding:databinding-adapters:" +
       Versions.androidx_databinding
 
@@ -217,6 +222,8 @@ object Libs {
    */
   const val autofittextview: String = "me.grantland:autofittextview:" + Versions.autofittextview
 
+  const val numbermarbleview: String = "mjstudio:numbermarbleview:" + Versions.numbermarbleview
+
   /**
    * https://kotlinlang.org/
    */
@@ -239,6 +246,12 @@ object Libs {
    * https://kotlinlang.org/
    */
   const val kotlin_gradle_plugin: String = "org.jetbrains.kotlin:kotlin-gradle-plugin:" +
+      Versions.org_jetbrains_kotlin
+
+  /**
+   * https://kotlinlang.org/
+   */
+  const val kotlin_stdlib_jdk7: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:" +
       Versions.org_jetbrains_kotlin
 
   /**
