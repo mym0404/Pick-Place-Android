@@ -18,6 +18,11 @@ object Libs {
   const val constraintlayout: String = "androidx.constraintlayout:constraintlayout:" +
       Versions.constraintlayout
 
+  /**
+   * http://developer.android.com/tools/extras/support-library.html
+   */
+  const val core_ktx: String = "androidx.core:core-ktx:" + Versions.core_ktx
+
   const val databinding_adapters: String = "androidx.databinding:databinding-adapters:" +
       Versions.androidx_databinding
 
@@ -217,6 +222,8 @@ object Libs {
    */
   const val autofittextview: String = "me.grantland:autofittextview:" + Versions.autofittextview
 
+  const val numbermarbleview: String = "mjstudio:numbermarbleview:" + Versions.numbermarbleview
+
   /**
    * https://kotlinlang.org/
    */
@@ -244,6 +251,12 @@ object Libs {
   /**
    * https://kotlinlang.org/
    */
+  const val kotlin_stdlib_jdk7: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:" +
+      Versions.org_jetbrains_kotlin
+
+  /**
+   * https://kotlinlang.org/
+   */
   const val kotlin_stdlib: String = "org.jetbrains.kotlin:kotlin-stdlib:" +
       Versions.org_jetbrains_kotlin
 
@@ -258,4 +271,15 @@ object Libs {
    * http://robolectric.org
    */
   const val robolectric: String = "org.robolectric:robolectric:" + Versions.robolectric
+
+
+
+  // @수민) 이거 추가 ,,?
+  const val kotlin_reflect : String = "org.jetbrains.kotlin:kotlin-reflect:" +
+          Versions.org_jetbrains_kotlin
+
+  /**
+   * CircleImageView
+   * */
+  const val circle_image_view: String = "de.hdodenhof:circleimageview:" + Versions.circleImageViewVersion
 }

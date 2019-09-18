@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.library.baseAdapters.BR
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ItemCourseCreateSearchBinding
 
-class CourseCreateSearchAdapter : RecyclerView.Adapter<CourseCreateSearchAdapter.CourseCreateSearchHolder>() {
+class CourseCreateSearchAdapter(private val vm : CourseCreateSearchViewModel,private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<CourseCreateSearchAdapter.CourseCreateSearchHolder>() {
 
 
     private val diff = object : DiffUtil.ItemCallback<Place>() {
@@ -33,6 +34,8 @@ class CourseCreateSearchAdapter : RecyclerView.Adapter<CourseCreateSearchAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseCreateSearchHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCourseCreateSearchBinding.inflate(inflater, parent, false)
+        binding.lifecycleOwner = lifecycleOwner
+        binding.vm = vm
 
         return CourseCreateSearchHolder(binding)
     }

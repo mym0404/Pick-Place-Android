@@ -55,9 +55,13 @@ final class PickpleMapFragment : Fragment() {
          *
          * @param zoom 지도의 scale 정도
          */
-        fun setZoom(zoom: Float) {
+        fun setZoom(zoom: Float, animate : Boolean = false) {
             tryMapRunnable {
-                mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                if(animate) {
+                    mMap?.animateCamera(CameraUpdateFactory.zoomTo(zoom))
+                }else {
+                    mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                }
             }
         }
 
@@ -100,6 +104,20 @@ final class PickpleMapFragment : Fragment() {
         fun setMarkerClickedListener(callback : (marker : Marker) -> Unit) {
             this@PickpleMapFragment.markerClickListener = callback
 
+        }
+
+        fun addMarker(place : Place) {
+            if(place.location == null) return
+
+            addMarker(place.location!!)
+        }
+        fun addMarker(location : Location) {
+            addMarker(location.toLatLng())
+        }
+        fun addMarker(latlng : LatLng) {
+            tryMapRunnable {
+                mMap?.addMarker(MarkerOptions().position(latlng))
+            }
         }
 
     }

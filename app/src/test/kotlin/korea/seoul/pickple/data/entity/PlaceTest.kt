@@ -15,17 +15,17 @@ class PlaceTest {
 
     @Test
     fun placeSerializationTest() {
-        val place = Place(
-            1,
-            Place.Type.FOOD,
-            "장소 이름",
-            "장소 짧은 설명",
-            "010-1111-1111",
-            Location(12.5,5.2),
-            null)
-
-        val json = gson.toJson(place)
-        println(json)
+//        val place = Place(
+//            1,
+//            Place.Type.FOOD,
+//            "장소 이름",
+//            "장소 짧은 설명",
+//            "010-1111-1111",
+//            Location(12.5,5.2),
+//            null)
+//
+//        val json = gson.toJson(place)
+//        println(json)
     }
 
     @After
