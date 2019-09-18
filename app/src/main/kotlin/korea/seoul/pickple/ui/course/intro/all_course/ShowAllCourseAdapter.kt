@@ -11,7 +11,8 @@ import korea.seoul.pickple.databinding.ItemAllCourseBinding
 
 class ShowAllCourseAdapter(
     private val context: Context,
-    var data: List<Course>
+    var data: List<Course>,
+    private val showAllCoursesViewModel: ShowAllCoursesViewModel
 ) : RecyclerView.Adapter<ShowAllCourseAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemAllCourseBinding = DataBindingUtil.inflate(
@@ -26,6 +27,9 @@ class ShowAllCourseAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.course = data[position]
+        holder.binding.containerItemAllCourse.setOnClickListener {
+            showAllCoursesViewModel.clickCourseId(data[position].id)
+        }
     }
 
     inner class ViewHolder(val binding: ItemAllCourseBinding): RecyclerView.ViewHolder(binding.root)

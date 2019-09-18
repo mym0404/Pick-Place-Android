@@ -17,6 +17,12 @@ class ShowAllCoursesViewModel(
     private val _courses: MutableLiveData<List<Course>> = MutableLiveData()
     val courses: LiveData<List<Course>> = _courses
 
+    /**
+    * 사용자가 새로 누른 course id
+    * */
+    private val _clickedCourseId: MutableLiveData<Int> = MutableLiveData()
+    val clickedCourseId: LiveData<Int> = _clickedCourseId
+
     init {
         courseRepository.getAllCourses()
             .callback(
@@ -30,5 +36,9 @@ class ShowAllCoursesViewModel(
                     _courses.value = listOf()
                 }
             )
+    }
+
+    fun clickCourseId(id: Int) {
+        _clickedCourseId.value = id
     }
 }

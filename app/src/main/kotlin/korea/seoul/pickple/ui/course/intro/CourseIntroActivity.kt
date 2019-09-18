@@ -2,6 +2,8 @@ package korea.seoul.pickple.ui.course.intro
 
 import android.animation.ObjectAnimator
 import android.animation.StateListAnimator
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,6 +12,8 @@ import androidx.viewpager.widget.ViewPager
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
+import korea.seoul.pickple.ui.navigation.NavigationArgs
+import korea.seoul.pickple.ui.navigation.navigate
 import korea.seoul.pickple.ui.navigation.parseIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -17,14 +21,14 @@ import org.koin.core.parameter.parametersOf
 class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.activity_course_intro) {
     private val viewModel: CourseIntroViewModel by viewModel { parametersOf(0) }
     private var toolbarActionShare: MenuItem? = null
-    private var courseId: Int = 0
+    private val REQUEST_SHOW_ALL_COURSES = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // navigation으로 들어온 것 데이터 파싱하자.
+        // navigation 으로 들어온 것 데이터 파싱하자.
         val args = parseIntent(intent)
-        courseId = args.courseId
+        val courseId = args.courseId
 
         mBinding.apply {
             vpCourseIntro.adapter = CourseIntroViewPagerAdapter(
@@ -80,15 +84,38 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             }
             R.id.actionShare -> {
                 // TODO 코스 공유하기 버튼임!
-                Log.d("seungmin", "$courseId 공유버튼")
+                Log.d("seungmin", "${viewModel.courseId} 공유버튼")
                 true
             }
             R.id.actionShowAll -> {
-                // TODO 전체 코스 보기 화면으로 넘어가야함
+                // 전체 코스 보기 화면으로 넘어가야함, 만약 거기서 코스를 선택했다면?! course Id를 변경해주자! (응답을 받아오자.)
                 Log.d("seungmin", "전체 코스보기")
+                navigate(this, NavigationArgs.ShowAllCourseArg(), REQUEST_SHOW_ALL_COURSES)
                 true
             }
             else -> onOptionsItemSelected(item)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        when(requestCode) {
+            REQUEST_SHOW_ALL_COURSES -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    // 다른 course를 선택했다. 코스를 변경하자.
+                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:0
+                    // 코스를 변경하고, 맨 처음 화면부터 시작하자.
+                    mBinding.vpCourseIntro.setCurrentItem(0, false)
+                }
+                else {
+                    // 코스를 선택하지 않았다. 그냥 아무것도 변경하지 말자!
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val COURSE_ID = "COURSE_ID"
     }
 }
