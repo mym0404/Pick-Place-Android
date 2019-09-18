@@ -1,6 +1,9 @@
 package korea.seoul.pickple.ui.course.intro
 
+import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.*
+import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
@@ -98,6 +101,11 @@ class CourseIntroViewModel(
         if (it>10) it.toString() else "0$it"
     } // 한 자리 index는 0을 붙혀서 보여준다.
 
+    /**
+    * 후기의 Emotion
+    * */
+    private val _currentEmotion: MutableLiveData<Review.Emotion> = MutableLiveData()
+    val currentEmotion: LiveData<Review.Emotion> = _currentEmotion
 
     /**
      * ViewModel이 처음 생성되었을때 세팅해줄 것
@@ -117,6 +125,8 @@ class CourseIntroViewModel(
         places.managedObserve {
 
         }
+
+        _currentEmotion.value = Review.Emotion.EMOTION1
     }
 
     /**
@@ -126,5 +136,12 @@ class CourseIntroViewModel(
      * */
     fun selectPlace(index: Int) {
         _index.value = index
+    }
+    
+    /**
+     * 사용자가 리뷰에 감정을 설정하였다.
+     * */
+    fun selectEmotion(emotion: Review.Emotion) {
+        _currentEmotion.value = emotion
     }
 }

@@ -1,5 +1,6 @@
 package korea.seoul.pickple.ui.course.intro.review
 
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.data.entity.Review
@@ -10,4 +11,9 @@ fun RecyclerView.setViewItem(list: List<Review>?) {
         data = list?: listOf()
         notifyDataSetChanged()
     }
+}
+
+@BindingAdapter("imageDrawableId")
+fun ImageView.setImageDrawable(id: Int) {
+    this.setImageResource(id)
 }

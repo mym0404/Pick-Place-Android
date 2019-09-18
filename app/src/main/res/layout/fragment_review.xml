@@ -64,7 +64,7 @@
                 android:layout_marginTop="22dp"
                 app:layout_constraintStart_toStartOf="@+id/btnSelectEmotion"
                 app:layout_constraintTop_toTopOf="@+id/btnSelectEmotion"
-                android:src="#bcbcbc"
+                imageDrawableId="@{courseIntroViewModel.currentEmotion.toDrawableResourceId()}"
                 />
 
             <com.google.android.material.textfield.TextInputLayout

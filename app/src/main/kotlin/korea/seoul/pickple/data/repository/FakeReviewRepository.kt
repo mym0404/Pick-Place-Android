@@ -18,7 +18,7 @@ class FakeReviewRepository : ReviewRepository {
                 commenter = listOf(
                     "승민이", "수민이", "명주이", "소민이", "볼드모트"
                 ).random(),
-                emotion = Review.Emotion.DEFAULT
+                emotion = Review.Emotion.EMOTION1
             )
     }
 

@@ -22,12 +22,25 @@ data class Review(
     val emotion: Emotion
 ) : Parcelable {
     enum class Emotion {
-        DEFAULT,
+        EMOTION1,
+        EMOTION2,
+        EMOTION3,
+        EMOTION4,
+        EMOTION5,
 
         ;
 
-        fun toDrawableResoureId(): Int {
-            return R.drawable.cover_gradation
+        /**
+         * TODO 감정표현 리소스 관리는 여기서 한다.
+         * */
+        fun toDrawableResourceId(): Int {
+            return when (this) {
+                EMOTION1 -> R.drawable.navi_btn_share_w
+                EMOTION2 -> R.drawable.cover_gradation
+                EMOTION3 -> R.drawable.navi_btn_back_b
+                EMOTION4 -> R.drawable.navi_btn_heart_w
+                EMOTION5 -> R.drawable.navi_btn_share_w
+            }
         }
     }
 }
