@@ -60,4 +60,10 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
         }
         return Calls.response(places)
     }
+
+    override fun getAllCourses(): Call<List<Course>> {
+        return Calls.response(
+            List(10) { fakeCourse }
+        )
+    }
 }

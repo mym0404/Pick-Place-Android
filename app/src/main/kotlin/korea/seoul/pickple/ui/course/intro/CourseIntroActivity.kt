@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
+import korea.seoul.pickple.ui.navigation.parseIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -20,6 +21,10 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // navigation으로 들어온 것 데이터 파싱하자.
+        val args = parseIntent(intent)
+        courseId = args.courseId
 
         mBinding.apply {
             vpCourseIntro.adapter = CourseIntroViewPagerAdapter(
