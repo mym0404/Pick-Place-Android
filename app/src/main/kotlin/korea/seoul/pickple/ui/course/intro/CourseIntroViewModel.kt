@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import androidx.lifecycle.*
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
@@ -53,7 +54,28 @@ class CourseIntroViewModel(
     * */
     private val _course: MutableLiveData<Course> = MutableLiveData()
     val course: LiveData<Course> = _course
-    
+
+    /**
+     * 현 course의 tag list
+     * */
+    val courseTagList: LiveData<String> = Transformations.map(course) {
+        it.tagList.toTagList()
+    }
+
+    /**
+     * 현 course의 tag list 하나의 태그만 보여주자.
+     * */
+    val courseOnlyOneTag: LiveData<String> = Transformations.map(course) {
+        it.tagList.toTagList(1)
+    }
+
+    /**
+    * 현 course의 장소 갯수 문자열
+    * */
+    val coursePlaceCount: LiveData<String> = Transformations.map(course) {
+        "장소 ${it.places.size}곳"
+    }
+
     /**
     * course intro 에서 소개할 course 에 해당하는 place list 정보
     * */
@@ -122,8 +144,16 @@ class CourseIntroViewModel(
                 )
         }
 
-        places.managedObserve {
-
+        // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
+        currentPlace.managedObserve {
+            it?.also {
+                reviewRepository.getPlaceReviews(it.id)
+                    .callback(
+                        successCallback = { reviews ->
+                            _placeReviews.value = reviews
+                        }
+                    )
+            }
         }
 
         _currentEmotion.value = Review.Emotion.EMOTION1

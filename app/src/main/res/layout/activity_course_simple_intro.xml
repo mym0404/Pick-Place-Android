@@ -78,7 +78,7 @@
             app:layout_constraintStart_toStartOf="@id/textCourseName"
             android:textSize="11sp"
             android:textColor="#ffffff"
-            android:text="@{courseViewModel.course.tagList.toString()}"
+            android:text="@{courseViewModel.courseTagList}"
             tools:text="# 덕수궁 핫플레이스  # 한국 전통 궁 체험" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

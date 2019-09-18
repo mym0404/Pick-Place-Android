@@ -6,6 +6,7 @@ import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityPlaceDetailBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
+import korea.seoul.pickple.ui.course.intro.review.ReviewFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -15,11 +16,18 @@ import org.koin.core.parameter.parametersOf
  * @author greedy0110
  * */
 class PlaceDetailActivity : BaseFragment<ActivityPlaceDetailBinding>(R.layout.activity_place_detail) {
-    private val mCourseIntroViewModel: CourseIntroViewModel by sharedViewModel() { parametersOf(0) }
+    private val mCourseIntroViewModel: CourseIntroViewModel by sharedViewModel { parametersOf(0) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.run {
+            supportFragmentManager.beginTransaction().apply {
+                disallowAddToBackStack()
+                replace(R.id.placePlaceDetailReviewFragment
+                    , ReviewFragment.newInstance(false), // Place의 리뷰이다.
+                    null)
+            }.commit()
+
             mBinding.vp2PlaceDetail.apply {
                 adapter = PlaceDetailViewPagerAdapter(this@run, listOf())
                 registerOnPageChangeCallback(

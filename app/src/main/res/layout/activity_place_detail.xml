@@ -148,22 +148,69 @@
                     android:layout_marginTop="32dp"
                     app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailDesc"
                     app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc"
-                    android:src="#000000"
-                    />
+                    app:srcCompat="@drawable/btn_place_sm" />
 
 <!--                TODO Place에 위치에 대한 상세 정보가 들어있어야함. (text로 산출 가능한, 혹은 Location으로 쿼리 가능?)-->
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분"
-                    android:lines="2"
-                    android:textSize="13sp"
+                    android:layout_marginStart="10dp"
                     android:lineSpacingExtra="7sp"
+                    android:lines="2"
                     android:textColor="#000000"
+                    android:textSize="13sp"
                     app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
                     app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLocation"
-                    />
+                    tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:srcCompat="@drawable/btn_time_sm" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="TextView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="23dp"
+                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5"
+                    app:srcCompat="@drawable/btn_price_sm" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="TextView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+                <!--                Review Fragment로 런타임에 대체되어야한다.-->
+                <FrameLayout
+                    android:id="@+id/placePlaceDetailReviewFragment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView6" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -30,7 +30,7 @@ class FakeReviewRepository : ReviewRepository {
 
     override fun getPlaceReviews(placeId: Int): Call<List<Review>> {
         return Calls.response(
-            List(10) { fakeReview }
+            List(10) { fakeReview.copy(commenter = "따땅리뷰") }
         )
     }
 }
