@@ -14,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgReviewEmotion"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            tools:src="@color/colorBlack"
             imageDrawableId="@{review.emotion.toDrawableResourceId()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

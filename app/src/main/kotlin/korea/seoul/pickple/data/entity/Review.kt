@@ -35,11 +35,11 @@ data class Review(
          * */
         fun toDrawableResourceId(): Int {
             return when (this) {
-                EMOTION1 -> R.drawable.navi_btn_share_w
-                EMOTION2 -> R.drawable.cover_gradation
-                EMOTION3 -> R.drawable.navi_btn_back_b
-                EMOTION4 -> R.drawable.navi_btn_heart_w
-                EMOTION5 -> R.drawable.navi_btn_share_w
+                EMOTION1 -> R.color.colorAccent
+                EMOTION2 -> R.color.colorBlack
+                EMOTION3 -> R.color.colorPrimary
+                EMOTION4 -> R.color.colorWhite
+                EMOTION5 -> R.color.colorBlack
             }
         }
     }

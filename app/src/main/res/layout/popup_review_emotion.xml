@@ -7,7 +7,9 @@
     android:background="#d8d8d8"
     android:orientation="horizontal">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="1dp"
         android:id="@+id/btnEmotion1"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -20,7 +22,9 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@color/colorWhite" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="1dp"
         android:id="@+id/btnEmotion2"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -31,7 +35,9 @@
         app:layout_constraintTop_toTopOf="@+id/btnEmotion1"
         tools:src="@color/colorWhite" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="1dp"
         android:id="@+id/btnEmotion3"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -42,7 +48,9 @@
         app:layout_constraintTop_toTopOf="@+id/btnEmotion2"
         tools:src="@color/colorWhite" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="1dp"
         android:id="@+id/btnEmotion4"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -53,7 +61,9 @@
         app:layout_constraintTop_toTopOf="@+id/btnEmotion3"
         tools:src="@color/colorWhite" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="1dp"
         android:id="@+id/btnEmotion5"
         android:layout_width="32dp"
         android:layout_height="32dp"
