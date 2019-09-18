@@ -5,6 +5,7 @@ import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityUniteCourseBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
+import korea.seoul.pickple.ui.course.intro.review.ReviewFragment
 import korea.seoul.pickple.ui.navigation.NavigationArgs
 import korea.seoul.pickple.ui.navigation.navigate
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,6 +22,13 @@ class UniteCourseActivity : BaseFragment<ActivityUniteCourseBinding>(R.layout.ac
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         activity?.run {
+            supportFragmentManager.beginTransaction().apply {
+                disallowAddToBackStack()
+                replace(R.id.placeUniteCourseReviewFragment
+                    ,ReviewFragment.newInstance(true),
+                    null)
+            }.commit()
+
             mBinding.viewModel = mCourseIntroViewModel
             mBinding.btnUniteCourseMap.setOnClickListener {
                 // TODO Map 을 화면에 띄워주자. (course를 함께 건내야 한다.)

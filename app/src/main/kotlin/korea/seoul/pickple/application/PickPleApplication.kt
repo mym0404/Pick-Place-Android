@@ -69,6 +69,7 @@ class PickPleApplication : Application() {
 
 
     private val repositoryModule = module {
+        single { FakeReviewRepository() as ReviewRepository }
         single { FakePlaceRepository() } bind PlaceRepository::class
         single { FakeCourseRepository(get()) } bind CourseRepository::class
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
@@ -78,7 +79,7 @@ class PickPleApplication : Application() {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
         viewModel { CourseCreateViewModel() }
         viewModel { CourseCreateSearchViewModel() }
-        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get()) }
+        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get(), get()) }
     }
 
 

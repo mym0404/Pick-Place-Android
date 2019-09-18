@@ -4,12 +4,17 @@ import androidx.lifecycle.*
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.data.repository.CourseRepository
+import korea.seoul.pickple.data.repository.FakeCourseRepository
+import korea.seoul.pickple.data.repository.FakePlaceRepository
+import korea.seoul.pickple.data.repository.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
 
 class CourseIntroViewModel(
     courseId: Int,
-    private val courseRepository: CourseRepository
+    private val courseRepository: CourseRepository,
+    private val reviewRepository: ReviewRepository
 ) : BaseViewModel() {
     /**
      * 현재 보여줄 courseId
@@ -20,7 +25,22 @@ class CourseIntroViewModel(
                 .callback(
                     successCallback = { course ->
                         _course.value = course
+                    },
+                    failCallback = {
+                        _course.value = FakeCourseRepository.fakeCourse
+                    },
+                    errorCallback = {
+                        _course.value = FakeCourseRepository.fakeCourse
                     }
+                )
+
+            reviewRepository.getCourseReviews(courseId)
+                .callback(
+                    successCallback = { reviews ->
+                        _courseReviews.value = reviews
+                    },
+                    failCallback = {  _courseReviews.value = listOf()},
+                    errorCallback = {  _courseReviews.value = listOf()}
                 )
             field = value
         }
@@ -36,6 +56,12 @@ class CourseIntroViewModel(
     * */
     private val _places: MutableLiveData<List<Place>> = MutableLiveData()
     val places: LiveData<List<Place>> = _places
+
+    /**
+    * course의 후기
+    * */
+    private val _courseReviews: MutableLiveData<List<Review>> = MutableLiveData()
+    val courseReviews: LiveData<List<Review>> = _courseReviews
 
     /**
      * place 이미지 url 리스트
@@ -59,6 +85,12 @@ class CourseIntroViewModel(
     }
 
     /**
+    * 현재 선택된 Place의 후기
+    * */
+    private val _placeReviews: MutableLiveData<List<Review>> = MutableLiveData()
+    val placeReviews: LiveData<List<Review>> = _placeReviews
+
+    /**
      * 현재 선택한 Place의 index 1부터 시작한다.
      * */
     private val _index: MutableLiveData<Int> = MutableLiveData()
@@ -66,6 +98,10 @@ class CourseIntroViewModel(
         if (it>10) it.toString() else "0$it"
     } // 한 자리 index는 0을 붙혀서 보여준다.
 
+
+    /**
+     * ViewModel이 처음 생성되었을때 세팅해줄 것
+     * */
     init {
         course.managedObserve {
             courseRepository.getPlaces(it)
@@ -76,6 +112,10 @@ class CourseIntroViewModel(
                         _places.value = places
                     }
                 )
+        }
+
+        places.managedObserve {
+
         }
     }
 
