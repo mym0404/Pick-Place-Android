@@ -213,6 +213,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round_button_background"
+                    android:layout_marginBottom="32dp"
                     android:paddingHorizontal="17dp"
                     android:paddingVertical="8dp"
                     android:text="코스 상세보기"
@@ -223,11 +224,12 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView4" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/txtCoursePlaceCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="TextView"
+                    android:text="@{viewModel.coursePlaceCount}"
+                    tools:text="장소 5곳"
                     android:textColor="@color/colorBlack"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -235,14 +237,14 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/txtCourseTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    tools:text="TextView"
                     android:textColor="@color/colorBlack"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                    app:layout_constraintStart_toStartOf="@+id/textView"
+                    app:layout_constraintStart_toStartOf="@+id/txtCoursePlaceCount"
                     app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
