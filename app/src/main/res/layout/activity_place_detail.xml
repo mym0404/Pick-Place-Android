@@ -101,18 +101,6 @@
                     android:textColor="#ffffff"
                     />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="0dp"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:navigationIcon="@drawable/navi_btn_back_w"
-                    app:menu="@menu/menu_place_detail_toolbar"
-                    android:background="#00000000"
-                    />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

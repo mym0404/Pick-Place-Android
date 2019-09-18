@@ -20,15 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity"/>
-        <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
-
-        <activity android:name=".NavigationActivity"/>
-        <activity android:name=".SearchActivity" />
-
-        <activity android:name=".ui.course.intro.CourseIntroActivity"
+        <activity android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true"/>
+        <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
+        <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
+        <activity android:name=".NavigationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity
+            android:name=".ui.course.intro.CourseIntroActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -64,9 +64,10 @@
         <activity
             android:name=".ui.course.create.CourseCreateActivity"
             android:exported="true" />
-
-        <activity android:name=".ui.course.create.search.CourseCreateSearchActivity"/>
-        <activity android:name=".ui.course.create.intro.CourseCreateIntroActivity" android:exported="true"/>
+        <activity android:name=".ui.course.create.search.CourseCreateSearchActivity" />
+        <activity
+            android:name=".ui.course.create.intro.CourseCreateIntroActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
