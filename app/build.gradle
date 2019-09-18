@@ -139,6 +139,8 @@ dependencies {
     implementation Libs.dexter
     implementation Libs.multidex
     implementation Libs.kotlin_reflect // 수민 추가
+
+    implementation Libs.circle_image_view
 }
 /**
  * Local Unit Test에서 사용할 라이브러리들
@@ -190,4 +192,8 @@ dependencies {
 dependencies {
     implementation 'androidx.appcompat:appcompat:+'
     implementation 'androidx.constraintlayout:constraintlayout:+'
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
 }

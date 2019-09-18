@@ -1,9 +1,8 @@
-package korea.seoul.pickple.ui.course.place_detail
+package korea.seoul.pickple.ui.course.intro.place_detail
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.R
 

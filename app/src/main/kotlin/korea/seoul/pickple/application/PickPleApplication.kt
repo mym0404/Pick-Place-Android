@@ -10,11 +10,10 @@ import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
+import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroViewModel
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
-import korea.seoul.pickple.ui.course.place_detail.PlaceDetailViewModel
-import korea.seoul.pickple.ui.course.unite_intro.UniteCourseViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -73,6 +72,7 @@ class PickPleApplication : Application() {
 
 
     private val repositoryModule = module {
+        single { FakeReviewRepository() as ReviewRepository }
         single { FakePlaceRepository() } bind PlaceRepository::class
         single { FakeCourseRepository(get()) } bind CourseRepository::class
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
@@ -80,10 +80,9 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
-        viewModel { (places: List<Int>) -> PlaceDetailViewModel(get(), places) }
-        viewModel { (courseId: Int) -> UniteCourseViewModel(get(), courseId) }
         viewModel { CourseCreateViewModel() }
         viewModel { CourseCreateSearchViewModel() }
+        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get(), get()) }
         viewModel { CourseCreateIntroViewModel() }
     }
 

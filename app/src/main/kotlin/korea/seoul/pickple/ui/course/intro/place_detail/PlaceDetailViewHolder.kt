@@ -1,4 +1,4 @@
-package korea.seoul.pickple.ui.course.place_detail
+package korea.seoul.pickple.ui.course.intro.place_detail
 
 import android.view.View
 import android.widget.ImageView
