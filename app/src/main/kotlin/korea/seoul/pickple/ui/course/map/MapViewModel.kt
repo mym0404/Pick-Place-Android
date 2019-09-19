@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
-import korea.seoul.pickple.data.repository.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

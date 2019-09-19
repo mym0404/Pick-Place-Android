@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        tools:background="#7b7b7b"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.course.intro.CourseIntroActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarLayoutCourseIntro"
+            android:background="@color/colorTransparent"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            >
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/colorBlack"
+                >
+                <androidx.appcompat.widget.Toolbar
+                    android:background="@color/colorTransparent"
+                    android:id="@+id/toolbarCourseIntro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:menu="@menu/menu_unite_course_toolbar"
+                    app:navigationIcon="@drawable/navi_btn_back_w"
+                    app:layout_collapseMode="pin"
+                    />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpCourseIntro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
