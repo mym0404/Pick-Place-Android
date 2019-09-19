@@ -1,9 +1,10 @@
-package korea.seoul.pickple.data.repository
+package korea.seoul.pickple.data.repository.implementation
 
 import korea.seoul.pickple.data.api.DirectionsAPI
 import korea.seoul.pickple.data.api.DirectionsResponse
 import korea.seoul.pickple.data.api.GeocodingResponse
 import korea.seoul.pickple.data.entity.Location
+import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import retrofit2.Call
 
 class DirectionsRepositoryImpl(private val api : DirectionsAPI) : DirectionsRepository {

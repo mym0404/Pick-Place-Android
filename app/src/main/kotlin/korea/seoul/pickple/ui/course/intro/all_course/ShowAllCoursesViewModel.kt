@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.ui.BaseViewModel
 
 class ShowAllCoursesViewModel(

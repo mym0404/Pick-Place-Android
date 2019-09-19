@@ -19,7 +19,7 @@ import korea.seoul.pickple.common.util.PermissionListener
 import korea.seoul.pickple.data.api.DirectionsResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
-import korea.seoul.pickple.data.repository.DirectionsRepository
+import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import korea.seoul.pickple.databinding.FragmentPickpleMapBinding
 import korea.seoul.pickple.ui.course.map.MapActivity
 import org.koin.android.ext.android.get

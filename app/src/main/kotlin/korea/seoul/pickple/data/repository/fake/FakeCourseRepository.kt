@@ -1,8 +1,10 @@
-package korea.seoul.pickple.data.repository
+package korea.seoul.pickple.data.repository.fake
 
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.enumerator.SeoulDistrict
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import retrofit2.Call
 import retrofit2.mock.Calls
 import kotlin.random.Random
