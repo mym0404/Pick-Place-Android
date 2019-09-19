@@ -1,6 +1,7 @@
-package korea.seoul.pickple.data.repository
+package korea.seoul.pickple.data.repository.fake
 
 import korea.seoul.pickple.data.entity.Review
+import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
 import retrofit2.Call
 import retrofit2.mock.Calls
 
