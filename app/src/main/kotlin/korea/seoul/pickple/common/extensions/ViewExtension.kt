@@ -12,6 +12,7 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import korea.seoul.pickple.R
 import me.grantland.widget.AutofitTextView
 
 
@@ -94,4 +95,19 @@ fun Fragment.toast(msg : String) {
 }
 fun Context.toast(msg : String) {
     Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+}
+
+/**
+ * 이미지 뷰를 라운드하게 세팅하는 방법, 라운드는 8dp로 고정한다. ㅎㅎ;
+ * @author greedy0110
+ * */
+@BindingAdapter("roundImageView")
+fun ImageView.setRound(isRound: Boolean) {
+    if (isRound) {
+        setBackgroundResource(R.drawable.round_8dp_rectangle)
+        clipToOutline = true
+    }
+    else {
+        clipToOutline = false
+    }
 }
