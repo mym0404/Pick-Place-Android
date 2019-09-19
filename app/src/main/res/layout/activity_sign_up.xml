@@ -18,6 +18,7 @@
         android:text="pickple"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/Mail_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -31,6 +32,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/more_icon_my"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
@@ -44,6 +46,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/Lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="282dp"
@@ -57,6 +60,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconDrawable="@drawable/Lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="348dp"
