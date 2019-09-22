@@ -22,7 +22,8 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        setRecyclerView()
+        setTabListener()
 
     }
 
@@ -30,8 +31,8 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
     private fun setRecyclerView() {
         var list = listOf("12", "@3", "33")
 
-//        adapter = RecyclerAdapterMainCourseDetail(, list)
-
+        adapter = RecyclerAdapterMainCourseDetail(this.context!!, list)
+        main_course_detail_recycler_new_popular.adapter = adapter
 
     }
 

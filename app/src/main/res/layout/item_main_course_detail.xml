@@ -11,7 +11,8 @@
         android:layout_height="0dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintDimensionRatio="296:240"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
