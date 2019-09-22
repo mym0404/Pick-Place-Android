@@ -1,13 +1,13 @@
-package korea.seoul.pickple.ui.setting
+package korea.seoul.pickple.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import korea.seoul.pickple.R
 
-class Setting_MemberInfo_EditNicknameActivity : AppCompatActivity() {
+class FindingPassword_PopUp_Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting__member_info__edit_nickname)
+        setContentView(R.layout.activity_finding_password__pop_up_)
     }
 }
