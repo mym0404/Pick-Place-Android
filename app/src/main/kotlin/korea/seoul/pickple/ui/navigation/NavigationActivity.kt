@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.common.util.LinearItemDecoration
 import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.databinding.ActivityNavigationBinding
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.setting.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavigationActivity : AppCompatActivity() {
@@ -24,8 +27,20 @@ class NavigationActivity : AppCompatActivity() {
         mBinding.lifecycleOwner = this
         mBinding.vm = mViewModel
 
+        initViews()
         initRecyclerViews()
         observeViewModel()
+    }
+
+    private fun initViews() {
+        mBinding.actNavIbtnClose.setOnClickListener {
+            onBackPressed()
+        }
+        mBinding.actNavRelativeIbtnSetting.setOnClickListener {
+            Intent(this@NavigationActivity,SettingActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
     }
 
     private fun initRecyclerViews() {
@@ -41,6 +56,11 @@ class NavigationActivity : AppCompatActivity() {
             adapter = NavigationCourseAdapter(mViewModel)
             addItemDecoration(LinearItemDecoration(this@NavigationActivity,16))
         }
+        mBinding.recyclerViewReview.apply {
+            adapter = NavigationReviewAdapter(mViewModel)
+            addItemDecoration(LinearItemDecoration(this@NavigationActivity,16))
+        }
+
     }
 
     private fun observeViewModel() {
@@ -50,6 +70,14 @@ class NavigationActivity : AppCompatActivity() {
                     setData(Uri.parse(it.url))
                     startActivity(this)
                 }
+            }
+            clickCourse.observeOnce(this@NavigationActivity) {course->
+                navigate(this@NavigationActivity,NavigationArgs.CourseCreateArgs(
+                    course.name, Uri.parse(""),course.description,course.tagList,true,course)
+                )
+            }
+            clickReview.observeOnce(this@NavigationActivity) {
+
             }
         }
     }

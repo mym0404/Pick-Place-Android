@@ -54,7 +54,7 @@ class PickPleApplication : Application() {
         //TODO
         single<Retrofit> {
             Retrofit.Builder()
-                .baseUrl("서버에게 URL을 받으세요")
+                .baseUrl("http://13.209.233.217:3000")
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
@@ -106,7 +106,7 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel() }
+        viewModel { CourseCreateViewModel(get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }

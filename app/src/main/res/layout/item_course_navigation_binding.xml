@@ -19,8 +19,15 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> vm.onClickCourse(item)}"
-        android:layout_width="match_parent"
+        android:layout_width="88dp"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:scaleType="centerCrop"
+
+            imageUrl="@{item.thumbnail}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

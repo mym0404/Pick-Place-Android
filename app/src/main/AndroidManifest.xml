@@ -70,6 +70,8 @@
         <activity
             android:name=".ui.course.create.intro.CourseCreateIntroActivity"
             android:exported="true" />
+
+        <activity android:name=".ui.setting.SettingActivity"/>
     </application>
 
 </manifest>

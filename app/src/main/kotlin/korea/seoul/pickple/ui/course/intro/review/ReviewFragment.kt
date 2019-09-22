@@ -1,19 +1,10 @@
 package korea.seoul.pickple.ui.course.intro.review
 
 
-import android.media.Image
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.PopupWindow
-import androidx.appcompat.widget.ListPopupWindow
-import androidx.appcompat.widget.PopupMenu
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.ListPopupWindowCompat
-import androidx.core.widget.PopupWindowCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -23,8 +14,6 @@ import korea.seoul.pickple.databinding.FragmentReviewBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_review.ShowAllReviewActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
