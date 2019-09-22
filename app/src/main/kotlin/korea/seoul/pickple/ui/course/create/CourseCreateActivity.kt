@@ -73,7 +73,7 @@ class CourseCreateActivity : AppCompatActivity() {
             setMarkerClickedListener { marker ->
 
                 toLocation(marker)
-                if(mViewModel.detailMode.value != true) {
+                if(mViewModel.detailMode.value != true && !mViewModel.onlyShow.value!!) {
                     mViewModel.detailMode.value = true
                 }
             }
