@@ -111,6 +111,7 @@ fun navigate(
             putExtra(COURSE_CREATE_ARG_DESCRIPTION,arg.description)
             putStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST,ArrayList(arg.tagList))
             putExtra(COURSE_CREATE_ARG_ONLY_SHOW,arg.onlyShow)
+            putExtra(COURSE_CREATE_ARG_COURSE,arg.course)
         }
         is NavigationArgs.CourseCreateSearchArg -> Intent(curActivity, CourseCreateSearchActivity::class.java)
         is NavigationArgs.CourseIntroArg -> Intent(curActivity, CourseIntroActivity::class.java).apply {
