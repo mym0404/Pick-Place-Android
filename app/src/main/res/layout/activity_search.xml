@@ -4,29 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/act_search_til_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/act_search_tiet_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/navi_btn_back_b"
-            android:hint="#검색어를 입력해주세요"/>
-
-
-    </com.google.android.material.textfield.TextInputLayout>
+    tools:context=".ui.search.SearchActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/act_search_img_back"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/navi_btn_back_b"
+            android:layout_marginLeft="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <EditText
+            android:id="@+id/act_search_et_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toEndOf="@id/act_search_img_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:hint="#검색어를 입력해주세요"
+            android:inputType="text"
+            android:imeOptions="actionSearch"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_search_constraint_popular_course"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/act_search_til_search">
+        app:layout_constraintTop_toBottomOf="@id/top_constraint">
 
         <TextView
             android:id="@+id/act_search_tv_popular_course"
@@ -52,9 +68,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_search_constraint_search_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/act_search_til_search">
+        app:layout_constraintTop_toBottomOf="@id/top_constraint"
+        android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/act_search_rv_search_result"

@@ -1,25 +1,27 @@
 package korea.seoul.pickple.ui.course.intro
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
-import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
 
 class CourseIntroViewModel(
-    courseId: Int,
     private val courseRepository: CourseRepository,
     private val reviewRepository: ReviewRepository
 ) : BaseViewModel() {
     /**
      * 현재 보여줄 courseId
      * */
-    var courseId: Int = courseId
+    var courseId: Int = 0
         set(value) {
             courseRepository.getCourseWithId(courseId)
                 .callback(

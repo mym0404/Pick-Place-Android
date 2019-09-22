@@ -5,10 +5,13 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.data.entity.Review
 
-@BindingAdapter("reviews")
-fun RecyclerView.setViewItem(list: List<Review>?) {
+@BindingAdapter("reviews", "isFullReview")
+fun RecyclerView.setViewItem(list: List<Review>?, isFullReview: Boolean) {
     (this.adapter as? ReviewAdapter)?.apply {
         data = list?: listOf()
+
+        // 만약 전체 리뷰 보는 상황이 아니라면 2개의 리뷰만 보여주자.
+        if (!isFullReview) data = data.take(2)
         notifyDataSetChanged()
     }
 }

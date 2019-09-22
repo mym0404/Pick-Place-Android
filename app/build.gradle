@@ -115,6 +115,7 @@ dependencies {
     implementation Libs.viewpager2
     implementation Libs.pageindicatorview
     implementation Libs.numbermarbleview
+    implementation Libs.circle_image_view
 
     //Firebase & Google
     implementation Libs.places

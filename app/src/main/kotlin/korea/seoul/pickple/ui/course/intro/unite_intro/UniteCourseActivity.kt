@@ -6,8 +6,8 @@ import korea.seoul.pickple.databinding.ActivityUniteCourseBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.review.ReviewFragment
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**

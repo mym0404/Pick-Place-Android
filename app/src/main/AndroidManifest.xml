@@ -23,13 +23,14 @@
         <activity android:name=".ui.main.MemberTermsActivity"></activity>
         <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
         <activity android:name=".ui.main.FindingPasswordActivity" />
+        <activity android:name=".ui.navigation.NavigationActivity" android:exported="true"/>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />
         <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
         <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
-        <activity android:name=".NavigationActivity" />
-        <activity android:name=".SearchActivity" />
+
         <activity
             android:name=".ui.course.intro.CourseIntroActivity"
             android:exported="true" />
@@ -72,6 +73,8 @@
         <activity
             android:name=".ui.course.create.intro.CourseCreateIntroActivity"
             android:exported="true" />
+
+        <activity android:name=".ui.setting.SettingActivity"/>
     </application>
 
 </manifest>

@@ -10,9 +10,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import korea.seoul.pickple.common.widget.Once
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
+import kotlin.concurrent.thread
 
-class CourseCreateViewModel : ViewModel() {
+class CourseCreateViewModel(private val placeRepository: PlaceRepository) : ViewModel() {
 
     private val TAG = CourseCreateViewModel::class.java.simpleName
 
@@ -50,6 +53,10 @@ class CourseCreateViewModel : ViewModel() {
     private val _title : MutableLiveData<String> = MutableLiveData("")
     val title : LiveData<String>
         get() = _title
+
+    private val _onlyShow : MutableLiveData<Boolean> = MutableLiveData(false)
+    val onlyShow : LiveData<Boolean>
+        get() = _onlyShow
 
     private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
 //        Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
@@ -99,13 +106,11 @@ class CourseCreateViewModel : ViewModel() {
 
 
     fun onAppendPlace(place : Place) {
-
         //중복
         if((this.places.value ?: listOf()).any { it.id == place.id }) {
             _appendFailDuplicatePlace.value = Once(place)
             return
         }
-
 
         this._places.value = (this.places.value ?: listOf()) + listOf(place)
         _appendPlaceSuccess.value = Once(place)
@@ -115,10 +120,29 @@ class CourseCreateViewModel : ViewModel() {
         _places.value = items
     }
 
-    fun onSetDatas(title : String, thumbnail : Uri, description : String, tagList : List<String>) {
+    fun onSetDatas(title : String, thumbnail : Uri, description : String, tagList : List<String>, onlyShow : Boolean, course : Course?) {
         _title.value = title
-    }
+        _onlyShow.value = onlyShow
 
+        if(onlyShow && course != null) {
+
+            thread {
+
+                var places = listOf<Place>()
+
+                course.places.forEach {
+                    placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
+                        places += it
+                    }
+
+                }
+
+                _places.postValue(places)
+            }
+
+
+        }
+    }
 
     //region Event
     fun onClickBackButton() {

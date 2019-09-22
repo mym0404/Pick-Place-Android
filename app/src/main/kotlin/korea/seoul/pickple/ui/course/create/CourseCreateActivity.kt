@@ -17,10 +17,10 @@ import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
+import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
-import korea.seoul.pickple.ui.navigation.parseIntent
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,7 +48,7 @@ class CourseCreateActivity : AppCompatActivity() {
         initMap()
         initRecyclerView()
 
-        mViewModel.onSetDatas(args.title,args.thumbnail,args.description,args.tagList)
+        mViewModel.onSetDatas(args.title,args.thumbnail,args.description,args.tagList,args.onlyShow,args.course)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel
@@ -153,7 +153,7 @@ class CourseCreateActivity : AppCompatActivity() {
             })
 
             clickPlaceAdd.observeOnce(this@CourseCreateActivity) {
-                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(), CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
+                navigate(this@CourseCreateActivity, NavigationArgs.CourseCreateSearchArg(), CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
             }
 
             clickAllDelete.observeOnce(this@CourseCreateActivity) {

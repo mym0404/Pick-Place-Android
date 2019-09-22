@@ -1,6 +1,7 @@
 package korea.seoul.pickple.data.repository.implementation
 
 import korea.seoul.pickple.data.api.CourseAPI
+import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
@@ -17,5 +18,9 @@ class CourseRepositoryImpl (private val courseAPI : CourseAPI) : CourseRepositor
 
     override fun getAllCourses(): Call<List<Course>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
+        return courseAPI.getHashTags(tagName)
     }
 }

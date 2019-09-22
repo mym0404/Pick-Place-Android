@@ -1,27 +1,23 @@
 package korea.seoul.pickple.ui.course.intro
 
-import android.animation.ObjectAnimator
-import android.animation.StateListAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.ActionBar
 import androidx.viewpager.widget.ViewPager
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
-import korea.seoul.pickple.ui.navigation.parseIntent
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.parseIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.activity_course_intro) {
     private val viewModel: CourseIntroViewModel by viewModel { parametersOf(0) }
     private var toolbarActionShare: MenuItem? = null
-    private val REQUEST_SHOW_ALL_COURSES = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,6 +112,7 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
     }
 
     companion object {
+        const val REQUEST_SHOW_ALL_COURSES = 1234
         const val COURSE_ID = "COURSE_ID"
     }
 }

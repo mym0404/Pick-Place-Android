@@ -24,8 +24,7 @@
         android:layout_marginTop="272dp"
         android:hint="이메일"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="#ffffff"
-        app:startIconDrawable="@drawable/Mail">
+        app:boxBackgroundColor="#ffffff">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -40,7 +39,7 @@
         android:hint="비밀번호"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="#ffffff"
-        app:startIconDrawable="@drawable/Lock">
+        app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

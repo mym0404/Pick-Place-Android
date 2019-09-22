@@ -1,8 +1,8 @@
 package korea.seoul.pickple.data.repository.implementation
 
 import korea.seoul.pickple.data.api.DirectionsAPI
-import korea.seoul.pickple.data.api.DirectionsResponse
-import korea.seoul.pickple.data.api.GeocodingResponse
+import korea.seoul.pickple.data.api.response.directions.DirectionsResponse
+import korea.seoul.pickple.data.api.response.directions.GeocodingResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import retrofit2.Call

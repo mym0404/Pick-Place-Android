@@ -3,14 +3,12 @@ package korea.seoul.pickple.application
 import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import korea.seoul.pickple.common.util.FileUtil
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
-import korea.seoul.pickple.data.repository.fake.FakePlaceRepository
-import korea.seoul.pickple.data.repository.fake.FakeReviewRepository
 import korea.seoul.pickple.data.repository.implementation.*
 import korea.seoul.pickple.data.repository.interfaces.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
@@ -19,6 +17,7 @@ import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
+import korea.seoul.pickple.ui.navigation.NavigationViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -41,6 +40,7 @@ class PickPleApplication : Application() {
         single { MapUtil() }
         single { PermissionDexterUtil() }
         single { GalleryUtil() }
+        single { FileUtil(get()) }
     }
 
     private val apiModule = module {
@@ -54,7 +54,7 @@ class PickPleApplication : Application() {
         //TODO
         single<Retrofit> {
             Retrofit.Builder()
-                .baseUrl("서버에게 URL을 받으세요")
+                .baseUrl("http://13.209.233.217:3000")
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
@@ -87,14 +87,14 @@ class PickPleApplication : Application() {
 
     private val repositoryModule = module {
         //TODO Fake
-        single { FakeReviewRepository() as ReviewRepository }
-        single { FakePlaceRepository() } bind PlaceRepository::class
-        single { FakeCourseRepository(get()) } bind CourseRepository::class
+//        single { FakeReviewRepository() as ReviewRepository }
+//        single { FakePlaceRepository() } bind PlaceRepository::class
+//        single { FakeCourseRepository(get()) } bind CourseRepository::class
 
 
-//        single { ReviewRepositoryImpl(get()) as ReviewRepository }
-//        single { PlaceRepositoryImpl(get()) } bind PlaceRepository::class
-//        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
+        single { ReviewRepositoryImpl(get()) as ReviewRepository }
+        single { PlaceRepositoryImpl(get(),get()) } bind PlaceRepository::class
+        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
         single { UserRepositoryImpl(get())} bind UserRepository::class
@@ -102,16 +102,16 @@ class PickPleApplication : Application() {
         single { MainRepositoryImpl(get())} bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
 
-
     }
 
     private val viewModelModule = module {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel() }
-        viewModel { CourseCreateSearchViewModel() }
-        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get(), get()) }
+        viewModel { CourseCreateViewModel(get()) }
+        viewModel { CourseIntroViewModel(get(), get()) }
+        viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
+        viewModel { NavigationViewModel() }
     }
 
 
