@@ -20,13 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.navigation.NavigationActivity"/>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />
         <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
         <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
-        <activity android:name=".NavigationActivity" />
-        <activity android:name=".SearchActivity" />
+
         <activity
             android:name=".ui.course.intro.CourseIntroActivity"
             android:exported="true" />
