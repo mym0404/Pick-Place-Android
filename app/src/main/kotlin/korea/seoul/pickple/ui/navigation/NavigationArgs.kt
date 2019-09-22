@@ -11,6 +11,9 @@ import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.ui.course.create.CourseCreateActivity
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroActivity
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
+import korea.seoul.pickple.ui.course.intro.CourseIntroActivity
+import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesActivity
+import korea.seoul.pickple.ui.course.intro.all_review.ShowAllReviewActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
 import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_DESCRIPTION
 import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TAGLIST
@@ -45,7 +48,19 @@ sealed class NavigationArgs {
 
     }
 
+    class CourseIntroArg(val courseId: Int) : NavigationArgs() {
+        companion object {
+            const val COURSE_INTRO_ARG_COURSE_ID = "COURSE_INTRO_ARG_COURSE_ID"
+        }
+    }
 
+    class ShowAllCourseArg : NavigationArgs()
+
+    class ShowAllReviewArg(val isCourseReview: Boolean) : NavigationArgs() {
+        companion object {
+            const val SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW = "SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW"
+        }
+    }
 }
 
 //계속 추가 요망
@@ -62,6 +77,10 @@ fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCrea
     intent.getStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST)
 )
 fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateSearchArg()
+
+fun CourseIntroActivity.parseIntent(intent: Intent) = NavigationArgs.CourseIntroArg(intent.getIntExtra(NavigationArgs.CourseIntroArg.COURSE_INTRO_ARG_COURSE_ID, 0))
+fun ShowAllCoursesActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllCourseArg()
+fun ShowAllReviewActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllReviewArg(intent.getBooleanExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, false))
 
 
 /**
@@ -87,6 +106,13 @@ fun navigate(
             putStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST,ArrayList(arg.tagList))
         }
         is NavigationArgs.CourseCreateSearchArg -> Intent(curActivity, CourseCreateSearchActivity::class.java)
+        is NavigationArgs.CourseIntroArg -> Intent(curActivity, CourseIntroActivity::class.java).apply {
+            putExtra(NavigationArgs.CourseIntroArg.COURSE_INTRO_ARG_COURSE_ID, arg.courseId)
+        }
+        is NavigationArgs.ShowAllCourseArg -> Intent(curActivity, ShowAllCoursesActivity::class.java)
+        is NavigationArgs.ShowAllReviewArg -> Intent(curActivity, ShowAllReviewActivity::class.java).apply {
+            putExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, arg.isCourseReview)
+        }
     }
 
 

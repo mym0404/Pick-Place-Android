@@ -9,13 +9,6 @@
         />
 
     <item
-        android:id="@+id/actionLike"
-        android:title="좋아요"
-        android:icon="@drawable/navi_btn_heart_w"
-        app:showAsAction="ifRoom"
-        />
-
-    <item
         android:id="@+id/actionShowAll"
         android:title="모두보기"
         android:icon="@drawable/navi_btn_all_w"

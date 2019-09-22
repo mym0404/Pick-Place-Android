@@ -16,10 +16,10 @@ import com.google.maps.android.PolyUtil
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
-import korea.seoul.pickple.data.api.DirectionsResponse
+import korea.seoul.pickple.data.api.response.directions.DirectionsResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
-import korea.seoul.pickple.data.repository.DirectionsRepository
+import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import korea.seoul.pickple.databinding.FragmentPickpleMapBinding
 import korea.seoul.pickple.ui.course.map.MapActivity
 import org.koin.android.ext.android.get
@@ -92,8 +92,12 @@ final class PickpleMapFragment : Fragment() {
         fun setMyLocationAsync() {
             tryMapRunnable {
 
-                fusedClient.lastLocation.addOnSuccessListener {location->
-                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude,location.longitude)))
+                fusedClient.lastLocation.addOnSuccessListener { location : android.location.Location? ->
+
+                    location?.let {location->
+                        mMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude,location.longitude)))
+                    }
+
                 }
             }
         }

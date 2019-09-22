@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,8 +11,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="144dp"
         android:lineSpacingExtra="-15sp"
         android:text="pickple"
         android:textColor="#000000"
@@ -21,10 +21,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="272dp"
         android:hint="이메일"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="#ffffff">
+        app:boxBackgroundColor="#ffffff"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -35,10 +36,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="338dp"
         android:hint="비밀번호"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="#ffffff">
+        app:boxBackgroundColor="#ffffff"
+        app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -48,33 +50,35 @@
 
     <ImageView
         android:id="@+id/iv_login"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_width="170dp"
+        android:layout_height="29dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="436dp"
         android:src="#ff551a" />
-    
-        <LinearLayout
-            android:layout_width="match_parent"
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="480dp">
+
+        <TextView
+            android:id="@+id/tv_FindPassword"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tv_FindPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="비밀번호 찾기" />
+            android:text="비밀번호 찾기 " />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#c0c0c0" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#c0c0c0" />
 
-            <TextView
-                android:id="@+id/tv_Signup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="회원가입" />
-
-        </LinearLayout>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_Signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=" 회원가입" />
+    </LinearLayout>
+</RelativeLayout>

@@ -85,8 +85,7 @@ data class Place(
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "place_location")
     @Embedded
-    var location: Location?,
-
+    var location: Location,
     /**
      * 장소 이용 가격 (nullable)
      *

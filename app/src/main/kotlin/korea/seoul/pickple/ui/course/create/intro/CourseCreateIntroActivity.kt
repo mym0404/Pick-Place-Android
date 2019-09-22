@@ -3,10 +3,8 @@ package korea.seoul.pickple.ui.course.create.intro
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import happy.mjstudio.widget.numbermarbleview.NumberMarbleView
 import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.widget.observeOnce
