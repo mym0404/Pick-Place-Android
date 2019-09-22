@@ -1,22 +1,44 @@
 package korea.seoul.pickple.ui.navigation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import korea.seoul.pickple.R
-import kotlinx.android.synthetic.main.activity_navigation.*
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
+import korea.seoul.pickple.databinding.ActivityNavigationBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavigationActivity : AppCompatActivity() {
 
+    private lateinit var mBinding : ActivityNavigationBinding
+
+    private val mViewModel : NavigationViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_navigation)
+        mBinding = ActivityNavigationBinding.inflate(LayoutInflater.from(this))
+        setContentView(mBinding.root)
 
-        setClickListener()
+        mBinding.lifecycleOwner = this
+        mBinding.vm = mViewModel
+
+        initRecyclerViews()
+        observeViewModel()
     }
 
-    private fun setClickListener() {
-        act_nav_ibtn_close.setOnClickListener{
-            finish()
+    private fun initRecyclerViews() {
+        mBinding.recyclerViewSeoulNews.apply {
+            adapter = SeoulNewsAdapter(mViewModel)
+        }
+        mBinding.recyclerViewMyCourse.apply {
+            adapter = NavigationCourseAdapter(mViewModel)
+        }
+        mBinding.recyclerViewPickPlace.apply {
+            adapter = NavigationCourseAdapter(mViewModel)
+        }
+    }
+
+    private fun observeViewModel() {
+        mViewModel.apply {
+
         }
     }
 }
