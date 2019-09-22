@@ -49,10 +49,10 @@ class NavigationViewModel() : ViewModel() {
     }
 
     fun onClickSeoulNews(news : SeoulNews) {
-
+        _clickSeoulNews.value = Once(news)
     }
     fun onClickCourse(course : Course) {
-
+        _clickCourse.value = Once(course)
     }
 
 }

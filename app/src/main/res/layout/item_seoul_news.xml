@@ -17,12 +17,15 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> vm.onClickSeoulNews(item)}"
         android:layout_width="88dp"
         android:layout_height="match_parent">
 
         <ImageView
             android:scaleType="centerCrop"
-            android:onClick="@{() -> vm.onClickSeoulNews(item)}"
+
             imageUrl="@{item.thumb}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
