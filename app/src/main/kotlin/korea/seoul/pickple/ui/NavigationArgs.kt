@@ -1,4 +1,4 @@
-package korea.seoul.pickple.ui.navigation
+package korea.seoul.pickple.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,12 @@ import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_COURSE
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_DESCRIPTION
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_ONLY_SHOW
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TAGLIST
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_THUMBNAIL
+import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TITLE
 import korea.seoul.pickple.ui.course.create.CourseCreateActivity
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroActivity
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
@@ -15,13 +21,8 @@ import korea.seoul.pickple.ui.course.intro.CourseIntroActivity
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesActivity
 import korea.seoul.pickple.ui.course.intro.all_review.ShowAllReviewActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_DESCRIPTION
-import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TAGLIST
-import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_THUMBNAIL
-import korea.seoul.pickple.ui.navigation.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TITLE
 
 sealed class NavigationArgs {
-
 
     //계속 추가 요망
     //일단 Nullable로 해놓음
@@ -35,8 +36,11 @@ sealed class NavigationArgs {
 
     }
 
-    class CourseCreateArgs(val title : String, val thumbnail : Uri, val description : String, val tagList : List<String>) : NavigationArgs() {
+    class CourseCreateArgs(val title : String, val thumbnail : Uri, val description : String, val tagList : List<String>, val onlyShow : Boolean = false,val course : Course?) : NavigationArgs() {
         companion object {
+            const val COURSE_CREATE_ARG_COURSE="COURSE_CREATE_ARG_COURSE"
+            const val COURSE_CREATE_ARG_ONLY_SHOW="COURSE_CREATE_ARG_ONLY_SHOW"
+
             const val COURSE_CREATE_ARG_TITLE = "COURSE_CREATE_ARG_TITLE"
             const val COURSE_CREATE_ARG_THUMBNAIL = "COURSE_CREATE_ARG_THUMBNAIL"
             const val COURSE_CREATE_ARG_DESCRIPTION = "COURSE_CREATE_ARG_DESCRIPTION"
@@ -74,7 +78,9 @@ fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCrea
     intent.getStringExtra(COURSE_CREATE_ARG_TITLE),
     intent.getParcelableExtra(COURSE_CREATE_ARG_THUMBNAIL) as Uri,
     intent.getStringExtra(COURSE_CREATE_ARG_DESCRIPTION),
-    intent.getStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST)
+    intent.getStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST),
+    intent.getBooleanExtra(NavigationArgs.CourseCreateArgs.COURSE_CREATE_ARG_ONLY_SHOW, false),
+    intent.getParcelableExtra<Course>(COURSE_CREATE_ARG_COURSE)
 )
 fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateSearchArg()
 
@@ -104,6 +110,7 @@ fun navigate(
             putExtra(COURSE_CREATE_ARG_THUMBNAIL,arg.thumbnail)
             putExtra(COURSE_CREATE_ARG_DESCRIPTION,arg.description)
             putStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST,ArrayList(arg.tagList))
+            putExtra(COURSE_CREATE_ARG_ONLY_SHOW,arg.onlyShow)
         }
         is NavigationArgs.CourseCreateSearchArg -> Intent(curActivity, CourseCreateSearchActivity::class.java)
         is NavigationArgs.CourseIntroArg -> Intent(curActivity, CourseIntroActivity::class.java).apply {

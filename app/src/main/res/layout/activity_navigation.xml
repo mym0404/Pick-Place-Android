@@ -1,114 +1,358 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.navigation.NavigationActivity">
 
-    <ImageButton
-        android:id="@+id/act_nav_ibtn_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/navi_btn_close_b"/>
-
-    <TextView
-        android:id="@+id/act_nav_tv_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_nav_ibtn_close"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
-        android:text="주미님\n오늘은 어디로 갈래요?"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:lineSpacingExtra="12sp"/>
-
-    <RelativeLayout
-        android:id="@+id/act_nav_relative"
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="korea.seoul.pickple.ui.navigation.NavigationViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_nav_tv_user_name"
-        android:layout_marginTop="40dp">
-
-        <ImageView
-            android:id="@+id/act_nav_relative_img_my"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/more_btn_my"
-            android:layout_marginStart="40dp"
-            android:layout_centerVertical="true"/>
-
-
-        <TextView
-            android:id="@+id/act_nav_relative_tv_my_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/act_nav_relative_img_my"
-            android:layout_marginStart="8dp"
-            android:text="12"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
-
-        <ImageView
-            android:id="@+id/act_nav_relative_img_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/more_btn_heart"
-            android:layout_marginStart="30dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/act_nav_relative_tv_my_num"/>
-
-        <TextView
-            android:id="@+id/act_nav_relative_tv_like_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/act_nav_relative_img_like"
-            android:layout_marginStart="8dp"
-            android:text="80"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
-
-        <ImageView
-            android:id="@+id/act_nav_relative_img_review"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/more_btn_review"
-            android:layout_marginStart="30dp"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/act_nav_relative_tv_like_num"/>
-
-        <TextView
-            android:id="@+id/act_nav_relative_tv_review_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/act_nav_relative_img_review"
-            android:layout_marginStart="8dp"
-            android:text="120"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
+        android:layout_height="match_parent"
+        tools:context=".ui.navigation.NavigationActivity">
 
         <ImageButton
-            android:id="@+id/act_nav_relative_ibtn_setting"
+            android:padding="4dp"
+            android:id="@+id/act_nav_ibtn_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="24dp"/>
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/navi_btn_close_b"/>
 
-    </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/act_nav_recycler"
-        app:layout_constraintTop_toBottomOf="@id/act_nav_relative"
-        android:layout_marginTop="56dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/act_nav_tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_nav_ibtn_close"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="36dp"
+            android:text="주미님\n오늘은 어디로 갈래요?"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="12sp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/act_nav_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_nav_tv_user_name">
+
+            <ImageView
+                android:id="@+id/act_nav_relative_img_my"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:src="@drawable/more_btn_my"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/act_nav_relative_tv_my_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="12"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/act_nav_relative_img_my"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/act_nav_relative_img_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/more_btn_heart"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/act_nav_relative_tv_my_num"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/act_nav_relative_tv_like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="80"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/act_nav_relative_img_like"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/act_nav_relative_img_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/more_btn_review"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/act_nav_relative_tv_like_num"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/act_nav_relative_tv_review_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="120"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/act_nav_relative_img_review"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/more_btn_set"
+                android:id="@+id/act_nav_relative_ibtn_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ScrollView
+            android:layout_marginTop="56dp"
+            app:layout_constraintTop_toBottomOf="@id/act_nav_relative"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:overScrollMode="never"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="174dp">
+
+                    <ImageView
+                        android:id="@+id/imageview"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:src="@drawable/more_btn_news"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        app:layout_constraintBottom_toBottomOf="@id/imageview"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@id/imageview"
+                        app:layout_constraintLeft_toRightOf="@id/imageview"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:text="서울시 소식"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imageview2"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/btn_next_b_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        app:recyclerview_seoul_news_items="@{vm.seoulNews}"
+                        android:id="@+id/recyclerViewSeoulNews"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageview"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="174dp">
+
+                    <ImageView
+                        android:id="@+id/imageview3"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:src="@drawable/more_btn_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        app:layout_constraintBottom_toBottomOf="@id/imageview3"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@id/imageview3"
+                        app:layout_constraintLeft_toRightOf="@id/imageview3"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:text="내가 만든 코스"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imageview4"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/btn_next_b_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        app:recyclerview_course_navigation_items="@{vm.myCourse}"
+                        android:id="@+id/recyclerViewMyCourse"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageview3"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="174dp">
+
+                    <ImageView
+                        android:id="@+id/imageview5"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:src="@drawable/more_btn_heart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        app:layout_constraintBottom_toBottomOf="@id/imageview5"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@id/imageview5"
+                        app:layout_constraintLeft_toRightOf="@id/imageview5"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:text="픽플레이스"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imageview6"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/btn_next_b_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        app:recyclerview_course_navigation_items="@{vm.pickPlace}"
+                        android:id="@+id/recyclerViewPickPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageview5"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="174dp">
+
+                    <ImageView
+                        android:id="@+id/imageview7"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:src="@drawable/more_btn_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        app:layout_constraintBottom_toBottomOf="@id/imageview7"
+                        android:layout_marginLeft="10dp"
+                        app:layout_constraintTop_toTopOf="@id/imageview7"
+                        app:layout_constraintLeft_toRightOf="@id/imageview7"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:text="내 후기 보기"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/imageview8"
+                        android:layout_marginRight="32dp"
+                        android:layout_marginTop="22dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:src="@drawable/btn_next_b_16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        app:recyclerview_navigation_review_items="@{vm.review}"
+                        android:id="@+id/recyclerViewReview"
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageview8"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

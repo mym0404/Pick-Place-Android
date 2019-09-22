@@ -17,6 +17,7 @@ import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
+import korea.seoul.pickple.ui.navigation.NavigationViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -53,7 +54,7 @@ class PickPleApplication : Application() {
         //TODO
         single<Retrofit> {
             Retrofit.Builder()
-                .baseUrl("서버에게 URL을 받으세요")
+                .baseUrl("http://13.209.233.217:3000")
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
@@ -105,11 +106,12 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel() }
+        viewModel { CourseCreateViewModel(get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
+        viewModel { NavigationViewModel() }
     }
 
 

@@ -1,20 +1,17 @@
 package korea.seoul.pickple.ui.course.intro
 
-import android.animation.ObjectAnimator
-import android.animation.StateListAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.ActionBar
 import androidx.viewpager.widget.ViewPager
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
-import korea.seoul.pickple.ui.navigation.parseIntent
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.parseIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

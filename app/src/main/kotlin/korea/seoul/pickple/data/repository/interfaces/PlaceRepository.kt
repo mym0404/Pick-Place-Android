@@ -15,5 +15,4 @@ interface PlaceRepository {
     fun likePlace(placeIdx : Int) : Call<BaseResponse>
     fun unlikePlace(placeIdx : Int) : Call<BaseResponse>
 
-
 }

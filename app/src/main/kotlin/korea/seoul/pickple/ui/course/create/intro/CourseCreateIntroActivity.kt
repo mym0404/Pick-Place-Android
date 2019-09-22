@@ -9,8 +9,8 @@ import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.databinding.ActivityCourseCreateIntroBinding
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,7 +54,7 @@ class CourseCreateIntroActivity : AppCompatActivity() {
 
                 val tagList = tagString.filterNot { it == ',' || it == ' ' }.split('#')
 
-                navigate(this@CourseCreateIntroActivity,NavigationArgs.CourseCreateArgs(title,thumbnail,description,tagList))
+                navigate(this@CourseCreateIntroActivity, NavigationArgs.CourseCreateArgs(title, thumbnail, description, tagList,false,null))
             }
 
             toastMsg.observeOnce(this@CourseCreateIntroActivity) {
