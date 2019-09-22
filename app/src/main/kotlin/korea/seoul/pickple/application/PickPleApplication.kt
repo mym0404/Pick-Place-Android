@@ -6,13 +6,17 @@ import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.GalleryUtil
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
-import korea.seoul.pickple.data.api.DirectionsAPI
+import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.*
+import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
+import korea.seoul.pickple.data.repository.fake.FakePlaceRepository
+import korea.seoul.pickple.data.repository.fake.FakeReviewRepository
+import korea.seoul.pickple.data.repository.implementation.*
+import korea.seoul.pickple.data.repository.interfaces.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
-import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroViewModel
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchViewModel
+import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import org.koin.android.ext.koin.androidContext
@@ -69,14 +73,36 @@ class PickPleApplication : Application() {
 
         //APIs
         single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) } bind DirectionsAPI::class
+
+        single { get<Retrofit>().create(CourseAPI::class.java) }
+        single{ get<Retrofit>().create(MainAPI::class.java)}
+        single{ get<Retrofit>().create(MyPageAPI::class.java)}
+        single{ get<Retrofit>().create(PlaceAPI::class.java)}
+        single{ get<Retrofit>().create(ReviewAPI::class.java)}
+        single{ get<Retrofit>().create(SetAPI::class.java)}
+        single{ get<Retrofit>().create(UserAPI::class.java)}
+
     }
 
 
     private val repositoryModule = module {
+        //TODO Fake
         single { FakeReviewRepository() as ReviewRepository }
         single { FakePlaceRepository() } bind PlaceRepository::class
         single { FakeCourseRepository(get()) } bind CourseRepository::class
+
+
+//        single { ReviewRepositoryImpl(get()) as ReviewRepository }
+//        single { PlaceRepositoryImpl(get()) } bind PlaceRepository::class
+//        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
+
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
+        single { UserRepositoryImpl(get())} bind UserRepository::class
+        single { SetRepositoryImpl(get()) } bind SetRepository::class
+        single { MainRepositoryImpl(get())} bind MainRepository::class
+        single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
+
+
     }
 
     private val viewModelModule = module {

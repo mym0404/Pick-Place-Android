@@ -1,18 +1,14 @@
 package korea.seoul.pickple.ui.course.intro
 
-import android.util.Log
-import androidx.annotation.DrawableRes
 import androidx.lifecycle.*
-import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
-import korea.seoul.pickple.data.repository.CourseRepository
-import korea.seoul.pickple.data.repository.FakeCourseRepository
-import korea.seoul.pickple.data.repository.FakePlaceRepository
-import korea.seoul.pickple.data.repository.ReviewRepository
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
+import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
 
 class CourseIntroViewModel(
