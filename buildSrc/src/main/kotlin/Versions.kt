@@ -88,6 +88,12 @@ object Versions {
   const val gradleLatestVersion: String = "5.6.2"
 
   const val gradleCurrentVersion: String = "5.4.1"
+
+  /**
+   * circle 이미지 뷰
+   * https://github.com/hdodenhof/CircleImageView
+   * */
+  const val circleImageViewVersion: String = "3.0.1"
 }
 
 /**

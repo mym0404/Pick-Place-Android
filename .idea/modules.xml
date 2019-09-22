@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/SeoulApp-Pickple.iml" filepath="$PROJECT_DIR$/SeoulApp-Pickple.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/SeoulApp-app.iml" filepath="$PROJECT_DIR$/app/SeoulApp-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/SeoulApp-buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/SeoulApp-buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/numbermarbleview/SeoulApp-numbermarbleview.iml" filepath="$PROJECT_DIR$/numbermarbleview/SeoulApp-numbermarbleview.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/numbermarbleview/numbermarbleview.iml" filepath="$PROJECT_DIR$/numbermarbleview/numbermarbleview.iml" />
