@@ -277,4 +277,7 @@ object Libs {
   // @수민) 이거 추가 ,,?
   const val kotlin_reflect : String = "org.jetbrains.kotlin:kotlin-reflect:" +
           Versions.org_jetbrains_kotlin
+
+  // @수민) 추가 CircleImageView
+  const val circle_image_view : String = "de.hdodenhof:circleimageview:3.0.0"
 }

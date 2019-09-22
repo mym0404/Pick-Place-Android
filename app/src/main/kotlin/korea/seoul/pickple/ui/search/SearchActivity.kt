@@ -1,7 +1,8 @@
-package korea.seoul.pickple
+package korea.seoul.pickple.ui.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import korea.seoul.pickple.R
 
 class SearchActivity : AppCompatActivity() {
 
