@@ -14,6 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:background="#e8e8e8"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgReviewEmotion"
             android:layout_width="24dp"
@@ -44,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="20dp"
             android:lineSpacingExtra="7sp"
             android:textSize="13sp"
             android:textColor="@color/colorBlack"

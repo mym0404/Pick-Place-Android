@@ -101,14 +101,14 @@ class PickPleApplication : Application() {
         single { MainRepositoryImpl(get())} bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
 
-
     }
 
     private val viewModelModule = module {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
         viewModel { CourseCreateViewModel() }
+        viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
-        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get(), get()) }
+        viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
     }
