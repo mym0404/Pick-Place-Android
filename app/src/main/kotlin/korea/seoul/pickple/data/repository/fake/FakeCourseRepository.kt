@@ -58,9 +58,9 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
 
     override fun getPlaces(course: Course): Call<List<Place>> {
         val places = course.places.map {
-            placeRepository.getPlaceWithId(it).execute().body()!!
+            placeRepository.getPlace(it).execute().body()!!
         }
-        return Calls.response(places)
+        return Calls.response(places.map { it.placeData!!.toEntity() })
     }
 
     override fun getAllCourses(): Call<List<Course>> {

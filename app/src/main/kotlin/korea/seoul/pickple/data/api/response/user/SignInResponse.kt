@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class LoginResponse(
+data class SignInResponse(
     @Expose
     var status : Int,
     @Expose

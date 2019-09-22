@@ -20,7 +20,12 @@ data class Location(
     @SerializedName("longitude")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name="longitude")
-    val longitude : Double
+    val longitude : Double,
+
+    @SerializedName("address")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name="longitude")
+    val address : String?
 ) : Parcelable {
     fun toLatLng() = LatLng(latitude,longitude)
 }
