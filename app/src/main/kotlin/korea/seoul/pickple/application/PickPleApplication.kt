@@ -109,7 +109,7 @@ class PickPleApplication : Application() {
         viewModel { (course : Course) -> MapViewModel(get(), course) }
         viewModel { CourseCreateViewModel() }
         viewModel { CourseCreateSearchViewModel() }
-        viewModel { (courseId: Int) -> CourseIntroViewModel(courseId, get(), get()) }
+        viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
     }
