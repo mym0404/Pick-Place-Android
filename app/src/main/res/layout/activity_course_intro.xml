@@ -20,9 +20,9 @@
             android:layout_height="?attr/actionBarSize"
             >
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collaspingToolbarLayoutCourseIntro"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="@color/colorBlack"
                 >
                 <androidx.appcompat.widget.Toolbar
                     android:background="@color/colorTransparent"

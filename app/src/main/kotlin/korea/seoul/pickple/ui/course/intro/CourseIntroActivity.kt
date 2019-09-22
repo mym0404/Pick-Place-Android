@@ -21,7 +21,6 @@ import org.koin.core.parameter.parametersOf
 class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.activity_course_intro) {
     private val viewModel: CourseIntroViewModel by viewModel { parametersOf(0) }
     private var toolbarActionShare: MenuItem? = null
-    private val REQUEST_SHOW_ALL_COURSES = 1234
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,6 +115,7 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
     }
 
     companion object {
+        const val REQUEST_SHOW_ALL_COURSES = 1234
         const val COURSE_ID = "COURSE_ID"
     }
 }

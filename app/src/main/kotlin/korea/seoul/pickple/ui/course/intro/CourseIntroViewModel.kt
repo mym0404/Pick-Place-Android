@@ -16,14 +16,13 @@ import korea.seoul.pickple.data.repository.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
 
 class CourseIntroViewModel(
-    courseId: Int,
     private val courseRepository: CourseRepository,
     private val reviewRepository: ReviewRepository
 ) : BaseViewModel() {
     /**
      * 현재 보여줄 courseId
      * */
-    var courseId: Int = courseId
+    var courseId: Int = 0
         set(value) {
             courseRepository.getCourseWithId(courseId)
                 .callback(
