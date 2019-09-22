@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.toast
 import kotlinx.android.synthetic.main.viewpager_item_main_course_detail.*
 
 class ViewPagerItemFragmentMainCourseDetail: Fragment() {
@@ -22,7 +23,8 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        setRecyclerView()
+        setTabListener()
 
     }
 
@@ -30,8 +32,11 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
     private fun setRecyclerView() {
         var list = listOf("12", "@3", "33")
 
-//        adapter = RecyclerAdapterMainCourseDetail(, list)
+        adapter = RecyclerAdapterMainCourseDetail(this.context!!, list)
+        main_course_detail_recycler_new_popular.adapter = adapter
 
+        val itemDeco = RecyclerItemDecorationVertical(this.context!!)
+        main_course_detail_recycler_new_popular.addItemDecoration(itemDeco)
 
     }
 
@@ -47,7 +52,18 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                val pos = tab?.position
 
+                if (pos == 0) {
+                    toast("최신순")
+
+                    // TODO RecyclerView Item 최신순으로 바뀌게
+                }
+                else if (pos == 1) {
+                    toast("인기순")
+
+                    // TODO RecyclerView Item 인기순으로 바뀌게
+                }
             }
 
         })
