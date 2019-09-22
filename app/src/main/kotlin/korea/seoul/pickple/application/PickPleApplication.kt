@@ -108,7 +108,6 @@ class PickPleApplication : Application() {
         viewModel { CourseCreateViewModel() }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
-        viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
     }
