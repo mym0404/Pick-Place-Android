@@ -5,24 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical"
     tools:context=".ui.main.LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="111dp"
+        android:src="@drawable/logo_09"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="144dp"
-        android:lineSpacingExtra="-15sp"
-        android:text="pickple"
-        android:textColor="#000000"
-        android:textSize="37sp" />
+        android:layout_marginTop="144dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="272dp"
+        app:startIconDrawable="@drawable/mail_icon_image"
         android:hint="이메일"
+        android:textColorHint="@color/colorGray"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="#ffffff">
 
@@ -37,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="338dp"
         android:hint="비밀번호"
+        android:textColorHint="@color/colorGray"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="#ffffff"
         app:startIconDrawable="@drawable/lock">
@@ -53,19 +52,22 @@
         android:layout_height="29dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="436dp"
-        android:src="#ff551a" />
+        android:src="@drawable/login_btn" />
 
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="480dp">
+        android:layout_marginTop="478dp">
 
         <TextView
             android:id="@+id/tv_FindPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/colorLightGray"
+            android:lineSpacingExtra="13sp"
             android:text="비밀번호 찾기 " />
 
         <View
@@ -78,6 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/colorLightGray"
+            android:lineSpacingExtra="13sp"
             android:text=" 회원가입" />
     </LinearLayout>
 </RelativeLayout>

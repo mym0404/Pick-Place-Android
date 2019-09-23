@@ -20,6 +20,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.main.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.main.SignUpActivity"   android:exported="true"/>
         <activity android:name=".ui.main.MemberTermsActivity"></activity>
         <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
         <activity android:name=".ui.main.FindingPasswordActivity" />
