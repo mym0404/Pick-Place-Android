@@ -15,8 +15,8 @@ import kotlinx.android.parcel.Parcelize
 data class ChangePasswordRequest(
     @SerializedName("user_pwd")
     @Expose(serialize = true, deserialize = true)
-    var userPwd: Int,
+    var userPwd: String,
     @SerializedName("new_pwd")
     @Expose(serialize = true, deserialize = true)
-    var newPwd: Int
+    var newPwd: String
 ) : Parcelable

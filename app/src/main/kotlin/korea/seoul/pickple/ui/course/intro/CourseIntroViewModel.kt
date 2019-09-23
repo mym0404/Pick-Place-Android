@@ -36,14 +36,23 @@ class CourseIntroViewModel(
                     }
                 )
 
-            reviewRepository.getCourseReviews(courseId)
-                .callback(
-                    successCallback = { reviews ->
-                        _courseReviews.value = reviews
-                    },
-                    failCallback = {  _courseReviews.value = listOf()},
-                    errorCallback = {  _courseReviews.value = listOf()}
-                )
+//            reviewRepository.listReviews(ReviewType.COURSE)
+//                .callback({
+//
+//                }, {
+//
+//                }, {
+//
+//                })
+//
+//            reviewRepository.getCourseReviews(courseId)
+//                .callback(
+//                    successCallback = { reviews ->
+//                        _courseReviews.value = reviews
+//                    },
+//                    failCallback = {  _courseReviews.value = listOf()},
+//                    errorCallback = {  _courseReviews.value = listOf()}
+//                )
             field = value
         }
 
@@ -122,10 +131,10 @@ class CourseIntroViewModel(
     } // 한 자리 index는 0을 붙혀서 보여준다.
 
     /**
-    * 후기의 Emotion
+    * 후기의 Emoticon
     * */
-    private val _currentEmotion: MutableLiveData<Review.Emotion> = MutableLiveData()
-    val currentEmotion: LiveData<Review.Emotion> = _currentEmotion
+    private val _currentEmotion: MutableLiveData<Review.Emoticon> = MutableLiveData()
+    val currentEmotion: LiveData<Review.Emoticon> = _currentEmotion
 
     /**
      * ViewModel이 처음 생성되었을때 세팅해줄 것
@@ -143,18 +152,18 @@ class CourseIntroViewModel(
         }
 
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
-        currentPlace.managedObserve {
-            it?.also {
-                reviewRepository.getPlaceReviews(it.id)
-                    .callback(
-                        successCallback = { reviews ->
-                            _placeReviews.value = reviews
-                        }
-                    )
-            }
-        }
+//        currentPlace.managedObserve {
+//            it?.also {
+//                reviewRepository.getPlaceReviews(it.id)
+//                    .callback(
+//                        successCallback = { reviews ->
+//                            _placeReviews.value = reviews
+//                        }
+//                    )
+//            }
+//        }
 
-        _currentEmotion.value = Review.Emotion.EMOTION1
+        _currentEmotion.value = Review.Emoticon.EMOTION1
     }
 
     /**
@@ -169,7 +178,7 @@ class CourseIntroViewModel(
     /**
      * 사용자가 리뷰에 감정을 설정하였다.
      * */
-    fun selectEmotion(emotion: Review.Emotion) {
+    fun selectEmotion(emotion: Review.Emoticon) {
         _currentEmotion.value = emotion
     }
 }

@@ -10,10 +10,10 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class EnrollReviewRequest(
+data class EnrollCourseReviewRequest(
     @SerializedName("courseIdx")
     @Expose(serialize = true, deserialize = true)
-    var courseIdx: String,
+    var courseIdx: Int,
     @SerializedName("comment")
     @Expose(serialize = true, deserialize = true)
     var comment: String,
