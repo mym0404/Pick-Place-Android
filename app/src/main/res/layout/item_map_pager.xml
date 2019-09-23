@@ -43,12 +43,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                tools:text="awkldjaslkjd"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
 
 
                 android:text="@{item.name}"
@@ -58,11 +58,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/index" />
 
             <TextView
+                tools:text="도보로 22년"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
 
 
                 android:text="@{item.location.address}"
