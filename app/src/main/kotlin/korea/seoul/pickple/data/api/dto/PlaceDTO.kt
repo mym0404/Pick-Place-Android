@@ -21,7 +21,7 @@ data class PlaceDTO(
     var placeLike: Int,
     var address: String,
     var number: String,
-    var fee: String,
+    var fee: String?,
     var businessHour: String,
     var location: Location
 ) : Parcelable {
@@ -33,7 +33,7 @@ data class PlaceDTO(
             description,
             number,
             Location(location.latitude,location.longitude,address),
-            fee.toIntOrNull() ?: 0,
+            (fee ?: "0").toIntOrNull() ?: 0,
             placeLike,
             placeThumbnail
         )

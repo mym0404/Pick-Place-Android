@@ -3,10 +3,7 @@ package korea.seoul.pickple.application
 import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import korea.seoul.pickple.common.util.FileUtil
-import korea.seoul.pickple.common.util.GalleryUtil
-import korea.seoul.pickple.common.util.MapUtil
-import korea.seoul.pickple.common.util.PermissionDexterUtil
+import korea.seoul.pickple.common.util.*
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.implementation.*
@@ -18,6 +15,7 @@ import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.navigation.NavigationViewModel
+import korea.seoul.pickple.ui.navigation.course.NavigationCourseViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -41,6 +39,7 @@ class PickPleApplication : Application() {
         single { PermissionDexterUtil() }
         single { GalleryUtil() }
         single { FileUtil(get()) }
+        single { IntentUtil() }
     }
 
     private val apiModule = module {
@@ -75,12 +74,12 @@ class PickPleApplication : Application() {
         single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) } bind DirectionsAPI::class
 
         single { get<Retrofit>().create(CourseAPI::class.java) }
-        single{ get<Retrofit>().create(MainAPI::class.java)}
-        single{ get<Retrofit>().create(MyPageAPI::class.java)}
-        single{ get<Retrofit>().create(PlaceAPI::class.java)}
-        single{ get<Retrofit>().create(ReviewAPI::class.java)}
-        single{ get<Retrofit>().create(SetAPI::class.java)}
-        single{ get<Retrofit>().create(UserAPI::class.java)}
+        single { get<Retrofit>().create(MainAPI::class.java) }
+        single { get<Retrofit>().create(MyPageAPI::class.java) }
+        single { get<Retrofit>().create(PlaceAPI::class.java) }
+        single { get<Retrofit>().create(ReviewAPI::class.java) }
+        single { get<Retrofit>().create(SetAPI::class.java) }
+        single { get<Retrofit>().create(UserAPI::class.java) }
 
     }
 
@@ -93,25 +92,26 @@ class PickPleApplication : Application() {
 
 
         single { ReviewRepositoryImpl(get()) as ReviewRepository }
-        single { PlaceRepositoryImpl(get(),get()) } bind PlaceRepository::class
+        single { PlaceRepositoryImpl(get(), get()) } bind PlaceRepository::class
         single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
-        single { UserRepositoryImpl(get())} bind UserRepository::class
+        single { UserRepositoryImpl(get()) } bind UserRepository::class
         single { SetRepositoryImpl(get()) } bind SetRepository::class
-        single { MainRepositoryImpl(get())} bind MainRepository::class
+        single { MainRepositoryImpl(get()) } bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
 
     }
 
     private val viewModelModule = module {
-        viewModel { (course : Course) -> MapViewModel(get(), course) }
+        viewModel { (course: Course) -> MapViewModel(get(), course) }
         viewModel { CourseCreateViewModel(get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
         viewModel { NavigationViewModel() }
+        viewModel { NavigationCourseViewModel() }
     }
 
 
