@@ -20,7 +20,7 @@
         android:layout_marginTop="150dp"
         app:startIconDrawable="@drawable/mail_icon_image"
         android:hint="이메일"
-        android:textColorHint="color/greyish_brown"
+        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
         app:boxStrokeColor="#2ae5bd"
         app:boxBackgroundColor="@color/colorWhite_1">
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
         android:hint="닉네임 (최대 10자)"
-        android:textColorHint="color/greyish_brown"
+        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="@color/colorWhite_1">
 
@@ -78,7 +78,7 @@
         android:layout_marginTop="282dp"
         app:hintTextColor="@color/colorGray"
         android:hint="비밀번호 (영문, 숫자 상관없이 4~8자리)"
-        android:textColorHint="color/greyish_brown"
+        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="@color/colorWhite_1">
 
@@ -94,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="348dp"
         android:hint="비밀번호 확인"
-        android:textColorHint="color/greyish_brown"
+        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="@color/colorWhite_1">
 

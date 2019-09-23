@@ -32,9 +32,12 @@
         <activity android:name=".ui.main.MemberTermsActivity"></activity>
         <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
         <activity android:name=".ui.main.FindingPasswordActivity" />
-        <activity android:name=".ui.navigation.NavigationActivity" android:exported="true"/>
-        <activity android:name=".ui.search.SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ui.navigation.NavigationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />
@@ -87,6 +90,8 @@
         <activity android:name=".ui.setting.SettingActivity"/>
 
         <activity android:name=".ui.navigation.course.NavigationCourseActivity" android:exported="true"/>
+
+        <activity android:name=".ui.navigation.review.NavigationReviewActivity" android:exported="true"/>
     </application>
 
 </manifest>

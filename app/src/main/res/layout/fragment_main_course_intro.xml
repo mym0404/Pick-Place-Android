@@ -24,8 +24,8 @@
         app:piv_animationType="scale"
         app:piv_dynamicCount="true"
         app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="#616161"
-        app:piv_unselectedColor="#a8a8a8"/>
+        app:piv_selectedColor="#5340c1"
+        app:piv_unselectedColor="#4d5340c1"/>
 
     <TextView
         android:id="@+id/viewpager_item_tv_course_name"
@@ -58,8 +58,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="19dp"
         android:src="@drawable/coures_write_image"
+        app:maxImageSize="31dp"
         app:tint="@color/colorWhite"
-        app:backgroundTint="#ff7f53"
+        app:backgroundTint="#2ae5bd"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -67,8 +68,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/btn_next_b_16"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/main_down_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
