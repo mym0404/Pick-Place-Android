@@ -1,5 +1,6 @@
 package korea.seoul.pickple.ui.main
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import korea.seoul.pickple.R
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.course.intro.CourseIntroActivity
+import korea.seoul.pickple.ui.course.intro.unite_intro.UniteCourseActivity
+import korea.seoul.pickple.ui.navigate
 
 // TODO 수민 data를 List<Course>로 바꾸기
 class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>() {
@@ -27,10 +33,15 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): 
             // TODO 수민 실제 데이터로 바꾸기
             val currentItem = data[position]
 
+
+            course_detail_card.setOnClickListener{
+                navigate(ctx as Activity, NavigationArgs.CourseIntroArg(3))
+            }
         }
     }
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val course_detail_card = itemView.findViewById<ConstraintLayout>(R.id.item_main_course_card)
         val course_img = itemView.findViewById<ImageView>(R.id.item_main_course_detail_img)
         val course_icon = itemView.findViewById<CircleImageView>(R.id.item_main_course_detail_civ_icon)
         val course_tag = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_tag)

@@ -9,6 +9,7 @@ import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.data.repository.implementation.*
 import korea.seoul.pickple.data.repository.interfaces.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
@@ -89,12 +90,12 @@ class PickPleApplication : Application() {
         //TODO Fake
 //        single { FakeReviewRepository() as ReviewRepository }
 //        single { FakePlaceRepository() } bind PlaceRepository::class
-//        single { FakeCourseRepository(get()) } bind CourseRepository::class
+        single { FakeCourseRepository(get()) } bind CourseRepository::class
 
 
         single { ReviewRepositoryImpl(get()) as ReviewRepository }
         single { PlaceRepositoryImpl(get(),get()) } bind PlaceRepository::class
-        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
+//        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
         single { UserRepositoryImpl(get())} bind UserRepository::class
