@@ -4,11 +4,11 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
@@ -125,19 +125,24 @@ class CourseCreateViewModel(private val placeRepository: PlaceRepository) : View
         _onlyShow.value = onlyShow
 
         if(onlyShow && course != null) {
+            debugE(TAG,"asd")
 
             thread {
 
-                var places = listOf<Place>()
+                try {
+                    var places = listOf<Place>()
 
-                course.places.forEach {
-                    placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
-                        places += it
+                    course.places.forEach {
+                        placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
+                            places += it
+                        }
+
                     }
 
+                    _places.postValue(places)
+                }catch(t : Throwable) {
+                    debugE(TAG,t)
                 }
-
-                _places.postValue(places)
             }
 
 
@@ -191,14 +196,7 @@ class CourseCreateViewModel(private val placeRepository: PlaceRepository) : View
 
     //endregion
 
-    init {
-        Log.e(TAG,object{}::class.java?.enclosingMethod?.name ?: "Method Name Not Found")
-    }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.e(TAG,object{}::class.java?.enclosingMethod?.name ?: "Method Name Not Found")
-    }
 
 }
 

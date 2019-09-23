@@ -19,7 +19,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.main.MemberTermsActivity"></activity>
+        <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
+        <activity android:name=".ui.main.FindingPasswordActivity" />
         <activity android:name=".ui.navigation.NavigationActivity" android:exported="true"/>
         <activity android:name=".ui.search.SearchActivity"
             android:windowSoftInputMode="adjustPan"/>

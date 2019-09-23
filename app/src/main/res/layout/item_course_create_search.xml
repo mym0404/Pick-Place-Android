@@ -21,7 +21,7 @@
         android:layout_height="68dp">
 
         <ImageView
-            android:src="@drawable/dummy"
+            imageUrl="@{item.thumbnail}"
             android:id="@+id/thumbnail"
             android:layout_width="40dp"
             android:layout_height="40dp"

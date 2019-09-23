@@ -140,7 +140,7 @@
                 android:padding="0dp"
                 android:text='@{vm.editMode ? "완료" : "편집"}'
                 android:textSize="13sp"
-                android:visibility_animate="@{(vm.bottomExpanded &amp;&amp; !vm.detailMode) &amp;&amp; (vm.places.size >= 2)}"
+                android:visibility_animate="@{(vm.bottomExpanded &amp;&amp; !vm.detailMode) &amp;&amp; (vm.places.size >= 2) &amp;&amp; !vm.onlyShow}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/expandButton"
                 tools:text="편집" />
@@ -178,7 +178,7 @@
                 android:text="장소추가"
 
                 android:textSize="14sp"
-                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode}"
+                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode &amp;&amp; !vm.onlyShow}"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/materialButton"
@@ -203,7 +203,7 @@
                 android:text="코스저장"
                 android:textSize="14sp"
 
-                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode}"
+                android:visibility="@{!vm.detailMode &amp;&amp; !vm.editMode &amp;&amp; !vm.onlyShow}"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -228,7 +228,7 @@
                 android:text="전체삭제"
                 android:textSize="14sp"
 
-                android:visibility="@{!vm.detailMode &amp;&amp; vm.editMode}"
+                android:visibility="@{!vm.detailMode &amp;&amp; vm.editMode &amp;&amp; !vm.onlyShow}"
                 app:cornerRadius="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -252,7 +252,7 @@
                 android:outlineProvider="none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="@{vm.detailMode ?? false}"
+                android:visibility="@{vm.detailMode ?? false &amp;&amp; !vm.onlyShow}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
