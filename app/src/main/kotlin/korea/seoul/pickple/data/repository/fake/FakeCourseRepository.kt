@@ -74,4 +74,8 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
             List(10) { fakeCourse }
         )
     }
+
+    override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
+        TODO()
+    }
 }
