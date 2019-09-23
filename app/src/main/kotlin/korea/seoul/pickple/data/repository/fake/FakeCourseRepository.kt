@@ -11,9 +11,7 @@ import retrofit2.mock.Calls
 import kotlin.random.Random
 
 class FakeCourseRepository(private val placeRepository: PlaceRepository) : CourseRepository {
-    override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
 
     companion object {
         val fakeCourse = Course(
@@ -62,11 +60,12 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
     }
 
     override fun getPlaces(course: Course): Call<List<Place>> {
-        val places =   try {course.places.map {
-            placeRepository.getPlace(it).execute().body()!!
-        }}catch (t : Throwable){listOf<Place>()}
-
-        return Calls.response(places.map { it.placeData!!.toEntity() })
+//        val places =   try {course.places.map {
+//            placeRepository.getPlace(it).execute().body()!!
+//        }}catch (t : Throwable){listOf<Place>()}
+//
+//        return Calls.response(places.map { it.placeData!!.toEntity() })
+        TODO()
     }
 
     override fun getAllCourses(): Call<List<Course>> {

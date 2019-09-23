@@ -3,10 +3,7 @@ package korea.seoul.pickple.application
 import android.app.Application
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import korea.seoul.pickple.common.util.FileUtil
-import korea.seoul.pickple.common.util.GalleryUtil
-import korea.seoul.pickple.common.util.MapUtil
-import korea.seoul.pickple.common.util.PermissionDexterUtil
+import korea.seoul.pickple.common.util.*
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
@@ -42,6 +39,7 @@ class PickPleApplication : Application() {
         single { PermissionDexterUtil() }
         single { GalleryUtil() }
         single { FileUtil(get()) }
+        single { IntentUtil() }
     }
 
     private val apiModule = module {

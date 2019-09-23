@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,14 +14,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.util.IntentUtil
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.course.intro.CourseIntroActivity
 import korea.seoul.pickple.ui.course.intro.unite_intro.UniteCourseActivity
 import korea.seoul.pickple.ui.navigate
+import org.koin.core.Koin
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 // TODO 수민 data를 List<Course>로 바꾸기
-class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>() {
+class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>(), KoinComponent {
+
+    val intentUtil : IntentUtil by inject()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_main_course_detail,parent,false)
         return Holder(view)
@@ -37,6 +45,10 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): 
             course_detail_card.setOnClickListener{
                 navigate(ctx as Activity, NavigationArgs.CourseIntroArg(3))
             }
+
+            course_share_btn.setOnClickListener {
+                intentUtil.share(ctx as Activity, "https://pickple.page.link/jTpt", "코스를 공유하세요")
+            }
         }
     }
 
@@ -47,5 +59,6 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): 
         val course_tag = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_tag)
         val course_name = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_course_name)
         val course_places = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_places)
+        val course_share_btn = itemView.findViewById<ImageButton>(R.id.item_main_course_detail_ibtn_share)
     }
 }
