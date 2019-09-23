@@ -1,5 +1,6 @@
 package korea.seoul.pickple.data.repository.fake
 
+import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.enumerator.SeoulDistrict
@@ -67,5 +68,9 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
         return Calls.response(
             List(10) { fakeCourse }
         )
+    }
+
+    override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
+        TODO()
     }
 }
