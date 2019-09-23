@@ -16,7 +16,7 @@ class SetRepositoryImpl(private val setAPI: SetAPI) : SetRepository {
 
     override fun changePassword(curPassword: String, newPassword: String): Call<BaseResponse> {
         return setAPI.changePassword(
-            ChangePasswordRequest(curPassword.toInt(),newPassword.toInt())
+            ChangePasswordRequest(curPassword,newPassword)
         )
     }
 

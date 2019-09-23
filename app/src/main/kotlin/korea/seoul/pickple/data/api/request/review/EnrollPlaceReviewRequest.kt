@@ -1,22 +1,23 @@
-package korea.seoul.pickple.data.api.request.set
-import android.annotation.SuppressLint
+package korea.seoul.pickple.data.api.request.review
+
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-
 import kotlinx.android.parcel.Parcelize
-
 
 /**
  * Created by mj on 24, September, 2019
  */
-@SuppressLint("ParcelCreator")
+
 @Parcelize
-data class ChangePasswordRequest(
-    @SerializedName("user_pwd")
+data class EnrollPlaceReviewRequest(
+    @SerializedName("placeIdx")
     @Expose(serialize = true, deserialize = true)
-    var userPwd: String,
-    @SerializedName("new_pwd")
+    var placeIdx: Int,
+    @SerializedName("comment")
     @Expose(serialize = true, deserialize = true)
-    var newPwd: String
+    var comment: String,
+    @SerializedName("emoticon")
+    @Expose
+    var emoticon : Int
 ) : Parcelable
