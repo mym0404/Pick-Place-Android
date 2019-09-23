@@ -74,12 +74,12 @@ class PickPleApplication : Application() {
         single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) } bind DirectionsAPI::class
 
         single { get<Retrofit>().create(CourseAPI::class.java) }
-        single{ get<Retrofit>().create(MainAPI::class.java)}
-        single{ get<Retrofit>().create(MyPageAPI::class.java)}
-        single{ get<Retrofit>().create(PlaceAPI::class.java)}
-        single{ get<Retrofit>().create(ReviewAPI::class.java)}
-        single{ get<Retrofit>().create(SetAPI::class.java)}
-        single{ get<Retrofit>().create(UserAPI::class.java)}
+        single { get<Retrofit>().create(MainAPI::class.java) }
+        single { get<Retrofit>().create(MyPageAPI::class.java) }
+        single { get<Retrofit>().create(PlaceAPI::class.java) }
+        single { get<Retrofit>().create(ReviewAPI::class.java) }
+        single { get<Retrofit>().create(SetAPI::class.java) }
+        single { get<Retrofit>().create(UserAPI::class.java) }
 
     }
 
@@ -92,19 +92,19 @@ class PickPleApplication : Application() {
 
 
         single { ReviewRepositoryImpl(get()) as ReviewRepository }
-        single { PlaceRepositoryImpl(get(),get()) } bind PlaceRepository::class
-//        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
+        single { PlaceRepositoryImpl(get(), get()) } bind PlaceRepository::class
+        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
-        single { UserRepositoryImpl(get())} bind UserRepository::class
+        single { UserRepositoryImpl(get()) } bind UserRepository::class
         single { SetRepositoryImpl(get()) } bind SetRepository::class
-        single { MainRepositoryImpl(get())} bind MainRepository::class
+        single { MainRepositoryImpl(get()) } bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
 
     }
 
     private val viewModelModule = module {
-        viewModel { (course : Course) -> MapViewModel(get(), course) }
+        viewModel { (course: Course) -> MapViewModel(get(), course) }
         viewModel { CourseCreateViewModel(get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
@@ -112,7 +112,6 @@ class PickPleApplication : Application() {
         viewModel { ShowAllCoursesViewModel(get()) }
         viewModel { NavigationViewModel() }
     }
-
 
     override fun onCreate() {
         super.onCreate()
