@@ -77,6 +77,8 @@
             android:exported="true" />
 
         <activity android:name=".ui.setting.SettingActivity"/>
+
+        <activity android:name=".ui.navigation.course.NavigationCourseActivity" android:exported="true"/>
     </application>
 
 </manifest>
