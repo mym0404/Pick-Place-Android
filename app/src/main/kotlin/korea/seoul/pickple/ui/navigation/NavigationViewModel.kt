@@ -8,6 +8,7 @@ import korea.seoul.pickple.R
 import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Review
+import korea.seoul.pickple.data.entity.SeoulNews
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.data.repository.fake.FakeReviewRepository
 
@@ -19,10 +20,7 @@ class NavigationViewModel() : ViewModel() {
 
     private val TAG = NavigationViewModel::class.java.simpleName
 
-    data class SeoulNews(
-        @DrawableRes  val thumb : Int,
-         val url : String
-    )
+
 
     val seoulNews : MutableLiveData<List<SeoulNews>> = MutableLiveData(listOf(
         SeoulNews(R.drawable.seoul_news_dummy_1,"http://news.seoul.go.kr/gov/archives/508899"),
