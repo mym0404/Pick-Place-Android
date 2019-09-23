@@ -21,7 +21,8 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.navigation.NavigationActivity" android:exported="true"/>
-        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />

@@ -2,15 +2,10 @@ package korea.seoul.pickple.ui.search
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import korea.seoul.pickple.R
 import kotlinx.android.synthetic.main.activity_search.*
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import korea.seoul.pickple.common.extensions.toast
 
 
 class SearchActivity : AppCompatActivity() {
@@ -29,11 +24,11 @@ class SearchActivity : AppCompatActivity() {
     private fun setRecycler() {
         // TODO 수민) 데이터 바꾸기
 
-        var list = listOf("123e", "!23", "@3")
+        var resultList = listOf("123e", "!23", "@3")
         var recommendWordList = listOf("한국 근대 역사 코스", "데이트코스", "서울역 오래가게 탐방 코스")
 
         // result
-        resultAdapter = RecyclerAdapterSearchResult(this, list)
+        resultAdapter = RecyclerAdapterSearchResult(this, resultList)
         act_search_rv_search_result.adapter = resultAdapter
 
         val itemDecorationSearchResult = ItemDecorationSearchResult(this)
@@ -43,6 +38,8 @@ class SearchActivity : AppCompatActivity() {
         recommendAdapter = RecyclerAdapterSearchRecommend(this, recommendWordList)
         act_search_rv_popular_course.adapter = recommendAdapter
 
+        val itemDecorationSearchRecommend = ItemDecorationSearchRecommend(this)
+        act_search_rv_popular_course.addItemDecoration(itemDecorationSearchRecommend)
 
     }
 
