@@ -16,6 +16,7 @@ import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.navigation.NavigationViewModel
+import korea.seoul.pickple.ui.navigation.course.NavigationCourseViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -111,6 +112,7 @@ class PickPleApplication : Application() {
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
         viewModel { NavigationViewModel() }
+        viewModel { NavigationCourseViewModel() }
     }
 
     override fun onCreate() {

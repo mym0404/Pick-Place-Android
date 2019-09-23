@@ -48,17 +48,17 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                     layoutManager = LinearLayoutManager(this@run)
                 }
                 btnSelectEmotion.setOnClickListener {
-                    // TODO Emotion Select 팝업이 나와야함
+                    // TODO Emoticon Select 팝업이 나와야함
                     val popupWindow = PopupWindow(layoutInflater.inflate(R.layout.popup_review_emotion, null),
                         ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, true)
 
                     popupWindow.run {
                         contentView.apply {
-                            findViewById<ImageView>(R.id.btnEmotion1).setEmotionButtonAndDismiss(Review.Emotion.EMOTION1, popupWindow)
-                            findViewById<ImageView>(R.id.btnEmotion2).setEmotionButtonAndDismiss(Review.Emotion.EMOTION2, popupWindow)
-                            findViewById<ImageView>(R.id.btnEmotion3).setEmotionButtonAndDismiss(Review.Emotion.EMOTION3, popupWindow)
-                            findViewById<ImageView>(R.id.btnEmotion4).setEmotionButtonAndDismiss(Review.Emotion.EMOTION4, popupWindow)
-                            findViewById<ImageView>(R.id.btnEmotion5).setEmotionButtonAndDismiss(Review.Emotion.EMOTION5, popupWindow)
+                            findViewById<ImageView>(R.id.btnEmotion1).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION1, popupWindow)
+                            findViewById<ImageView>(R.id.btnEmotion2).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION2, popupWindow)
+                            findViewById<ImageView>(R.id.btnEmotion3).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION3, popupWindow)
+                            findViewById<ImageView>(R.id.btnEmotion4).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION4, popupWindow)
+                            findViewById<ImageView>(R.id.btnEmotion5).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION5, popupWindow)
                         }
                         showAsDropDown(it)
                     }
@@ -75,7 +75,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
         }
     }
 
-    private fun ImageView.setEmotionButtonAndDismiss(emotion: Review.Emotion, popup: PopupWindow) {
+    private fun ImageView.setEmotionButtonAndDismiss(emotion: Review.Emoticon, popup: PopupWindow) {
         apply {
             setImageResource(emotion.toDrawableResourceId())
             setOnClickListener {

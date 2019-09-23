@@ -1,7 +1,6 @@
 package korea.seoul.pickple.data.entity
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import korea.seoul.pickple.R
 import kotlinx.android.parcel.Parcelize
 
@@ -19,14 +18,14 @@ data class Review(
 
     val commenter: String,
 
-    val emotion: Emotion
+    val emotion: Emoticon
 ) : Parcelable {
-    enum class Emotion {
-        EMOTION1,
-        EMOTION2,
-        EMOTION3,
-        EMOTION4,
-        EMOTION5,
+    enum class Emoticon(val value : Int) {
+        EMOTION1(0),
+        EMOTION2(1),
+        EMOTION3(2),
+        EMOTION4(3),
+        EMOTION5(4),
 
         ;
 
@@ -42,5 +41,11 @@ data class Review(
                 EMOTION5 -> R.color.colorBlack
             }
         }
+        companion object {
+            @JvmStatic
+            fun parse(value : Int) = Emoticon.values().firstOrNull{value == it.value} ?: Emoticon.EMOTION1
+        }
     }
+
+
 }
