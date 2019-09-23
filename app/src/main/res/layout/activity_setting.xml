@@ -33,7 +33,7 @@
         android:layout_height="32dp"
         android:layout_marginTop="68dp"
         android:layout_marginLeft="32dp"
-        android:src="#000000"/>
+        android:src="@drawable/more_btn_setting"/>
 
     <RelativeLayout
         android:id="@+id/rl_setting_01"
@@ -160,6 +160,8 @@
         app:boxBackgroundColor="#e6e6e6">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:gravity="start"
+            android:hint="불편한 사항이 있으면 작성하신 후, 문의하기 버튼을 눌러주세요."
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>

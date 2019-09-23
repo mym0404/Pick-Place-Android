@@ -1,13 +1,17 @@
 package korea.seoul.pickple.ui.course.create.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.widget.Once
-import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 
-class CourseCreateSearchViewModel : ViewModel() {
+class CourseCreateSearchViewModel(private val placeRepository: PlaceRepository) : ViewModel() {
+
+    private val TAG = CourseCreateSearchViewModel::class.java.simpleName
 
     //region State
     val query : MutableLiveData<String> = MutableLiveData("")
@@ -16,14 +20,6 @@ class CourseCreateSearchViewModel : ViewModel() {
 
     //region Data
     private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
-        //TODO DUMMY
-        Place(1,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(2,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(3,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(4,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(5,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(6,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa"),
-        Place(7,Place.Type.FOOD,"경복궁","경복경복",null,  Location(37.6371,127.0247),null,999,"aaa")
     ))
     val places : LiveData<List<Place>>
         get() = _places
@@ -39,6 +35,23 @@ class CourseCreateSearchViewModel : ViewModel() {
     val clickAdd : LiveData<Once<Place>>
         get() = _clickAdd
     //endregion
+
+    init {
+        loadDatas()
+    }
+
+    private fun loadDatas() {
+        placeRepository.searchPlace("")
+            .callback({ it ->
+                it.placeData?.run {
+                    _places.value = this.map { it.toEntity() }
+                }
+            }, {
+                Log.e(TAG,"Fail")
+            }, {
+                Log.e(TAG,it.toString())
+            })
+    }
 
 
     fun onClickBackButton() {

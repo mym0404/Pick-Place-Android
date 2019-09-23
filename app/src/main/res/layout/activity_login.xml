@@ -24,8 +24,7 @@
         android:layout_marginTop="272dp"
         android:hint="이메일"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="#ffffff"
-        app:startIconDrawable="@drawable/mail">
+        app:boxBackgroundColor="#ffffff">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
