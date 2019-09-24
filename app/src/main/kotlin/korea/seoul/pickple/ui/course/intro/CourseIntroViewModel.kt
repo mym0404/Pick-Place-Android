@@ -1,5 +1,6 @@
 package korea.seoul.pickple.ui.course.intro
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,6 +10,7 @@ import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
+import korea.seoul.pickple.data.enumerator.ReviewType
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
@@ -23,7 +25,7 @@ class CourseIntroViewModel(
      * */
     var courseId: Int = 0
         set(value) {
-            courseRepository.getCourseWithId(courseId)
+            courseRepository.getCourseWithId(value)
                 .callback(
                     successCallback = { course ->
                         _course.value = course
@@ -36,23 +38,8 @@ class CourseIntroViewModel(
                     }
                 )
 
-//            reviewRepository.listReviews(ReviewType.COURSE)
-//                .callback({
-//
-//                }, {
-//
-//                }, {
-//
-//                })
-//
-//            reviewRepository.getCourseReviews(courseId)
-//                .callback(
-//                    successCallback = { reviews ->
-//                        _courseReviews.value = reviews
-//                    },
-//                    failCallback = {  _courseReviews.value = listOf()},
-//                    errorCallback = {  _courseReviews.value = listOf()}
-//                )
+            updateReivew(ReviewType.COURSE, value)
+
             field = value
         }
 
@@ -152,16 +139,11 @@ class CourseIntroViewModel(
         }
 
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
-//        currentPlace.managedObserve {
-//            it?.also {
-//                reviewRepository.getPlaceReviews(it.id)
-//                    .callback(
-//                        successCallback = { reviews ->
-//                            _placeReviews.value = reviews
-//                        }
-//                    )
-//            }
-//        }
+        currentPlace.managedObserve {
+            it?.also { place ->
+                updateReivew(ReviewType.PLACE, place.id)
+            }
+        }
 
         _currentEmotion.value = Review.Emoticon.EMOTION1
     }
@@ -180,5 +162,41 @@ class CourseIntroViewModel(
      * */
     fun selectEmotion(emotion: Review.Emoticon) {
         _currentEmotion.value = emotion
+    }
+
+    /**
+     * place 리뷰를 등록한다.
+     * */
+    fun enrollPlaceReview(comment: String) {
+        reviewRepository.enrollPlaceReview(
+            currentPlace.value?.id?:0 , comment, currentEmotion.value?:Review.Emoticon.EMOTION1
+        ).callback({
+            updateReivew(ReviewType.PLACE, currentPlace.value?.id?:0) // 리뷰등록에 성공했으면 갱신해준다.
+        })
+    }
+
+    /**
+     * course 리뷰를 등록한다.
+     * */
+    fun enrollCourseReview(comment: String) {
+        reviewRepository.enrollCourseReview(
+            courseId, comment, currentEmotion.value?:Review.Emoticon.EMOTION1
+        ).callback({
+            updateReivew(ReviewType.COURSE, courseId) // 리뷰등록에 성공했으면 갱신해준다.
+        })
+    }
+
+    private fun updateReivew(type: ReviewType, Id: Int) {
+        reviewRepository.listReviews(type)
+            .callback({
+                Log.d("seungmin", it.toEntityWithIdx(Id).toString())
+                _courseReviews.value = it.toEntityWithIdx(Id)
+            }, {
+                Log.d("seungmin", "fail")
+                _courseReviews.value = listOf()
+            }, {
+                Log.d("seungmin", it.message)
+                _courseReviews.value = listOf()
+            })
     }
 }

@@ -48,7 +48,7 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                     layoutManager = LinearLayoutManager(this@run)
                 }
                 btnSelectEmotion.setOnClickListener {
-                    // TODO Emoticon Select 팝업이 나와야함
+                    // Emoticon Select 팝업이 나와야함
                     val popupWindow = PopupWindow(layoutInflater.inflate(R.layout.popup_review_emotion, null),
                         ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, true)
 
@@ -64,12 +64,17 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                     }
                 }
                 btnShowAllReview.setOnClickListener {
-//                    navigate(this@run, NavigationArgs.ShowAllReviewArg(mIsCourseReview))
                     supportFragmentManager.beginTransaction().apply {
                         addToBackStack(null)
                         setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right,android.R.anim.slide_in_left, android.R.anim.slide_out_right)
                         replace(android.R.id.content, ShowAllReviewActivity.newInstance(mIsCourseReview))
                     }.commit()
+                }
+                btnReviewSubmit.setOnClickListener {
+                    if (mIsCourseReview)
+                        mCourseIntroViewModel.enrollCourseReview(edtReviewComment.text.toString())
+                    else
+                        mCourseIntroViewModel.enrollPlaceReview(edtReviewComment.text.toString())
                 }
             }
         }

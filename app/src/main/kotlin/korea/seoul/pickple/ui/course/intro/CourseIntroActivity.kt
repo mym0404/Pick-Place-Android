@@ -64,7 +64,8 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             appbarLayoutCourseIntro.outlineProvider = null
         }
 
-        viewModel.courseId = courseId
+//        viewModel.courseId = courseId
+        viewModel.courseId = 1 // 테스트 용으로 서버에 더미데이터가 들어있는 1로 변경하였다.
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,7 +105,7 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             REQUEST_SHOW_ALL_COURSES -> {
                 if (resultCode == Activity.RESULT_OK) {
                     // 다른 course를 선택했다. 코스를 변경하자.
-                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:0
+                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:viewModel.courseId
                     // 코스를 변경하고, 맨 처음 화면부터 시작하자.
                     mBinding.vpCourseIntro.setCurrentItem(0, false)
                 }

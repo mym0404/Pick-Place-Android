@@ -69,42 +69,41 @@
                 />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="48dp"
-                app:layout_constraintStart_toEndOf="@id/btnSelectEmotion"
-                app:layout_constraintTop_toTopOf="@id/btnSelectEmotion"
-                app:layout_constraintBottom_toBottomOf="@id/btnSelectEmotion"
                 app:layout_constraintEnd_toEndOf="parent"
-                >
+                app:layout_constraintStart_toEndOf="@id/btnSelectEmotion"
+                app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtReviewComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="후기를 남겨주세요.(44자 이내)"
-                    android:maxLength="44"
-                    android:textColorHint="#bcbcbc"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="13sp"
                     android:lineSpacingExtra="7sp"
-                    />
+                    android:maxLength="44"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="#bcbcbc"
+                    android:textSize="13sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvReviewList"
+                isFullReview="@{isFullReview}"
+                reviews="@{isCourseReview ? courseIntroViewModel.courseReviews : courseIntroViewModel.placeReviews}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@id/btnSelectEmotion"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                reviews="@{isCourseReview ? courseIntroViewModel.courseReviews : courseIntroViewModel.placeReviews}"
-                isFullReview="@{isFullReview}"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
             <TextView
                 android:id="@+id/btnShowAllReview"
@@ -134,6 +133,15 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+            <Button
+                android:id="@+id/btnReviewSubmit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -17,7 +17,7 @@ data class EnrollPlaceReviewRequest(
     @SerializedName("comment")
     @Expose(serialize = true, deserialize = true)
     var comment: String,
-    @SerializedName("emoticon")
+    @SerializedName("emotion")
     @Expose
     var emoticon : Int
 ) : Parcelable

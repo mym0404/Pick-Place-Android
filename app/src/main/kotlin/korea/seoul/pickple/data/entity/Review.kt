@@ -30,15 +30,15 @@ data class Review(
         ;
 
         /**
-         * TODO 감정표현 리소스 관리는 여기서 한다.
+         * 감정표현 리소스 관리는 여기서 한다.
          * */
         fun toDrawableResourceId(): Int {
             return when (this) {
-                EMOTION1 -> R.color.colorAccent
-                EMOTION2 -> R.color.colorBlack
-                EMOTION3 -> R.color.colorPrimary
-                EMOTION4 -> R.color.colorWhite
-                EMOTION5 -> R.color.colorBlack
+                EMOTION1 -> R.drawable.btn_face_1_md
+                EMOTION2 -> R.drawable.btn_face_2_md
+                EMOTION3 -> R.drawable.btn_face_3_md
+                EMOTION4 -> R.drawable.btn_face_4_md
+                EMOTION5 -> R.drawable.btn_face_5_md
             }
         }
         companion object {
