@@ -1,5 +1,7 @@
 package korea.seoul.pickple.data.repository.fake
 
+import korea.seoul.pickple.data.api.response.BaseResponse
+import korea.seoul.pickple.data.api.response.course.CourseInfoResponse
 import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
@@ -76,5 +78,17 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
 
     override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
         TODO()
+    }
+
+    override fun getCourseInfo(idx: Int): Call<CourseInfoResponse> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun likeCourse(idx: Int): Call<BaseResponse> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun unlikeCourse(idx: Int): Call<BaseResponse> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
