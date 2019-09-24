@@ -32,4 +32,8 @@ class UserRepositoryImpl(private val userAPI : UserAPI,private val tokenUtil : T
     override fun signUp(email: String, nickname: String, password: String): Call<BaseResponse> {
         return userAPI.signUp(SignUpRequest(email,password,nickname))
     }
+
+    override fun findPassword(): Call<BaseResponse> {
+        return userAPI.findPassword()
+    }
 }
