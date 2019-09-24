@@ -73,7 +73,7 @@ class NavigationActivity : AppCompatActivity() {
             }
             clickCourse.observeOnce(this@NavigationActivity) {course->
                 navigate(this@NavigationActivity,NavigationArgs.CourseCreateArgs(
-                    course.name, Uri.parse(""),course.description,course.tagList,true,course)
+                    course.name, Uri.parse(""),course.description,course.tagList!!,true,course)
                 )
             }
             clickReview.observeOnce(this@NavigationActivity) {

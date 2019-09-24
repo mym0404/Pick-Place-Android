@@ -132,7 +132,7 @@ class CourseCreateViewModel(private val placeRepository: PlaceRepository) : View
                 try {
                     var places = listOf<Place>()
 
-                    course.places.forEach {
+                    course.places?.forEach {
                         placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
                             places += it
                         }

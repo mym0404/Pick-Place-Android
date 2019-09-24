@@ -79,7 +79,7 @@ data class Course(
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "course_places")
     @TypeConverters(CoursePlacesConverter::class)
-    val places : List<Int>,
+    val places : List<Int>?,
 
     /**
      * 코스의 좋아요 횟수
@@ -97,7 +97,7 @@ data class Course(
     @SerializedName("course_tags")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_tags")
-    val tagList : List<String>,
+    val tagList : List<String>?,
 
     @SerializedName("course_thumbnail")
     @Expose(serialize = true,deserialize = true)

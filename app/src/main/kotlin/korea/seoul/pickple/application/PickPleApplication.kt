@@ -128,7 +128,6 @@ class PickPleApplication : Application() {
         single { SetRepositoryImpl(get()) } bind SetRepository::class
         single { MainRepositoryImpl(get()) } bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
-
     }
 
     private val viewModelModule = module {

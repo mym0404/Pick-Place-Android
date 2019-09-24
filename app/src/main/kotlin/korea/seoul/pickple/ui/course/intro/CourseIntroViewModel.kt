@@ -66,21 +66,21 @@ class CourseIntroViewModel(
      * 현 course의 tag list
      * */
     val courseTagList: LiveData<String> = Transformations.map(course) {
-        it.tagList.toTagList()
+        it.tagList?.toTagList()
     }
 
     /**
      * 현 course의 tag list 하나의 태그만 보여주자.
      * */
     val courseOnlyOneTag: LiveData<String> = Transformations.map(course) {
-        it.tagList.toTagList(1)
+        it.tagList?.toTagList(1)
     }
 
     /**
     * 현 course의 장소 갯수 문자열
     * */
     val coursePlaceCount: LiveData<String> = Transformations.map(course) {
-        "장소 ${it.places.size}곳"
+        "장소 ${it.places?.size}곳"
     }
 
     /**

@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.ui.navigation.NavigationActivity
 import korea.seoul.pickple.R
+import korea.seoul.pickple.data.api.MainAPI
 import korea.seoul.pickple.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main_course.*
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
