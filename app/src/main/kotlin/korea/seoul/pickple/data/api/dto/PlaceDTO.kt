@@ -35,7 +35,10 @@ data class PlaceDTO(
             Location(location.latitude,location.longitude,address),
             (fee ?: "0").toIntOrNull() ?: 0,
             placeLike,
-            placeThumbnail
+            placeThumbnail,
+            address,
+            businessHour,
+            fee
         )
     }
 }

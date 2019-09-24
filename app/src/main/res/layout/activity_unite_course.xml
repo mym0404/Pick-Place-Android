@@ -75,12 +75,12 @@
                     android:textColor="#ffffff"
                     />
 
-                <ImageView
+                <CheckedTextView
                     android:id="@+id/toolUniteCourseLike"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginBottom="24dp"
-                    android:src="@drawable/navi_btn_heart_w"
+                    android:background="@drawable/selector_heart"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/toolUniteCourseName" />
 
