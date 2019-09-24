@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.loadImage
 import korea.seoul.pickple.common.util.IntentUtil
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.ui.NavigationArgs
@@ -25,7 +26,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 // TODO 수민 data를 List<Course>로 바꾸기
-class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>(), KoinComponent {
+class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<Course>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>(), KoinComponent {
 
     val intentUtil : IntentUtil by inject()
 
@@ -40,6 +41,19 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<String>): 
         holder.run {
             // TODO 수민 실제 데이터로 바꾸기
             val currentItem = data[position]
+
+            // 데이터 값 넣기
+            Glide.with(ctx)
+                .load(currentItem.thumbnail)
+                .into(course_img)
+            Glide.with(ctx)
+                .load(currentItem.thumbnail)
+                .into(course_icon)
+
+            val tags = currentItem.tagList.toString()
+            course_tag.text = tags
+
+            course_name.text = currentItem.name
 
 
             course_detail_card.setOnClickListener{
