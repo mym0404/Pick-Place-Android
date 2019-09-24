@@ -7,4 +7,6 @@ interface UserRepository {
     fun signIn(email : String, password : String, callback : (success : Boolean, message : String) -> Unit)
 
     fun signUp(email : String, nickname : String, password : String) : Call<BaseResponse>
+
+    fun findPassword() : Call<BaseResponse>
 }

@@ -6,6 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface MainAPI {
-    @GET("/main/list/{type}")
+    @GET("main/list/{type}")
     fun listMainCourses(@Path("type") type : Int) : Call<MainListResponse>
+
+
+    @GET("main/order")
+    fun listMainCoursesWithPopularOrder() : Call<MainListResponse>
+
+
 }
