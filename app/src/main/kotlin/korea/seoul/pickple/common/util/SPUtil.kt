@@ -10,7 +10,7 @@ import android.content.Context
 class SPUtil(private val context: Application) {
 
     enum class SPKeys(val key : String) {
-        RecentConnectedAddress("RECENT_CONNECTED_ARRESS")
+        TOKEN("TOKEN")
 
 
         ,

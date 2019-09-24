@@ -108,10 +108,18 @@ class CourseIntroViewModel(
     val currentPlace: MediatorLiveData<Place> by lazy {
         MediatorLiveData<Place>().apply {
             addSource(_places) {
-                currentPlace.value = it[0]
+                try {
+                    currentPlace.value = it[0]
+                }catch(t: Throwable) {
+
+                }
             }
             addSource(_index) {
-                currentPlace.value = _places.value?.get(it-1)
+                try {
+                    currentPlace.value = _places.value?.get(it - 1)
+                }catch(t: Throwable) {
+
+                }
             }
         }
     }

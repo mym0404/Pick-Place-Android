@@ -2,6 +2,7 @@ package korea.seoul.pickple.data.api.response.user
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
+import korea.seoul.pickple.data.api.dto.TokenDTO
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -13,5 +14,5 @@ data class SignInResponse(
     @Expose
     var message : String,
     @Expose
-    var data : String
+    var tokenDatas : TokenDTO?
 ) : Parcelable
