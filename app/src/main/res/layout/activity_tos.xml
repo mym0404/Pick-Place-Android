@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/tosBackButton"
+            app:layout_constraintBottom_toBottomOf="@id/tosBackButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#666666"
+            android:lineSpacingExtra="7sp"
+            android:gravity="center_horizontal"
+            android:text="회원약관 확인"
+
+            />
+
+        <ImageButton
+            android:id="@+id/tosBackButton"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            android:padding="4dp"
+            android:src="@drawable/navi_btn_back_b"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:background="@drawable/background_tos"
+            android:overScrollMode="never"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="41dp"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="5dp"
+                    android:padding="8dp"
+                    android:text="회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용회원약관 내용"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+
+            </FrameLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

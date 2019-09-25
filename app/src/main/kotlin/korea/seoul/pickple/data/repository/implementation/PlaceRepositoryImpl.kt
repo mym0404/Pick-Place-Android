@@ -34,7 +34,7 @@ class PlaceRepositoryImpl(private val placeAPI: PlaceAPI, private val fileUtil: 
             MultipartBody.Part.createFormData(
                 "place_thumbnail",
                 thumbnailFile.name,
-                RequestBody.create(fileUtil.getTypeOfFile(thumbnail),thumbnailFile)
+                RequestBody.create(fileUtil.getTypeOfFile(thumbnail.path!!),thumbnailFile)
             ),
             RequestBody.create(MultipartBody.FORM, place.location.latitude.toString()),
             RequestBody.create(MultipartBody.FORM, place.location.longitude.toString()),

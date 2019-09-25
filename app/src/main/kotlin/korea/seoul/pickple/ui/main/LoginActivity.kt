@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.SPUtil
+import korea.seoul.pickple.common.widget.AsteriskPasswordTransformationMethod
 import korea.seoul.pickple.data.repository.interfaces.UserRepository
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
@@ -23,10 +24,18 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
+        //TODO 그냥 넘어가게함
+//        Intent(this@LoginActivity, MainActivity::class.java).apply {
+//            startActivity(this)
+//            finish()
+//        }
+
         initView()
     }
 
     private fun initView() {
+        passwordEditText.transformationMethod = AsteriskPasswordTransformationMethod()
+
         spUtil.getString(SPUtil.SPKeys.LAST_LOGIN_EMAIL)?.let {
             emailEditText.setText(it)
         }
@@ -34,7 +43,8 @@ class LoginActivity : AppCompatActivity() {
             passwordEditText.setText(it)
         }
         if (!emailEditText.text.isNullOrEmpty() && !passwordEditText.text.isNullOrEmpty()) {
-            signIn(emailEditText.text.toString(), passwordEditText.text.toString())
+            //TODO 자동로그인 꺼놓음
+//            signIn(emailEditText.text.toString(), passwordEditText.text.toString())
         }
 
 
@@ -74,6 +84,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
+
+        emailText.error = ""
+        passwordText.error = ""
 
         loginProgressBar.visibility = View.VISIBLE
 

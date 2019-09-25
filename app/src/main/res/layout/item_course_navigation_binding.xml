@@ -11,7 +11,7 @@
             type="korea.seoul.pickple.ui.navigation.NavigationViewModel" />
         <variable
             name="item"
-            type="korea.seoul.pickple.data.entity.Course" />
+            type="korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse.Data.CourseDTO" />
 
     </data>
 
@@ -25,7 +25,7 @@
         <ImageView
             android:scaleType="centerCrop"
 
-            imageUrl="@{item.thumbnail}"
+            imageUrl="@{item.cThumbnail}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

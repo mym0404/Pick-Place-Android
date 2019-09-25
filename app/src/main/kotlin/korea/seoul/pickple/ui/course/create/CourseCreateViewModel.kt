@@ -3,19 +3,19 @@ package korea.seoul.pickple.ui.course.create
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.net.Uri
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
-import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import kotlin.concurrent.thread
 
-class CourseCreateViewModel(private val placeRepository: PlaceRepository) : ViewModel() {
+class CourseCreateViewModel(private val courseRepository: CourseRepository,private val placeRepository: PlaceRepository) : ViewModel() {
 
     private val TAG = CourseCreateViewModel::class.java.simpleName
 
@@ -120,30 +120,42 @@ class CourseCreateViewModel(private val placeRepository: PlaceRepository) : View
         _places.value = items
     }
 
-    fun onSetDatas(title : String, thumbnail : Uri, description : String, tagList : List<String>, onlyShow : Boolean, course : Course?) {
+    fun onSetDatas(title : String, onlyShow : Boolean, courseId : Int = -1) {
         _title.value = title
         _onlyShow.value = onlyShow
 
-        if(onlyShow && course != null) {
-            debugE(TAG,"asd")
+        if(onlyShow && courseId != -1) {
 
-            thread {
 
-                try {
-                    var places = listOf<Place>()
+            courseRepository.getCourseInfo(courseId)
+                .callback({
+                    val course = it.data?.toEntity() ?: return@callback
 
-                    course.places?.forEach {
-                        placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
-                            places += it
+                    thread {
+
+                        try {
+                            var places = listOf<Place>()
+
+                            course.places?.forEach {
+                                placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
+                                    places += it
+                                }
+
+                            }
+
+                            _places.postValue(places)
+                        }catch(t : Throwable) {
+                            debugE(TAG,t)
                         }
-
                     }
+                }, {
 
-                    _places.postValue(places)
-                }catch(t : Throwable) {
-                    debugE(TAG,t)
-                }
-            }
+                }, {
+
+                })
+
+
+
 
 
         }
@@ -169,6 +181,7 @@ class CourseCreateViewModel(private val placeRepository: PlaceRepository) : View
 
     fun onClickCourseSaveButton() {
         _syncData.value = Once(true)
+
 
     }
 

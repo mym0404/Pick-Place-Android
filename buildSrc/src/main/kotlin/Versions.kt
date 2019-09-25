@@ -20,6 +20,8 @@ object Versions {
 
   const val androidx_databinding: String = "3.5.0"
 
+  const val legacy_support_v4: String = "1.0.0"
+
   const val androidx_lifecycle: String = "2.1.0"
 
   const val androidx_room: String = "2.2.0-rc01"
@@ -42,7 +44,7 @@ object Versions {
 
   const val lint_gradle: String = "26.5.0"
 
-  const val com_github_bumptech_glide: String = "4.9.0"
+  const val com_github_bumptech_glide: String = "4.9.0" // available: "4.10.0"
 
   const val play_services_maps: String = "17.0.0"
 
@@ -60,13 +62,17 @@ object Versions {
 
   const val com_google_truth_truth: String = "1.0"
 
-  const val dexter: String = "5.0.0"
+  const val dexter: String = "5.0.0" // available: "6.0.0"
 
   const val pageindicatorview: String = "1.0.3"
 
-  const val com_squareup_retrofit2: String = "2.6.1"
+  const val logging_interceptor: String = "3.12.1" // available: "4.2.0"
 
-  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.6.0"
+  const val com_squareup_retrofit2: String = "2.6.1" // available: "2.6.2"
+
+  const val de_fayard_buildsrcversions_gradle_plugin: String = "0.4.2" // available: "0.6.1"
+
+  const val circleimageview: String = "3.0.1"
 
   const val junit_junit: String = "4.12"
 
@@ -88,12 +94,6 @@ object Versions {
   const val gradleLatestVersion: String = "5.6.2"
 
   const val gradleCurrentVersion: String = "5.4.1"
-
-  /**
-   * circle 이미지 뷰
-   * https://github.com/hdodenhof/CircleImageView
-   * */
-  const val circleImageViewVersion: String = "3.0.1"
 }
 
 /**

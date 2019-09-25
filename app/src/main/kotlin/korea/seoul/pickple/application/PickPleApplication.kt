@@ -18,6 +18,7 @@ import korea.seoul.pickple.ui.navigation.NavigationViewModel
 import korea.seoul.pickple.ui.navigation.course.NavigationCourseViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -46,6 +47,7 @@ class PickPleApplication : Application() {
         single { IntentUtil() }
         single { TokenUtil(get())}
         single { SPUtil(get())}
+        single { MultiPartUtil(get())}
     }
 
     private val apiModule = module {
@@ -84,7 +86,7 @@ class PickPleApplication : Application() {
             return@single Interceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", tokenUtil.loadToken() ?: "" )
+                    .addHeader("token", tokenUtil.loadToken() ?: "" )
                     .build()
                 debugE(TAG,"token : ${tokenUtil.loadToken()}")
                 chain.proceed(request)
@@ -94,6 +96,9 @@ class PickPleApplication : Application() {
         single {
             OkHttpClient.Builder()
                 .addInterceptor(get())
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    this.level = HttpLoggingInterceptor.Level.BODY
+                })
                 .build()
         } bind OkHttpClient::class
 
@@ -132,12 +137,12 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course: Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel(get()) }
+        viewModel { CourseCreateViewModel(get(),get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
-        viewModel { NavigationViewModel() }
+        viewModel { NavigationViewModel(get(),get()) }
         viewModel { NavigationCourseViewModel() }
     }
 

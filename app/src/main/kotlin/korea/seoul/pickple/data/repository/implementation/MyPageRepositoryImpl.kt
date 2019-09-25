@@ -23,6 +23,6 @@ class MyPageRepositoryImpl(private val myPageAPI: MyPageAPI) : MyPageRepository 
     }
 
     override fun listMylikePlace(): Call<ListMyLikePlaceResponse> {
-        return myPageAPI.listMyLikePlace()
+        return myPageAPI.listPickPlace()
     }
 }

@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:id="@+id/emailText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
         android:textColorHint="@color/colorGray"
         app:boxBackgroundColor="#ffffff"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:boxStrokeColor="@color/aqua_marine"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo"
         app:startIconDrawable="@drawable/mail_icon_image">
@@ -55,10 +57,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:id="@+id/passwordText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
+        app:boxStrokeColor="@color/aqua_marine"
         android:layout_marginTop="16dp"
         android:layout_marginRight="32dp"
         android:hint="비밀번호"
@@ -70,6 +74,7 @@
         app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import korea.seoul.pickple.data.entity.Review
 import kotlinx.android.parcel.Parcelize
 
 
@@ -27,36 +28,41 @@ data class ListMyReviewResponse(
     data class Data(
         @SerializedName("info")
         @Expose(serialize = true, deserialize = true)
-        var info: List<Info>
+        var info: List<ReviewDTO>
     ) : Parcelable {
         @SuppressLint("ParcelCreator")
         @Parcelize
-        data class Info(
-            @SerializedName("placeIdx")
-            @Expose(serialize = true, deserialize = true)
-            var placeIdx: Int,
-            @SerializedName("place_thumbnail")
-            @Expose(serialize = true, deserialize = true)
-            var placeThumbnail: String,
-            @SerializedName("pName")
-            @Expose(serialize = true, deserialize = true)
-            var pName: String,
-            @SerializedName("place_like")
-            @Expose(serialize = true, deserialize = true)
-            var placeLike: Int,
-            @SerializedName("pReviewCount")
-            @Expose(serialize = true, deserialize = true)
-            var pReviewCount: Int,
+        data class ReviewDTO(
+            @SerializedName("placeIdx",alternate = ["courseIdx"])
+            var placeCourseIdx: Int,
+            @SerializedName("place_thumbnail",alternate = ["cThumbnail"])
+            var thumbnail: String,
+            @SerializedName("pName", alternate = ["cName"])
+            var name: String,
+            @SerializedName("place_like",alternate = ["cLikeCount"])
+            var likeCount: Int,
+            @SerializedName("pReviewCount",alternate = ["cReviewCount"])
+            var reviewCount: Int,
             @SerializedName("createdAt")
-            @Expose(serialize = true, deserialize = true)
             var createdAt: String,
             @SerializedName("comment")
-            @Expose(serialize = true, deserialize = true)
             var comment: String,
             @SerializedName("emotion")
-            @Expose(serialize = true, deserialize = true)
             var emotion: String
         ) : Parcelable {
+
+            fun toEntity() : Review {
+                return Review(placeCourseIdx,
+                    thumbnail,
+                    name,
+                    likeCount,
+                    reviewCount,
+                    comment,
+                    "",
+                    createdAt,
+                    Review.Emoticon.parse(emotion.toInt())
+                )
+            }
         }
     }
 }

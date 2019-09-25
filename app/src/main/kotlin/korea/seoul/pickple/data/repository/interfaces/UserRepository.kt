@@ -8,5 +8,5 @@ interface UserRepository {
 
     fun signUp(email : String, nickname : String, password : String) : Call<BaseResponse>
 
-    fun findPassword() : Call<BaseResponse>
+    fun findPassword(email : String) : Call<BaseResponse>
 }

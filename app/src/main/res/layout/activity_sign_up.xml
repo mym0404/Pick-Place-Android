@@ -15,6 +15,7 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -22,7 +23,7 @@
         android:hint="이메일"
         android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
-        app:boxStrokeColor="#2ae5bd"
+        app:boxStrokeColor="@color/aqua_marine"
         app:boxBackgroundColor="@color/colorWhite_1">
 
     <com.google.android.material.textfield.TextInputEditText
@@ -44,12 +45,14 @@
         android:fontFamily="@font/nanum_square_bold" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/more_icon_my"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
         android:hint="닉네임 (최대 10자)"
         android:textColorHint="@color/greyish_brown"
+        app:boxStrokeColor="@color/aqua_marine"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="@color/colorWhite_1">
 
@@ -72,12 +75,14 @@
         android:textColor="@color/aqua_marine" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="282dp"
         app:hintTextColor="@color/colorGray"
         android:hint="비밀번호 (영문, 숫자 상관없이 4~8자리)"
+        app:boxStrokeColor="@color/aqua_marine"
         android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
         app:boxBackgroundColor="@color/colorWhite_1">
@@ -89,9 +94,11 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/aqua_marine"
         android:layout_marginTop="348dp"
         android:hint="비밀번호 확인"
         android:textColorHint="@color/greyish_brown"
@@ -140,6 +147,9 @@
         app:cornerRadius="15dp" />
 
     <TextView
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
         android:id="@+id/tv_MemberTermsConfrim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,7 +157,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="14sp"
         android:textColor="@color/colorLightGray"
-        android:lineSpacingExtra="13sp"
         android:text="회원약관 확인하기"/>
     <View
         android:background="@color/colorLightGray"

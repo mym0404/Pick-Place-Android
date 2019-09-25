@@ -32,11 +32,11 @@ data class ListMyCoursesResponse(
     data class Data(
         @SerializedName("info")
         @Expose(serialize = true, deserialize = true)
-        var info: List<Info>
+        var info: List<CourseDTO>
     ) : Parcelable {
         @SuppressLint("ParcelCreator")
         @Parcelize
-        data class Info(
+        data class CourseDTO(
             @SerializedName("courseIdx")
             @Expose(serialize = true, deserialize = true)
             var courseIdx: Int,
