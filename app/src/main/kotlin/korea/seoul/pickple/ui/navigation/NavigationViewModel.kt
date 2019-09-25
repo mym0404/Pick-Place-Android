@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.api.MyPageAPI
+import korea.seoul.pickple.data.api.response.mypage.ListMyReviewResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.data.entity.SeoulNews
@@ -43,7 +44,7 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
             FakeCourseRepository.fakeCourse
         )
     )
-    val review: MutableLiveData<List<Review>> = MutableLiveData(
+    val review: MutableLiveData<List<ListMyReviewResponse.Data.ReviewDTO>> = MutableLiveData(
         listOf(
         )
     )
@@ -81,7 +82,7 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
 
             review.value = it.data?.map {
 
-                it?.info?.getOrNull(0)?.toEntity()
+                it?.info?.getOrNull(0)
 
             }?.filterNotNull() ?: listOf()
 

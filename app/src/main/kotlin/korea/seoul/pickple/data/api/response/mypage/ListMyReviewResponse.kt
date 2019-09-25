@@ -28,11 +28,11 @@ data class ListMyReviewResponse(
     data class Data(
         @SerializedName("info")
         @Expose(serialize = true, deserialize = true)
-        var info: List<Info>
+        var info: List<ReviewDTO>
     ) : Parcelable {
         @SuppressLint("ParcelCreator")
         @Parcelize
-        data class Info(
+        data class ReviewDTO(
             @SerializedName("placeIdx",alternate = ["courseIdx"])
             var placeCourseIdx: Int,
             @SerializedName("place_thumbnail",alternate = ["cThumbnail"])
