@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.widget.AsteriskPasswordTransformationMethod
 import korea.seoul.pickple.data.repository.interfaces.SetRepository
 import kotlinx.android.synthetic.main.activity_setting_member_info_change_password.*
 import org.koin.android.ext.android.inject
@@ -21,6 +22,10 @@ class SettingMemberInfoChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
+        editText1.transformationMethod = AsteriskPasswordTransformationMethod()
+        editText2.transformationMethod = AsteriskPasswordTransformationMethod()
+        editText3.transformationMethod = AsteriskPasswordTransformationMethod()
 
         backButton.setOnClickListener {
             onBackPressed()
