@@ -1,10 +1,15 @@
 package korea.seoul.pickple.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.data.repository.interfaces.UserRepository
+import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
+import java.util.regex.Pattern
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -15,5 +20,59 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
+        initView()
+    }
+
+    private fun initView() {
+
+        findPasswordText.setOnClickListener {
+            Intent(this@LoginActivity,FindingPasswordActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+        signUpText.setOnClickListener {
+            Intent(this@LoginActivity,SignUpActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        loginButton.setOnClickListener {
+
+            val email = emailEditText.text?.toString()
+            val password = passwordEditText.text?.toString()
+
+            if(email.isNullOrEmpty()) {
+                emailText.error = "이메일을 채워주세요"
+                return@setOnClickListener
+            }
+            if(password.isNullOrEmpty()) {
+                passwordText.error = "패스워드를 채워주세요"
+                return@setOnClickListener
+            }
+            if(!isValidEmail(email)) {
+                emailText.error = "유효한 이메일 형식으로 채워주세요"
+                return@setOnClickListener
+            }
+
+
+            userRepository.signIn(email,password) { success, message ->
+
+                if(success) {
+                    runOnUiThread {
+
+                    }
+                }else {
+                    runOnUiThread {
+                        loginRootView.showSnackBar(message)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun isValidEmail(email : String) : Boolean{
+        val pattern = Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+
+        return pattern.matcher(email).matches()
     }
 }

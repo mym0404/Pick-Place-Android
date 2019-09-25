@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/loginRootView"
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:animateLayoutChanges="true"
@@ -47,6 +48,7 @@
         app:boxBackgroundColor="#ffffff">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -68,6 +70,7 @@
         app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -98,6 +101,8 @@
 
 
         <TextView
+            android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackground"
             app:layout_constraintLeft_toLeftOf="@id/loginButton"
             app:layout_constraintRight_toLeftOf="@id/signUpText"
@@ -113,6 +118,8 @@
 
 
         <TextView
+            android:clickable="true"
+            android:focusable="true"
             android:background="?attr/selectableItemBackground"
             app:layout_constraintRight_toRightOf="@id/loginButton"
             app:layout_constraintLeft_toRightOf="@id/findPasswordText"
