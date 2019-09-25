@@ -18,12 +18,9 @@ data class MainListResponse(
     @SerializedName("success")
     @Expose(serialize = true, deserialize = true)
     var success: Boolean,
-    @SerializedName("message")
-    @Expose(serialize = true, deserialize = true)
-    var message: String,
     @SerializedName("data")
     @Expose(serialize = true, deserialize = true)
-    var data: List<List<Data>>?
+    var `data`: List<Data>?
 ) : Parcelable {
     @SuppressLint("ParcelCreator")
     @Parcelize
@@ -31,5 +28,7 @@ data class MainListResponse(
         @SerializedName("info")
         @Expose(serialize = true, deserialize = true)
         var info: List<CourseDTO>
-    ) : Parcelable
+    ) : Parcelable {
+      
+    }
 }

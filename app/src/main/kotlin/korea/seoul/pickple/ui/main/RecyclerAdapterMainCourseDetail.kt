@@ -39,16 +39,24 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<Course>): 
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.run {
-            // TODO 수민 실제 데이터로 바꾸기
             val currentItem = data[position]
 
             // 데이터 값 넣기
             Glide.with(ctx)
                 .load(currentItem.thumbnail)
                 .into(course_img)
-            Glide.with(ctx)
-                .load(currentItem.thumbnail)
-                .into(course_icon)
+
+            when (currentItem.type.type) {
+                0 -> {
+                    course_icon.setImageResource(R.drawable.oldshop_course_icon)
+                }
+                1 -> {
+                    course_icon.setImageResource(R.drawable.oldshop_tradition_icon)
+                }
+                2 -> {
+                    course_icon.setImageResource(R.drawable.user_course_icon)
+                }
+            }
 
             val tags = currentItem.tagList.toString()
             course_tag.text = tags
