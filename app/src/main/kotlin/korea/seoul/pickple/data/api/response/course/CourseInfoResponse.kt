@@ -59,45 +59,15 @@ data class CourseInfoResponse(
         @SerializedName("cReviewCount")
         @Expose(serialize = true, deserialize = true)
         var cReviewCount: Int,
-        @SerializedName("place_1")
-        @Expose(serialize = true, deserialize = true)
-        var place1: Int?,
-        @SerializedName("place_2")
-        @Expose(serialize = true, deserialize = true)
-        var place2: Int?,
-        @SerializedName("place_3")
-        @Expose(serialize = true, deserialize = true)
-        var place3: Int,
-        @SerializedName("place_4")
-        @Expose(serialize = true, deserialize = true)
-        var place4: Int?,
-        @SerializedName("place_5")
-        @Expose(serialize = true, deserialize = true)
-        var place5: Int?,
-        @SerializedName("place_6")
-        @Expose(serialize = true, deserialize = true)
-        var place6: Int?,
-        @SerializedName("place_7")
-        @Expose(serialize = true, deserialize = true)
-        var place7: Int?,
-        @SerializedName("place_8")
-        @Expose(serialize = true, deserialize = true)
-        var place8: Int?,
-        @SerializedName("place_9")
-        @Expose(serialize = true, deserialize = true)
-        var place9: Int?,
-        @SerializedName("place_10")
-        @Expose(serialize = true, deserialize = true)
-        var place10: Int?,
-        @SerializedName("place_11")
-        @Expose(serialize = true, deserialize = true)
-        var place11: Int?,
-        @SerializedName("place_12")
-        @Expose(serialize = true, deserialize = true)
-        var place12: Int?,
+        @SerializedName("placeIdx")
+        @Expose
+        var placeIndices : List<Int>,
         @SerializedName("tagIdx")
         @Expose(serialize = true, deserialize = true)
-        var tagIdx: List<Int>?
+        var tagIdx: List<String>,
+        @SerializedName("distance")
+        @Expose
+        var distances:List<Float>
     ) : Parcelable {
         fun toEntity() : Course {
             return Course(
@@ -106,10 +76,9 @@ data class CourseInfoResponse(
                 cName,
                 cDescription,
                 SeoulDistrict.parse(cDistrict),
-                listOf(place1,place2,place3,place4,place5,place6,
-                    place7,place8,place9,place10,place11,place12).filterNotNull(),
+                placeIndices,
                 cLikeCount,
-                listOf(),
+                tagIdx,
                 cThumbnail
             )
         }

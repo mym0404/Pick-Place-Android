@@ -25,10 +25,10 @@ class LoginActivity : AppCompatActivity() {
 
 
         //TODO 그냥 넘어가게함
-        Intent(this@LoginActivity, MainActivity::class.java).apply {
-            startActivity(this)
-            finish()
-        }
+//        Intent(this@LoginActivity, MainActivity::class.java).apply {
+//            startActivity(this)
+//            finish()
+//        }
 
         initView()
     }
