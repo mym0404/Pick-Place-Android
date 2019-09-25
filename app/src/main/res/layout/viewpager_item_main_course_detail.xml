@@ -9,6 +9,8 @@
         android:id="@+id/tabLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:tabIndicatorHeight="0.8dp"
+        app:tabIndicatorColor="@color/blue_with_a_hint_of_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
