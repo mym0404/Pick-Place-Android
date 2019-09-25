@@ -1,16 +1,20 @@
 package korea.seoul.pickple.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
+import korea.seoul.pickple.data.repository.interfaces.UserRepository
+import korea.seoul.pickple.ui.login.TosActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.koin.android.ext.android.inject
 import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
 
+    private val userRepeatable: UserRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,5 +96,15 @@ class SignUpActivity : AppCompatActivity() {
 //    private fun afterTextChanged() {
 //        if (tiet_signup_email==)
 //    }
+
+        tv_MemberTermsConfrim.setOnClickListener {
+            Intent(this@SignUpActivity, TosActivity::class.java).apply { startActivity(this) }
+        }
     }
+
+    private fun isValidEmail(email: String): Boolean {
+        val pattern = Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+
+        return pattern.matcher(email).matches()
     }
+}
