@@ -21,13 +21,25 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".ui.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- FIREBASE DEEP LINKS -->
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="pickple.page.link"
+                    android:pathPrefix="/jTpt"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.main.SignUpActivity"
             android:exported="true" />
@@ -63,20 +75,9 @@
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- FIREBASE DEEP LINKS -->
-            <intent-filter>
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="pickple.page.link"
-                    android:pathPrefix="/jTpt"
-                    android:scheme="https" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.course.map.MapActivity"
