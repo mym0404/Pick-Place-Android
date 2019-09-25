@@ -17,21 +17,15 @@
             android:layout_marginLeft="16dp"
             android:src="@drawable/navi_btn_back_b"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/navi_btn_close_b"/>
     </RelativeLayout>
 
     <ImageView
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="68dp"
-        android:src="#000000"/>
+        android:src="@drawable/more_btn_profile"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"

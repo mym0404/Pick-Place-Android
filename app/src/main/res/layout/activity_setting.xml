@@ -1,183 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/settingRoot"
+    android:animateLayoutChanges="true"
     tools:context=".ui.setting.SettingActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp">
 
-        <ImageView
-            android:id="@+id/iv_SettingPage_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/navi_btn_back_b"/>
-
-        <ImageView
-            android:id="@+id/iv_SetttingPage_close_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/navi_btn_close_b"/>
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/iv_SetttingPage_close_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="12dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/navi_btn_back_b"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginRight="12dp" />
 
     <ImageView
+        android:id="@+id/gear"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginTop="68dp"
         android:layout_marginLeft="32dp"
-        android:src="@drawable/more_btn_setting"/>
+        android:layout_marginTop="68dp"
+        android:src="@drawable/more_btn_setting"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/rl_setting_01"
-        android:layout_marginTop="156dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/container1"
+        app:layout_constraintTop_toBottomOf="@id/gear"
+        android:layout_marginTop="42dp"
         android:layout_width="match_parent"
         android:layout_height="64dp">
-
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="32dp"
-            android:src="@drawable/more_btn_my"/>
-        <TextView
-            android:id="@+id/tv_MemberInfo"
+            android:id="@+id/image1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72sp"
             android:layout_centerVertical="true"
-            android:textColor="#000000"
-            android:text="회원정보"/>
+            android:src="@drawable/more_btn_my"
+             />
+
         <TextView
-            android:id="@+id/tv_setting_member_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_marginLeft="24dp"
+            android:text="회원정보"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/image1"
+            app:layout_constraintLeft_toRightOf="@id/image1"
+            app:layout_constraintTop_toTopOf="@id/image1" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginRight="32dp"
-            android:layout_centerVertical="true"
-            android:text="email"/>
-    </RelativeLayout>
+            android:gravity="end"
+            android:lineSpacingExtra="2sp"
+            android:textColor="#818181"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/image1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@id/image1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image1"
+            tools:text="pmh960313@gmail.com" />
 
-    <RelativeLayout
-        android:id="@+id/rl_setting_02"
-        android:layout_marginTop="220dp"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/container2"
+        app:layout_constraintTop_toBottomOf="@id/container1"
         android:layout_width="match_parent"
         android:layout_height="64dp">
-
         <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="32dp"
+            android:id="@+id/image2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32dp"
-            android:src="@drawable/more_btn_rules"/>
+            android:src="@drawable/more_btn_rules"
+            />
 
         <TextView
-            android:id="@+id/tv_setting_UsingTerms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="72dp"
-            android:textColor="#000000"
-            android:text="이용약관"/>
-    </RelativeLayout>
+            android:layout_marginLeft="24dp"
+            android:text="이용약관"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/image2"
+            app:layout_constraintLeft_toRightOf="@id/image2"
+            app:layout_constraintTop_toTopOf="@id/image2" />
 
-    <RelativeLayout
-        android:id="@+id/rl_setting_03"
-        android:layout_marginTop="284dp"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/container3"
+        app:layout_constraintTop_toBottomOf="@id/container2"
         android:layout_width="match_parent"
         android:layout_height="64dp">
-
         <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="32dp"
+            android:id="@+id/image3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32dp"
-            android:src="@drawable/more_btn_ver"/>
+            android:src="@drawable/more_btn_ver"
+            />
 
         <TextView
-            android:id="@+id/tv_setting_VersionInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="72dp"
-            android:textColor="#000000"
-            android:text="버전정보"/>
+            android:layout_marginLeft="24dp"
+            android:text="버전정보"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/image3"
+            app:layout_constraintLeft_toRightOf="@id/image3"
+            app:layout_constraintTop_toTopOf="@id/image3" />
         <TextView
+            android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_marginRight="32dp"
-            android:layout_centerVertical="true"
-            android:text="01. ver"/>
-    </RelativeLayout>
+            android:gravity="end"
+            android:lineSpacingExtra="2sp"
+            android:textColor="#818181"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/image3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toRightOf="@id/image3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/image3"
+            tools:text="1.0.0" />
 
-    <RelativeLayout
-        android:id="@+id/rl_setting_04"
-        android:layout_marginTop="348dp"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:animateLayoutChanges="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/container4"
+        app:layout_constraintTop_toBottomOf="@id/container3"
         android:layout_width="match_parent"
         android:layout_height="64dp">
-
         <ImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="32dp"
+            android:id="@+id/image4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="32dp"
-            android:src="@drawable/more_btn_question"/>
+            android:src="@drawable/more_btn_question"
+            />
 
         <TextView
-            android:id="@+id/tv_setting_ToContact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="72dp"
-            android:textColor="#000000"
-            android:text="문의하기"/>
-        <ImageView
-            android:id="@+id/iv_setting_contact_btn"
+            android:layout_marginLeft="23dp"
+            android:text="문의하기"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/image4"
+            app:layout_constraintLeft_toRightOf="@id/image4"
+            app:layout_constraintTop_toTopOf="@id/image4" />
+
+        <ImageButton
+            android:id="@+id/contactOpenButton"
+            android:rotation="180"
+            android:layout_marginRight="28dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/btn_up_16"
+            android:padding="4dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="32dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/btn_down_16"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mt_setting_ToContact"
+        android:id="@+id/textField"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:visibility="invisible"
-        android:layout_width="295dp"
-        android:layout_height="96dp"
-        android:layout_marginTop="436dp"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
         android:layout_centerHorizontal="true"
-        app:boxBackgroundColor="#e6e6e6">
+        android:layout_marginTop="36dp"
+        android:visibility="invisible"
+        app:hintEnabled="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container4"
+        app:layout_constraintWidth_percent="0.8"
+        tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/contactEditText"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="start"
             android:hint="불편한 사항이 있으면 작성하신 후, 문의하기 버튼을 눌러주세요."
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+             />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_setting_ToContact_btn"
-        android:visibility="invisible"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="556dp">
 
-        <ImageView
-            android:layout_width="92dp"
-            android:layout_height="32dp"
-            android:layout_centerHorizontal="true"
-            android:src="#000000"/>
-    </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/contactButton"
+        android:layout_width="108dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:insetLeft="0dp"
+        android:text="문의하기"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="16dp"
 
-</RelativeLayout>
+
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:layout_constraintLeft_toLeftOf="@id/textField"
+        app:layout_constraintRight_toRightOf="@id/textField"
+        app:layout_constraintTop_toBottomOf="@id/textField" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

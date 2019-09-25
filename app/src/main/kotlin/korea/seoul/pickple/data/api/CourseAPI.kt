@@ -23,7 +23,7 @@ interface CourseAPI {
     @GET("course/tagSearch")
     fun getHashTags(@Path("tagName") keyword: String): Call<GetHashTagResponse>
 
-    @POST("course/enroll")
+    @POST("course/edit")
     @Multipart
     fun createCourse(
         @Part("courseName") name: String,

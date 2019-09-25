@@ -44,32 +44,32 @@ class CourseAPIAndroidTEST : KoinComponent {
 
 
 
-        val response = courseAPI.createCourse(
-            "이름",
-            "설명",
-            part,
-            1,
-            2,
-            3,
-            4,
-            5,
-            1f,
-            2f,
-            3f,
-            4f,
-            "tag1",
-            "tag2",
-            "tag3",
-            "tag4",
-            "tag5",
-            "2019-01-01",
-            SeoulDistrict.DOBONG.code,
-            1,
-            1,
-            "2억광년"
-        ).execute().body()!!
+            val response = courseAPI.createCourse(
+                "이름",
+                "설명",
+                part,
+                1,
+                2,
+                3,
+                4,
+                5,
+                1f,
+                2f,
+                3f,
+                4f,
+                "tag1",
+                "tag2",
+                "tag3",
+                "tag4",
+                "tag5",
+                "2019-01-01",
+                SeoulDistrict.DOBONG.code,
+                1,
+                1,
+                "2억광년"
+            ).execute().body()!!
 
-        debugE("ASD",response)
+        debugE(response)
 
 
     }
