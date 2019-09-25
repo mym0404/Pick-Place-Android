@@ -10,6 +10,11 @@
     tools:context=".ui.main.SplashActivity">
 
     <ImageView
+        android:scaleX="2"
+        android:scaleY="2"
+        android:alpha="0"
+        tools:alpha="1"
+        android:id="@+id/splashLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

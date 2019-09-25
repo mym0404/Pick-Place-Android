@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="@id/guideline" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:id="@+id/emailText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +56,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:id="@+id/passwordText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
         app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:inputType="textPassword"
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
