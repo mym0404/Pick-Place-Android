@@ -24,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
 
+        //TODO 그냥 넘어가게함
+        Intent(this@LoginActivity, MainActivity::class.java).apply {
+            startActivity(this)
+            finish()
+        }
+
         initView()
     }
 
@@ -78,6 +84,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
+
+        emailText.error = ""
+        passwordText.error = ""
 
         loginProgressBar.visibility = View.VISIBLE
 
