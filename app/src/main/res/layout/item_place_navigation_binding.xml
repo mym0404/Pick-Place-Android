@@ -11,21 +11,21 @@
             type="korea.seoul.pickple.ui.navigation.NavigationViewModel" />
         <variable
             name="item"
-            type="korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse.Data.CourseDTO" />
+            type="korea.seoul.pickple.data.api.response.mypage.ListMyLikePlaceResponse.Data.PlaceDTO" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> vm.onClickCourse(item)}"
+        android:onClick="@{() -> vm.onClickPlace(item)}"
         android:layout_width="88dp"
         android:layout_height="match_parent">
 
         <ImageView
             android:scaleType="centerCrop"
 
-            imageUrl="@{item.cThumbnail}"
+            imageUrl="@{item.placeThumbnail}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

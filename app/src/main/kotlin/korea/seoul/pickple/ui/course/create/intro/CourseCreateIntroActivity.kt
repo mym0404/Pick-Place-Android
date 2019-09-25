@@ -54,7 +54,7 @@ class CourseCreateIntroActivity : AppCompatActivity() {
 
                 val tagList = tagString.filterNot { it == ',' || it == ' ' }.split('#')
 
-                navigate(this@CourseCreateIntroActivity, NavigationArgs.CourseCreateArgs(title, thumbnail, description, tagList,false,null))
+                navigate(this@CourseCreateIntroActivity, NavigationArgs.CourseCreateArgs(title, thumbnail, description, tagList,false))
             }
 
             toastMsg.observeOnce(this@CourseCreateIntroActivity) {
