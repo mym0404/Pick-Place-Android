@@ -182,6 +182,7 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
     fun onClickCourseSaveButton() {
         _syncData.value = Once(true)
 
+
     }
 
     fun onClickPlaceBackground(place : Place) {

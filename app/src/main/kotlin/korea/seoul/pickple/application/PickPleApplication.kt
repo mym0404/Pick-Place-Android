@@ -47,6 +47,7 @@ class PickPleApplication : Application() {
         single { IntentUtil() }
         single { TokenUtil(get())}
         single { SPUtil(get())}
+        single { MultiPartUtil(get())}
     }
 
     private val apiModule = module {

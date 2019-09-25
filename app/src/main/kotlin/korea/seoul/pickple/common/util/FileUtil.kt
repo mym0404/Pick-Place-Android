@@ -9,12 +9,25 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.webkit.MimeTypeMap
 import okhttp3.MediaType
 
 /**
  * Created by mj on 22, September, 2019
  */
 class FileUtil(private val context : Application) {
+    fun getTypeOfFile(path : String) : MediaType? {
+        return MediaType.parse(getMimeType(path) ?: "")
+    }
+    fun getMimeType(url: String): String? {
+        var type: String? = null
+        val extension = MimeTypeMap.getFileExtensionFromUrl(url)
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        }
+        return type
+    }
+
     fun getPathFromUri(uri: Uri): String? {
 
         val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
@@ -36,7 +49,7 @@ class FileUtil(private val context : Application) {
 
                 val id = DocumentsContract.getDocumentId(uri)
                 val contentUri = ContentUris.withAppendedId(
-                    Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+                    Uri.parse("content://downloads/public_downloads"),id.toLong()
                 )
 
                 return getDataColumn(context, contentUri, null, null)
@@ -94,9 +107,6 @@ class FileUtil(private val context : Application) {
         return null
     }
 
-    fun getTypeOfFile(fileUri : Uri) : MediaType? {
-        return MediaType.parse(context.contentResolver.getType(fileUri) ?: "")
-    }
 
     /**
      * @param uri The Uri to check.

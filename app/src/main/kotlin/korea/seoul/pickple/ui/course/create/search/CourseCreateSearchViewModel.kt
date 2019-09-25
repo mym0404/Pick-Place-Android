@@ -17,6 +17,12 @@ class CourseCreateSearchViewModel(private val placeRepository: PlaceRepository) 
     //region State
     val query : MutableLiveData<String> = MutableLiveData("")
 
+    //region Data
+    private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
+    ))
+    val places : LiveData<List<Place>>
+        get() = _places
+    //endregion
 
     val filteredPlaces : MediatorLiveData<List<Place>> = MediatorLiveData<List<Place>>().apply {
         this.value = listOf()
@@ -39,12 +45,7 @@ class CourseCreateSearchViewModel(private val placeRepository: PlaceRepository) 
     }
     //endregion
 
-    //region Data
-    private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
-    ))
-    val places : LiveData<List<Place>>
-        get() = _places
-    //endregion
+
 
     //region Event
 
