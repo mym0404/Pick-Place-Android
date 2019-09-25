@@ -85,7 +85,7 @@ class PickPleApplication : Application() {
             return@single Interceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader("Authorization", tokenUtil.loadToken() ?: "" )
+                    .addHeader("token", tokenUtil.loadToken() ?: "" )
                     .build()
                 debugE(TAG,"token : ${tokenUtil.loadToken()}")
                 chain.proceed(request)
