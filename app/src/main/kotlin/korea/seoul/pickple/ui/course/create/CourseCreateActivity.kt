@@ -48,7 +48,7 @@ class CourseCreateActivity : AppCompatActivity() {
         initMap()
         initRecyclerView()
 
-        mViewModel.onSetDatas(args.title,args.thumbnail,args.description,args.tagList,args.onlyShow,args.course)
+        mViewModel.onSetDatas(args.title,args.onlyShow,args.course)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel

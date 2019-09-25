@@ -53,7 +53,7 @@ class NavigationActivity : AppCompatActivity() {
             addItemDecoration(LinearItemDecoration(this@NavigationActivity,16))
         }
         mBinding.recyclerViewPickPlace.apply {
-            adapter = NavigationCourseAdapter(mViewModel)
+            adapter = NavigationPickPlaceAdapter(mViewModel)
             addItemDecoration(LinearItemDecoration(this@NavigationActivity,16))
         }
         mBinding.recyclerViewReview.apply {
@@ -73,8 +73,10 @@ class NavigationActivity : AppCompatActivity() {
             }
             clickCourse.observeOnce(this@NavigationActivity) {course->
                 navigate(this@NavigationActivity,NavigationArgs.CourseCreateArgs(
-                    course.name, Uri.parse(""),course.description,course.tagList!!,true,course)
-                )
+                    course.cName,Uri.parse(course.cThumbnail),"",listOf(),true,course.courseIdx
+                ))
+            }
+            clickPlace.observeOnce(this@NavigationActivity) {
             }
             clickReview.observeOnce(this@NavigationActivity) {
 

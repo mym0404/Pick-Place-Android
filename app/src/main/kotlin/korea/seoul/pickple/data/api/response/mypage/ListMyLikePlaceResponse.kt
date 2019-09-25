@@ -32,11 +32,11 @@ data class ListMyLikePlaceResponse(
     data class Data(
         @SerializedName("info")
         @Expose(serialize = true, deserialize = true)
-        var info: List<Info>
+        var info: List<PlaceDTO>
     ) : Parcelable {
         @SuppressLint("ParcelCreator")
         @Parcelize
-        data class Info(
+        data class PlaceDTO(
             @SerializedName("placeIdx")
             @Expose(serialize = true, deserialize = true)
             var placeIdx: Int,

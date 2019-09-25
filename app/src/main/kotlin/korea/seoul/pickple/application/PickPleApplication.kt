@@ -136,7 +136,7 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course: Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel(get()) }
+        viewModel { CourseCreateViewModel(get(),get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }

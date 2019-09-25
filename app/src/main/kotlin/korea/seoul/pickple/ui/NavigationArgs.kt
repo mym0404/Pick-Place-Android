@@ -36,7 +36,7 @@ sealed class NavigationArgs {
 
     }
 
-    class CourseCreateArgs(val title : String, val thumbnail : Uri, val description : String, val tagList : List<String>, val onlyShow : Boolean = false,val course : Course?) : NavigationArgs() {
+    class CourseCreateArgs(val title : String, val thumbnail : Uri, val description : String, val tagList : List<String>, val onlyShow : Boolean = false,val course : Int = -1) : NavigationArgs() {
         companion object {
             const val COURSE_CREATE_ARG_COURSE="COURSE_CREATE_ARG_COURSE"
             const val COURSE_CREATE_ARG_ONLY_SHOW="COURSE_CREATE_ARG_ONLY_SHOW"
@@ -80,7 +80,7 @@ fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCrea
     intent.getStringExtra(COURSE_CREATE_ARG_DESCRIPTION),
     intent.getStringArrayListExtra(COURSE_CREATE_ARG_TAGLIST),
     intent.getBooleanExtra(NavigationArgs.CourseCreateArgs.COURSE_CREATE_ARG_ONLY_SHOW, false),
-    intent.getParcelableExtra<Course>(COURSE_CREATE_ARG_COURSE)
+    intent.getIntExtra(COURSE_CREATE_ARG_COURSE,-1)
 )
 fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateSearchArg()
 

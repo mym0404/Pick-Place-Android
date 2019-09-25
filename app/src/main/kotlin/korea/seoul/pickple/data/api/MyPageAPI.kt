@@ -18,6 +18,6 @@ interface MyPageAPI {
     fun listMyReview() : Call<ListMyReviewResponse>
 
     @GET("mypage/likePlace")
-    fun listMyLikePlace() : Call<ListMyLikePlaceResponse>
+    fun listPickPlace() : Call<ListMyLikePlaceResponse>
 
 }
