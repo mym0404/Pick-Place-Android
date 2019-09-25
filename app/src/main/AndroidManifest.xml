@@ -100,6 +100,7 @@
             android:exported="true" />
 
         <activity android:name=".ui.main.LoginActivity"/>
+        <activity android:name=".ui.login.TosActivity"/>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@
         android:layout_height="wrap_content" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
@@ -44,6 +45,7 @@
         android:fontFamily="@font/nanum_square_bold" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/more_icon_my"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,6 +74,7 @@
         android:textColor="@color/aqua_marine" />
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,6 +92,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:startIconTint="@color/blue_with_a_hint_of_purple"
         app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -140,6 +144,9 @@
         app:cornerRadius="15dp" />
 
     <TextView
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
         android:id="@+id/tv_MemberTermsConfrim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
