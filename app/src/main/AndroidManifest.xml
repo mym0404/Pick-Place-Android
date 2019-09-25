@@ -54,8 +54,7 @@
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />
-        <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
-        <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
+
 
         <activity
             android:name=".ui.course.intro.CourseIntroActivity"
@@ -102,7 +101,9 @@
         <activity android:name=".ui.main.LoginActivity"/>
         <activity android:name=".ui.login.TosActivity"/>
 
-        <activity android:name=".ui.setting.Setting_MemberInfoActivity"/>
+        <activity android:name=".ui.setting.SettingMemberInfoActivity"/>
+        <activity android:name=".ui.setting.Setting_MemberInfoChangePasswordActivity" />
+        <activity android:name=".ui.setting.Setting_MemberInfoEditNicknameActivity" />
     </application>
 
 </manifest>

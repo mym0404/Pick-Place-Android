@@ -47,7 +47,7 @@ class SettingActivity : AppCompatActivity() {
         }
 
         container1.setOnClickListener {
-            Intent(this@SettingActivity, Setting_MemberInfoActivity::class.java).apply { startActivity(this) }
+            Intent(this@SettingActivity, SettingMemberInfoActivity::class.java).apply { startActivity(this) }
         }
         container2.setOnClickListener {
             Intent(this@SettingActivity, TosActivity::class.java).apply { startActivity(this) }
