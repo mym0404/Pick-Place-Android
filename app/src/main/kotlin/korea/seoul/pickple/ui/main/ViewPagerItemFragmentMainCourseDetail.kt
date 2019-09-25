@@ -54,7 +54,6 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
                     toast("data success")
                 }
 
-
 //                adapter = RecyclerAdapterMainCourseDetail(this.context!!, )
             },
             failCallback = {
