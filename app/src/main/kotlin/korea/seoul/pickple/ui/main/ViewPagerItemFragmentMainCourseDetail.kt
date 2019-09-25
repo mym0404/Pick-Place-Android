@@ -10,12 +10,15 @@ import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.toast
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.api.MainAPI
+import korea.seoul.pickple.data.entity.Course
 import kotlinx.android.synthetic.main.viewpager_item_main_course_detail.*
 import org.koin.android.ext.android.inject
 
 class ViewPagerItemFragmentMainCourseDetail: Fragment() {
 
     private lateinit var adapter: RecyclerAdapterMainCourseDetail // 리사이클러뷰 어댑터
+    private lateinit var courseLatestList : List<Course>
+    var currentPosition = -1
 
     private val mainAPI : MainAPI by inject()
 
@@ -36,26 +39,18 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
 
     // 리사이클러뷰 설정
     private fun setRecyclerView() {
-        var list = listOf("12", "@3", "33")
-
         // @수민 추가
-        mainAPI.listMainCourses(2).callback(
+        mainAPI.listMainCourses(currentPosition).callback(
             successCallback = {
-//                var list = listOf<Course>((it.data?.getOrNull(0)?.getOrNull(0))
 
-                var course = it.data?.map {
-                    var courseList = it.getOrNull(0)?.info?.map {
-                        it.toEntity()
-                    } ?: listOf()
+                var courseList = it.data?.getOrNull(0)?.info?.map {
+                    it.toEntity()
+                } ?: listOf()
 
-                    adapter = RecyclerAdapterMainCourseDetail(this.context!!, courseList)
-                    main_course_detail_recycler_new_popular.adapter = adapter
+                courseLatestList = courseList // 최신순 리스트에 넣기
 
-                    toast("data success")
-                }
-
-
-//                adapter = RecyclerAdapterMainCourseDetail(this.context!!, )
+                adapter = RecyclerAdapterMainCourseDetail(this.context!!, courseList)
+                main_course_detail_recycler_new_popular.adapter = adapter
             },
             failCallback = {
                 toast("fail")
@@ -95,6 +90,9 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
 //                    }
 
                     // TODO RecyclerView Item 최신순으로 바뀌게
+                    adapter = RecyclerAdapterMainCourseDetail(context!!, courseLatestList)
+                    main_course_detail_recycler_new_popular.adapter = adapter
+                    adapter.notifyDataSetChanged()
                 }
                 else if (pos == 1) {
                     toast("인기순")
@@ -104,6 +102,7 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
                     }
 
                     // TODO RecyclerView Item 인기순으로 바뀌게
+                    adapter.notifyDataSetChanged()
                 }
             }
 

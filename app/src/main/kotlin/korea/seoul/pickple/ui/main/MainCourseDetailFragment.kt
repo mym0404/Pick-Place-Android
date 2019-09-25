@@ -23,7 +23,7 @@ class MainCourseDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = FragmentAdapterMainCourseDetail(this)
+        val adapter =  FragmentAdapterMainCourseDetail(this)
         frag_main_course_detail_viewpager2_horizontal.adapter = adapter
 
         setViewPagerOnPageChangeListener()
