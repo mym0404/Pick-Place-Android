@@ -102,8 +102,8 @@
         <activity android:name=".ui.login.TosActivity"/>
 
         <activity android:name=".ui.setting.SettingMemberInfoActivity"/>
-        <activity android:name=".ui.setting.Setting_MemberInfoChangePasswordActivity" />
-        <activity android:name=".ui.setting.Setting_MemberInfoEditNicknameActivity" />
+        <activity android:name=".ui.setting.SettingMemberInfoChangePasswordActivity" />
+        <activity android:name=".ui.setting.SettingMemberInfoEditNicknameActivity" />
     </application>
 
 </manifest>

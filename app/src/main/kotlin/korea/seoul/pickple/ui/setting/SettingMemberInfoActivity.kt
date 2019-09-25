@@ -32,11 +32,11 @@ class SettingMemberInfoActivity : AppCompatActivity() {
 
 
         container1.setOnClickListener {
-            Intent(this@SettingMemberInfoActivity,Setting_MemberInfoEditNicknameActivity::class.java).apply{startActivity(this)}
+            Intent(this@SettingMemberInfoActivity,SettingMemberInfoEditNicknameActivity::class.java).apply{startActivity(this)}
         }
         container2.setOnClickListener {  }
         container3.setOnClickListener {
-            Intent(this@SettingMemberInfoActivity,Setting_MemberInfoChangePasswordActivity::class.java).apply{startActivity(this)}
+            Intent(this@SettingMemberInfoActivity,SettingMemberInfoChangePasswordActivity::class.java).apply{startActivity(this)}
         }
 
         setRepository.getUserInfo()
