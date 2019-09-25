@@ -5,7 +5,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import korea.seoul.pickple.data.api.dto.CourseDTO
-import korea.seoul.pickple.data.api.dto.ReviewDTO
 import kotlinx.android.parcel.Parcelize
 
 
@@ -33,3 +32,5 @@ data class MainListResponse(
         var info: List<CourseDTO>
     ) : Parcelable
 }
+
+

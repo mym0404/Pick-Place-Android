@@ -2,6 +2,7 @@ package korea.seoul.pickple.data.repository.implementation
 
 import korea.seoul.pickple.common.util.TokenUtil
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.data.api.UserAPI
 import korea.seoul.pickple.data.api.request.user.SignInRequest
 import korea.seoul.pickple.data.api.request.user.SignUpRequest
@@ -15,6 +16,7 @@ class UserRepositoryImpl(private val userAPI : UserAPI,private val tokenUtil : T
             .callback({
                 if(it.success) {
                     it.tokenDatas?.run {
+                        debugE("TAG","save Token!")
                         tokenUtil.saveToken(this.token)
                     }
                     callback(true,it.message)

@@ -3,7 +3,6 @@ package korea.seoul.pickple.data.api.dto
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import korea.seoul.pickple.data.entity.Review
 import kotlinx.android.parcel.Parcelize
 
 /**
@@ -40,7 +39,4 @@ data class ReviewDTO(
     @Expose(serialize = true, deserialize = true)
     var placeIdx: Int?
 ) : Parcelable {
-    fun toEntity() : Review {
-        return Review(reviewIdx,comment,nickname, Review.Emoticon.parse(emotion))
-    }
 }

@@ -14,7 +14,6 @@ interface UserAPI {
     fun signIn(@Body request : SignInRequest) : Call<SignInResponse>
     @POST("auth/signup")
     fun signUp(@Body request : SignUpRequest) : Call<BaseResponse>
-
     @GET("auth/finder/{email}")
     fun findPassword() : Call<BaseResponse>
 }

@@ -42,6 +42,12 @@ object Libs {
       Versions.androidx_databinding
 
   /**
+   * http://developer.android.com/tools/extras/support-library.html
+   */
+  const val legacy_support_v4: String = "androidx.legacy:legacy-support-v4:" +
+      Versions.legacy_support_v4
+
+  /**
    * https://developer.android.com/topic/libraries/architecture/index.html
    */
   const val lifecycle_compiler: String = "androidx.lifecycle:lifecycle-compiler:" +
@@ -186,6 +192,12 @@ object Libs {
       Versions.pageindicatorview
 
   /**
+   * https://github.com/square/okhttp
+   */
+  const val logging_interceptor: String = "com.squareup.okhttp3:logging-interceptor:" +
+      Versions.logging_interceptor
+
+  /**
    * https://github.com/square/retrofit/
    */
   const val converter_gson: String = "com.squareup.retrofit2:converter-gson:" +
@@ -211,6 +223,11 @@ object Libs {
   const val de_fayard_buildsrcversions_gradle_plugin: String =
       "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
       Versions.de_fayard_buildsrcversions_gradle_plugin
+
+  /**
+   * https://github.com/hdodenhof/CircleImageView
+   */
+  const val circleimageview: String = "de.hdodenhof:circleimageview:" + Versions.circleimageview
 
   /**
    * http://junit.org
@@ -251,6 +268,12 @@ object Libs {
   /**
    * https://kotlinlang.org/
    */
+  const val kotlin_reflect: String = "org.jetbrains.kotlin:kotlin-reflect:" +
+      Versions.org_jetbrains_kotlin
+
+  /**
+   * https://kotlinlang.org/
+   */
   const val kotlin_stdlib_jdk7: String = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:" +
       Versions.org_jetbrains_kotlin
 
@@ -271,15 +294,4 @@ object Libs {
    * http://robolectric.org
    */
   const val robolectric: String = "org.robolectric:robolectric:" + Versions.robolectric
-
-
-
-  // @수민) 이거 추가 ,,?
-  const val kotlin_reflect : String = "org.jetbrains.kotlin:kotlin-reflect:" +
-          Versions.org_jetbrains_kotlin
-
-  /**
-   * CircleImageView
-   * */
-  const val circle_image_view: String = "de.hdodenhof:circleimageview:" + Versions.circleImageViewVersion
 }

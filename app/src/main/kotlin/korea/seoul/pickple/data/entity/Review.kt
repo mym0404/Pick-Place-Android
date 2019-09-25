@@ -6,10 +6,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Review(
-    /**
-     * Review의 아이디
-     * */
     val id: Int,
+
+    val thumbnail : String,
+
+    val name : String,
+
+    val likeCount : Int,
+
+    val reviewCount : Int,
 
     /**
      * Review의 내용
@@ -17,6 +22,8 @@ data class Review(
     val comment: String,
 
     val commenter: String,
+
+    val createdAt : String,
 
     val emotion: Emoticon
 ) : Parcelable {
