@@ -21,16 +21,6 @@ class SettingMemberInfoChangePasswordActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        setRepository.getUserInfo()
-            .callback({
-                it.data?.getOrNull(0)?.let { user ->
-                    editText1.setText(user.nickname)
-                }
-            }, {
-
-            }, {
-
-            })
 
         backButton.setOnClickListener {
             onBackPressed()
