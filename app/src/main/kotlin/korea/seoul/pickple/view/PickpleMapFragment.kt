@@ -16,10 +16,10 @@ import com.google.maps.android.PolyUtil
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
-import korea.seoul.pickple.data.api.DirectionsResponse
+import korea.seoul.pickple.data.api.response.directions.DirectionsResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
-import korea.seoul.pickple.data.repository.DirectionsRepository
+import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import korea.seoul.pickple.databinding.FragmentPickpleMapBinding
 import korea.seoul.pickple.ui.course.map.MapActivity
 import org.koin.android.ext.android.get
@@ -55,9 +55,13 @@ final class PickpleMapFragment : Fragment() {
          *
          * @param zoom 지도의 scale 정도
          */
-        fun setZoom(zoom: Float) {
+        fun setZoom(zoom: Float, animate: Boolean = false) {
             tryMapRunnable {
-                mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                if (animate) {
+                    mMap?.animateCamera(CameraUpdateFactory.zoomTo(zoom))
+                } else {
+                    mMap?.moveCamera(CameraUpdateFactory.zoomTo(zoom))
+                }
             }
         }
 
@@ -74,9 +78,9 @@ final class PickpleMapFragment : Fragment() {
          * @param places 장소들
          * @param drawPolyline 장소들을 잇는 선을 그을 것인지
          */
-        fun updateLocationAndZoomScale(places: List<Place>,drawPolyline : Boolean = false) {
+        fun updateLocationAndZoomScale(places: List<Place>, drawPolyline: Boolean = false) {
             tryMapRunnable {
-                updateMapPositionAndScale(places,drawPolyline)
+                updateMapPositionAndScale(places, drawPolyline)
             }
         }
 
@@ -88,8 +92,12 @@ final class PickpleMapFragment : Fragment() {
         fun setMyLocationAsync() {
             tryMapRunnable {
 
-                fusedClient.lastLocation.addOnSuccessListener {location->
-                    mMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude,location.longitude)))
+                fusedClient.lastLocation.addOnSuccessListener { location: android.location.Location? ->
+
+                    location?.let { location ->
+                        mMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude)))
+                    }
+
                 }
             }
         }
@@ -97,9 +105,25 @@ final class PickpleMapFragment : Fragment() {
         /**
          * 마커를 클릭했을 때 마커를 반환해주는 콜백 등록
          */
-        fun setMarkerClickedListener(callback : (marker : Marker) -> Unit) {
+        fun setMarkerClickedListener(callback: (marker: Marker) -> Unit) {
             this@PickpleMapFragment.markerClickListener = callback
 
+        }
+
+        fun addMarker(place: Place) {
+            if (place.location == null) return
+
+            addMarker(place.location!!)
+        }
+
+        fun addMarker(location: Location) {
+            addMarker(location.toLatLng())
+        }
+
+        fun addMarker(latlng: LatLng) {
+            tryMapRunnable {
+                mMap?.addMarker(MarkerOptions().position(latlng))
+            }
         }
 
     }
@@ -141,11 +165,9 @@ final class PickpleMapFragment : Fragment() {
 
     private val mapUtil: MapUtil by inject()
 
-    private lateinit var fusedClient : FusedLocationProviderClient
+    private lateinit var fusedClient: FusedLocationProviderClient
 
-    private var markerClickListener : ((Marker) -> Unit)? = null
-
-
+    private var markerClickListener: ((Marker) -> Unit)? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -172,7 +194,6 @@ final class PickpleMapFragment : Fragment() {
         }, mutableListOf(android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION))
 
 
-
     }
 
     /**
@@ -195,7 +216,7 @@ final class PickpleMapFragment : Fragment() {
 
 
 
-            mMap?.setOnMarkerClickListener {marker->
+            mMap?.setOnMarkerClickListener { marker ->
                 this@PickpleMapFragment.markerClickListener?.invoke(marker)
                 true
             }
@@ -235,10 +256,11 @@ final class PickpleMapFragment : Fragment() {
         mapUtil.autoZoomLevel(places)?.run {
             try {
                 mMap?.moveCamera(this)
-            }catch (t : Throwable){}
+            } catch (t: Throwable) {
+            }
         }
 
-        if(drawPolyline) {
+        if (drawPolyline) {
             val repo: DirectionsRepository = get()
 
             for (i in 0 until places.size - 1) {
@@ -258,8 +280,8 @@ final class PickpleMapFragment : Fragment() {
                             val r = response.body()!!
 
                             val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-
-                            val option = PolylineOptions().color(Color.CYAN).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+                            r
+                            val option = PolylineOptions().color(Color.BLACK).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
                             mMap?.addPolyline(option)
                         } catch (t: Throwable) {
                             Log.e(TAG, "fail to add polyline")

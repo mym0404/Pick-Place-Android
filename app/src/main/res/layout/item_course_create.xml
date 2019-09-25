@@ -16,6 +16,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{() -> vm.onClickPlaceBackground(item)}"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
@@ -76,6 +77,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:onClick="@{() -> vm.onClickItemDeleteButton(item)}"
             android:visibility_animate="@{vm.editMode}"
             android:layout_marginRight="24dp"
             android:src="@drawable/navi_btn_back_b"
@@ -88,6 +90,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:onClick="@{() -> vm.onClickItemMoreButton(item)}"
             android:visibility_animate="@{vm.editMode}"
             android:layout_marginRight="24dp"
             android:src="@drawable/navi_btn_back_b"

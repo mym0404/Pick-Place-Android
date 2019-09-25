@@ -36,7 +36,7 @@ class ILoveInstrumentationTest {
 
         scenario.moveToState(Lifecycle.State.RESUMED)
 
-        val tvInteraction = onView(withId(R.id.textView)).perform(SetTextViewText(message))
+        val tvInteraction = onView(withId(R.id.txtCourseName)).perform(SetTextViewText(message))
 
         Thread.sleep((message.count() + 3) * 600L)
 

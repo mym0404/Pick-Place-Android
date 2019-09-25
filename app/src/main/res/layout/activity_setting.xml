@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.setting.SettingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/iv_SettingPage_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/navi_btn_back_b"/>
+
+        <ImageView
+            android:id="@+id/iv_SetttingPage_close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/navi_btn_close_b"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginLeft="32dp"
+        android:src="@drawable/more_btn_setting"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_01"
+        android:layout_marginTop="156dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/more_btn_my"/>
+        <TextView
+            android:id="@+id/tv_MemberInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72sp"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="회원정보"/>
+        <TextView
+            android:id="@+id/tv_setting_member_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_centerVertical="true"
+            android:text="email"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_02"
+        android:layout_marginTop="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/more_btn_rules"/>
+
+        <TextView
+            android:id="@+id/tv_setting_UsingTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="이용약관"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_03"
+        android:layout_marginTop="284dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/more_btn_ver"/>
+
+        <TextView
+            android:id="@+id/tv_setting_VersionInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="버전정보"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_centerVertical="true"
+            android:text="01. ver"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_setting_04"
+        android:layout_marginTop="348dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/more_btn_question"/>
+
+        <TextView
+            android:id="@+id/tv_setting_ToContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="2sp"
+            android:text="문의하기"/>
+        <ImageView
+            android:id="@+id/iv_setting_contact_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_down_16"/>
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mt_setting_ToContact"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:visibility="invisible"
+        android:layout_width="295dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="436dp"
+        android:layout_centerHorizontal="true"
+        app:boxBackgroundColor="@color/colorWhite_1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:gravity="start"
+            android:hint="불편한 사항이 있으면 작성하신 후, 문의하기 버튼을 눌러주세요."
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mt_setting_ToContact_btn"
+        android:visibility="invisible"
+        android:layout_width="108dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="556dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/colorWhite_1"
+        android:insetLeft="0dp"
+
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        android:minWidth="60dp"
+
+        android:padding="0dp"
+        android:singleLine="true"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:text="문의하기"
+        android:textColor="@color/colorBlack"
+        android:lineSpacingExtra="7sp"
+        android:textSize="13sp"
+        app:cornerRadius="15dp" />
+
+</RelativeLayout>

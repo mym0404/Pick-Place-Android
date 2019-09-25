@@ -5,17 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".SplashActivity">
+    tools:context=".ui.main.SplashActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="135dp"
+        android:src="@drawable/logo_09"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="306dp"
-        android:text="pickple"
-        android:textSize="37sp"
-        android:textColor="#000000"
-        android:lineSpacingExtra="-15sp"/>
-
+        android:layout_marginTop="306dp" />
 
 </RelativeLayout>

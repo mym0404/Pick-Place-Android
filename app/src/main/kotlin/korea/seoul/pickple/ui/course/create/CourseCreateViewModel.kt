@@ -3,15 +3,21 @@ package korea.seoul.pickple.ui.course.create
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.net.Uri
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
-import korea.seoul.pickple.data.entity.Location
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
+import kotlin.concurrent.thread
 
-class CourseCreateViewModel : ViewModel() {
+class CourseCreateViewModel(private val placeRepository: PlaceRepository) : ViewModel() {
+
+    private val TAG = CourseCreateViewModel::class.java.simpleName
 
     //region State
     private val _bottomExpanded: MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
@@ -43,10 +49,18 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
     //region Data
+    
+    private val _title : MutableLiveData<String> = MutableLiveData("")
+    val title : LiveData<String>
+        get() = _title
+
+    private val _onlyShow : MutableLiveData<Boolean> = MutableLiveData(false)
+    val onlyShow : LiveData<Boolean>
+        get() = _onlyShow
 
     private val _places : MutableLiveData<List<Place>> = MutableLiveData(listOf(
-        Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
-        Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
+//        Place(1,Place.Type.FOOD,"사당역","경복경복",null,Location(37.4766,126.9816),null,999,"url"),
+//        Place(1,Place.Type.FOOD,"서울","경복경복",null,Location(37.5536,126.9696),null,999,"url")
     ))
     val places : LiveData<List<Place>>
         get() = _places
@@ -56,6 +70,10 @@ class CourseCreateViewModel : ViewModel() {
     //endregion
 
     //region Event
+    private val _clickBackButton : MutableLiveData<Once<Boolean>> = MutableLiveData()
+    val clickBackButton : LiveData<Once<Boolean>>
+        get() = _clickBackButton
+
     private val _clickPlaceAdd : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
     val clickPlaceAdd : LiveData<Once<Boolean>>
         get() = _clickPlaceAdd
@@ -64,22 +82,78 @@ class CourseCreateViewModel : ViewModel() {
     val clickAllDelete : LiveData<Once<Boolean>>
         get() = _clickAllDelete
 
+    /**
+     * For Sync with RecyclerViewAdapter because of ItemTouchHelper move
+     */
     private val _syncData : MutableLiveData<Once<Boolean>> = MutableLiveData<Once<Boolean>>()
     val syncData : LiveData<Once<Boolean>>
         get() = _syncData
+
+    private val _appendFailDuplicatePlace : MutableLiveData<Once<Place>> = MutableLiveData()
+    val appendFailDuplicatePlace : LiveData<Once<Place>>
+        get() = _appendFailDuplicatePlace
+
+    private val _appendPlaceSuccess : MutableLiveData<Once<Place>> = MutableLiveData()
+    val appendPlaceSuccess : LiveData<Once<Place>>
+        get() = _appendPlaceSuccess
+
+    private val _clickPlaceBackground : MutableLiveData<Once<Place>> = MutableLiveData()
+    val clickPlaceBackground : LiveData<Once<Place>>
+        get() = _clickPlaceBackground
     //endregion
 
 
-    private fun setDatas() {
 
+
+    fun onAppendPlace(place : Place) {
+        //중복
+        if((this.places.value ?: listOf()).any { it.id == place.id }) {
+            _appendFailDuplicatePlace.value = Once(place)
+            return
+        }
+
+        this._places.value = (this.places.value ?: listOf()) + listOf(place)
+        _appendPlaceSuccess.value = Once(place)
     }
 
     fun syncDataWith(items : List<Place>) {
         _places.value = items
     }
 
+    fun onSetDatas(title : String, thumbnail : Uri, description : String, tagList : List<String>, onlyShow : Boolean, course : Course?) {
+        _title.value = title
+        _onlyShow.value = onlyShow
+
+        if(onlyShow && course != null) {
+            debugE(TAG,"asd")
+
+            thread {
+
+                try {
+                    var places = listOf<Place>()
+
+                    course.places?.forEach {
+                        placeRepository.getPlace(it).execute().body()?.placeData?.toEntity()?.let {
+                            places += it
+                        }
+
+                    }
+
+                    _places.postValue(places)
+                }catch(t : Throwable) {
+                    debugE(TAG,t)
+                }
+            }
+
+
+        }
+    }
 
     //region Event
+    fun onClickBackButton() {
+        _clickBackButton.value = Once(true)
+    }
+
     fun onClickExpandButton() {
         _bottomExpanded.value = !(bottomExpanded.value!!)
     }
@@ -89,6 +163,7 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     fun onClickPlaceAddButton() {
+        _syncData.value = Once(true)
         _clickPlaceAdd.value = Once(true)
     }
 
@@ -97,8 +172,22 @@ class CourseCreateViewModel : ViewModel() {
 
     }
 
+    fun onClickPlaceBackground(place : Place) {
+        _clickPlaceBackground.value = Once(place)
+    }
+
+    fun onClickItemMoreButton(place : Place) {
+
+    }
+    fun onClickItemDeleteButton(place : Place) {
+        _syncData.value = Once(true)
+
+        _places.value = places.value!! - place
+    }
+
 
     fun onClickAllDeleteButton() {
+        _syncData.value = Once(true)
         _clickAllDelete.value = Once(true)
     }
     fun allDelete() {
@@ -106,6 +195,8 @@ class CourseCreateViewModel : ViewModel() {
     }
 
     //endregion
+
+
 
 }
 

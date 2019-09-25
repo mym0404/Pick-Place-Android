@@ -4,6 +4,12 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#b5e64c</color>
 
+    <color name="greyish_brown">#3c3c3c</color>
+    <color name="blue_with_a_hint_of_purple">#5340c1</color>
+    <color name="aqua_marine">#2ae5bd</color>
+    <color name="colorWhite_1">#ffffff</color>
+    <color name="colorLightGray">#c0c0c0</color>
+    <color name="colorGray">#818181</color>
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
     <color name="colorTransparent">#0000</color>

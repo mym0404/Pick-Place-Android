@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.navigation.review.NavigationReviewActivity">
+
+    <ImageButton
+        android:id="@+id/act_navi_review_list_ibtn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/navi_btn_back_b"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/act_navi_review_list_img_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="38dp"
+        android:src="@drawable/more_btn_review"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/act_navi_review_list_ibtn_back" />
+
+    <TextView
+        android:id="@+id/act_navi_review_list_tv_my_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="내 후기 보기"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/act_navi_review_list_img_review"
+        app:layout_constraintStart_toEndOf="@id/act_navi_review_list_img_review"
+        app:layout_constraintTop_toTopOf="@id/act_navi_review_list_img_review" />
+
+    <TextView
+        android:id="@+id/act_navi_review_list_tv_review_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="120"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/act_navi_review_list_tv_my_review"
+        app:layout_constraintStart_toEndOf="@id/act_navi_review_list_tv_my_review"
+        app:layout_constraintTop_toTopOf="@id/act_navi_review_list_tv_my_review" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/act_navi_review_list_recycler_review"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="26dp"
+        android:background="#f4f4f5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/act_navi_review_list_img_review"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

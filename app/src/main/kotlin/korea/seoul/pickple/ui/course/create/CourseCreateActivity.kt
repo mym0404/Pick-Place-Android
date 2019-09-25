@@ -10,19 +10,21 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
+import korea.seoul.pickple.common.extensions.toast
+import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
-import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ActivityCourseCreateBinding
+import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
-import korea.seoul.pickple.ui.navigation.NavigationArgs
-import korea.seoul.pickple.ui.navigation.navigate
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
-import kotlin.math.sqrt
 
 class CourseCreateActivity : AppCompatActivity() {
 
@@ -34,16 +36,19 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
 
+    private val mMapUtil : MapUtil by inject()
+
+    private val args : NavigationArgs.CourseCreateArgs by lazy{parseIntent(intent)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityCourseCreateBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
 
-
-
         initMap()
         initRecyclerView()
 
+        mViewModel.onSetDatas(args.title,args.thumbnail,args.description,args.tagList,args.onlyShow,args.course)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel
@@ -68,10 +73,12 @@ class CourseCreateActivity : AppCompatActivity() {
             setMarkerClickedListener { marker ->
 
                 toLocation(marker)
-                if(mViewModel.detailMode.value != true) {
+                if(mViewModel.detailMode.value != true && !mViewModel.onlyShow.value!!) {
                     mViewModel.detailMode.value = true
                 }
             }
+
+            setMyLocationAsync()
         }
     }
 
@@ -98,6 +105,10 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         mViewModel.apply {
+
+            clickBackButton.observeOnce(this@CourseCreateActivity) {
+                onBackPressed()
+            }
 
             places.observe(this@CourseCreateActivity, Observer { places ->
                 mBinding.pageIndicatorView.count = places.size
@@ -142,7 +153,7 @@ class CourseCreateActivity : AppCompatActivity() {
             })
 
             clickPlaceAdd.observeOnce(this@CourseCreateActivity) {
-                navigate(this@CourseCreateActivity,NavigationArgs.CourseCreateSearchArg(), CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
+                navigate(this@CourseCreateActivity, NavigationArgs.CourseCreateSearchArg(), CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE)
             }
 
             clickAllDelete.observeOnce(this@CourseCreateActivity) {
@@ -161,15 +172,31 @@ class CourseCreateActivity : AppCompatActivity() {
                 }
             }
 
+            appendFailDuplicatePlace.observeOnce(this@CourseCreateActivity) {place->
+                toast("중복된 장소를 추가할 수 없습니다.")
+            }
+
+            appendPlaceSuccess.observeOnce(this@CourseCreateActivity) { place->
+                mMapFragment.get()?.getController()?.run {
+                    addMarker(place)
+                    updateLocationAndZoomScale(mViewModel.places.value!!,false)
+                }
+
+            }
+
+            clickPlaceBackground.observeOnce(this@CourseCreateActivity) {place->
+                toLocation(place)
+                mViewModel.detailMode.value = true
+            }
+
+
         }
     }
 
-    private fun toLocation(location: Location) {
-
-    }
 
     private fun toLocation(place: Place) {
         place.location?.let { location ->
+            mMapFragment.get()?.getController()?.setZoom(15f,true)
             mMapFragment.get()?.getController()?.setLocation(location,true)
         }
     }
@@ -179,26 +206,16 @@ class CourseCreateActivity : AppCompatActivity() {
 
         if (places.isEmpty()) return
 
-        getNearestPlaceWithMarker(places, marker)?.let { place ->
+        mMapUtil.getNearestPlaceWithMarker(places, marker)?.let { place ->
             mViewModel.curPlace.value = place
+            mMapFragment.get()?.getController()?.setZoom(15f,true)
             mMapFragment.get()?.getController()?.setLocation(place.location!!, true)
         }
 
 
     }
 
-    private fun getNearestPlaceWithMarker(places: List<Place>, marker: Marker): Place? {
-        return places.minBy {
-            val lat = it.location?.latitude ?: 100.0
-            val lng = it.location?.longitude ?: 100.0
 
-            val markerLat = marker.position.latitude
-            val markerLng = marker.position.longitude
-
-
-            sqrt((lat - markerLat) * (lat - markerLat) + (lng - markerLng) * (lng - markerLng))
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -208,16 +225,19 @@ class CourseCreateActivity : AppCompatActivity() {
             CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE-> {
                 when(resultCode) {
                     CourseCreateSearchActivity.COURSE_SEARCH_NONE_RESULT_CODE-> {
-
                     }
                     CourseCreateSearchActivity.COURSE_SEARCH_WITH_RESULT_CODE-> {
-
                         val selectedPlace = data?.getParcelableExtra<Place>(CourseCreateSearchActivity.EXTRA_SELECTED_PLACE_CODE)
+                        selectedPlace?.let{place-> appendPlaceToList(place)}
                     }
                 }
             }
         }
 
+    }
+
+    private fun appendPlaceToList(place : Place) {
+        mViewModel.onAppendPlace(place)
     }
 
     override fun onBackPressed() {

@@ -19,25 +19,44 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.main.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.main.SignUpActivity"   android:exported="true"/>
+        <activity android:name=".ui.main.MemberTermsActivity"></activity>
+        <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
+        <activity android:name=".ui.main.FindingPasswordActivity" />
         <activity
-            android:name=".ui.course.place_detail.PlaceDetailActivity"
+            android:name=".ui.navigation.NavigationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
+            android:exported="true" />
+        <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
+        <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
+
+        <activity
+            android:name=".ui.course.intro.CourseIntroActivity"
             android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <!-- 테스트 라이브러리 사용 -->
+            android:value="@string/google_maps_key" /> <!-- 테스트 라이브러리 사용 -->
         <uses-library
             android:name="android.test.runner"
-            android:required="false" />
-
-        <!-- 구글 API 라이브러리 호환성 -->
+            android:required="false" /> <!-- 구글 API 라이브러리 호환성 -->
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
 
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
@@ -57,24 +76,22 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".ui.course.map.MapActivity"
             android:exported="true" />
-
-
         <activity
-            android:name=".ui.course.simple_intro.CourseSimpleIntroActivity"
+            android:name=".ui.course.create.CourseCreateActivity"
+            android:exported="true" />
+        <activity android:name=".ui.course.create.search.CourseCreateSearchActivity" />
+        <activity
+            android:name=".ui.course.create.intro.CourseCreateIntroActivity"
             android:exported="true" />
 
+        <activity android:name=".ui.setting.SettingActivity"/>
 
-        <activity android:name=".ui.course.create.CourseCreateActivity" android:exported="true"/>
+        <activity android:name=".ui.navigation.course.NavigationCourseActivity" android:exported="true"/>
 
-        <activity android:name=".ui.course.unite_intro.UniteCourseActivity"
-            android:exported="true"/>
-
-        <activity android:name=".ui.course.create.search.CourseCreateSearchActivity"/>
+        <activity android:name=".ui.navigation.review.NavigationReviewActivity" android:exported="true"/>
     </application>
 
 </manifest>

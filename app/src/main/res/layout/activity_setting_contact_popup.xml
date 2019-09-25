@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.FindingPassword_PopUp_Activity">
+
+    <RelativeLayout
+        android:layout_width="311dp"
+        android:layout_height="158dp"
+        android:layout_marginTop="279dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_white_border">
+
+        <TextView
+            android:id="@+id/tv_setting_contact_alarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginLeft="24dp"
+            android:text="알림"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:lineSpacingExtra="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_setting_contact_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:layout_marginLeft="24dp"
+            android:text="담당자에게 전달해드렸습니다."
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:lineSpacingExtra="16sp"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="117.5dp"
+            android:background="#c0c0c0"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_setting_contact_popup_ok"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/aqua_marine"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="16sp"
+                android:textColor="@color/colorWhite_1"
+                android:lineSpacingExtra="16sp"
+                android:text="OK"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

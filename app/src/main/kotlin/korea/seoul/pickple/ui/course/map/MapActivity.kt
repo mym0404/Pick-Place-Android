@@ -7,9 +7,9 @@ import androidx.lifecycle.Observer
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.FakeCourseRepository
+import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.databinding.ActivityMapBinding
-import korea.seoul.pickple.ui.navigation.parseIntent
+import korea.seoul.pickple.ui.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
