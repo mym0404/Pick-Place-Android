@@ -143,7 +143,7 @@ class PickPleApplication : Application() {
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
         viewModel { NavigationViewModel(get(),get()) }
-        viewModel { NavigationCourseViewModel() }
+        viewModel { (type : Course.Type) -> NavigationCourseViewModel(type,get()) }
     }
 
     override fun onCreate() {

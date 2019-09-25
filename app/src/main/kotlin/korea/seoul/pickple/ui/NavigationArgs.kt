@@ -3,6 +3,7 @@ package korea.seoul.pickple.ui
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Parcelable
 import android.view.View
 import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
@@ -14,6 +15,7 @@ import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_C
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TAGLIST
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_THUMBNAIL
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_TITLE
+import korea.seoul.pickple.ui.NavigationArgs.NavigationCourseArg.Companion.NAVIGATION_COURSE_ARG_TYPE
 import korea.seoul.pickple.ui.course.create.CourseCreateActivity
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroActivity
 import korea.seoul.pickple.ui.course.create.search.CourseCreateSearchActivity
@@ -21,6 +23,7 @@ import korea.seoul.pickple.ui.course.intro.CourseIntroActivity
 import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesActivity
 import korea.seoul.pickple.ui.course.intro.all_review.ShowAllReviewActivity
 import korea.seoul.pickple.ui.course.map.MapActivity
+import korea.seoul.pickple.ui.navigation.course.NavigationCourseActivity
 
 sealed class NavigationArgs {
 
@@ -65,6 +68,13 @@ sealed class NavigationArgs {
             const val SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW = "SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW"
         }
     }
+
+    class NavigationCourseArg(val type : Course.Type) : NavigationArgs() {
+        companion object {
+            const val NAVIGATION_COURSE_ARG_TYPE = "NAVIGATION_COURSE_ARG_TYPE"
+        }
+    }
+
 }
 
 //계속 추가 요망
@@ -87,6 +97,9 @@ fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.Cour
 fun CourseIntroActivity.parseIntent(intent: Intent) = NavigationArgs.CourseIntroArg(intent.getIntExtra(NavigationArgs.CourseIntroArg.COURSE_INTRO_ARG_COURSE_ID, 0))
 fun ShowAllCoursesActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllCourseArg()
 fun ShowAllReviewActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllReviewArg(intent.getBooleanExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, false))
+fun NavigationCourseActivity.parseIntent(intent : Intent) = NavigationArgs.NavigationCourseArg(
+    intent.getParcelableExtra(NAVIGATION_COURSE_ARG_TYPE)
+)
 
 
 /**
@@ -120,6 +133,9 @@ fun navigate(
         is NavigationArgs.ShowAllCourseArg -> Intent(curActivity, ShowAllCoursesActivity::class.java)
         is NavigationArgs.ShowAllReviewArg -> Intent(curActivity, ShowAllReviewActivity::class.java).apply {
             putExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, arg.isCourseReview)
+        }
+        is NavigationArgs.NavigationCourseArg -> Intent(curActivity,NavigationCourseActivity::class.java).apply {
+            putExtra(NavigationArgs.NavigationCourseArg.NAVIGATION_COURSE_ARG_TYPE,arg.type as Parcelable)
         }
     }
 
