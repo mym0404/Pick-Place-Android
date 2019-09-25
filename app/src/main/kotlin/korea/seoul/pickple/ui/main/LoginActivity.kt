@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.SPUtil
+import korea.seoul.pickple.common.widget.AsteriskPasswordTransformationMethod
 import korea.seoul.pickple.data.repository.interfaces.UserRepository
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
@@ -27,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        passwordEditText.transformationMethod = AsteriskPasswordTransformationMethod()
+
         spUtil.getString(SPUtil.SPKeys.LAST_LOGIN_EMAIL)?.let {
             emailEditText.setText(it)
         }
