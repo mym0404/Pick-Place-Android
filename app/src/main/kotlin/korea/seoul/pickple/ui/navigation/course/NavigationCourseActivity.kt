@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.databinding.ActivityNavigationCourseBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import korea.seoul.pickple.ui.parseIntent
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 /**
  * Created by mj on 23, September, 2019
@@ -14,12 +16,18 @@ class NavigationCourseActivity : AppCompatActivity() {
 
     private lateinit var mBinding : ActivityNavigationCourseBinding
 
-    private val mViewModel : NavigationCourseViewModel by viewModel()
+    private lateinit var mViewModel : NavigationCourseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityNavigationCourseBinding.inflate(LayoutInflater.from(this))
         setContentView(mBinding.root)
+
+        val arg = parseIntent(intent)
+        mViewModel = getViewModel {
+            parametersOf(arg.type)
+        }
+
 
         mBinding.lifecycleOwner = this
         mBinding.vm = mViewModel

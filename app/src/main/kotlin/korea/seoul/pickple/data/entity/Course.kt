@@ -110,7 +110,8 @@ data class Course(
      *
      * e.g.)음식점, 고궁 ...
      */
-    enum class Type(val type : Int) {
+    @Parcelize
+    enum class Type(val type : Int) : Parcelable {
         UNKNOWN(-1),
         ORAEGAGE(0),
         KOREA_TRADITIONAL(1),

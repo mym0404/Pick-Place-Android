@@ -248,6 +248,8 @@
 
 
     <com.google.android.material.button.MaterialButton
+        tools:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/contactButton"
         android:layout_width="108dp"
         android:layout_height="32dp"

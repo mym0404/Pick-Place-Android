@@ -10,6 +10,7 @@ import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.databinding.ActivityNavigationBinding
 import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.navigation.review.NavigationReviewActivity
 import korea.seoul.pickple.ui.setting.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -38,6 +39,11 @@ class NavigationActivity : AppCompatActivity() {
         }
         mBinding.actNavRelativeIbtnSetting.setOnClickListener {
             Intent(this@NavigationActivity,SettingActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+        mBinding.imageview8.setOnClickListener {
+            Intent(this@NavigationActivity,NavigationReviewActivity::class.java).apply {
                 startActivity(this)
             }
         }
