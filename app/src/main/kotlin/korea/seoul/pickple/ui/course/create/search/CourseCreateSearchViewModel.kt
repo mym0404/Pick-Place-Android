@@ -2,6 +2,7 @@ package korea.seoul.pickple.ui.course.create.search
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import korea.seoul.pickple.common.util.callback
@@ -16,6 +17,26 @@ class CourseCreateSearchViewModel(private val placeRepository: PlaceRepository) 
     //region State
     val query : MutableLiveData<String> = MutableLiveData("")
 
+
+    val filteredPlaces : MediatorLiveData<List<Place>> = MediatorLiveData<List<Place>>().apply {
+        this.value = listOf()
+
+        addSource(query) {
+            if(query.value.isNullOrEmpty()) {
+                this.value = places.value ?: listOf()
+            }else {
+                this.value = (places.value ?: listOf()).filter { it.name.contains(query.value!!) }
+            }
+        }
+        addSource(places) {
+            if(query.value.isNullOrEmpty()) {
+                this.value = it
+            }else {
+                this.value = it.filter { it.name.contains(query.value!!) }
+            }
+        }
+
+    }
     //endregion
 
     //region Data
