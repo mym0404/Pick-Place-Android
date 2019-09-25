@@ -34,7 +34,8 @@ class LoginActivity : AppCompatActivity() {
             passwordEditText.setText(it)
         }
         if (!emailEditText.text.isNullOrEmpty() && !passwordEditText.text.isNullOrEmpty()) {
-            signIn(emailEditText.text.toString(), passwordEditText.text.toString())
+            //TODO 자동로그인 꺼놓음
+//            signIn(emailEditText.text.toString(), passwordEditText.text.toString())
         }
 
 

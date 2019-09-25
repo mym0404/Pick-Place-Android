@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface UserAPI {
     @POST("auth/signin")
@@ -15,5 +16,5 @@ interface UserAPI {
     @POST("auth/signup")
     fun signUp(@Body request : SignUpRequest) : Call<BaseResponse>
     @GET("auth/finder/{email}")
-    fun findPassword() : Call<BaseResponse>
+    fun findPassword(@Path("email") email : String) : Call<BaseResponse>
 }
