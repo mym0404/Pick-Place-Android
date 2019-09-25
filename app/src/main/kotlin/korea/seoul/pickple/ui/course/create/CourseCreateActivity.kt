@@ -196,8 +196,9 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun toLocation(place: Place) {
         place.location?.let { location ->
-            mMapFragment.get()?.getController()?.setZoom(15f,true)
+
             mMapFragment.get()?.getController()?.setLocation(location,true)
+            mMapFragment.get()?.getController()?.setZoom(15f,true)
         }
     }
 
@@ -208,8 +209,9 @@ class CourseCreateActivity : AppCompatActivity() {
 
         mMapUtil.getNearestPlaceWithMarker(places, marker)?.let { place ->
             mViewModel.curPlace.value = place
-            mMapFragment.get()?.getController()?.setZoom(15f,true)
+
             mMapFragment.get()?.getController()?.setLocation(place.location!!, true)
+            mMapFragment.get()?.getController()?.setZoom(15f,true)
         }
 
 
