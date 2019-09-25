@@ -5,13 +5,21 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.extensions.toast
+import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.data.api.MainAPI
+import korea.seoul.pickple.data.entity.Course
 import kotlinx.android.synthetic.main.activity_search.*
+import org.koin.android.ext.android.inject
 
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var resultAdapter : RecyclerAdapterSearchResult
     private lateinit var recommendAdapter : RecyclerAdapterSearchRecommend
+
+    // 수민) 서버 통신,,?
+    private val mainAPI : MainAPI by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +29,31 @@ class SearchActivity : AppCompatActivity() {
         setRecycler()
     }
 
+    // 서버 통신
+    private fun getSearchResult(keyword : String) {
+        mainAPI.listMainSearch(keyword).callback(
+            successCallback = {
+                var searchResultList = it.data?.map {
+                    it
+                } ?: listOf()
+
+                resultAdapter = RecyclerAdapterSearchResult(this, searchResultList)
+                act_search_rv_search_result.adapter = resultAdapter
+
+                val itemDecorationSearchResult = ItemDecorationSearchResult(this)
+                act_search_rv_search_result.addItemDecoration(itemDecorationSearchResult)
+
+                resultAdapter.notifyDataSetChanged()
+            },
+            failCallback = {
+                toast("search failed")
+            },
+            errorCallback = {
+                toast(it.message!!)
+            }
+        )
+    }
+
     private fun setRecycler() {
         // TODO 수민) 데이터 바꾸기
 
@@ -28,11 +61,11 @@ class SearchActivity : AppCompatActivity() {
         var recommendWordList = listOf("한국 근대 역사 코스", "데이트코스", "서울역 오래가게 탐방 코스")
 
         // result
-        resultAdapter = RecyclerAdapterSearchResult(this, resultList)
-        act_search_rv_search_result.adapter = resultAdapter
-
-        val itemDecorationSearchResult = ItemDecorationSearchResult(this)
-        act_search_rv_search_result.addItemDecoration(itemDecorationSearchResult)
+//        resultAdapter = RecyclerAdapterSearchResult(this, resultList)
+//        act_search_rv_search_result.adapter = resultAdapter
+//
+//        val itemDecorationSearchResult = ItemDecorationSearchResult(this)
+//        act_search_rv_search_result.addItemDecoration(itemDecorationSearchResult)
 
         // recommend word
         recommendAdapter = RecyclerAdapterSearchRecommend(this, recommendWordList)
@@ -57,6 +90,8 @@ class SearchActivity : AppCompatActivity() {
                 {
                     act_search_constraint_popular_course.visibility = View.GONE
                     act_search_constraint_search_result.visibility = View.VISIBLE
+
+                    getSearchResult(act_search_et_search.text.toString())
                 }
 
 

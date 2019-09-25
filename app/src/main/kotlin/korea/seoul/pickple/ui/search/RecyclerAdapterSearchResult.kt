@@ -9,8 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 import korea.seoul.pickple.R
+import korea.seoul.pickple.data.entity.Course
 
-class RecyclerAdapterSearchResult(val ctx: Context, var data:List<String>): RecyclerView.Adapter<RecyclerAdapterSearchResult.Holder>() {
+class RecyclerAdapterSearchResult(val ctx: Context, var data:List<Course>): RecyclerView.Adapter<RecyclerAdapterSearchResult.Holder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_search_result,parent,false)
         return Holder(view)
@@ -21,6 +22,7 @@ class RecyclerAdapterSearchResult(val ctx: Context, var data:List<String>): Recy
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.run {
             // TODO 수민 실제 데이터로 바꾸기
+
 
         }
     }
