@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/rootContainer"
     android:layout_height="match_parent"
     tools:context=".ui.setting.SettingMemberInfoEditNicknameActivity">
 
@@ -57,6 +58,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/okButton"
         app:cornerRadius="16dp"
         android:layout_marginTop="32dp"
         android:text="확인"
