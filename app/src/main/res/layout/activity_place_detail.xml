@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="korea.seoul.pickple.ui.course.intro.CourseIntroViewModel" />
@@ -129,69 +130,103 @@
                     android:text="@{viewModel.currentPlace.description}"
                     />
 
-                <ImageView
-                    android:id="@+id/toolPlaceDetailLocation"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctnPlaceDetailLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:visibility="@{viewModel.currentPlace.address!=``?View.VISIBLE : View.GONE}"
                     app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailDesc"
                     app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc"
-                    app:srcCompat="@drawable/btn_place_sm" />
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:lineSpacingExtra="7sp"
-                    android:lines="2"
-                    android:textColor="#000000"
-                    android:textSize="13sp"
-                    app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
-                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLocation"
-                    tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분"
-                    android:text="@{viewModel.currentPlace.address}"
-                    />
+                    <ImageView
+                        android:id="@+id/toolPlaceDetailLocation"
+                        android:layout_width="16dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/btn_place_sm" />
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailLocation"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
-                    app:srcCompat="@drawable/btn_time_sm" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:lineSpacingExtra="7sp"
+                        android:maxLines="2"
+                        android:text="@{viewModel.currentPlace.address}"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분" />
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:textColor="#000000"
-                    android:textSize="13sp"
-                    android:text="@{viewModel.currentPlace.busHours}"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
-                    app:layout_constraintTop_toTopOf="@+id/imageView5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctnPlaceDetailBusHours"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="23dp"
-                    app:layout_constraintStart_toStartOf="@+id/imageView5"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5"
-                    app:srcCompat="@drawable/btn_price_sm" />
+                    android:visibility="@{viewModel.currentPlace.busHours!=``?View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="@id/ctnPlaceDetailLocation"
+                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailLocation"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/btn_time_sm" />
 
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:text="@{viewModel.currentPlace.busHours}"
+                        app:layout_constraintStart_toEndOf="@+id/imageView5"
+                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ctnPlaceDetailFee"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:textColor="#000000"
-                    android:textSize="13sp"
-                    android:text="@{viewModel.currentPlace.fee}"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
-                    app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                    android:layout_marginTop="23dp"
+                    android:visibility="@{viewModel.currentPlace.fee!=``?View.VISIBLE : View.GONE}"
+                    app:layout_constraintStart_toStartOf="@id/ctnPlaceDetailBusHours"
+                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailBusHours"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/btn_price_sm" />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textColor="#000000"
+                        android:textSize="13sp"
+                        android:lineSpacingExtra="7sp"
+                        android:text="@{viewModel.currentPlace.fee}"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <!--                Review Fragment로 런타임에 대체되어야한다.-->
                 <FrameLayout
@@ -203,7 +238,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailFee" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

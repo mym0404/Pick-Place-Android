@@ -140,7 +140,6 @@ class CourseIntroViewModel(
                 try {
                     currentPlace.value = _places.value?.get(it - 1)
                 }catch(t: Throwable) {
-
                 }
             }
         }
@@ -202,7 +201,7 @@ class CourseIntroViewModel(
                 thread {
 
                     try {
-                        var places = listOf<Place>()
+                        val places = mutableListOf<Place>()
                         placesIdx.forEach { placeId ->
                             placeRepository.getPlace(placeId).execute().body()?.placeData?.toEntity()?.let {
                                 Log.d("seungmin", "sync place : $placeId , $it")
