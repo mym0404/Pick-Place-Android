@@ -66,6 +66,6 @@ class CourseRepositoryImpl (private val courseAPI : CourseAPI) : CourseRepositor
     }
 
     override fun unlikeCourse(idx: Int): Call<BaseResponse> {
-        return unlikeCourse(idx)
+        return courseAPI.unlikeCourse(idx)
     }
 }

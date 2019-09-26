@@ -58,7 +58,7 @@ data class ReviewListResponse(
                     reviewCount = 0,
                     commenter = nickname,
                     comment = comment,
-                    createdAt = "",
+                    createdAt = createdAt,
                     emotion = Review.Emoticon.parse(emotion)
                 )
             }

@@ -6,18 +6,24 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.data.enumerator.ReviewType
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
+import kotlin.concurrent.thread
+import kotlin.random.Random
 
 class CourseIntroViewModel(
     private val courseRepository: CourseRepository,
+    private val placeRepository: PlaceRepository,
     private val reviewRepository: ReviewRepository
 ) : BaseViewModel() {
     /**
@@ -25,10 +31,12 @@ class CourseIntroViewModel(
      * */
     var courseId: Int = 0
         set(value) {
-            courseRepository.getCourseWithId(value)
+            Log.d("seungmin", "set course id $value")
+            courseRepository.getCourseInfo(value)
                 .callback(
                     successCallback = { course ->
-                        _course.value = course
+                        Log.d("seungmin", "get course info : $course")
+                        _course.value = course.data?.toEntity() ?: return@callback
                     },
                     failCallback = {
                         _course.value = FakeCourseRepository.fakeCourse
@@ -38,7 +46,22 @@ class CourseIntroViewModel(
                     }
                 )
 
-            updateReivew(ReviewType.COURSE, value)
+//            courseRepository.getCourseWithId(value)
+//                .callback(
+//                    successCallback = { course ->
+//                        _course.value = course
+//                    },
+//                    failCallback = {
+//                        _course.value = FakeCourseRepository.fakeCourse
+//                    },
+//                    errorCallback = {
+//                        _course.value = FakeCourseRepository.fakeCourse
+//                    }
+//                )
+
+
+
+            updateReview(ReviewType.COURSE, value)
 
             field = value
         }
@@ -46,7 +69,7 @@ class CourseIntroViewModel(
     /**
     * course intro 에서 소개할 course 정보
     * */
-    private val _course: MutableLiveData<Course> = MutableLiveData()
+    private val _course: MutableLiveData<Course> = MutableLiveData(FakeCourseRepository.fakeCourse)
     val course: LiveData<Course> = _course
 
     /**
@@ -68,6 +91,18 @@ class CourseIntroViewModel(
     * */
     val coursePlaceCount: LiveData<String> = Transformations.map(course) {
         "장소 ${it.places?.size}곳"
+    }
+
+    /**
+     * course like check되어있는 여부
+     * */
+    val courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    /**
+    * 현 course의 소요 시간 문자열
+    * */
+    val courseConsumeTime: LiveData<String> = Transformations.map(course) {
+        it.totalHours
     }
 
     /**
@@ -136,24 +171,79 @@ class CourseIntroViewModel(
      * */
     init {
         course.managedObserve {
-            courseRepository.getPlaces(it)
-                .callback(
-                    successCallback = { places ->
-                        // place가 세팅될때, index를 초기화 해야한다.
-                        _index.value = 1
-                        _places.value = places
+            it.places?.let { placesIdx ->
+                if (placesIdx.isEmpty()) return@let
+
+                // place가 세팅될때, index를 초기화 해야한다.
+                _index.value = 1
+                _places.value = List(placesIdx.size) {
+                    Place(
+                        id = 1,
+                        type = Place.Type.FOOD,
+                        name = "${listOf("명주","수민","승민","소민").random()}네 집",
+                        description = "${listOf("깨끗","아늑","더럽기까지","기괴","심심").random()}함",
+                        phoneNumber = "010-${Random.nextInt(1000,10000)}-${Random.nextInt(1000,10000)}",
+                        location = listOf(
+                            Location(37.6371,127.0247,""),
+                            Location(37.4766,126.9816, ""),
+                            Location(37.4626,126.9383, "")
+                        ).random(),
+                        price = Random.nextInt(5000,300000000),
+                        likeCount = 999,
+                        thumbnail = listOf(
+                            "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg",
+                            "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
+                            "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
+                            "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
+                        ).random()
+                    )
+                }
+
+                thread {
+
+                    try {
+                        var places = listOf<Place>()
+                        placesIdx.forEach { placeId ->
+                            placeRepository.getPlace(placeId).execute().body()?.placeData?.toEntity()?.let {
+                                Log.d("seungmin", "sync place : $placeId , $it")
+                                places += it.copy(id = placeId)
+                            }
+
+                        }
+                        _places.postValue(places)
+                    }catch(t : Throwable) {
+                        debugE("seungmin",t)
                     }
-                )
+                }
+            }
+
+
+
         }
 
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
         currentPlace.managedObserve {
             it?.also { place ->
-                updateReivew(ReviewType.PLACE, place.id)
+                updateReview(ReviewType.PLACE, place.id)
             }
         }
 
         _currentEmotion.value = Review.Emoticon.EMOTION1
+
+        courseLikeChecked.managedObserve {
+            if (it) {
+                courseRepository.likeCourse(courseId)
+                course.value?.let {
+                    _course.value = it.copy(likeCount = it.likeCount+1)
+                }
+            }
+            else {
+                courseRepository.unlikeCourse(courseId)
+                course.value?.let {
+                    _course.value = it.copy(likeCount = it.likeCount-1)
+                }
+            }
+        }
     }
 
     /**
@@ -177,9 +267,9 @@ class CourseIntroViewModel(
      * */
     fun enrollPlaceReview(comment: String) {
         reviewRepository.enrollPlaceReview(
-            currentPlace.value?.id?:0 , comment, currentEmotion.value?:Review.Emoticon.EMOTION1
+            currentPlace.value?.id?: return , comment, currentEmotion.value?:Review.Emoticon.EMOTION1
         ).callback({
-            updateReivew(ReviewType.PLACE, currentPlace.value?.id?:0) // 리뷰등록에 성공했으면 갱신해준다.
+            updateReview(ReviewType.PLACE, currentPlace.value?.id?: return@callback) // 리뷰등록에 성공했으면 갱신해준다.
         })
     }
 
@@ -190,21 +280,24 @@ class CourseIntroViewModel(
         reviewRepository.enrollCourseReview(
             courseId, comment, currentEmotion.value?:Review.Emoticon.EMOTION1
         ).callback({
-            updateReivew(ReviewType.COURSE, courseId) // 리뷰등록에 성공했으면 갱신해준다.
+            updateReview(ReviewType.COURSE, courseId) // 리뷰등록에 성공했으면 갱신해준다.
         })
     }
 
-    private fun updateReivew(type: ReviewType, Id: Int) {
+    private fun updateReview(type: ReviewType, Id: Int) {
+        val updateReviewTarget = if (type == ReviewType.COURSE) _courseReviews else _placeReviews
+
         reviewRepository.listReviews(type)
             .callback({
-                Log.d("seungmin", it.toEntityWithIdx(Id).toString())
-                _courseReviews.value = it.toEntityWithIdx(Id)
+                Log.d("seungmin", "update review ${type.name} $Id \n ${it.toEntityWithIdx(Id)}")
+                updateReviewTarget.value = it.toEntityWithIdx(Id)
             }, {
                 Log.d("seungmin", "fail")
-                _courseReviews.value = listOf()
+                updateReviewTarget.value = listOf()
             }, {
                 Log.d("seungmin", it.message)
-                _courseReviews.value = listOf()
+                updateReviewTarget.value = listOf()
             })
     }
+
 }

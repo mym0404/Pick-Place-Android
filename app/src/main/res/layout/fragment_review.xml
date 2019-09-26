@@ -19,6 +19,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,10 +31,9 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/btn_review_sm"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -52,21 +52,19 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@id/imageView"
-                app:layout_constraintStart_toStartOf="@id/imageView"
                 android:src="@drawable/btn_review_imoji"
-                />
+                app:layout_constraintStart_toStartOf="@id/imageView"
+                app:layout_constraintTop_toBottomOf="@id/imageView" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgSelectedEmotion"
+                imageDrawableId="@{courseIntroViewModel.currentEmotion.toDrawableResourceId()}"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="22dp"
                 android:layout_marginTop="22dp"
                 app:layout_constraintStart_toStartOf="@+id/btnSelectEmotion"
-                app:layout_constraintTop_toTopOf="@+id/btnSelectEmotion"
-                imageDrawableId="@{courseIntroViewModel.currentEmotion.toDrawableResourceId()}"
-                />
+                app:layout_constraintTop_toTopOf="@+id/btnSelectEmotion" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
@@ -75,9 +73,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnSelectEmotion"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnReviewSubmit"
+                app:layout_constraintHorizontal_bias="0.09"
+                app:layout_constraintStart_toEndOf="@+id/imgSelectedEmotion"
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -90,6 +89,7 @@
                     android:textColor="@color/colorBlack"
                     android:textColorHint="#bcbcbc"
                     android:textSize="13sp" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -107,41 +107,43 @@
 
             <TextView
                 android:id="@+id/btnShowAllReview"
-                android:background="@drawable/round_button_background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="모든 후기 보기"
-                android:textSize="13sp"
-                android:textColor="@color/colorBlack"
+                android:background="@drawable/round_button_background"
                 android:paddingHorizontal="19dp"
                 android:paddingVertical="8dp"
-                app:layout_constraintTop_toBottomOf="@id/rvReviewList"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:text="모든 후기 보기"
+                android:textColor="@color/colorBlack"
+                android:textSize="13sp"
                 android:visibility="@{isFullReview ? View.GONE : View.VISIBLE}"
-                />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvReviewList" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="14sp"
-                android:textColor="@color/colorBlack"
                 android:text="@{isCourseReview ? `` + courseIntroViewModel.courseReviews.size() : `` + courseIntroViewModel.placeReviews.size()}"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp"
                 android:visibility="@{isFullReview ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
-            <Button
+            <TextView
                 android:id="@+id/btnReviewSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:layout_marginEnd="20dp"
+                android:text="등록"
+                android:textColor="@color/blue_with_a_hint_of_purple"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayout"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

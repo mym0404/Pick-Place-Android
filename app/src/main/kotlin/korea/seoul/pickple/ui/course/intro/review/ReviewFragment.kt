@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import korea.seoul.pickple.R
+import korea.seoul.pickple.common.util.hideKeyboardFrom
 import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.databinding.FragmentReviewBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.all_review.ShowAllReviewActivity
+import kotlinx.android.synthetic.main.fragment_review.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
@@ -40,13 +42,15 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
         activity?.run {
             mReviewAdapter = ReviewAdapter(this, listOf())
             mBinding.apply {
-                courseIntroViewModel = mCourseIntroViewModel
-                isCourseReview = mIsCourseReview
-                isFullReview = mIsFullReview
                 rvReviewList.apply {
                     adapter = mReviewAdapter
                     layoutManager = LinearLayoutManager(this@run)
                 }
+
+                courseIntroViewModel = mCourseIntroViewModel
+                isCourseReview = mIsCourseReview
+                isFullReview = mIsFullReview
+
                 btnSelectEmotion.setOnClickListener {
                     // Emoticon Select 팝업이 나와야함
                     val popupWindow = PopupWindow(layoutInflater.inflate(R.layout.popup_review_emotion, null),
@@ -71,12 +75,22 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                     }.commit()
                 }
                 btnReviewSubmit.setOnClickListener {
-                    if (mIsCourseReview)
+                    if (mIsCourseReview) {
                         mCourseIntroViewModel.enrollCourseReview(edtReviewComment.text.toString())
-                    else
+                    }
+                    else {
                         mCourseIntroViewModel.enrollPlaceReview(edtReviewComment.text.toString())
+                    }
+                    clearReviewText()
                 }
             }
+        }
+    }
+
+    private fun clearReviewText() {
+        edtReviewComment.setText("")
+        activity?.let {
+            hideKeyboardFrom(it, edtReviewComment)
         }
     }
 
