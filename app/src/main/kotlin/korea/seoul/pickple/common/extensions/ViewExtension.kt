@@ -13,6 +13,7 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import korea.seoul.pickple.R
 import me.grantland.widget.AutofitTextView
 
@@ -117,4 +118,9 @@ fun ImageView.setRound(isRound: Boolean) {
     else {
         clipToOutline = false
     }
+}
+
+
+fun View.showSnackBar(msg : String) {
+    Snackbar.make(this,msg,Snackbar.LENGTH_SHORT).show()
 }

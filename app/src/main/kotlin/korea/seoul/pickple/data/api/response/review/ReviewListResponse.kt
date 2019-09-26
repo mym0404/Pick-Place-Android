@@ -49,7 +49,19 @@ data class ReviewListResponse(
         return data?.filter {
             it.info[0].courseIdx == idx || it.info[0].placeIdx == idx
         }?.map {
-            it.info[0].toEntity()
+            it.info[0].run {
+                Review(
+                    id = reviewIdx,
+                    thumbnail = "",
+                    name = "",
+                    likeCount = 0,
+                    reviewCount = 0,
+                    commenter = nickname,
+                    comment = comment,
+                    createdAt = "",
+                    emotion = Review.Emoticon.parse(emotion)
+                )
+            }
         }?: listOf()
     }
 }

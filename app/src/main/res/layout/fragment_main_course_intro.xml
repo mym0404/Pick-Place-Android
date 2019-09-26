@@ -10,46 +10,63 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="1:1"/>
+        app:layout_constraintDimensionRatio="360:303"/>
 
     <com.rd.PageIndicatorView
         android:id="@+id/viewpager_item_page_indicator_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frag_main_course_intro_viewpager2_horizontal"
         app:piv_animationType="scale"
         app:piv_dynamicCount="true"
         app:piv_interactiveAnimation="true"
-        app:piv_selectedColor="#616161"
-        app:piv_unselectedColor="#a8a8a8"/>
+        app:piv_selectedColor="#5340c1"
+        app:piv_unselectedColor="#4d5340c1"/>
 
-    <TextView
-        android:id="@+id/viewpager_item_tv_course_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
-        android:text="오래가게 코스"
-        android:textColor="#666666"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_item_page_indicator_view" />
 
-    <TextView
-        android:id="@+id/viewpager_item_tv_course_detail"
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/viewpager_item_page_indicator_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/imageView8"
+        android:id="@+id/linearLayout"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/viewpager_item_tv_course_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="그때 그 시절의 추억이 담긴 코스"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewpager_item_tv_course_name" />
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toTopOf="@id/viewpager_item_tv_course_detail"
+            android:id="@+id/viewpager_item_tv_course_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오래가게 코스"
+            android:textColor="#666666"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewpager_item_page_indicator_view" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/viewpager_item_tv_course_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewpager_item_tv_course_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="그때 그 시절의 추억이 담긴 코스"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/imageView8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewpager_item_tv_course_name" />
+
+    </LinearLayout>
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/viewpager_item_floating_button_make_course"
@@ -58,17 +75,20 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="19dp"
         android:src="@drawable/coures_write_image"
+        app:maxImageSize="31dp"
         app:tint="@color/colorWhite"
-        app:backgroundTint="#ff7f53"
+        app:backgroundTint="#2ae5bd"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
+    <ImageButton
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:id="@+id/imageView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/btn_next_b_16"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/main_down_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

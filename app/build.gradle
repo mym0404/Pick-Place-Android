@@ -103,6 +103,7 @@ dependencies {
     implementation Libs.retrofit_mock
     implementation Libs.converter_gson
     implementation Libs.converter_scalars
+    implementation Libs.logging_interceptor
 
     //Glide
     implementation Libs.glide
@@ -115,7 +116,7 @@ dependencies {
     implementation Libs.viewpager2
     implementation Libs.pageindicatorview
     implementation Libs.numbermarbleview
-    implementation Libs.circle_image_view
+    implementation Libs.circleimageview
 
     //Firebase & Google
     implementation Libs.places
@@ -141,7 +142,6 @@ dependencies {
     implementation Libs.multidex
     implementation Libs.kotlin_reflect // 수민 추가
 
-    implementation Libs.circle_image_view
 }
 /**
  * Local Unit Test에서 사용할 라이브러리들
@@ -174,47 +174,3 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}
-
-dependencies {
-    implementation 'androidx.appcompat:appcompat:+'
-    implementation 'androidx.constraintlayout:constraintlayout:+'
-}

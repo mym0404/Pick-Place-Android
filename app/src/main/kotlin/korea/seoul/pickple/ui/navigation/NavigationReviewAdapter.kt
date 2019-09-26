@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
-import korea.seoul.pickple.data.entity.Review
+import korea.seoul.pickple.data.api.response.mypage.ListMyReviewResponse
 import korea.seoul.pickple.databinding.ItemNavigationReviewBinding
 
 /**
@@ -14,7 +14,7 @@ import korea.seoul.pickple.databinding.ItemNavigationReviewBinding
 
 class NavigationReviewAdapter(private val vm : NavigationViewModel) : RecyclerView.Adapter<NavigationReviewAdapter.NavigationReviewHolder>() {
 
-    var items: List<Review> = listOf()
+    var items: List<ListMyReviewResponse.Data.ReviewDTO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NavigationReviewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,7 +38,7 @@ class NavigationReviewAdapter(private val vm : NavigationViewModel) : RecyclerVi
 }
 
 @BindingAdapter("app:recyclerview_navigation_review_items")
-fun RecyclerView.setItems(items: List<Review>) {
+fun RecyclerView.setItems(items: List<ListMyReviewResponse.Data.ReviewDTO>) {
     (adapter as? NavigationReviewAdapter)?.run {
         this.items = items
         this.notifyDataSetChanged()

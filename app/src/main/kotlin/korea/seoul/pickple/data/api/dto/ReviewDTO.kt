@@ -39,8 +39,4 @@ data class ReviewDTO(
     @SerializedName("placeIdx")
     @Expose(serialize = true, deserialize = true)
     var placeIdx: Int?
-) : Parcelable {
-    fun toEntity() : Review {
-        return Review(reviewIdx,comment,nickname, Review.Emoticon.parse(emotion))
-    }
-}
+) : Parcelable

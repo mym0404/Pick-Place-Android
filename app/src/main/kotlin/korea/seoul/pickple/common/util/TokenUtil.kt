@@ -5,5 +5,10 @@ package korea.seoul.pickple.common.util
  */
 
 class TokenUtil(private val spUtil: SPUtil) {
-
+    fun saveToken(token : String) {
+        spUtil.putString(SPUtil.SPKeys.TOKEN,token)
+    }
+    fun loadToken() : String? {
+        return spUtil.getString(SPUtil.SPKeys.TOKEN)
+    }
 }

@@ -19,19 +19,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.main.MemberTermsActivity"></activity>
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <activity android:name=".ui.main.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- FIREBASE DEEP LINKS -->
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="pickple.page.link"
+                    android:pathPrefix="/jTpt"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.main.SignUpActivity"
+            android:exported="true" />
         <activity android:name=".ui.main.FindingPassword_PopUp_Activity" />
         <activity android:name=".ui.main.FindingPasswordActivity" />
-        <activity android:name=".ui.navigation.NavigationActivity" android:exported="true"/>
-        <activity android:name=".ui.search.SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ui.navigation.NavigationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.course.intro.all_course.ShowAllCoursesActivity"
             android:exported="true" />
-        <activity android:name=".ui.setting.Setting_MemberInfo_ChangePasswordActivity" />
-        <activity android:name=".ui.setting.Setting_MemberInfo_EditNicknameActivity" />
+
 
         <activity
             android:name=".ui.course.intro.CourseIntroActivity"
@@ -50,20 +73,9 @@
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- FIREBASE DEEP LINKS -->
-            <intent-filter>
-                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="pickple.page.link"
-                    android:pathPrefix="/jTpt"
-                    android:scheme="https" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.course.map.MapActivity"
@@ -76,9 +88,22 @@
             android:name=".ui.course.create.intro.CourseCreateIntroActivity"
             android:exported="true" />
 
-        <activity android:name=".ui.setting.SettingActivity"/>
+        <activity android:name=".ui.setting.SettingActivity" />
 
-        <activity android:name=".ui.navigation.course.NavigationCourseActivity" android:exported="true"/>
+        <activity
+            android:name=".ui.navigation.course.NavigationCourseActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.navigation.review.NavigationReviewActivity"
+            android:exported="true" />
+
+        <activity android:name=".ui.main.LoginActivity"/>
+        <activity android:name=".ui.login.TosActivity"/>
+
+        <activity android:name=".ui.setting.SettingMemberInfoActivity"/>
+        <activity android:name=".ui.setting.SettingMemberInfoChangePasswordActivity" />
+        <activity android:name=".ui.setting.SettingMemberInfoEditNicknameActivity" />
     </application>
 
 </manifest>

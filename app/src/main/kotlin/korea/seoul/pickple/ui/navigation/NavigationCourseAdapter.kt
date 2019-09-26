@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
-import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse
 import korea.seoul.pickple.databinding.ItemCourseNavigationBindingBinding
 
 /**
@@ -14,7 +14,7 @@ import korea.seoul.pickple.databinding.ItemCourseNavigationBindingBinding
 
 class NavigationCourseAdapter(private val mViewModel : NavigationViewModel) : RecyclerView.Adapter<NavigationCourseAdapter.NavigationCourseHolder>() {
 
-    var items: List<Course> = listOf()
+    var items: List<ListMyCoursesResponse.Data.CourseDTO> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NavigationCourseHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,7 +38,7 @@ class NavigationCourseAdapter(private val mViewModel : NavigationViewModel) : Re
 }
 
 @BindingAdapter("app:recyclerview_course_navigation_items")
-fun RecyclerView.setItems(items: List<Course>) {
+fun RecyclerView.setItems(items: List<ListMyCoursesResponse.Data.CourseDTO>) {
     (adapter as? NavigationCourseAdapter)?.run {
         this.items = items
         this.notifyDataSetChanged()

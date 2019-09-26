@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.R
 import korea.seoul.pickple.ui.course.create.intro.CourseCreateIntroActivity
-import kotlinx.android.synthetic.main.fragment_main_course_detail.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main_course_intro.*
 import kotlinx.android.synthetic.main.toolbar_main_course.*
 
@@ -35,6 +35,14 @@ class MainCourseIntroFragment : Fragment() {
 
         setOnPageChangeListener()
         setFloatingButtonListener()
+
+        imageView8.setOnClickListener {
+
+            try {
+                activity!!.act_main_viewpager2_vertical.currentItem = 1
+            }catch(t: Throwable) {
+            }
+        }
     }
 
     private fun setFloatingButtonListener() {
@@ -64,16 +72,19 @@ class MainCourseIntroFragment : Fragment() {
                 viewpager_item_tv_course_name.text = "오래 가게 코스"
                 viewpager_item_tv_course_detail.text = "그 때 그 시절 추억이 담긴 코스"
                 viewpager_item_floating_button_make_course.visibility = View.GONE
+//                frag_main_course_intro_viewpager2_horizontal.setBackgroundResource(R.drawable.main_illustration_01)
             }
             1 -> {
                 viewpager_item_tv_course_name.text = "한국 전통 코스"
                 viewpager_item_tv_course_detail.text = "서울의 궁궐을 알아보는 코스"
                 viewpager_item_floating_button_make_course.visibility = View.GONE
+//                frag_main_course_intro_viewpager2_horizontal.setBackgroundResource(R.drawable.main_illustration_02)
             }
             2 -> {
                 viewpager_item_tv_course_name.text = "사용자 코스"
                 viewpager_item_tv_course_detail.text = "사용자가 직접 개발하는 코스"
                 viewpager_item_floating_button_make_course.visibility = View.VISIBLE
+//                frag_main_course_intro_viewpager2_horizontal.setBackgroundResource(R.drawable.main_illustration_03)
             }
         }
     }

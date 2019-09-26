@@ -16,6 +16,9 @@ import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.navigation.NavigationViewModel
 import korea.seoul.pickple.ui.navigation.course.NavigationCourseViewModel
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -30,6 +33,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class PickPleApplication : Application() {
 
+    private val TAG = PickPleApplication::class.java.simpleName
+
     private val appModule = module {
 
     }
@@ -40,6 +45,9 @@ class PickPleApplication : Application() {
         single { GalleryUtil() }
         single { FileUtil(get()) }
         single { IntentUtil() }
+        single { TokenUtil(get())}
+        single { SPUtil(get())}
+        single { MultiPartUtil(get())}
     }
 
     private val apiModule = module {
@@ -56,6 +64,7 @@ class PickPleApplication : Application() {
                 .baseUrl("http://13.209.233.217:3000")
                 .addConverterFactory(GsonConverterFactory.create(get()))
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .client(get())
                 .build()
         }
 
@@ -69,6 +78,30 @@ class PickPleApplication : Application() {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
         }
+
+        single {
+
+            val tokenUtil = get<TokenUtil>()
+
+            return@single Interceptor { chain ->
+                val request = chain.request()
+                    .newBuilder()
+                    .addHeader("token", tokenUtil.loadToken() ?: "" )
+                    .build()
+                debugE(TAG,"token : ${tokenUtil.loadToken()}")
+                chain.proceed(request)
+            }
+        } bind Interceptor::class
+
+        single {
+            OkHttpClient.Builder()
+                .addInterceptor(get())
+                .addInterceptor(HttpLoggingInterceptor().apply {
+                    this.level = HttpLoggingInterceptor.Level.BODY
+                })
+                .build()
+        } bind OkHttpClient::class
+
 
         //APIs
         single { get<Retrofit>(Retrofit::class, named("Directions"), null).create(DirectionsAPI::class.java) } bind DirectionsAPI::class
@@ -96,24 +129,22 @@ class PickPleApplication : Application() {
         single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
-        single { UserRepositoryImpl(get()) } bind UserRepository::class
+        single { UserRepositoryImpl(get(),get()) } bind UserRepository::class
         single { SetRepositoryImpl(get()) } bind SetRepository::class
         single { MainRepositoryImpl(get()) } bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
-
     }
 
     private val viewModelModule = module {
         viewModel { (course: Course) -> MapViewModel(get(), course) }
-        viewModel { CourseCreateViewModel(get()) }
+        viewModel { CourseCreateViewModel(get(),get()) }
         viewModel { CourseIntroViewModel(get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { ShowAllCoursesViewModel(get()) }
-        viewModel { NavigationViewModel() }
-        viewModel { NavigationCourseViewModel() }
+        viewModel { NavigationViewModel(get(),get()) }
+        viewModel { (type : Course.Type) -> NavigationCourseViewModel(type,get()) }
     }
-
 
     override fun onCreate() {
         super.onCreate()

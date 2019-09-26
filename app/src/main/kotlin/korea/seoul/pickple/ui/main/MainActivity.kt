@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import korea.seoul.pickple.ui.navigation.NavigationActivity
 import korea.seoul.pickple.R
+import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.navigation.NavigationActivity
 import korea.seoul.pickple.ui.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_main_course.*
@@ -80,5 +83,19 @@ class MainActivity : AppCompatActivity() {
                 toolbar_main_course_tv_course_name.text = "사용자 코스"
             }
         }
+    }
+
+    override fun onBackPressed() {
+
+        if(act_main_viewpager2_vertical.currentItem == 1) {
+            act_main_viewpager2_vertical.currentItem = 0
+        }else {
+
+            super.onBackPressed()
+        }
+    }
+
+    fun onClickIntroPage(position : Int) {
+        navigate(this,NavigationArgs.NavigationCourseArg(Course.Type.parse(position)))
     }
 }

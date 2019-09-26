@@ -1,6 +1,9 @@
 package korea.seoul.pickple.data.repository.implementation
 
 import korea.seoul.pickple.data.api.CourseAPI
+import korea.seoul.pickple.data.api.request.course.CourseLikeRequest
+import korea.seoul.pickple.data.api.response.BaseResponse
+import korea.seoul.pickple.data.api.response.course.CourseInfoResponse
 import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Location
@@ -50,5 +53,19 @@ class CourseRepositoryImpl (private val courseAPI : CourseAPI) : CourseRepositor
 
     override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
         return courseAPI.getHashTags(tagName)
+    }
+
+    override fun getCourseInfo(idx: Int): Call<CourseInfoResponse> {
+        return courseAPI.getCourseInfo(idx)
+    }
+
+    override fun likeCourse(idx: Int): Call<BaseResponse> {
+        return courseAPI.likeCourse(
+            CourseLikeRequest(idx)
+        )
+    }
+
+    override fun unlikeCourse(idx: Int): Call<BaseResponse> {
+        return unlikeCourse(idx)
     }
 }
