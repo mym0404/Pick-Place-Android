@@ -160,6 +160,11 @@ class CourseIntroViewModel(
     } // 한 자리 index는 0을 붙혀서 보여준다.
 
     /**
+    * 현재 선택한 Place의 좋아요 여부
+    * */
+    val placeLiked: MutableLiveData<Boolean> = MutableLiveData()
+
+    /**
     * 후기의 Emoticon
     * */
     private val _currentEmotion: MutableLiveData<Review.Emoticon> = MutableLiveData()
@@ -243,6 +248,8 @@ class CourseIntroViewModel(
                 }
             }
         }
+
+        
     }
 
     /**

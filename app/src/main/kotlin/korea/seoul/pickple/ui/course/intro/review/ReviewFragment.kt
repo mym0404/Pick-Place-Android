@@ -1,6 +1,8 @@
 package korea.seoul.pickple.ui.course.intro.review
 
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.PopupWindow
@@ -64,7 +66,9 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                             findViewById<ImageView>(R.id.btnEmotion4).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION4, popupWindow)
                             findViewById<ImageView>(R.id.btnEmotion5).setEmotionButtonAndDismiss(Review.Emoticon.EMOTION5, popupWindow)
                         }
-                        showAsDropDown(it)
+                        setBackgroundDrawable(resources.getDrawable(R.drawable.rounded_white_border, null))
+                        elevation = 20F
+                        showAsDropDown(it,0, 20)
                     }
                 }
                 btnShowAllReview.setOnClickListener {
