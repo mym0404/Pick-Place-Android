@@ -14,6 +14,8 @@ import kotlinx.android.parcel.Parcelize
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class PlaceDTO(
+    @SerializedName("placeIdx")
+    var id : Int,
     var placeName: String,
     var description: String,
     @SerializedName("place_thumbnail")
@@ -27,7 +29,7 @@ data class PlaceDTO(
 ) : Parcelable {
     fun toEntity() : Place {
         return Place(
-            -1,
+            id,
             Place.Type.UNKNOWN,
             placeName,
             description,

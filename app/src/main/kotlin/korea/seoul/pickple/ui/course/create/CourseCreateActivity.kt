@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
-import korea.seoul.pickple.common.extensions.toast
+import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.getPixelFromDP
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
@@ -88,7 +88,8 @@ class CourseCreateActivity : AppCompatActivity() {
 
             this.adapter = adapter
 
-            ItemTouchHelper(SimpleItemTouchHelperCallback(adapter)).attachToRecyclerView(this)
+            if(!args.onlyShow)
+                ItemTouchHelper(SimpleItemTouchHelperCallback(adapter)).attachToRecyclerView(this)
         }
 
         mBinding.detailPager.apply {
@@ -173,7 +174,7 @@ class CourseCreateActivity : AppCompatActivity() {
             }
 
             appendFailDuplicatePlace.observeOnce(this@CourseCreateActivity) {place->
-                toast("중복된 장소를 추가할 수 없습니다.")
+                mBinding.root.showSnackBar("중복된 장소를 추가할 수 없습니다.")
             }
 
             appendPlaceSuccess.observeOnce(this@CourseCreateActivity) { place->

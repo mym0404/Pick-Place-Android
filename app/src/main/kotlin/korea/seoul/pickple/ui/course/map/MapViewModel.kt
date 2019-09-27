@@ -38,6 +38,9 @@ class MapViewModel(private val courseRepository: CourseRepository, course : Cour
     }
 
     private fun getPlacesForCourse(course : Course) {
+
+
+
         courseRepository.getPlaces(course).enqueue(object : Callback<List<Place>> {
             override fun onFailure(call: Call<List<Place>>, t: Throwable) {
                 _loading.value = false
@@ -52,5 +55,6 @@ class MapViewModel(private val courseRepository: CourseRepository, course : Cour
                 }
             }
         })
+
     }
 }
