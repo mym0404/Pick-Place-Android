@@ -7,11 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.R
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.databinding.ItemAllCourseBinding
 
 class ShowAllCourseAdapter(
     private val context: Context,
-    var data: List<Course>,
+    var data: List<Place>,
     private val showAllCoursesViewModel: ShowAllCoursesViewModel
 ) : RecyclerView.Adapter<ShowAllCourseAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,9 +27,9 @@ class ShowAllCourseAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.course = data[position]
+        holder.binding.place = data[position]
         holder.binding.containerItemAllCourse.setOnClickListener {
-            showAllCoursesViewModel.clickCourseId(data[position].id)
+            showAllCoursesViewModel.clickIndex(position)
         }
     }
 

@@ -98,7 +98,7 @@ class CourseIntroViewModel(
     /**
      * course like check되어있는 여부
      * */
-    var courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData(false)
+    var courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
     * 현 course의 소요 시간 문자열
@@ -154,15 +154,16 @@ class CourseIntroViewModel(
     val placeReviews: LiveData<List<Review>> = _placeReviews
 
     /**
-     * 현재 선택한 Place의 index 1부터 시작한다.
+     * 현재 선택한 Place의 indexString 1부터 시작한다.
      * */
     private val _index: MutableLiveData<Int> = MutableLiveData()
-    val index: LiveData<String> = Transformations.map(_index) {
+    val index: LiveData<Int> = _index
+    val indexString: LiveData<String> = Transformations.map(_index) {
         if (it>10) it.toString() else "0$it"
     } // 한 자리 index는 0을 붙혀서 보여준다.
     
     /**
-    * < 현재 index / 전체 사이즈 > 를 나타네는 문자열
+    * < 현재 indexString / 전체 사이즈 > 를 나타네는 문자열
     * */
     val indexNavString: LiveData<String> = Transformations.map(_index) {
         "< $it / ${places.value?.size?:0} >"
@@ -246,6 +247,14 @@ class CourseIntroViewModel(
         courseLikeChecked.managedObserve {
             if (it) {
                 courseRepository.likeCourse(courseId)
+                    .callback({
+                        if (it.success) {
+                            Log.d("seungmin", "like course : $courseId")
+                        }
+                        else {
+                            Log.d("seungmin", "like course fail : $courseId")
+                        }
+                    })
                 course.value?.let {
                     _course.value = it.apply {
                         isLiked = true
@@ -261,7 +270,6 @@ class CourseIntroViewModel(
                         }
                         else {
                             Log.d("seungmin", "unlike course fail : $courseId")
-
                         }
                     })
                 course.value?.let {
@@ -289,8 +297,8 @@ class CourseIntroViewModel(
 
     /**
      * 사용자가 이미지를 스크롤해서 특정 index의 Place를 고름
-     * index 는 1-based index이다!
-     * @param index 1-based index
+     * indexString 는 1-based index이다!
+     * @param index 1-based indexString
      * */
     fun selectPlace(index: Int) {
         _index.value = index
