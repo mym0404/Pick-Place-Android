@@ -50,7 +50,6 @@ data class ListMyReviewResponse(
             @SerializedName("emotion")
             var emotion: String
         ) : Parcelable {
-
             fun toEntity() : Review {
                 return Review(placeCourseIdx,
                     thumbnail,

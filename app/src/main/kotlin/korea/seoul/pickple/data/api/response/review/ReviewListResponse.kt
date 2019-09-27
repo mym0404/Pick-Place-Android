@@ -59,7 +59,7 @@ data class ReviewListResponse(
                     commenter = nickname,
                     comment = comment,
                     createdAt = createdAt,
-                    emotion = Review.Emoticon.parse(emotion)
+                    emotion = Review.Emoticon.parse(emotion.toIntOrNull() ?: 0)
                 )
             }
         }?: listOf()
