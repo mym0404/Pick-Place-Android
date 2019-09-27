@@ -30,7 +30,7 @@ class RecyclerAdapterSearchResult(val ctx: Context, var data:List<Course>): Recy
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         var course_img = itemView.findViewById<ImageView>(R.id.item_search_result_img_result)
-        var course_icon = itemView.findViewById<CircleImageView>(R.id.item_search_civ_icon)
+        var course_icon = itemView.findViewById<ImageView>(R.id.item_search_civ_icon)
         var course_tag = itemView.findViewById<TextView>(R.id.item_search_result_tv_tag)
         var course_name = itemView.findViewById<TextView>(R.id.item_search_result_course_name)
         var heart_num = itemView.findViewById<TextView>(R.id.item_search_result_tv_heart)

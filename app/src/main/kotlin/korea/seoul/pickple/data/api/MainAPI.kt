@@ -8,6 +8,7 @@ import android.os.Parcelable
 import korea.seoul.pickple.data.api.response.main.MainSearchResponse
 
 import kotlinx.android.parcel.Parcelize
+import retrofit2.http.Query
 
 
 interface MainAPI {
@@ -18,6 +19,6 @@ interface MainAPI {
     @GET("main/order")
     fun listMainCoursesWithPopularOrder() : Call<MainListResponse>
 
-    @GET("main/search/{keyword}")
-    fun listMainSearch(@Path("keyword") keyword: String) : Call<MainSearchResponse>
+    @GET("main/search")
+    fun listMainSearch(@Query("keyword") keyword: String) : Call<MainSearchResponse>
 }
