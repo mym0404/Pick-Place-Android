@@ -89,7 +89,7 @@ data class Course(
     @SerializedName("course_like")
     @Expose(serialize = false, deserialize = true)
     @ColumnInfo(name = "course_like")
-    val likeCount : Int,
+    var likeCount : Int,
 
     /**
      * 코스 태그 리스트
@@ -107,7 +107,12 @@ data class Course(
     @SerializedName("course_hours")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_hours")
-    val totalHours : String = ""
+    val totalHours : String = "",
+
+    @SerializedName("course_liked")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_liked")
+    var isLiked : Boolean = false
 ) : Parcelable {
 
     /**

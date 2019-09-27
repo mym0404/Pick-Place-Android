@@ -9,6 +9,7 @@ import androidx.annotation.AnimRes
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_COURSE
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_DESCRIPTION
 import korea.seoul.pickple.ui.NavigationArgs.CourseCreateArgs.Companion.COURSE_CREATE_ARG_ONLY_SHOW
@@ -61,7 +62,11 @@ sealed class NavigationArgs {
         }
     }
 
-    class ShowAllCourseArg : NavigationArgs()
+    class ShowAllCourseArg(val places: ArrayList<Place>) : NavigationArgs() {
+        companion object {
+            const val SHOW_ALL_COURSE_ARG_PLACES = "SHOW_ALL_COURSE_ARG_PLACES"
+        }
+    }
 
     class ShowAllReviewArg(val isCourseReview: Boolean) : NavigationArgs() {
         companion object {
@@ -95,7 +100,7 @@ fun CourseCreateActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCrea
 fun CourseCreateSearchActivity.parseIntent(intent: Intent) = NavigationArgs.CourseCreateSearchArg()
 
 fun CourseIntroActivity.parseIntent(intent: Intent) = NavigationArgs.CourseIntroArg(intent.getIntExtra(NavigationArgs.CourseIntroArg.COURSE_INTRO_ARG_COURSE_ID, 0))
-fun ShowAllCoursesActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllCourseArg()
+fun ShowAllCoursesActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllCourseArg(intent.getParcelableArrayListExtra(NavigationArgs.ShowAllCourseArg.SHOW_ALL_COURSE_ARG_PLACES))
 fun ShowAllReviewActivity.parseIntent(intent: Intent) = NavigationArgs.ShowAllReviewArg(intent.getBooleanExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, false))
 fun NavigationCourseActivity.parseIntent(intent : Intent) = NavigationArgs.NavigationCourseArg(
     intent.getParcelableExtra(NAVIGATION_COURSE_ARG_TYPE)
@@ -130,7 +135,9 @@ fun navigate(
         is NavigationArgs.CourseIntroArg -> Intent(curActivity, CourseIntroActivity::class.java).apply {
             putExtra(NavigationArgs.CourseIntroArg.COURSE_INTRO_ARG_COURSE_ID, arg.courseId)
         }
-        is NavigationArgs.ShowAllCourseArg -> Intent(curActivity, ShowAllCoursesActivity::class.java)
+        is NavigationArgs.ShowAllCourseArg -> Intent(curActivity, ShowAllCoursesActivity::class.java).apply {
+            putParcelableArrayListExtra(NavigationArgs.ShowAllCourseArg.SHOW_ALL_COURSE_ARG_PLACES, arg.places)
+        }
         is NavigationArgs.ShowAllReviewArg -> Intent(curActivity, ShowAllReviewActivity::class.java).apply {
             putExtra(NavigationArgs.ShowAllReviewArg.SHOW_ALL_REVIEW_ARG_IS_COURSE_REVIEW, arg.isCourseReview)
         }

@@ -123,7 +123,12 @@ data class Place(
     @SerializedName("fee")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "fee")
-    val fee: String? = null
+    val fee: String? = null,
+
+    @SerializedName("isLiked")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "isLiked")
+    var isLiked: Boolean = false
 
 ) : Parcelable {
     /**
