@@ -62,7 +62,7 @@ data class CourseInfoResponse(
         @SerializedName("placeIdx")
         @Expose
         var placeIndices : List<Int>,
-        @SerializedName("tagIdx")
+        @SerializedName("tag")
         @Expose(serialize = true, deserialize = true)
         var tagIdx: List<String>,
         @SerializedName("distance")
@@ -79,7 +79,8 @@ data class CourseInfoResponse(
                 placeIndices,
                 cLikeCount,
                 tagIdx,
-                cThumbnail
+                cThumbnail,
+                totalHour
             )
         }
     }

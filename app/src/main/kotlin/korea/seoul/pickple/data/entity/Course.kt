@@ -102,7 +102,12 @@ data class Course(
     @SerializedName("course_thumbnail")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_thumbnail")
-    val thumbnail : String
+    val thumbnail : String,
+
+    @SerializedName("course_hours")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="course_hours")
+    val totalHours : String = ""
 ) : Parcelable {
 
     /**

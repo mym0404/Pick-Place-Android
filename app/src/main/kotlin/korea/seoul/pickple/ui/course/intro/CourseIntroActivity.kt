@@ -2,11 +2,14 @@ package korea.seoul.pickple.ui.course.intro
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.viewpager.widget.ViewPager
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import korea.seoul.pickple.R
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
 import korea.seoul.pickple.ui.NavigationArgs
@@ -61,7 +64,8 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             appbarLayoutCourseIntro.outlineProvider = null
         }
 
-        viewModel.courseId = courseId
+//        viewModel.courseId = courseId
+        viewModel.courseId = 1 // 테스트 용으로 서버에 더미데이터가 들어있는 1로 변경하였다.
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -79,7 +83,8 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
                 true
             }
             R.id.actionShare -> {
-                // TODO 코스 공유하기 버튼임!
+                // 코스 공유하기 버튼임! 현재 버전에선 단순히 앱을 킬 수 있는 다이나믹 링크를 제공하는 것으로 결정!
+                shareCourse()
                 Log.d("seungmin", "${viewModel.courseId} 공유버튼")
                 true
             }
@@ -100,7 +105,7 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             REQUEST_SHOW_ALL_COURSES -> {
                 if (resultCode == Activity.RESULT_OK) {
                     // 다른 course를 선택했다. 코스를 변경하자.
-                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:0
+                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:viewModel.courseId
                     // 코스를 변경하고, 맨 처음 화면부터 시작하자.
                     mBinding.vpCourseIntro.setCurrentItem(0, false)
                 }
@@ -109,6 +114,14 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
                 }
             }
         }
+    }
+
+    private fun shareCourse() {
+        // 다이나믹 링크 URL을 공유한다.
+        startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "https://pickple.page.link/jTpt")
+        }, "함께 가고싶은 플레이스를 추천하세요!"))
     }
 
     companion object {

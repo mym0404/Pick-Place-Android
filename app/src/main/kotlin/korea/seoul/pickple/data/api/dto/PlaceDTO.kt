@@ -22,7 +22,7 @@ data class PlaceDTO(
     var address: String,
     var number: String,
     var fee: String?,
-    var businessHour: String,
+    var businessHour: String?,
     var location: Location
 ) : Parcelable {
     fun toEntity() : Place {
@@ -35,7 +35,10 @@ data class PlaceDTO(
             Location(location.latitude,location.longitude,address),
             (fee ?: "0").toIntOrNull() ?: 0,
             placeLike,
-            placeThumbnail
+            placeThumbnail,
+            address.replace("\\n", "\n"),
+            businessHour?.replace("\\n", "\n")?:"",
+            fee?.replace("\\n", "\n")?:""
         )
     }
 }
