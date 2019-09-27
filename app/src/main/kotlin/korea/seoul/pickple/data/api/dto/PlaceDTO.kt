@@ -21,7 +21,7 @@ data class PlaceDTO(
     @SerializedName("place_like")
     var placeLike: Int,
     var address: String,
-    var number: String,
+    var number: String?,
     var fee: String?,
     var businessHour: String?,
     var location: Location,
@@ -33,7 +33,7 @@ data class PlaceDTO(
             Place.Type.UNKNOWN,
             placeName,
             description,
-            number,
+            number?:"",
             Location(location.latitude,location.longitude,address),
             (fee ?: "0").toIntOrNull() ?: 0,
             placeLike,
