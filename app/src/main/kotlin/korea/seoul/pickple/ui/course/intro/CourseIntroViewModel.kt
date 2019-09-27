@@ -35,8 +35,10 @@ class CourseIntroViewModel(
             courseRepository.getCourseInfo(value)
                 .callback(
                     successCallback = { course ->
+                        // 코스를 좋아요 한지 여부를 확인
                         Log.d("seungmin", "get course info : $course")
                         _course.value = course.data?.toEntity() ?: return@callback
+                        courseLikeChecked.value = _course.value?.isLiked?:false
                     },
                     failCallback = {
                         _course.value = FakeCourseRepository.fakeCourse
@@ -96,7 +98,7 @@ class CourseIntroViewModel(
     /**
      * course like check되어있는 여부
      * */
-    val courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData(false)
+    var courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData(false)
 
     /**
     * 현 course의 소요 시간 문자열
@@ -158,11 +160,18 @@ class CourseIntroViewModel(
     val index: LiveData<String> = Transformations.map(_index) {
         if (it>10) it.toString() else "0$it"
     } // 한 자리 index는 0을 붙혀서 보여준다.
+    
+    /**
+    * < 현재 index / 전체 사이즈 > 를 나타네는 문자열
+    * */
+    val indexNavString: LiveData<String> = Transformations.map(_index) {
+        "< $it / ${places.value?.size?:0} >"
+    }
 
     /**
     * 현재 선택한 Place의 좋아요 여부
     * */
-    val placeLiked: MutableLiveData<Boolean> = MutableLiveData()
+    val currentPlaceLiked: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
     * 후기의 Emoticon
@@ -175,6 +184,8 @@ class CourseIntroViewModel(
      * */
     init {
         course.managedObserve {
+
+            // 코스에 해당하는 장소 리스트를 순차적으로 받아옴
             it.places?.let { placesIdx ->
                 if (placesIdx.isEmpty()) return@let
 
@@ -220,11 +231,9 @@ class CourseIntroViewModel(
                     }
                 }
             }
-
-
-
         }
 
+        // 현재 장소에 맞는 리뷰를 갱신해줌
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
         currentPlace.managedObserve {
             it?.also { place ->
@@ -238,13 +247,39 @@ class CourseIntroViewModel(
             if (it) {
                 courseRepository.likeCourse(courseId)
                 course.value?.let {
-                    _course.value = it.copy(likeCount = it.likeCount+1)
+                    _course.value = it.apply {
+                        isLiked = true
+                        likeCount++
+                    }
                 }
             }
             else {
                 courseRepository.unlikeCourse(courseId)
+                    .callback({
+                        if (it.success) {
+                            Log.d("seungmin", "unlike course : $courseId")
+                        }
+                        else {
+                            Log.d("seungmin", "unlike course fail : $courseId")
+
+                        }
+                    })
                 course.value?.let {
-                    _course.value = it.copy(likeCount = it.likeCount-1)
+                    _course.value = it.apply {
+                        isLiked = false
+                        likeCount--
+                    }
+                }
+            }
+        }
+
+        currentPlaceLiked.managedObserve {
+            currentPlace.value?.let { place ->
+                if (it) {
+                    placeRepository.likePlace(place.id)
+                }
+                else {
+                    placeRepository.unlikePlace(place.id)
                 }
             }
         }

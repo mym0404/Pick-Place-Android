@@ -37,7 +37,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                </androidx.viewpager2.widget.ViewPager2>
 
                 <TextView
                     android:id="@+id/toolPlaceDetailIndex"
@@ -52,6 +54,19 @@
                     android:textSize="29sp"
                     android:textColor="#ffffff"
                     />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    tools:text=" 1 / 6 "
+                    android:textSize="11sp"
+                    android:text="@{viewModel.indexNavString}"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolPlaceDetailLikeCount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolPlaceDetailLikeCount" />
 
                 <TextView
                     android:id="@+id/toolPlaceDetailName"
@@ -71,7 +86,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginBottom="24dp"
-                    android:checked="@={viewModel.placeLiked}"
+                    android:checked="@={viewModel.currentPlaceLiked}"
                     android:background="@drawable/selector_heart"
                     android:button="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -93,16 +108,16 @@
 
 <!--                TODO [Place]에 tag 추가하고 연결 해야함 -->
                 <TextView
+                    android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    android:textColor="#ffffff"
+                    android:textSize="11sp"
                     app:layout_constraintBottom_toBottomOf="@id/toolPlaceDetailLike"
                     app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLikeCount"
-                    tools:text="# 덕수궁 핫 플레이스"
-                    android:textSize="11sp"
-                    android:textColor="#ffffff"
-                    />
+                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    tools:text="# 덕수궁 핫 플레이스" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
