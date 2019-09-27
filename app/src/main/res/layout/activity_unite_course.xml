@@ -66,7 +66,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/toolUniteCourseLike"
+                    app:layout_constraintBottom_toTopOf="@id/btnUniteCourseLike"
                     tools:text="덕수궁"
                     android:text="@{viewModel.course.name}"
                     android:lines="2"
@@ -75,12 +75,14 @@
                     android:textColor="#ffffff"
                     />
 
-                <ImageView
-                    android:id="@+id/toolUniteCourseLike"
+                <CheckBox
+                    android:id="@+id/btnUniteCourseLike"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginBottom="24dp"
-                    android:src="@drawable/navi_btn_heart_w"
+                    android:checked="@={viewModel.courseLikeChecked}"
+                    android:background="@drawable/selector_heart"
+                    android:button="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/toolUniteCourseName" />
 
@@ -89,9 +91,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    app:layout_constraintTop_toTopOf="@id/toolUniteCourseLike"
-                    app:layout_constraintBottom_toBottomOf="@id/toolUniteCourseLike"
-                    app:layout_constraintStart_toEndOf="@id/toolUniteCourseLike"
+                    app:layout_constraintTop_toTopOf="@id/btnUniteCourseLike"
+                    app:layout_constraintBottom_toBottomOf="@id/btnUniteCourseLike"
+                    app:layout_constraintStart_toEndOf="@id/btnUniteCourseLike"
                     tools:text="364"
                     android:text="@{``+ viewModel.course.likeCount}"
                     android:textSize="11sp"
@@ -102,8 +104,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    app:layout_constraintTop_toTopOf="@id/toolUniteCourseLike"
-                    app:layout_constraintBottom_toBottomOf="@id/toolUniteCourseLike"
+                    app:layout_constraintTop_toTopOf="@id/btnUniteCourseLike"
+                    app:layout_constraintBottom_toBottomOf="@id/btnUniteCourseLike"
                     app:layout_constraintStart_toEndOf="@id/toolUniteCourseLikeCount"
                     tools:text="# 덕수궁 핫 플레이스"
                     android:text="@{viewModel.courseOnlyOneTag}"
@@ -239,6 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="TextView"
+                    android:text="@{viewModel.courseConsumeTime}"
                     android:textColor="@color/colorBlack"
                     android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView4"

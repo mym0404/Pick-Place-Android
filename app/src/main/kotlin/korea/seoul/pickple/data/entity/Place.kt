@@ -108,7 +108,22 @@ data class Place(
     @SerializedName("place_thumbnail")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "place_thumbnail")
-    val thumbnail: String
+    val thumbnail: String,
+
+    @SerializedName("address")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "address")
+    val address: String? = null,
+
+    @SerializedName("busHours")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "busHours")
+    val busHours: String? = null,
+
+    @SerializedName("fee")
+    @Expose(serialize = true, deserialize = true)
+    @ColumnInfo(name = "fee")
+    val fee: String? = null
 
 ) : Parcelable {
     /**
