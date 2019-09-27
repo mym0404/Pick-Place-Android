@@ -83,7 +83,7 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
                 val pos = tab?.position
 
                 if (pos == 0) {
-                    toast("최신순")
+//                    toast("최신순")
 
 //                    (main_course_detail_recycler_new_popular.adapter as? RecyclerAdapterMainCourseDetail)?.let {
 //                        it.data = it.data.sortedByDescending { it.created }
@@ -95,7 +95,7 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
                     adapter.notifyDataSetChanged()
                 }
                 else if (pos == 1) {
-                    toast("인기순")
+//                    toast("인기순")
 
                     (main_course_detail_recycler_new_popular.adapter as? RecyclerAdapterMainCourseDetail)?.let {
                         it.data = it.data.sortedByDescending { it.likeCount }
