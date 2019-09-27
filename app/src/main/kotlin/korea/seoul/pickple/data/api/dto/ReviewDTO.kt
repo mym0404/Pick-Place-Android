@@ -35,7 +35,7 @@ data class ReviewDTO(
     var comment: String,
     @SerializedName("emotion")
     @Expose(serialize = true, deserialize = true)
-    var emotion: Int,
+    var emotion: String,
     @SerializedName("placeIdx")
     @Expose(serialize = true, deserialize = true)
     var placeIdx: Int?

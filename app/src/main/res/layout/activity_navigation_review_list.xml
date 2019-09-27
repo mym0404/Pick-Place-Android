@@ -27,7 +27,8 @@
         android:layout_marginTop="38dp"
         android:src="@drawable/more_btn_review"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_navi_review_list_ibtn_back" />
+        app:layout_constraintTop_toBottomOf="@id/act_navi_review_list_ibtn_back"
+        android:tint="@color/blue_with_a_hint_of_purple"/>
 
     <TextView
         android:id="@+id/act_navi_review_list_tv_my_review"
