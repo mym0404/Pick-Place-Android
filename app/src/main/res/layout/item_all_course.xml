@@ -42,15 +42,19 @@
             app:layout_constraintStart_toStartOf="@id/imageView7"
             tools:text="덕수궁 산책" />
 
-        <ImageView
+        <CheckBox
             android:id="@+id/imageView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/navi_btn_heart_w" />
+            android:checked="@{place.isLiked}"
+            android:button="@null"
+            android:enabled="false"
+            android:background="@drawable/selector_heart"
+            />
 
         <TextView
             android:id="@+id/txtCourseLikeCount"

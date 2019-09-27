@@ -240,54 +240,77 @@ class CourseIntroViewModel(
             it?.also { place ->
                 updateReview(ReviewType.PLACE, place.id)
             }
+
+            // 장소에 맞게 좋아요 수정!
+            currentPlaceLiked.value = it.isLiked
         }
 
         _currentEmotion.value = Review.Emoticon.EMOTION1
 
-        courseLikeChecked.managedObserve {
-            if (it) {
-                courseRepository.likeCourse(courseId)
-                    .callback({
-                        if (it.success) {
-                            Log.d("seungmin", "like course : $courseId")
-                        }
-                        else {
-                            Log.d("seungmin", "like course fail : $courseId")
-                        }
-                    })
-                course.value?.let {
-                    _course.value = it.apply {
-                        isLiked = true
-                        likeCount++
-                    }
-                }
-            }
-            else {
-                courseRepository.unlikeCourse(courseId)
-                    .callback({
-                        if (it.success) {
-                            Log.d("seungmin", "unlike course : $courseId")
-                        }
-                        else {
-                            Log.d("seungmin", "unlike course fail : $courseId")
-                        }
-                    })
-                course.value?.let {
-                    _course.value = it.apply {
-                        isLiked = false
-                        likeCount--
-                    }
+        courseLikeChecked.managedObserve { liked ->
+            course.value?.let { course ->
+                if (liked) {
+                    courseRepository.likeCourse(courseId)
+                        .callback({
+                            if (it.success) {
+                                Log.d("seungmin", "like course : $courseId")
+                                _course.value = course.apply {
+                                    isLiked = true
+                                    likeCount++
+                                }
+                            } else {
+                                Log.d("seungmin", "like course fail : $courseId")
+//                                _course.value = course // 실패시 초기화
+                            }
+                        })
+                } else {
+                    courseRepository.unlikeCourse(courseId)
+                        .callback({
+                            if (it.success) {
+                                Log.d("seungmin", "unlike course : $courseId")
+                                _course.value = course.apply {
+                                    isLiked = false
+                                    likeCount--
+                                }
+                            } else {
+                                Log.d("seungmin", "unlike course fail : $courseId")
+//                                _course.value = course // 실패시 초기화
+                            }
+                        })
+
                 }
             }
         }
 
-        currentPlaceLiked.managedObserve {
+        currentPlaceLiked.managedObserve { liked ->
             currentPlace.value?.let { place ->
-                if (it) {
+                if (liked) {
                     placeRepository.likePlace(place.id)
+                        .callback({
+                            if (it.success) {
+                                currentPlace.value = place.apply {
+                                    isLiked = true
+                                    likeCount++
+                                }
+                            }
+                            else {
+
+                            }
+                        })
                 }
                 else {
                     placeRepository.unlikePlace(place.id)
+                        .callback({
+                            if (it.success) {
+                                currentPlace.value = place.apply {
+                                    isLiked = false
+                                    likeCount--
+                                }
+                            }
+                            else {
+
+                            }
+                        })
                 }
             }
         }
