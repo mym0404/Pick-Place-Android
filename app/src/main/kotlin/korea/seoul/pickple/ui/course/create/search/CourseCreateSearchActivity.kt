@@ -40,6 +40,11 @@ class CourseCreateSearchActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mBinding.recyclerView.startLayoutAnimation()
+    }
+
     private fun observeViewModel() {
         mViewModel.apply {
 

@@ -36,7 +36,6 @@ class MapActivity : AppCompatActivity() {
      */
     private lateinit var mViewModel: MapViewModel
 
-
     private lateinit var course: Course
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)

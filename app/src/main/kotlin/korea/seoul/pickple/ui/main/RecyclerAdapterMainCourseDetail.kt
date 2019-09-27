@@ -26,16 +26,16 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 // TODO 수민 data를 List<Course>로 바꾸기
-class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<Course>): RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>(), KoinComponent {
+class RecyclerAdapterMainCourseDetail(val ctx: Context, var data: List<Course>) : RecyclerView.Adapter<RecyclerAdapterMainCourseDetail.Holder>(), KoinComponent {
 
-    val intentUtil : IntentUtil by inject()
+    val intentUtil: IntentUtil by inject()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_main_course_detail,parent,false)
+        val view: View = LayoutInflater.from(ctx).inflate(R.layout.item_main_course_detail, parent, false)
         return Holder(view)
     }
 
-    override fun getItemCount(): Int =data.size
+    override fun getItemCount(): Int = data.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.run {
@@ -58,13 +58,16 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<Course>): 
                 }
             }
 
-            val tags = currentItem.tagList.toString()
+            val tags = currentItem.tagList?.fold(initial = "") { str, tag ->
+
+                return@fold "$str #$tag"
+
+            }
             course_tag.text = tags
 
             course_name.text = currentItem.name
 
-
-            course_detail_card.setOnClickListener{
+            course_detail_card.setOnClickListener {
                 navigate(ctx as Activity, NavigationArgs.CourseIntroArg(3))
             }
 
@@ -74,10 +77,10 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data:List<Course>): 
         }
     }
 
-    inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val course_detail_card = itemView.findViewById<ConstraintLayout>(R.id.item_main_course_card)
         val course_img = itemView.findViewById<ImageView>(R.id.item_main_course_detail_img)
-        val course_icon = itemView.findViewById<CircleImageView>(R.id.item_main_course_detail_civ_icon)
+        val course_icon = itemView.findViewById<ImageView>(R.id.item_main_course_detail_civ_icon)
         val course_tag = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_tag)
         val course_name = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_course_name)
         val course_places = itemView.findViewById<TextView>(R.id.item_main_course_detail_tv_places)
