@@ -6,6 +6,7 @@ import korea.seoul.pickple.data.api.response.BaseResponse
 import korea.seoul.pickple.data.api.response.review.ReviewListResponse
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -17,7 +18,7 @@ interface ReviewAPI {
     @POST("review/enroll/place")
     fun enrollPlaceReview(@Body request : EnrollPlaceReviewRequest) : Call<BaseResponse>
 
-    @POST("review/list/{type}")
+    @GET("review/list/{type}")
     fun listReviews(@Path("type") type : Int) : Call<ReviewListResponse>
 
 }

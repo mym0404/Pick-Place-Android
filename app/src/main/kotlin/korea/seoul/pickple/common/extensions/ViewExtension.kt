@@ -65,6 +65,7 @@ fun View.startSimpleAnim() {
 fun ImageView.loadImage(url: String?) {
     Glide.with(context)
         .load(url)
+        .error(R.drawable.logo_img)
         .into(this)
 }
 
@@ -76,12 +77,14 @@ fun ImageView.loadImage(url: String?) {
 fun ImageView.loadImage(uri: Uri?) {
     Glide.with(context)
         .load(uri)
+        .error(R.drawable.logo_img)
         .into(this)
 }
 @BindingAdapter("imageUrl")
 fun ImageView.loadImage(@DrawableRes id : Int?) {
     Glide.with(context)
         .load(id)
+        .error(R.drawable.logo_img)
         .into(this)
 }
 
