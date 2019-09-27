@@ -49,7 +49,7 @@
                 android:src="@drawable/more_btn_heart"
                 app:layout_constraintStart_toStartOf="@id/item_navi_review_list_tv_course_name"
                 app:layout_constraintTop_toBottomOf="@id/item_navi_review_list_tv_course_name"
-                android:tint="#95989a"/>
+                android:tint="@color/aqua_marine"/>
 
             <TextView
                 android:id="@+id/item_navi_review_list_tv_heart_num"
@@ -72,7 +72,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/item_navi_review_list_icon_heart"
                 app:layout_constraintStart_toEndOf="@id/item_navi_review_list_tv_heart_num"
                 app:layout_constraintTop_toTopOf="@id/item_navi_review_list_icon_heart"
-                android:tint="#95989a"/>
+                android:tint="@color/blue_with_a_hint_of_purple"/>
 
             <TextView
                 android:id="@+id/item_navi_review_list_tv_review_num"
@@ -104,8 +104,7 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="@id/item_navi_review_list_img_review"
-                app:layout_constraintTop_toBottomOf="@id/item_navi_review_list_img_review"
-                android:background="#000000"/>
+                app:layout_constraintTop_toBottomOf="@id/item_navi_review_list_img_review"/>
 
             <TextView
                 android:id="@+id/item_navi_review_list_tv_review"
