@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.databinding.ActivityMapBinding

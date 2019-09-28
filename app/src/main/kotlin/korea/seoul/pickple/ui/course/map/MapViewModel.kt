@@ -1,16 +1,22 @@
 package korea.seoul.pickple.ui.course.map
 
+import android.os.Looper
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.logging.Handler
+import kotlin.concurrent.thread
 
-class MapViewModel(private val courseRepository: CourseRepository, course : Course) : ViewModel() {
+class MapViewModel(private val courseRepository: CourseRepository,private val placeRepository: PlaceRepository, course : Course) : ViewModel() {
 
 
     private val TAG = MapViewModel::class.java.simpleName
@@ -39,22 +45,16 @@ class MapViewModel(private val courseRepository: CourseRepository, course : Cour
 
     private fun getPlacesForCourse(course : Course) {
 
+        thread {
 
+            var placeList = listOf<Place>()
 
-        courseRepository.getPlaces(course).enqueue(object : Callback<List<Place>> {
-            override fun onFailure(call: Call<List<Place>>, t: Throwable) {
-                _loading.value = false
+            (course.places ?: listOf()).forEach {
+                val response = placeRepository.getPlace(it).execute()
+                response.body()?.placeData?.toEntity()?.let { placeList = placeList + it }
             }
 
-            override fun onResponse(call: Call<List<Place>>, response: Response<List<Place>>) {
-                if(response.isSuccessful) {
-                    _places.value = response.body()
-                    _loading.value = false
-                }else {
-                    _loading.value = false
-                }
-            }
-        })
-
+            android.os.Handler(Looper.getMainLooper()).post { _places.value = placeList }
+        }
     }
 }
