@@ -16,6 +16,7 @@ import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.data.api.response.directions.DirectionsResponse
 import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
