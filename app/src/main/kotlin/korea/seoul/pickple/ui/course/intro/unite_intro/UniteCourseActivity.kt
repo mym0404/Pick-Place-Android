@@ -46,7 +46,7 @@ class UniteCourseActivity : BaseFragment<ActivityUniteCourseBinding>(R.layout.ac
                         arg = NavigationArgs.CourseCreateArgs(
                             title = course.name,
                             thumbnail = Uri.parse(course.thumbnail),
-                            description = course.description,
+                            description = course.description ?: "",
                             tagList = course.tagList?: listOf(),
                             onlyShow = true,
                             course = course.id

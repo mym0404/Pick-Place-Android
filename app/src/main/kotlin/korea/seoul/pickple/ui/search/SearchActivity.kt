@@ -34,14 +34,11 @@ class SearchActivity : AppCompatActivity() {
         mainAPI.listMainSearch(keyword).callback(
             successCallback = {
                 var searchResultList = it.data?.map {
-                    it
+                    it.toEntity()
                 } ?: listOf()
 
                 resultAdapter = RecyclerAdapterSearchResult(this, searchResultList)
                 act_search_rv_search_result.adapter = resultAdapter
-
-                val itemDecorationSearchResult = ItemDecorationSearchResult(this)
-                act_search_rv_search_result.addItemDecoration(itemDecorationSearchResult)
 
                 resultAdapter.notifyDataSetChanged()
             },
@@ -56,8 +53,6 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setRecycler() {
         // TODO 수민) 데이터 바꾸기
-
-        var resultList = listOf("123e", "!23", "@3")
         var recommendWordList = listOf("한국 근대 역사 코스", "데이트코스", "서울역 오래가게 탐방 코스")
 
         // result
@@ -74,6 +69,8 @@ class SearchActivity : AppCompatActivity() {
         val itemDecorationSearchRecommend = ItemDecorationSearchRecommend(this)
         act_search_rv_popular_course.addItemDecoration(itemDecorationSearchRecommend)
 
+        val itemDecorationSearchResult = ItemDecorationSearchResult(this)
+        act_search_rv_search_result.addItemDecoration(itemDecorationSearchResult)
     }
 
     private fun setListener() {

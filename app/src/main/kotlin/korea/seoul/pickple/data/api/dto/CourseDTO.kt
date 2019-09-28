@@ -41,8 +41,10 @@ data class CourseDTO(
     var courseIcon: String,
     @SerializedName("totalHour")
     @Expose(serialize = true, deserialize = true)
-    var totalHour: String
-
+    var totalHour: String,
+    @SerializedName("cReviewCount")
+    @Expose(serialize = true, deserialize = true)
+    var cReviewCount: Int
     ) : Parcelable {
     fun toEntity() : Course {
         return Course(
@@ -54,7 +56,9 @@ data class CourseDTO(
             listOf(),
             cLikeCount,
             listOf(),
-            cThumbnail
+            cThumbnail,
+            totalHour,
+            cReviewCount
         )
     }
 }

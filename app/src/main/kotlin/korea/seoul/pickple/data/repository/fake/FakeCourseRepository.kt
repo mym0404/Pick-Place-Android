@@ -33,7 +33,8 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
                 "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
                 "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
                 "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
-            ).random()
+            ).random(),
+            review_count = 1
         )
     }
 
@@ -56,7 +57,8 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
                     "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
                     "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
                     "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
-                ).random()
+                ).random(),
+                review_count = 1
             )
         )
     }

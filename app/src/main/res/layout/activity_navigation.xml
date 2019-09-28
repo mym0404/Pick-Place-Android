@@ -78,7 +78,8 @@
                 android:src="@drawable/more_btn_heart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/act_nav_relative_tv_my_num"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@color/blue_with_a_hint_of_purple"/>
 
             <TextView
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -100,7 +101,8 @@
                 android:src="@drawable/more_btn_review"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/act_nav_relative_tv_like_num"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@color/blue_with_a_hint_of_purple"/>
 
             <TextView
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -155,7 +157,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:src="@drawable/more_btn_news"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:tint="@color/blue_with_a_hint_of_purple"/>
 
                     <TextView
                         app:layout_constraintBottom_toBottomOf="@id/imageview"
@@ -261,7 +264,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:src="@drawable/more_btn_heart"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:tint="@color/blue_with_a_hint_of_purple"/>
 
                     <TextView
                         app:layout_constraintBottom_toBottomOf="@id/imageview5"
@@ -314,7 +318,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         android:src="@drawable/more_btn_review"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:tint="@color/blue_with_a_hint_of_purple"/>
 
                     <TextView
                         app:layout_constraintBottom_toBottomOf="@id/imageview7"

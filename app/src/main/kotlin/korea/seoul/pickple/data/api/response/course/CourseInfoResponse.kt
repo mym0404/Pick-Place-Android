@@ -70,7 +70,7 @@ data class CourseInfoResponse(
         var distances:List<Float>,
         @SerializedName("isLiked")
         @Expose
-        var isLiked:Int
+        var isLiked: Boolean
     ) : Parcelable {
         fun toEntity() : Course {
             return Course(
@@ -84,7 +84,8 @@ data class CourseInfoResponse(
                 tagIdx,
                 cThumbnail,
                 totalHour,
-                isLiked==1
+                cReviewCount,
+                isLiked
             )
         }
     }
