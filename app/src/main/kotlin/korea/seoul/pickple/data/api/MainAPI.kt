@@ -6,7 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import android.os.Parcelable
 import korea.seoul.pickple.data.api.response.main.MainSearchResponse
-
 import kotlinx.android.parcel.Parcelize
 import retrofit2.http.Query
 

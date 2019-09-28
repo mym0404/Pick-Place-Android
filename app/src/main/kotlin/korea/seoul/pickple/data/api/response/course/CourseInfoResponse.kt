@@ -80,7 +80,8 @@ data class CourseInfoResponse(
                 cLikeCount,
                 tagIdx,
                 cThumbnail,
-                totalHour
+                totalHour,
+                cReviewCount
             )
         }
     }

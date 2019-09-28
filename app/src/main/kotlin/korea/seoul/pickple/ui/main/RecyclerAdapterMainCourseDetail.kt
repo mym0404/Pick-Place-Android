@@ -46,7 +46,7 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data: List<Course>) 
                 .load(currentItem.thumbnail)
                 .into(course_img)
 
-            when (currentItem.type.type) {
+            when (currentItem.type?.type) {
                 0 -> {
                     course_icon.setImageResource(R.drawable.oldshop_course_icon)
                 }

@@ -35,7 +35,7 @@ data class Course(
     @ColumnInfo(name="course_type")
     @JsonAdapter(CourseTypeJsonSerializer::class)
     @TypeConverters(CourseTypeConverter::class)
-    val type : Type,
+    val type : Type?,
 
     /**
      * 코스의 이름
@@ -51,7 +51,7 @@ data class Course(
     @SerializedName("course_description")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "course_description")
-    val description : String,
+    val description : String?,
 
     /**
      * 해당 코스가 어느 서울 행정구역에 포함되는 지에대한 정보
@@ -67,7 +67,7 @@ data class Course(
     @ColumnInfo(name = "course_district")
     @JsonAdapter(SeoulDistrictJsonSerializer::class)
     @TypeConverters(SeoulDistrictConverter::class)
-    val districtInSeoul : SeoulDistrict,
+    val districtInSeoul : SeoulDistrict?,
 
     /**
      * 해당 코스가 포함하고 있는 [Place] 들
@@ -107,7 +107,12 @@ data class Course(
     @SerializedName("course_hours")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_hours")
-    val totalHours : String = ""
+    val totalHours : String = "",
+
+    @SerializedName("review_count")
+    @Expose(serialize = true,deserialize = true)
+    @ColumnInfo(name="review_count")
+    val review_count : Int?
 ) : Parcelable {
 
     /**

@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/item_search_result_card_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:cardUseCompatPadding="true"
@@ -23,7 +24,8 @@
                 android:layout_height="match_parent"
                 app:layout_constraintDimensionRatio="207:134"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="#000000"/>
+                android:background="#000000"
+                android:scaleType="centerCrop"/>
             
             <ImageView
                 android:id="@+id/item_search_civ_icon"
