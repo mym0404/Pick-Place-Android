@@ -2,50 +2,51 @@ package korea.seoul.pickple.ui.navigation.course
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.callback
-import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.interfaces.MainRepository
+import korea.seoul.pickple.common.widget.Once
+import korea.seoul.pickple.data.api.MyPageAPI
+import korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse
 
 /**
  * Created by mj on 23, September, 2019
  */
 
-class NavigationCourseViewModel(private val courseType : Course.Type,private val mainRepository: MainRepository)  : ViewModel() {
+class NavigationCourseViewModel(private val myPageAPI: MyPageAPI)  : ViewModel() {
 
-    private val _courses : MutableLiveData<List<Course>> = MutableLiveData()
-    val courses : LiveData<List<Course>>
+    private val _courses : MutableLiveData<List<ListMyCoursesResponse.Data.CourseDTO>> = MutableLiveData(listOf())
+    val courses : LiveData<List<ListMyCoursesResponse.Data.CourseDTO>>
         get() = _courses
 
-    val title = when(courseType) {
-        Course.Type.UNKNOWN->""
-        Course.Type.ORAEGAGE->"오래가게 코스"
-        Course.Type.KOREA_TRADITIONAL->"한국 전통 코스"
-        Course.Type.CUSTOM->"사용자 코스"
+    val courseCountText : LiveData<String> = Transformations.map(courses) {
+        it.size.toString() ?: "0"
     }
-    val titleImage = when(courseType) {
-        Course.Type.UNKNOWN-> R.drawable.oldshop_course_icon
-        Course.Type.ORAEGAGE->R.drawable.oldshop_course_icon
-        Course.Type.KOREA_TRADITIONAL->R.drawable.history_course_icon
-        Course.Type.CUSTOM->R.drawable.more_btn_map
-    }
+
+
+    private val _clickCourse : MutableLiveData<Once<ListMyCoursesResponse.Data.CourseDTO>> = MutableLiveData()
+    val clickCourse : LiveData<Once<ListMyCoursesResponse.Data.CourseDTO>>
+        get() = _clickCourse
 
     init {
         getDatas()
     }
 
+    fun onClickCourse(item : ListMyCoursesResponse.Data.CourseDTO) {
+        _clickCourse.value = Once(item)
+    }
     private fun getDatas() {
-        mainRepository.listMainCourses(courseType.type)
-            .callback({
-                _courses.value =  it.data?.map {
-                    it.info?.getOrNull(0)?.toEntity()
-                }?.filterNotNull() ?: listOf()
-            }, {
+        myPageAPI.listMyCourses().callback({
+            it.data?.let {
+                _courses.value = it.mapNotNull {
+                    it.info?.getOrNull(0)
+                } ?: listOf()
+            }
+        }, {
 
-            }, {
+        }, {
 
-            })
+        })
     }
 
 }
