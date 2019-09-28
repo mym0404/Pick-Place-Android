@@ -26,6 +26,9 @@ class CourseIntroViewModel(
     private val placeRepository: PlaceRepository,
     private val reviewRepository: ReviewRepository
 ) : BaseViewModel() {
+
+    private val TAG = CourseIntroViewModel::class.java.simpleName
+
     /**
      * 현재 보여줄 courseId
      * */
@@ -36,15 +39,16 @@ class CourseIntroViewModel(
                 .callback(
                     successCallback = { course ->
                         // 코스를 좋아요 한지 여부를 확인
-                        Log.d("seungmin", "get course info : $course")
+                        Log.e("seungmin", "get course info : $course")
                         _course.value = course.data?.toEntity() ?: return@callback
                         courseLikeChecked.value = _course.value?.isLiked?:false
                     },
                     failCallback = {
-                        _course.value = FakeCourseRepository.fakeCourse
+//                        _course.value = FakeCourseRepository.fakeCourse
                     },
                     errorCallback = {
-                        _course.value = FakeCourseRepository.fakeCourse
+                        debugE(TAG,it)
+//                        _course.value = FakeCourseRepository.fakeCourse
                     }
                 )
 
@@ -71,7 +75,7 @@ class CourseIntroViewModel(
     /**
     * course intro 에서 소개할 course 정보
     * */
-    private val _course: MutableLiveData<Course> = MutableLiveData(FakeCourseRepository.fakeCourse)
+    private val _course: MutableLiveData<Course> = MutableLiveData()
     val course: LiveData<Course> = _course
 
     /**

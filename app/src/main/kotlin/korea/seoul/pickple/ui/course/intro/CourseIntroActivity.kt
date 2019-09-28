@@ -64,8 +64,8 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
             appbarLayoutCourseIntro.outlineProvider = null
         }
 
-//        viewModel.courseId = courseId
-        viewModel.courseId = 1 // 테스트 용으로 서버에 더미데이터가 들어있는 1로 변경하였다.
+        viewModel.courseId = courseId
+//        viewModel.courseId = 1 // 테스트 용으로 서버에 더미데이터가 들어있는 1로 변경하였다.
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
