@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.SignUpActivity">
@@ -29,7 +30,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tiet_signup_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:singleLine="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -59,7 +61,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_signup_nickname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -90,7 +93,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_signup_pw"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -108,7 +113,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_signup_pw_check"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:singleLine="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
