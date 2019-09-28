@@ -144,7 +144,7 @@ class PickPleApplication : Application() {
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { (places: List<Place>) -> ShowAllCoursesViewModel(places) }
-        viewModel { NavigationViewModel(get(),get()) }
+        viewModel { NavigationViewModel(get(),get(), get()) }
         viewModel { NavigationCourseViewModel(get()) }
         viewModel { NavigationPickPlaceViewModel(get(),get()) }
     }
