@@ -47,9 +47,9 @@ class PickPleApplication : Application() {
         single { GalleryUtil() }
         single { FileUtil(get()) }
         single { IntentUtil() }
-        single { TokenUtil(get())}
-        single { SPUtil(get())}
-        single { MultiPartUtil(get())}
+        single { TokenUtil(get()) }
+        single { SPUtil(get()) }
+        single { MultiPartUtil(get()) }
     }
 
     private val apiModule = module {
@@ -81,6 +81,14 @@ class PickPleApplication : Application() {
                 .build()
         }
 
+        single<Retrofit>(qualifier = named("OpenAPI")) {
+            Retrofit.Builder()
+                .baseUrl("http://openapi.seoul.go.kr:8088/")
+                .addConverterFactory(GsonConverterFactory.create(get()))
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build()
+        }
+
         single {
 
             val tokenUtil = get<TokenUtil>()
@@ -88,9 +96,9 @@ class PickPleApplication : Application() {
             return@single Interceptor { chain ->
                 val request = chain.request()
                     .newBuilder()
-                    .addHeader("token", tokenUtil.loadToken() ?: "" )
+                    .addHeader("token", tokenUtil.loadToken() ?: "")
                     .build()
-                debugE(TAG,"token : ${tokenUtil.loadToken()}")
+                debugE(TAG, "token : ${tokenUtil.loadToken()}")
                 chain.proceed(request)
             }
         } bind Interceptor::class
@@ -115,6 +123,7 @@ class PickPleApplication : Application() {
         single { get<Retrofit>().create(ReviewAPI::class.java) }
         single { get<Retrofit>().create(SetAPI::class.java) }
         single { get<Retrofit>().create(UserAPI::class.java) }
+        single { get<Retrofit>(Retrofit::class, named("OpenAPI"), parameters = null).create(OpenAPI::class.java) } bind OpenAPI::class
 
     }
 
@@ -131,22 +140,22 @@ class PickPleApplication : Application() {
         single { CourseRepositoryImpl(get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
-        single { UserRepositoryImpl(get(),get()) } bind UserRepository::class
+        single { UserRepositoryImpl(get(), get()) } bind UserRepository::class
         single { SetRepositoryImpl(get()) } bind SetRepository::class
         single { MainRepositoryImpl(get()) } bind MainRepository::class
         single { MyPageRepositoryImpl(get()) } bind MyPageRepository::class
     }
 
     private val viewModelModule = module {
-        viewModel { (course: Course) -> MapViewModel(get(),get(), course) }
-        viewModel { CourseCreateViewModel(get(),get()) }
+        viewModel { (course: Course) -> MapViewModel(get(), get(), course) }
+        viewModel { CourseCreateViewModel(get(), get()) }
         viewModel { CourseIntroViewModel(get(), get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
         viewModel { (places: List<Place>) -> ShowAllCoursesViewModel(places) }
-        viewModel { NavigationViewModel(get(),get(), get()) }
+        viewModel { NavigationViewModel(get(), get(), get(), get()) }
         viewModel { NavigationCourseViewModel(get()) }
-        viewModel { NavigationPickPlaceViewModel(get(),get()) }
+        viewModel { NavigationPickPlaceViewModel(get(), get()) }
     }
 
     override fun onCreate() {

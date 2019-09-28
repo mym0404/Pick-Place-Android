@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
+import korea.seoul.pickple.data.api.OpenAPIDTO
 import korea.seoul.pickple.data.entity.SeoulNews
 import korea.seoul.pickple.databinding.ItemSeoulNewsBinding
 
@@ -14,7 +15,7 @@ import korea.seoul.pickple.databinding.ItemSeoulNewsBinding
 
 class SeoulNewsAdapter(private val vm : NavigationViewModel) : RecyclerView.Adapter<SeoulNewsAdapter.SeoulNewsHolder>() {
 
-    var items: List<SeoulNews> = listOf()
+    var items: List<OpenAPIDTO.CulturalEventInfo.Row> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeoulNewsHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,7 +39,7 @@ class SeoulNewsAdapter(private val vm : NavigationViewModel) : RecyclerView.Adap
 }
 
 @BindingAdapter("app:recyclerview_seoul_news_items")
-fun RecyclerView.setItems(items: List<SeoulNews>) {
+fun RecyclerView.setItems(items: List<OpenAPIDTO.CulturalEventInfo.Row>) {
     (adapter as? SeoulNewsAdapter)?.run {
         this.items = items
         this.notifyDataSetChanged()
