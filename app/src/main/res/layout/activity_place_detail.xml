@@ -37,7 +37,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" >
+
+                </androidx.viewpager2.widget.ViewPager2>
 
                 <TextView
                     android:id="@+id/toolPlaceDetailIndex"
@@ -48,10 +50,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/toolPlaceDetailName"
                     tools:text="1"
-                    android:text="@{viewModel.index}"
+                    android:text="@{viewModel.indexString}"
                     android:textSize="29sp"
                     android:textColor="#ffffff"
                     />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    tools:text=" 1 / 6 "
+                    android:textSize="11sp"
+                    android:text="@{viewModel.indexNavString}"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolPlaceDetailLikeCount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/toolPlaceDetailLikeCount" />
 
                 <TextView
                     android:id="@+id/toolPlaceDetailName"
@@ -71,7 +86,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_marginBottom="24dp"
-                    android:checked="@={viewModel.placeLiked}"
+                    android:checked="@={viewModel.currentPlaceLiked}"
                     android:background="@drawable/selector_heart"
                     android:button="@null"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -93,16 +108,16 @@
 
 <!--                TODO [Place]에 tag 추가하고 연결 해야함 -->
                 <TextView
+                    android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    android:textColor="#ffffff"
+                    android:textSize="11sp"
                     app:layout_constraintBottom_toBottomOf="@id/toolPlaceDetailLike"
                     app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLikeCount"
-                    tools:text="# 덕수궁 핫 플레이스"
-                    android:textSize="11sp"
-                    android:textColor="#ffffff"
-                    />
+                    app:layout_constraintTop_toTopOf="@id/toolPlaceDetailLike"
+                    tools:text="# 덕수궁 핫 플레이스" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -132,106 +147,141 @@
                     android:text="@{viewModel.currentPlace.description}"
                     />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ctnPlaceDetailLocation"
+                <LinearLayout
+                    android:id="@+id/ctnPlaceDetailInfo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:visibility="@{viewModel.currentPlace.address!=``?View.VISIBLE : View.GONE}"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/toolPlaceDetailDesc"
                     app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailDesc"
-                    app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc">
 
-                    <ImageView
-                        android:id="@+id/toolPlaceDetailLocation"
-                        android:layout_width="16dp"
-                        android:layout_height="0dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/btn_place_sm" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ctnPlaceDetailLocation"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="30dp"
-                        android:lineSpacingExtra="7sp"
-                        android:maxLines="2"
-                        android:text="@{viewModel.currentPlace.address}"
-                        android:textColor="#000000"
-                        android:textSize="13sp"
+                        android:visibility="@{viewModel.currentPlace.address!=``?View.VISIBLE : View.GONE}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분" />
+                        app:layout_constraintStart_toStartOf="@+id/toolPlaceDetailDesc"
+                        app:layout_constraintTop_toBottomOf="@+id/toolPlaceDetailDesc">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/toolPlaceDetailLocation"
+                            android:layout_width="16dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/btn_place_sm" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ctnPlaceDetailBusHours"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    android:visibility="@{viewModel.currentPlace.busHours!=``?View.VISIBLE : View.GONE}"
-                    app:layout_constraintStart_toStartOf="@id/ctnPlaceDetailLocation"
-                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailLocation"
-                    app:layout_constraintEnd_toEndOf="parent">
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:lineSpacingExtra="7sp"
+                            android:maxLines="2"
+                            android:text="@{viewModel.currentPlace.address}"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@id/toolPlaceDetailLocation"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="서울특별시 중구 정동 세종대로 99\n1호선 시청역 2번 출구 도보 5분" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ctnPlaceDetailNumber"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/btn_time_sm" />
+                        android:layout_marginTop="23dp"
+                        android:visibility="@{viewModel.currentPlace.phoneNumber!=``?View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="0dp"
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/phone" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:text="@{`전화번호 : ` +viewModel.currentPlace.phoneNumber}"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView10"
+                            app:layout_constraintTop_toTopOf="@+id/imageView10" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ctnPlaceDetailBusHours"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="30dp"
-                        android:text="@{viewModel.currentPlace.busHours}"
-                        android:textColor="#000000"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView5"
-                        app:layout_constraintTop_toTopOf="@+id/imageView5" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_marginTop="23dp"
+                        android:visibility="@{viewModel.currentPlace.busHours!=``?View.VISIBLE : View.GONE}">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ctnPlaceDetailFee"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="23dp"
-                    android:visibility="@{viewModel.currentPlace.fee!=``?View.VISIBLE : View.GONE}"
-                    app:layout_constraintStart_toStartOf="@id/ctnPlaceDetailBusHours"
-                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailBusHours"
-                    app:layout_constraintEnd_toEndOf="parent">
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/btn_time_sm" />
 
-                    <ImageView
-                        android:id="@+id/imageView6"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:text="@{`영업시간 : ` + viewModel.currentPlace.busHours}"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView5"
+                            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ctnPlaceDetailFee"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/btn_price_sm" />
+                        android:layout_marginTop="23dp"
+                        android:visibility="@{viewModel.currentPlace.fee!=``?View.VISIBLE : View.GONE}">
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="30dp"
-                        android:lineSpacingExtra="7sp"
-                        android:text="@{viewModel.currentPlace.fee}"
-                        android:textColor="#000000"
-                        android:textSize="13sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/btn_price_sm" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="30dp"
+                            android:lineSpacingExtra="7sp"
+                            android:text="@{viewModel.currentPlace.fee}"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView6"
+                            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
 
 
                 <!--                Review Fragment로 런타임에 대체되어야한다.-->
@@ -244,7 +294,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailFee" />
+                    app:layout_constraintTop_toBottomOf="@id/ctnPlaceDetailInfo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

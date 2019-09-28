@@ -3,11 +3,12 @@ package korea.seoul.pickple.ui.course.intro.all_course
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Place
 
-@BindingAdapter("courses")
-fun RecyclerView.setAllCourse(courses: List<Course>?) {
+@BindingAdapter("livePlaces")
+fun RecyclerView.setAllCourse(places: List<Place>?) {
     (adapter as? ShowAllCourseAdapter)?.apply {
-        data = courses?: listOf()
+        data = places?: listOf()
         notifyDataSetChanged()
     }
 }

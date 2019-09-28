@@ -114,7 +114,7 @@ class CourseCreateActivity : AppCompatActivity() {
             places.observe(this@CourseCreateActivity, Observer { places ->
                 mBinding.pageIndicatorView.count = places.size
                 mMapFragment.get()?.getController()?.run {
-                    updateLocationAndZoomScale(places, false)
+                    updateLocationAndZoomScale(places, true)
                 }
 
             })
@@ -197,9 +197,9 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun toLocation(place: Place) {
         place.location?.let { location ->
-
+            mMapFragment.get()?.getController()?.setZoom(15f,false)
             mMapFragment.get()?.getController()?.setLocation(location,true)
-            mMapFragment.get()?.getController()?.setZoom(15f,true)
+
         }
     }
 
@@ -210,9 +210,9 @@ class CourseCreateActivity : AppCompatActivity() {
 
         mMapUtil.getNearestPlaceWithMarker(places, marker)?.let { place ->
             mViewModel.curPlace.value = place
-
+            mMapFragment.get()?.getController()?.setZoom(15f,false)
             mMapFragment.get()?.getController()?.setLocation(place.location!!, true)
-            mMapFragment.get()?.getController()?.setZoom(15f,true)
+
         }
 
 

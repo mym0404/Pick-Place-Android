@@ -2,43 +2,34 @@ package korea.seoul.pickple.ui.course.intro.all_course
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import korea.seoul.pickple.common.util.callback
-import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.ui.BaseViewModel
 
+/**
+ * 코스의 모든 장소정보를 보여주어야한다.
+ * */
 class ShowAllCoursesViewModel(
-    courseRepository: CourseRepository
+    places: List<Place>
 ) : BaseViewModel() {
 
     /**
     * 모든 course 데이터
     * */
-    private val _courses: MutableLiveData<List<Course>> = MutableLiveData()
-    val courses: LiveData<List<Course>> = _courses
+    private val _livePlaces: MutableLiveData<List<Place>> = MutableLiveData()
+    val livePlaces: LiveData<List<Place>> = _livePlaces
 
     /**
-    * 사용자가 새로 누른 course id
+    * 사용자가 새로 누른 indexString
     * */
-    private val _clickedCourseId: MutableLiveData<Int> = MutableLiveData()
-    val clickedCourseId: LiveData<Int> = _clickedCourseId
+    private val _clickedIndex: MutableLiveData<Int> = MutableLiveData()
+    val clickedIndex: LiveData<Int> = _clickedIndex
 
     init {
-        courseRepository.getAllCourses()
-            .callback(
-                successCallback = {
-                    _courses.value = it
-                },
-                failCallback = {
-                    _courses.value = listOf()
-                },
-                errorCallback =  {
-                    _courses.value = listOf()
-                }
-            )
+        _livePlaces.value = places
     }
 
-    fun clickCourseId(id: Int) {
-        _clickedCourseId.value = id
+    fun clickIndex(id: Int) {
+        // 장소 index는 1 기반 인덱스이다.
+        _clickedIndex.value = id + 1
     }
 }

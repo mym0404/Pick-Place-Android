@@ -1,8 +1,6 @@
 package korea.seoul.pickple.ui.course.intro.review
 
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.PopupWindow
@@ -79,6 +77,9 @@ class ReviewFragment : BaseFragment<FragmentReviewBinding>(R.layout.fragment_rev
                     }.commit()
                 }
                 btnReviewSubmit.setOnClickListener {
+                    // 빈 댓글은 등록할 수 없다.
+                    if (edtReviewComment.text.isNullOrEmpty()) return@setOnClickListener
+
                     if (mIsCourseReview) {
                         mCourseIntroViewModel.enrollCourseReview(edtReviewComment.text.toString())
                     }

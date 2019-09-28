@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.*
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.implementation.*
 import korea.seoul.pickple.data.repository.interfaces.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
@@ -142,7 +143,7 @@ class PickPleApplication : Application() {
         viewModel { CourseIntroViewModel(get(), get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
-        viewModel { ShowAllCoursesViewModel(get()) }
+        viewModel { (places: List<Place>) -> ShowAllCoursesViewModel(places) }
         viewModel { NavigationViewModel(get(),get()) }
         viewModel { NavigationCourseViewModel(get()) }
         viewModel { NavigationPickPlaceViewModel(get(),get()) }

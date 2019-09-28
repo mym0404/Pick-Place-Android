@@ -16,7 +16,7 @@ class CourseIntroViewPagerAdapter(
             0 -> CourseSimpleIntroActivity()
             1 -> UniteCourseActivity()
             2 -> PlaceDetailActivity()
-            else -> throw IllegalArgumentException("course intro fragment index error")
+            else -> throw IllegalArgumentException("course intro fragment indexString error")
         }
     }
 
