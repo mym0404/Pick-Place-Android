@@ -3,10 +3,12 @@ package korea.seoul.pickple.ui.navigation.course
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.databinding.ActivityNavigationCourseBinding
+import korea.seoul.pickple.ui.NavigationArgs
+import korea.seoul.pickple.ui.navigate
 import korea.seoul.pickple.ui.parseIntent
 import org.koin.androidx.viewmodel.ext.android.getViewModel
-import org.koin.core.parameter.parametersOf
 
 /**
  * Created by mj on 23, September, 2019
@@ -24,9 +26,7 @@ class NavigationCourseActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         val arg = parseIntent(intent)
-        mViewModel = getViewModel {
-            parametersOf(arg.type)
-        }
+        mViewModel = getViewModel()
 
 
         mBinding.lifecycleOwner = this
@@ -37,6 +37,12 @@ class NavigationCourseActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
+        mBinding.recyclerView.apply {
+            adapter = NavigationCourseAdapter(mViewModel)
+
+        }
+
         mBinding.backButton.setOnClickListener {
             onBackPressed()
         }
@@ -44,7 +50,9 @@ class NavigationCourseActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         mViewModel.apply {
-            
+            clickCourse.observeOnce(this@NavigationCourseActivity) {
+                navigate(this@NavigationCourseActivity, NavigationArgs.CourseIntroArg(it.courseIdx))
+            }
         }
     }
 }

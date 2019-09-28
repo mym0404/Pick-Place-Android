@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.common.util.LinearItemDecoration
 import korea.seoul.pickple.common.widget.observeOnce
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.databinding.ActivityNavigationBinding
 import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.navigate
+import korea.seoul.pickple.ui.navigation.pickplace.NavigationPickPlaceActivity
 import korea.seoul.pickple.ui.navigation.review.NavigationReviewActivity
 import korea.seoul.pickple.ui.setting.SettingActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,6 +46,17 @@ class NavigationActivity : AppCompatActivity() {
         }
         mBinding.imageview8.setOnClickListener {
             Intent(this@NavigationActivity,NavigationReviewActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+
+        mBinding.imageview4.setOnClickListener {
+
+            navigate(this,NavigationArgs.NavigationCourseArg(Course.Type.CUSTOM))
+
+        }
+        mBinding.imageview6.setOnClickListener {
+            Intent(this@NavigationActivity,NavigationPickPlaceActivity::class.java).apply {
                 startActivity(this)
             }
         }
