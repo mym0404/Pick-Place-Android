@@ -21,4 +21,5 @@ interface MyPageAPI {
     @GET("mypage/likePlace")
     fun listPickPlace() : Call<ListMyLikePlaceResponse>
 
+
 }

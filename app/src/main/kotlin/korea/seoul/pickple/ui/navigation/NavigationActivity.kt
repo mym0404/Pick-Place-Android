@@ -86,7 +86,7 @@ class NavigationActivity : AppCompatActivity() {
         mViewModel.apply {
             clickSeoulNews.observeOnce(this@NavigationActivity) {
                 Intent(Intent.ACTION_VIEW).apply {
-                    setData(Uri.parse(it.url))
+                    setData(Uri.parse(it.oRGLINK))
                     startActivity(this)
                 }
             }

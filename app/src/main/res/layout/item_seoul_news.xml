@@ -12,7 +12,7 @@
 
         <variable
             name="item"
-            type="korea.seoul.pickple.data.entity.SeoulNews" />
+            type="korea.seoul.pickple.data.api.OpenAPIDTO.CulturalEventInfo.Row" />
 
     </data>
 
@@ -26,7 +26,7 @@
         <ImageView
             android:scaleType="centerCrop"
 
-            imageUrl="@{item.thumbnail}"
+            imageUrl="@{item.mAINIMG}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

@@ -7,6 +7,8 @@ import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.api.MyPageAPI
+import korea.seoul.pickple.data.api.OpenAPI
+import korea.seoul.pickple.data.api.OpenAPIDTO
 import korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse
 import korea.seoul.pickple.data.api.response.mypage.ListMyLikePlaceResponse
 import korea.seoul.pickple.data.api.response.mypage.ListMyReviewResponse
@@ -19,11 +21,11 @@ import korea.seoul.pickple.data.repository.interfaces.SetRepository
  * Created by mj on 22, September, 2019
  */
 
-class NavigationViewModel(private val mainRepository: MainRepository, private val myPageAPI: MyPageAPI, private val setRepository: SetRepository) : ViewModel() {
+class NavigationViewModel(private val openAPI : OpenAPI,private val mainRepository: MainRepository, private val myPageAPI: MyPageAPI, private val setRepository: SetRepository) : ViewModel() {
 
     private val TAG = NavigationViewModel::class.java.simpleName
 
-    val seoulNews: MutableLiveData<List<SeoulNews>> = MutableLiveData(
+    val seoulNews: MutableLiveData<List<OpenAPIDTO.CulturalEventInfo.Row>> = MutableLiveData(
         listOf(
         )
     )
@@ -45,8 +47,8 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
 
     val nickName : MutableLiveData<String> = MutableLiveData()
 
-    private val _clickSeoulNews: MutableLiveData<Once<SeoulNews>> = MutableLiveData()
-    val clickSeoulNews: LiveData<Once<SeoulNews>>
+    private val _clickSeoulNews: MutableLiveData<Once<OpenAPIDTO.CulturalEventInfo.Row>> = MutableLiveData()
+    val clickSeoulNews: LiveData<Once<OpenAPIDTO.CulturalEventInfo.Row>>
         get() = _clickSeoulNews
 
     private val _clickCourse: MutableLiveData<Once<ListMyCoursesResponse.Data.CourseDTO>> = MutableLiveData()
@@ -77,12 +79,13 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
     }
 
     private fun getDatas() {
-        myPageAPI.listSeoulNews().callback({
-            it.data?.let {
-                seoulNews.value = it.getOrNull(0)?.map {
-                    it.info.getOrNull(0)
-                }?.filterNotNull() ?: listOf()
+        openAPI.listOpenAPIDatas().callback({
+            try {
+                seoulNews.value = it.culturalEventInfo.row
+            }catch(t : Throwable) {
+
             }
+
         }, {
 
         }, {
@@ -130,7 +133,7 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
         })
     }
 
-    fun onClickSeoulNews(news: SeoulNews) {
+    fun onClickSeoulNews(news: OpenAPIDTO.CulturalEventInfo.Row) {
         _clickSeoulNews.value = Once(news)
     }
 
