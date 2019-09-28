@@ -89,9 +89,11 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
                 true
             }
             R.id.actionShowAll -> {
-                // 전체 코스 보기 화면으로 넘어가야함, 만약 거기서 코스를 선택했다면?! course Id를 변경해주자! (응답을 받아오자.)
+                // 코스의 전체 장소 보기 화면으로 넘어가야함, 만약 거기서 장소를 선택했다면?! 선택된 index를 전달해주자!
                 Log.d("seungmin", "전체 코스보기")
-                navigate(this, NavigationArgs.ShowAllCourseArg(), REQUEST_SHOW_ALL_COURSES)
+                viewModel.places.value?.let { places ->
+                    navigate(this, NavigationArgs.ShowAllCourseArg(ArrayList(places)), REQUEST_SHOW_ALL_COURSES)
+                }
                 true
             }
             else -> onOptionsItemSelected(item)
@@ -104,13 +106,15 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
         when(requestCode) {
             REQUEST_SHOW_ALL_COURSES -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    // 다른 course를 선택했다. 코스를 변경하자.
-                    viewModel.courseId = data?.getIntExtra(COURSE_ID, 0)?:viewModel.courseId
-                    // 코스를 변경하고, 맨 처음 화면부터 시작하자.
-                    mBinding.vpCourseIntro.setCurrentItem(0, false)
+                    Log.d("seungmin", "course intro on activity result $data")
+                    val index = data?.getIntExtra(SET_CURRENT_INDEX, 1)?:1
+                    // 다른 place를 선택했다. 코스를 변경하자.
+                    viewModel.selectPlace(index)
+                    // 장소 보는 화면으로 넘어가자
+                    mBinding.vpCourseIntro.setCurrentItem(2, false)
                 }
                 else {
-                    // 코스를 선택하지 않았다. 그냥 아무것도 변경하지 말자!
+                    // 장소를 선택하지 않았다. 그냥 아무것도 변경하지 말자!
                 }
             }
         }
@@ -126,6 +130,6 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
 
     companion object {
         const val REQUEST_SHOW_ALL_COURSES = 1234
-        const val COURSE_ID = "COURSE_ID"
+        const val SET_CURRENT_INDEX = "SET_CURRENT_INDEX"
     }
 }

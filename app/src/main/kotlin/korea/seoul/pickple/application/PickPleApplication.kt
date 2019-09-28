@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.*
 import korea.seoul.pickple.data.api.*
 import korea.seoul.pickple.data.entity.Course
+import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.repository.implementation.*
 import korea.seoul.pickple.data.repository.interfaces.*
 import korea.seoul.pickple.ui.course.create.CourseCreateViewModel
@@ -16,6 +17,7 @@ import korea.seoul.pickple.ui.course.intro.all_course.ShowAllCoursesViewModel
 import korea.seoul.pickple.ui.course.map.MapViewModel
 import korea.seoul.pickple.ui.navigation.NavigationViewModel
 import korea.seoul.pickple.ui.navigation.course.NavigationCourseViewModel
+import korea.seoul.pickple.ui.navigation.pickplace.NavigationPickPlaceViewModel
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -141,9 +143,10 @@ class PickPleApplication : Application() {
         viewModel { CourseIntroViewModel(get(), get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }
-        viewModel { ShowAllCoursesViewModel(get()) }
+        viewModel { (places: List<Place>) -> ShowAllCoursesViewModel(places) }
         viewModel { NavigationViewModel(get(),get()) }
-        viewModel { (type : Course.Type) -> NavigationCourseViewModel(type,get()) }
+        viewModel { NavigationCourseViewModel(get()) }
+        viewModel { NavigationPickPlaceViewModel(get(),get()) }
     }
 
     override fun onCreate() {

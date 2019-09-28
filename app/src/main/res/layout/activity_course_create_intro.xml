@@ -96,19 +96,19 @@
                     app:layout_constraintDimensionRatio="296:147">
 
                     <ImageView
-                        android:src="@drawable/btn_location"
+                        android:src="@drawable/askdljaskljd"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                     <ImageView
+                        android:id="@+id/thumbnail"
+                        imageUrl="@{vm.thumbnailUri}"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:background="?attr/selectableItemBackground"
                         android:onClick="@{() -> vm.onClickAddThumbnail()}"
-                        imageUrl="@{vm.thumbnailUri}"
-                        android:id="@+id/thumbnail"
-                        android:scaleType="centerCrop"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 

@@ -14,31 +14,36 @@ import kotlinx.android.parcel.Parcelize
 @SuppressLint("ParcelCreator")
 @Parcelize
 data class PlaceDTO(
+    @SerializedName("placeIdx")
+    var id : Int,
     var placeName: String,
     var description: String,
     @SerializedName("place_thumbnail")
     var placeThumbnail: String,
+    @SerializedName("place_like")
     var placeLike: Int,
     var address: String,
-    var number: String,
+    var number: String?,
     var fee: String?,
     var businessHour: String?,
-    var location: Location
+    var location: Location,
+    val isLiked: Int
 ) : Parcelable {
     fun toEntity() : Place {
         return Place(
-            -1,
+            id,
             Place.Type.UNKNOWN,
             placeName,
             description,
-            number,
+            number?:"",
             Location(location.latitude,location.longitude,address),
             (fee ?: "0").toIntOrNull() ?: 0,
             placeLike,
             placeThumbnail,
             address.replace("\\n", "\n"),
             businessHour?.replace("\\n", "\n")?:"",
-            fee?.replace("\\n", "\n")?:""
+            fee?.replace("\\n", "\n")?:"",
+            isLiked==1
         )
     }
 }

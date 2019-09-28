@@ -1,12 +1,14 @@
 package korea.seoul.pickple.ui.course.intro.place_detail
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityPlaceDetailBinding
 import korea.seoul.pickple.ui.BaseFragment
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.review.ReviewFragment
+import kotlinx.android.synthetic.main.activity_place_detail.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -39,6 +41,11 @@ class PlaceDetailActivity : BaseFragment<ActivityPlaceDetailBinding>(R.layout.ac
                     }
                 )
             }
+
+            mCourseIntroViewModel.index.observe(this, Observer { index ->
+                // 1 베이스 인덱스
+                vp2PlaceDetail.currentItem = index - 1
+            })
 
             mBinding.viewModel = mCourseIntroViewModel
 

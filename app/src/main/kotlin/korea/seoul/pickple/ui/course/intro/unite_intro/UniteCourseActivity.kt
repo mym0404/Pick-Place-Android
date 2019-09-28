@@ -1,5 +1,6 @@
 package korea.seoul.pickple.ui.course.intro.unite_intro
 
+import android.net.Uri
 import android.os.Bundle
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityUniteCourseBinding
@@ -36,6 +37,23 @@ class UniteCourseActivity : BaseFragment<ActivityUniteCourseBinding>(R.layout.ac
                     curActivity = this,
                     arg = NavigationArgs.MapActivityArg(mCourseIntroViewModel.course.value)
                 )
+            }
+
+            mBinding.btnUniteCourseCourseDetail.setOnClickListener {
+                mCourseIntroViewModel.course.value?.let { course ->
+                    navigate(
+                        curActivity = this,
+                        arg = NavigationArgs.CourseCreateArgs(
+                            title = course.name,
+                            thumbnail = Uri.parse(course.thumbnail),
+                            description = course.description ?: "",
+                            tagList = course.tagList?: listOf(),
+                            onlyShow = true,
+                            course = course.id
+                        )
+                    )
+                }
+
             }
         }
     }

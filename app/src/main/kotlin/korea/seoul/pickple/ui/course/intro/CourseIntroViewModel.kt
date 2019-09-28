@@ -35,8 +35,10 @@ class CourseIntroViewModel(
             courseRepository.getCourseInfo(value)
                 .callback(
                     successCallback = { course ->
+                        // 코스를 좋아요 한지 여부를 확인
                         Log.d("seungmin", "get course info : $course")
                         _course.value = course.data?.toEntity() ?: return@callback
+                        courseLikeChecked.value = _course.value?.isLiked?:false
                     },
                     failCallback = {
                         _course.value = FakeCourseRepository.fakeCourse
@@ -96,7 +98,7 @@ class CourseIntroViewModel(
     /**
      * course like check되어있는 여부
      * */
-    val courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData(false)
+    var courseLikeChecked: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
     * 현 course의 소요 시간 문자열
@@ -152,17 +154,25 @@ class CourseIntroViewModel(
     val placeReviews: LiveData<List<Review>> = _placeReviews
 
     /**
-     * 현재 선택한 Place의 index 1부터 시작한다.
+     * 현재 선택한 Place의 indexString 1부터 시작한다.
      * */
     private val _index: MutableLiveData<Int> = MutableLiveData()
-    val index: LiveData<String> = Transformations.map(_index) {
+    val index: LiveData<Int> = _index
+    val indexString: LiveData<String> = Transformations.map(_index) {
         if (it>10) it.toString() else "0$it"
     } // 한 자리 index는 0을 붙혀서 보여준다.
+    
+    /**
+    * < 현재 indexString / 전체 사이즈 > 를 나타네는 문자열
+    * */
+    val indexNavString: LiveData<String> = Transformations.map(_index) {
+        "< $it / ${places.value?.size?:0} >"
+    }
 
     /**
     * 현재 선택한 Place의 좋아요 여부
     * */
-    val placeLiked: MutableLiveData<Boolean> = MutableLiveData()
+    val currentPlaceLiked: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
     * 후기의 Emoticon
@@ -175,6 +185,8 @@ class CourseIntroViewModel(
      * */
     init {
         course.managedObserve {
+
+            // 코스에 해당하는 장소 리스트를 순차적으로 받아옴
             it.places?.let { placesIdx ->
                 if (placesIdx.isEmpty()) return@let
 
@@ -220,31 +232,85 @@ class CourseIntroViewModel(
                     }
                 }
             }
-
-
-
         }
 
+        // 현재 장소에 맞는 리뷰를 갱신해줌
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
         currentPlace.managedObserve {
             it?.also { place ->
                 updateReview(ReviewType.PLACE, place.id)
             }
+
+            // 장소에 맞게 좋아요 수정!
+            currentPlaceLiked.value = it.isLiked
         }
 
         _currentEmotion.value = Review.Emoticon.EMOTION1
 
-        courseLikeChecked.managedObserve {
-            if (it) {
-                courseRepository.likeCourse(courseId)
-                course.value?.let {
-                    _course.value = it.copy(likeCount = it.likeCount+1)
+        courseLikeChecked.managedObserve { liked ->
+            course.value?.let { course ->
+                if (liked) {
+                    courseRepository.likeCourse(courseId)
+                        .callback({
+                            if (it.success) {
+                                Log.d("seungmin", "like course : $courseId")
+                                _course.value = course.apply {
+                                    isLiked = true
+                                    likeCount++
+                                }
+                            } else {
+                                Log.d("seungmin", "like course fail : $courseId")
+//                                _course.value = course // 실패시 초기화
+                            }
+                        })
+                } else {
+                    courseRepository.unlikeCourse(courseId)
+                        .callback({
+                            if (it.success) {
+                                Log.d("seungmin", "unlike course : $courseId")
+                                _course.value = course.apply {
+                                    isLiked = false
+                                    likeCount--
+                                }
+                            } else {
+                                Log.d("seungmin", "unlike course fail : $courseId")
+//                                _course.value = course // 실패시 초기화
+                            }
+                        })
+
                 }
             }
-            else {
-                courseRepository.unlikeCourse(courseId)
-                course.value?.let {
-                    _course.value = it.copy(likeCount = it.likeCount-1)
+        }
+
+        currentPlaceLiked.managedObserve { liked ->
+            currentPlace.value?.let { place ->
+                if (liked) {
+                    placeRepository.likePlace(place.id)
+                        .callback({
+                            if (it.success) {
+                                currentPlace.value = place.apply {
+                                    isLiked = true
+                                    likeCount++
+                                }
+                            }
+                            else {
+
+                            }
+                        })
+                }
+                else {
+                    placeRepository.unlikePlace(place.id)
+                        .callback({
+                            if (it.success) {
+                                currentPlace.value = place.apply {
+                                    isLiked = false
+                                    likeCount--
+                                }
+                            }
+                            else {
+
+                            }
+                        })
                 }
             }
         }
@@ -254,8 +320,8 @@ class CourseIntroViewModel(
 
     /**
      * 사용자가 이미지를 스크롤해서 특정 index의 Place를 고름
-     * index 는 1-based index이다!
-     * @param index 1-based index
+     * indexString 는 1-based index이다!
+     * @param index 1-based indexString
      * */
     fun selectPlace(index: Int) {
         _index.value = index

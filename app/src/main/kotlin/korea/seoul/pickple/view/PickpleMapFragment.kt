@@ -1,6 +1,5 @@
 package korea.seoul.pickple.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
+import korea.seoul.pickple.R
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.PermissionDexterUtil
 import korea.seoul.pickple.common.util.PermissionListener
@@ -122,7 +122,7 @@ final class PickpleMapFragment : Fragment() {
 
         fun addMarker(latlng: LatLng) {
             tryMapRunnable {
-                mMap?.addMarker(MarkerOptions().position(latlng))
+                mMap?.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)).position(latlng))
             }
         }
 
@@ -247,7 +247,7 @@ final class PickpleMapFragment : Fragment() {
         //Add Markers
         places.map { place ->
             place.location?.let { location ->
-                mMap?.addMarker(MarkerOptions().position(location.toLatLng()))
+                mMap?.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.pin)).position(location.toLatLng()))
             }
         }
 
@@ -270,6 +270,7 @@ final class PickpleMapFragment : Fragment() {
                     places[i + 1].location!!,
                     getString(korea.seoul.pickple.R.string.google_maps_key)
                 ).enqueue(object : Callback<DirectionsResponse> {
+
                     override fun onFailure(call: Call<DirectionsResponse>, t: Throwable) {
                         Log.e(TAG, t.toString())
                     }
@@ -280,11 +281,17 @@ final class PickpleMapFragment : Fragment() {
                             val r = response.body()!!
 
                             val points = PolyUtil.decode(r.routes[0].overviewPolyline.points)
-                            r
-                            val option = PolylineOptions().color(Color.BLACK).jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+
+                            val option = PolylineOptions().color(
+                                resources.getColor(R.color.blue_with_a_hint_of_purple)
+                            ) .jointType(JointType.ROUND).visible(true).zIndex(50f).width(10f).add(*points.toTypedArray())
+
                             mMap?.addPolyline(option)
+
                         } catch (t: Throwable) {
+
                             Log.e(TAG, "fail to add polyline")
+
                         }
 
                     }
