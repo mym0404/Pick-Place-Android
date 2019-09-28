@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.viewpager2.widget.ViewPager2
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.setShowSideItemsWithDimens
 import korea.seoul.pickple.common.util.debugE
@@ -39,7 +40,7 @@ class MapActivity : AppCompatActivity() {
 
     private lateinit var course: Course
 
-    private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
+    private var mMapFragment: PickpleMapFragment? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,10 +52,10 @@ class MapActivity : AppCompatActivity() {
         course = parseIntent(intent).course ?: FakeCourseRepository.fakeCourse
         mViewModel = getViewModel(MapViewModel::class, null) { parametersOf(course) }
 
-        if (mMapFragment.get() == null) {
+        if (mMapFragment == null) {
             val frag = PickpleMapFragment()
 
-            mMapFragment = WeakReference(frag)
+            mMapFragment = frag
             this@MapActivity.supportFragmentManager.beginTransaction().add(R.id.map_container, frag).commit()
         }
 
@@ -72,6 +73,11 @@ class MapActivity : AppCompatActivity() {
                 R.dimen.map_pager_page_margin,
                 R.dimen.map_pager_pager_offset
             )
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    mViewModel.onPageChanged(position)
+                }
+            })
         }
     }
 
@@ -84,7 +90,14 @@ class MapActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
                 }
 
-                mMapFragment.get()?.getController()?.updateLocationAndZoomScale(places,true)
+                mMapFragment?.getController()?.updateLocationAndZoomScale(places,true)
+            })
+
+            select.observe(this@MapActivity, Observer {
+                mMapFragment?.getController()?.let{controller->
+                    controller.setLocation(it.location,true)
+                    controller.setZoom(15f)
+                }
             })
         }
 

@@ -33,14 +33,15 @@ class MapViewModel(private val courseRepository: CourseRepository,private val pl
     private val _loading : MutableLiveData<Boolean> = MutableLiveData<Boolean>(true)
     val loading : LiveData<Boolean>
         get() = _loading
+
+    private val _select : MutableLiveData<Place> = MutableLiveData()
+    val select : LiveData<Place>
+        get() = _select
     //endregion
-
-
 
 
     init {
         getPlacesForCourse(course)
-
     }
 
     private fun getPlacesForCourse(course : Course) {
@@ -54,7 +55,17 @@ class MapViewModel(private val courseRepository: CourseRepository,private val pl
                 response.body()?.placeData?.toEntity()?.let { placeList = placeList + it }
             }
 
-            android.os.Handler(Looper.getMainLooper()).post { _places.value = placeList }
+            android.os.Handler(Looper.getMainLooper()).post {
+                _places.value = placeList
+                if(placeList.isNotEmpty()){
+                    _select.value = placeList[0]
+                }
+            }
+
         }
+    }
+
+    fun onPageChanged(position : Int){
+        _select.value = places.value?.getOrNull(position) ?: return
     }
 }
