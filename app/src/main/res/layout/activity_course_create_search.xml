@@ -80,7 +80,7 @@
             app:layout_constraintGuide_percent="0.2"/>
 
         <TextView
-            android:visibility="@{vm.places.size() &lt; 1}"
+            android:visibility="@{vm.filteredPlaces.size() &lt; 1}"
             android:id="@+id/cannotfindLabel"
             app:layout_constraintTop_toTopOf="@id/guideLine"
             app:layout_constraintBottom_toBottomOf="@id/guideLine"
@@ -96,7 +96,7 @@
             />
 
         <ImageView
-            android:visibility="@{vm.places.size() &lt; 1}"
+            android:visibility="@{vm.filteredPlaces.size() &lt; 1}"
             android:layout_marginTop="48dp"
             android:scaleType="fitCenter"
             android:src="@drawable/no_search_result"

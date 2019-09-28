@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
 import korea.seoul.pickple.data.api.MyPageAPI
 import korea.seoul.pickple.data.api.response.mypage.ListMyCoursesResponse
@@ -12,12 +13,13 @@ import korea.seoul.pickple.data.api.response.mypage.ListMyReviewResponse
 import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.data.entity.SeoulNews
 import korea.seoul.pickple.data.repository.interfaces.MainRepository
+import korea.seoul.pickple.data.repository.interfaces.SetRepository
 
 /**
  * Created by mj on 22, September, 2019
  */
 
-class NavigationViewModel(private val mainRepository: MainRepository, private val myPageAPI: MyPageAPI) : ViewModel() {
+class NavigationViewModel(private val mainRepository: MainRepository, private val myPageAPI: MyPageAPI, private val setRepository: SetRepository) : ViewModel() {
 
     private val TAG = NavigationViewModel::class.java.simpleName
 
@@ -41,6 +43,8 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
         )
     )
 
+    val nickName : MutableLiveData<String> = MutableLiveData()
+
     private val _clickSeoulNews: MutableLiveData<Once<SeoulNews>> = MutableLiveData()
     val clickSeoulNews: LiveData<Once<SeoulNews>>
         get() = _clickSeoulNews
@@ -59,6 +63,17 @@ class NavigationViewModel(private val mainRepository: MainRepository, private va
 
     init {
         getDatas()
+
+        setRepository.getUserInfo().callback (
+            {
+                nickName.value = it.data?.getOrNull(0)?.nickname + "님,\n오늘은 어디로 갈래요?"
+
+            }, {
+
+            }, {
+
+            }
+        )
     }
 
     private fun getDatas() {
