@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import korea.seoul.pickple.R
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.ui.NavigationArgs
@@ -17,6 +19,8 @@ import kotlinx.android.synthetic.main.toolbar_main_course.*
 class MainActivity : AppCompatActivity() {
 
     var currentPosition = 0
+
+    private var isShowingSnackBar = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,9 +91,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
 
+
         if(act_main_viewpager2_vertical.currentItem == 1) {
             act_main_viewpager2_vertical.currentItem = 0
-        }else {
+        }
+        else if(!isShowingSnackBar) {
+            val sb = Snackbar.make(root,"정말 Pickple을 종료하시겠습니까?",Snackbar.LENGTH_LONG)
+            sb.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                override fun onShown(transientBottomBar: Snackbar?) {
+                    super.onShown(transientBottomBar)
+                    isShowingSnackBar = true
+                }
+
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    isShowingSnackBar = false
+                }
+            })
+            sb.show()
+        }
+        else {
 
             super.onBackPressed()
         }
