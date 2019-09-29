@@ -48,6 +48,7 @@
             app:layout_constraintGuide_begin="100dp" />
 
         <me.grantland.widget.AutofitTextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/title"
 
             android:layout_width="wrap_content"
@@ -72,6 +73,7 @@
             app:minTextSize="18sp" />
 
         <me.grantland.widget.AutofitTextView
+            android:fontFamily="@font/nanum_square_regular"
 
             tools:text = "코스 이름을 입력해주세요."
             android:text="@{vm.title}"
@@ -130,6 +132,7 @@
                 app:rotation_animation="@{vm.bottomExpanded ? 180 : 0}" />
 
             <com.google.android.material.button.MaterialButton
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/editDeleteButton"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
@@ -164,6 +167,7 @@
                 app:layout_constraintTop_toBottomOf="@id/editDeleteButton" />
 
             <com.google.android.material.button.MaterialButton
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/materialButton2"
 
                 tools:alpha="0.5"
@@ -193,6 +197,7 @@
                 app:layout_constraintWidth_percent="0.43" />
 
             <com.google.android.material.button.MaterialButton
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/materialButton"
 
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -218,6 +223,7 @@
                 app:layout_constraintWidth_percent="0.43" />
 
             <com.google.android.material.button.MaterialButton
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/materialButton3"
 
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"

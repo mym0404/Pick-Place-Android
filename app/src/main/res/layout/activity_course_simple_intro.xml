@@ -47,10 +47,12 @@
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="14sp"
             android:textColor="#ffffff"
+            android:fontFamily="@font/nanum_square_regular"
             android:text='@{courseViewModel.course.type.toString() ?? ""}'
             tools:text="한국 전통 코스" />
 
         <me.grantland.widget.AutofitTextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/textCourseName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,14 +62,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textCourseType"
             app:minTextSize="24sp"
+            android:textSize="28sp"
             android:lineSpacingExtra="13sp"
             android:textColor="#ffffff"
-            android:lines="2"
             android:textStyle="bold"
             android:text='@{courseViewModel.course.name ?? ""}'
             tools:text="한국의 근대가 시작된 정동길을 따라 걸어볼까?" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/textHashTagList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

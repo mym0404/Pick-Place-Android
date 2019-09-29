@@ -23,6 +23,7 @@
         app:layout_goneMarginRight="12dp" />
 
     <TextView
+        android:fontFamily="@font/nanum_square_regular"
         android:textStyle="bold"
         android:layout_marginLeft="20dp"
         app:layout_constraintLeft_toRightOf="@id/backButton"
@@ -50,6 +51,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:hint="닉네임을 입력하세요"
             android:id="@+id/editText1"
             android:layout_width="match_parent"
@@ -58,6 +60,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/okButton"
         app:cornerRadius="16dp"
         android:layout_marginTop="32dp"

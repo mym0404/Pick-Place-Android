@@ -23,6 +23,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/tv"
             android:textStyle="bold"
             android:layout_marginBottom="40dp"
@@ -44,6 +45,7 @@
             app:layout_constraintGuide_percent="0.7"/>
 
         <com.google.android.material.button.MaterialButton
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/share"
             android:textSize="14sp"
             android:text="공유하기"
@@ -62,6 +64,7 @@
             android:layout_height="29dp"/>
 
         <com.google.android.material.button.MaterialButton
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/ok"
             android:textSize="16sp"
             android:text="OK"

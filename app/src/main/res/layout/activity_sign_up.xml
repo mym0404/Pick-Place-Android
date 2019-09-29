@@ -8,166 +8,176 @@
     tools:context=".ui.main.SignUpActivity">
 
     <ImageView
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/text_logo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/text_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        app:startIconTint="@color/blue_with_a_hint_of_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        app:startIconDrawable="@drawable/mail_icon_image"
         android:hint="이메일"
-        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
+        android:textColorHint="@color/greyish_brown"
+        app:boxBackgroundColor="@color/colorWhite_1"
         app:boxStrokeColor="@color/aqua_marine"
-        app:boxBackgroundColor="@color/colorWhite_1">
+        app:startIconDrawable="@drawable/mail_icon_image"
+        app:startIconTint="@color/blue_with_a_hint_of_purple">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tiet_signup_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"/>
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/tiet_signup_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_regular"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+
         android:id="@+id/tv_signup_email_wrong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="172.5dp"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="172.5dp"
         android:layout_marginRight="38dp"
-        android:textSize="10sp"
-        android:textColor="@color/aqua_marine"
+        android:fontFamily="@font/nanum_square_bold"
         android:lineSpacingExtra="10sp"
-        android:fontFamily="@font/nanum_square_bold" />
+        android:textColor="@color/aqua_marine"
+        android:textSize="10sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        app:startIconTint="@color/blue_with_a_hint_of_purple"
-        app:startIconDrawable="@drawable/more_icon_my"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
         android:hint="닉네임 (최대 10자)"
-        android:textColorHint="@color/greyish_brown"
-        app:boxStrokeColor="@color/aqua_marine"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="@color/colorWhite_1">
+        android:textColorHint="@color/greyish_brown"
+        app:boxBackgroundColor="@color/colorWhite_1"
+        app:boxStrokeColor="@color/aqua_marine"
+        app:startIconDrawable="@drawable/more_icon_my"
+        app:startIconTint="@color/blue_with_a_hint_of_purple">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/tiet_signup_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/tv_signup_nickname_wrong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="238.5dp"
         android:layout_marginRight="38dp"
-        android:layout_alignParentRight="true"
-        android:textSize="10sp"
-        android:lineSpacingExtra="10sp"
         android:fontFamily="@font/nanum_square_bold"
-        android:textColor="@color/aqua_marine" />
+        android:lineSpacingExtra="10sp"
+        android:textColor="@color/aqua_marine"
+        android:textSize="10sp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        app:startIconTint="@color/blue_with_a_hint_of_purple"
-        app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="282dp"
-        app:hintTextColor="@color/colorGray"
         android:hint="비밀번호 (영문, 숫자 상관없이 4~8자리)"
-        app:boxStrokeColor="@color/aqua_marine"
-        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="@color/colorWhite_1">
+        android:textColorHint="@color/greyish_brown"
+        app:boxBackgroundColor="@color/colorWhite_1"
+        app:boxStrokeColor="@color/aqua_marine"
+        app:hintTextColor="@color/colorGray"
+        app:startIconDrawable="@drawable/lock"
+        app:startIconTint="@color/blue_with_a_hint_of_purple">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/tiet_signup_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        app:startIconTint="@color/blue_with_a_hint_of_purple"
-        app:startIconDrawable="@drawable/lock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxStrokeColor="@color/aqua_marine"
         android:layout_marginTop="348dp"
         android:hint="비밀번호 확인"
-        android:textColorHint="@color/greyish_brown"
         android:paddingHorizontal="20sp"
-        app:boxBackgroundColor="@color/colorWhite_1">
+        android:textColorHint="@color/greyish_brown"
+        app:boxBackgroundColor="@color/colorWhite_1"
+        app:boxStrokeColor="@color/aqua_marine"
+        app:startIconDrawable="@drawable/lock"
+        app:startIconTint="@color/blue_with_a_hint_of_purple">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/tiet_signup_pw_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+
         android:id="@+id/tv_singup_pw_check_wrong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="368.5dp"
         android:layout_marginRight="38dp"
-        android:layout_alignParentRight="true"
-        android:textSize="10sp"
-        android:lineSpacingExtra="10sp"
         android:fontFamily="@font/nanum_square_bold"
-        android:textColor="@color/aqua_marine" />
+        android:lineSpacingExtra="10sp"
+        android:textColor="@color/aqua_marine"
+        android:textSize="10sp" />
 
     <com.google.android.material.button.MaterialButton
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/m_btn_signup"
         android:layout_width="170dp"
         android:layout_height="29dp"
-        android:layout_marginTop="446dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="446dp"
         android:backgroundTint="@color/blue_with_a_hint_of_purple"
         android:insetLeft="0dp"
 
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:lineSpacingExtra="13sp"
+
         android:minWidth="60dp"
-
         android:padding="0dp"
-        android:singleLine="true"
 
+        android:singleLine="true"
         android:text="회원가입"
         android:textColor="@color/colorWhite_1"
-        android:lineSpacingExtra="13sp"
         android:textSize="14sp"
         app:cornerRadius="15dp" />
 
     <TextView
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/tv_MemberTermsConfrim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="488dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="14sp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="회원약관 확인하기"
         android:textColor="@color/colorLightGray"
-        android:text="회원약관 확인하기"/>
+        android:textSize="14sp" />
+
     <View
-        android:background="@color/colorLightGray"
-        android:layout_marginTop="506dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="105dp"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="506dp"
+        android:background="@color/colorLightGray" />
 </RelativeLayout>

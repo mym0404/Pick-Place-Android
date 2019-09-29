@@ -44,6 +44,7 @@
         android:layout_height="64dp">
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/nickLabel"
             android:layout_marginLeft="32dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,6 +60,7 @@
             tools:layout_editor_absoluteY="22dp" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             app:layout_constraintLeft_toRightOf="@id/nickLabel"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -83,6 +85,7 @@
         android:layout_height="64dp">
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/emailLabel"
             android:layout_marginLeft="32dp"
             app:layout_constraintTop_toTopOf="parent"
@@ -98,6 +101,7 @@
             tools:layout_editor_absoluteY="22dp" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             app:layout_constraintLeft_toRightOf="@id/emailLabel"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -122,6 +126,7 @@
         android:layout_height="64dp">
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/passwordChangeLabel"
             android:layout_marginLeft="32dp"
             app:layout_constraintTop_toTopOf="parent"

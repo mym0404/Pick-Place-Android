@@ -36,6 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,6 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView7">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/edtReviewComment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,6 +108,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/btnShowAllReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,6 +124,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rvReviewList" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,6 +138,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/btnReviewSubmit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

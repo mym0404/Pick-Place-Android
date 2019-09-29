@@ -37,6 +37,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/txtReviewCommenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
             tools:text="greedy0110" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/txtReviewComment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

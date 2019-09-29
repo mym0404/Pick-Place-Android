@@ -47,21 +47,22 @@
 
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:textSize="10sp"
                 android:textColor="#848484"
                 android:id="@+id/type"
                 android:layout_marginTop="19dp"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintLeft_toRightOf="@id/imageView"
-                tools:text="미용실"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.type.name}"
+                android:text="장소"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                  />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:id="@+id/name"
@@ -91,6 +92,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:text='@{item.likeCount + ""}'
                 android:id="@+id/likeCount"
                 android:gravity="center"
@@ -117,6 +119,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:text='@{item.likeCount + ""}'
                 android:gravity="center"
                 tools:text="382"

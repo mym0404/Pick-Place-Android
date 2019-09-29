@@ -48,6 +48,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -60,6 +61,7 @@
                     />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/toolUniteCourseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -87,6 +89,7 @@
                     app:layout_constraintStart_toStartOf="@id/toolUniteCourseName" />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/toolUniteCourseLikeCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,6 +104,7 @@
                     />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -124,6 +128,7 @@
                 app:layout_constraintTop_toBottomOf="@id/containerUniteCourseImagePart">
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/textview3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -148,6 +153,7 @@
                     app:layout_constraintEnd_toEndOf="@id/textview3"/>
                 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/textview4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,6 +215,7 @@
                     app:srcCompat="@drawable/btn_time_sm" />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/btnUniteCourseCourseDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -224,6 +231,7 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView4" />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/txtCoursePlaceCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -237,6 +245,7 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
                 <TextView
+                    android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/txtCourseTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

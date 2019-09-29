@@ -4,13 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.data.repository.interfaces.SetRepository
 import korea.seoul.pickple.ui.login.TosActivity
+import korea.seoul.pickple.ui.main.SplashActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 import org.koin.android.ext.android.inject
+
+
 
 class SettingActivity : AppCompatActivity() {
 
@@ -57,6 +61,17 @@ class SettingActivity : AppCompatActivity() {
         }
         container4.setOnClickListener {
             contactOpenButton.performClick()
+        }
+        container5.setOnClickListener {
+            Intent(this@SettingActivity,SplashActivity::class.java).apply {
+                this.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(this)
+            }
+            finish()
+        }
+        container6.setOnClickListener {
+            startActivity(Intent(this, OssLicensesMenuActivity::class.java))
+//            Intent(this@SettingActivity,OpenSourcesActivity::class.java).apply{startActivity(this)}
         }
 
         try {
