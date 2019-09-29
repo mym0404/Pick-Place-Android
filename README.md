@@ -34,10 +34,12 @@ Android Studio project using native Android development
 ----
 ## UI Navigation Flow 
 
-<img alt="Get it on Google Play" src="https://github.com/mym0404/Pick-Place-Android/blob/master/data.png" height=400px />
+<img alt="" src="https://github.com/mym0404/Pick-Place-Android/blob/master/data.png" height=400px />
 
 ----
-## 
+## System Structure Overview
+
+<img alt="" src="https://github.com/mym0404/Pick-Place-Android/blob/master/1.jpg" height=400px />
 
 ----
 ## Android
