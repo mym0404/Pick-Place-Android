@@ -40,6 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/backButton" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/label"
 
             android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
             app:layout_constraintTop_toTopOf="@id/my" />
 
         <TextView
-
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 

@@ -29,6 +29,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/index"
@@ -43,6 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 tools:text="awkldjaslkjd"
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
@@ -58,6 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/index" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 tools:text="도보로 22년"
                 android:textColor="@color/colorWhite"
                 android:id="@+id/info"

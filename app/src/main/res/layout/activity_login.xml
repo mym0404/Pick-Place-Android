@@ -49,6 +49,7 @@
         app:startIconDrawable="@drawable/mail_icon_image">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
         app:startIconDrawable="@drawable/lock">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:inputType="textPassword"
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
@@ -83,6 +85,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/loginButton"
         android:layout_width="170dp"
         android:layout_height="30dp"
@@ -103,6 +106,7 @@
 
 
     <TextView
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/findPasswordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,6 +124,7 @@
 
 
     <TextView
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

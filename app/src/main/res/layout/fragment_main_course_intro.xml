@@ -38,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_gravity="center"
             app:layout_constraintBottom_toTopOf="@id/viewpager_item_tv_course_detail"
             android:id="@+id/viewpager_item_tv_course_name"
@@ -51,6 +52,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewpager_item_page_indicator_view" />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_gravity="center"
             android:id="@+id/viewpager_item_tv_course_detail"
             android:layout_width="wrap_content"

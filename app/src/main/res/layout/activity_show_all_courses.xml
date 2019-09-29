@@ -19,6 +19,7 @@
             tools:context=".ui.course.intro.all_course.ShowAllCoursesActivity">
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/textview1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

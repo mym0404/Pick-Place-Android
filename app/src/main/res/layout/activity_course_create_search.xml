@@ -35,6 +35,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/editText"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -80,6 +81,7 @@
             app:layout_constraintGuide_percent="0.2"/>
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:visibility="@{vm.filteredPlaces.size() &lt; 1}"
             android:id="@+id/cannotfindLabel"
             app:layout_constraintTop_toTopOf="@id/guideLine"

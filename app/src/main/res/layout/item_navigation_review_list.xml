@@ -29,6 +29,7 @@
                 android:background="#000000"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/item_navi_review_list_tv_course_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,6 +52,7 @@
                 android:tint="@color/aqua_marine"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/item_navi_review_list_tv_heart_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,6 +76,7 @@
                 android:tint="@color/blue_with_a_hint_of_purple"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/item_navi_review_list_tv_review_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,6 +89,7 @@
                 app:layout_constraintTop_toTopOf="@id/item_navi_review_list_icon_review" />
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/item_navi_review_list_tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -106,6 +110,7 @@
                 app:layout_constraintTop_toBottomOf="@id/item_navi_review_list_img_review"/>
 
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:id="@+id/item_navi_review_list_tv_review"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

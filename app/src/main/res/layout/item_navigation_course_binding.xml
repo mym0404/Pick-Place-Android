@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -70,6 +71,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
+                android:fontFamily="@font/nanum_square_regular"
                 android:text='@{item.cLikeCount + ""}'
                 android:shadowDx="1"
                 android:shadowDy="1"

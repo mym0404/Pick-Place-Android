@@ -28,6 +28,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:lineSpacingExtra="6sp"
             android:layout_margin="8dp"
             android:gravity="center_horizontal"

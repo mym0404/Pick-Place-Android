@@ -31,6 +31,7 @@
         android:tint="@color/blue_with_a_hint_of_purple"/>
 
     <TextView
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/act_navi_review_list_tv_my_review"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +45,7 @@
         app:layout_constraintTop_toTopOf="@id/act_navi_review_list_img_review" />
 
     <TextView
+        android:fontFamily="@font/nanum_square_regular"
         android:id="@+id/act_navi_review_list_tv_review_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

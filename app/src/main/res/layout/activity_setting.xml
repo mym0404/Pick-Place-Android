@@ -57,6 +57,7 @@
              />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_marginLeft="72dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
@@ -68,6 +69,7 @@
             app:layout_constraintBottom_toBottomOf="@id/image1"
             app:layout_constraintTop_toTopOf="@id/image1" />
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,6 +107,7 @@
             />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_marginLeft="72dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
@@ -139,6 +142,7 @@
             />
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_marginLeft="72dp"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
@@ -150,6 +154,7 @@
             app:layout_constraintBottom_toBottomOf="@id/image3"
             app:layout_constraintTop_toTopOf="@id/image3" />
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -188,7 +193,7 @@
             />
 
         <TextView
-
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="문의하기"
@@ -238,6 +243,7 @@
         tools:visibility="visible">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:fontFamily="@font/nanum_square_regular"
             android:id="@+id/contactEditText"
             android:textSize="12sp"
             android:layout_width="match_parent"
@@ -249,6 +255,7 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:fontFamily="@font/nanum_square_regular"
         tools:visibility="visible"
         android:visibility="gone"
         android:id="@+id/contactButton"
@@ -280,6 +287,7 @@
         android:layout_height="64dp">
 
         <TextView
+            android:fontFamily="@font/nanum_square_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="72dp"
