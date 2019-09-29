@@ -1,14 +1,12 @@
 # PickPle [픽플]
 
-* <a href="https://github.com/mym0404/GFree-Android">Android  ![Progress](http://progressed.io/bar/64)  </a>
+* <a href="https://github.com/mym0404/Pick-Place-Android">Android  ![Progress](http://progressed.io/bar/100)  </a>
 
-Android Studio project using native Android development
+Android Studio Client
 
-* <a href="https://github.com/mym0404/GFree-Android">Android  ![Progress](http://progressed.io/bar/64)  </a>
+* <a href="https://github.com/project-pickple/Pickple_Server">Server  ![Progress](http://progressed.io/bar/100)  </a>
 
-App Store(iOS) pending...
-
-Android Studio project using native Android development
+Node.js API Server
 
 ----
 ## PickPle 이란?
@@ -40,8 +38,3 @@ Android Studio project using native Android development
 ## System Structure Overview
 
 <img alt="" src="https://github.com/mym0404/Pick-Place-Android/blob/master/1.jpg" height=400px />
-
-----
-## Android
-
-![Android](https://github.com/mym0404/GFree-Assets/blob/master/Sample_Images/gif.gif "Android")
