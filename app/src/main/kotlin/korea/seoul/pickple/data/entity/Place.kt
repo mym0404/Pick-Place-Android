@@ -128,7 +128,7 @@ data class Place(
     @SerializedName("isLiked")
     @Expose(serialize = true, deserialize = true)
     @ColumnInfo(name = "isLiked")
-    var isLiked: Boolean = false
+    var isLiked: Boolean? = false
 
 ) : Parcelable {
     /**
