@@ -48,7 +48,7 @@ Node.js API Server
 
 ----
 ## Developer
-* **문명주(mym0404)** 
-* **신승민(greedy0110)**
-* **이소민(chloe73)**
-* **조수민(ChoSooMin)**
+* **문명주**(mym0404)
+* **신승민**(greedy0110)
+* **이소민**(chloe73)
+* **조수민**(ChoSooMin)
