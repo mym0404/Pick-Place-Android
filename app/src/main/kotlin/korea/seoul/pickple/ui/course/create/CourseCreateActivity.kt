@@ -36,9 +36,9 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
 
-    private val mMapUtil : MapUtil by inject()
+    private val mMapUtil: MapUtil by inject()
 
-    private val args : NavigationArgs.CourseCreateArgs by lazy{parseIntent(intent)}
+    private val args: NavigationArgs.CourseCreateArgs by lazy { parseIntent(intent) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,12 +47,14 @@ class CourseCreateActivity : AppCompatActivity() {
 
         initMap()
         initRecyclerView()
+        initMarbleView()
 
-        mViewModel.onSetDatas(args.title,args.onlyShow,args.course)
+        mViewModel.onSetDatas(args.title, args.onlyShow, args.course)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel
         observeViewModel()
+
 
     }
 
@@ -73,7 +75,7 @@ class CourseCreateActivity : AppCompatActivity() {
             setMarkerClickedListener { marker ->
 
                 toLocation(marker)
-                if(mViewModel.detailMode.value != true && !mViewModel.onlyShow.value!!) {
+                if (mViewModel.detailMode.value != true && !mViewModel.onlyShow.value!!) {
                     mViewModel.detailMode.value = true
                 }
             }
@@ -84,11 +86,11 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         mBinding.recyclerView.apply {
-            val adapter = CourseCreateAdapter(mViewModel,this@CourseCreateActivity)
+            val adapter = CourseCreateAdapter(mViewModel, this@CourseCreateActivity)
 
             this.adapter = adapter
 
-            if(!args.onlyShow)
+            if (!args.onlyShow)
                 ItemTouchHelper(SimpleItemTouchHelperCallback(adapter)).attachToRecyclerView(this)
         }
 
@@ -101,6 +103,14 @@ class CourseCreateActivity : AppCompatActivity() {
                     mBinding.pageIndicatorView.setSelected(position)
                 }
             })
+        }
+    }
+
+    private fun initMarbleView() {
+        mBinding.numberMarbleView.apply {
+            this.setOnMarbleTouchListener { position ->
+                mViewModel.onClickMarble(position)
+            }
         }
     }
 
@@ -117,16 +127,17 @@ class CourseCreateActivity : AppCompatActivity() {
                     updateLocationAndZoomScale(places, true)
                 }
 
+                mBinding.numberMarbleView.marbleCount = places.size
             })
 
             curPlace.observe(this@CourseCreateActivity, Observer { place ->
 
-                if(place == null) return@Observer
+                if (place == null) return@Observer
 
                 val idx = mViewModel.places.value!!.indexOf(place)
 
-                if(idx != mBinding.detailPager.currentItem)
-                    mBinding.detailPager.setCurrentItem(idx,true)
+                if (idx != mBinding.detailPager.currentItem)
+                    mBinding.detailPager.setCurrentItem(idx, true)
 
                 toLocation(place)
             })
@@ -137,14 +148,14 @@ class CourseCreateActivity : AppCompatActivity() {
                 val defaultHeight = applicationContext.getPixelFromDP(100)
 
                 if (detailMode) {
-                    ObjectAnimator.ofInt(mBinding.guideline,"guidelineBegin",defaultHeight,detailModeHeight).apply {
+                    ObjectAnimator.ofInt(mBinding.guideline, "guidelineBegin", defaultHeight, detailModeHeight).apply {
                         setAutoCancel(true)
 
                         duration = 500L
                         start()
                     }
                 } else {
-                    ObjectAnimator.ofInt(mBinding.guideline,"guidelineBegin",detailModeHeight,defaultHeight).apply {
+                    ObjectAnimator.ofInt(mBinding.guideline, "guidelineBegin", detailModeHeight, defaultHeight).apply {
                         setAutoCancel(true)
 
                         duration = 500L
@@ -161,8 +172,8 @@ class CourseCreateActivity : AppCompatActivity() {
                 AlertDialog.Builder(this@CourseCreateActivity)
                     .setTitle("장소 전체 삭제")
                     .setMessage("모든 장소를 삭제하시겠습니까?")
-                    .setPositiveButton("예"){_,_ -> mViewModel.allDelete()}
-                    .setNegativeButton("아니오"){_,_ ->}
+                    .setPositiveButton("예") { _, _ -> mViewModel.allDelete() }
+                    .setNegativeButton("아니오") { _, _ -> }
                     .show()
             }
 
@@ -173,19 +184,19 @@ class CourseCreateActivity : AppCompatActivity() {
                 }
             }
 
-            appendFailDuplicatePlace.observeOnce(this@CourseCreateActivity) {place->
+            appendFailDuplicatePlace.observeOnce(this@CourseCreateActivity) { place ->
                 mBinding.root.showSnackBar("중복된 장소를 추가할 수 없습니다.")
             }
 
-            appendPlaceSuccess.observeOnce(this@CourseCreateActivity) { place->
+            appendPlaceSuccess.observeOnce(this@CourseCreateActivity) { place ->
                 mMapFragment.get()?.getController()?.run {
                     addMarker(place)
-                    updateLocationAndZoomScale(mViewModel.places.value!!,false)
+                    updateLocationAndZoomScale(mViewModel.places.value!!, false)
                 }
 
             }
 
-            clickPlaceBackground.observeOnce(this@CourseCreateActivity) {place->
+            clickPlaceBackground.observeOnce(this@CourseCreateActivity) { place ->
                 toLocation(place)
                 mViewModel.detailMode.value = true
             }
@@ -197,8 +208,8 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun toLocation(place: Place) {
         place.location?.let { location ->
-            mMapFragment.get()?.getController()?.setZoom(15f,false)
-            mMapFragment.get()?.getController()?.setLocation(location,true)
+            mMapFragment.get()?.getController()?.setZoom(15f, false)
+            mMapFragment.get()?.getController()?.setLocation(location, true)
 
         }
     }
@@ -210,7 +221,7 @@ class CourseCreateActivity : AppCompatActivity() {
 
         mMapUtil.getNearestPlaceWithMarker(places, marker)?.let { place ->
             mViewModel.curPlace.value = place
-            mMapFragment.get()?.getController()?.setZoom(15f,false)
+            mMapFragment.get()?.getController()?.setZoom(15f, false)
             mMapFragment.get()?.getController()?.setLocation(place.location!!, true)
 
         }
@@ -219,19 +230,18 @@ class CourseCreateActivity : AppCompatActivity() {
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
 
-        when(requestCode) {
-            CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE-> {
-                when(resultCode) {
-                    CourseCreateSearchActivity.COURSE_SEARCH_NONE_RESULT_CODE-> {
+        when (requestCode) {
+            CourseCreateSearchActivity.COURSE_SEARCH_REQUEST_CODE -> {
+                when (resultCode) {
+                    CourseCreateSearchActivity.COURSE_SEARCH_NONE_RESULT_CODE -> {
                     }
-                    CourseCreateSearchActivity.COURSE_SEARCH_WITH_RESULT_CODE-> {
+                    CourseCreateSearchActivity.COURSE_SEARCH_WITH_RESULT_CODE -> {
                         val selectedPlace = data?.getParcelableExtra<Place>(CourseCreateSearchActivity.EXTRA_SELECTED_PLACE_CODE)
-                        selectedPlace?.let{place-> appendPlaceToList(place)}
+                        selectedPlace?.let { place -> appendPlaceToList(place) }
                     }
                 }
             }
@@ -239,19 +249,17 @@ class CourseCreateActivity : AppCompatActivity() {
 
     }
 
-    private fun appendPlaceToList(place : Place) {
+    private fun appendPlaceToList(place: Place) {
         mViewModel.onAppendPlace(place)
     }
 
     override fun onBackPressed() {
 
-        if(mViewModel.detailMode.value == true) {
+        if (mViewModel.detailMode.value == true) {
             mViewModel.detailMode.value = false
-        }
-        else if(mViewModel.bottomExpanded.value == true) {
+        } else if (mViewModel.bottomExpanded.value == true) {
             mViewModel.onClickExpandButton()
-        }
-        else {
+        } else {
             super.onBackPressed()
         }
     }

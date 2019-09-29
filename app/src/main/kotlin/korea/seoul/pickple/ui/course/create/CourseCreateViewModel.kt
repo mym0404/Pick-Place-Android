@@ -162,6 +162,14 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
     }
 
     //region Event
+    fun onClickMarble(position : Int) {
+        try {
+            curPlace.value = places.value?.getOrNull(position)
+        }catch(t : Throwable) {
+
+        }
+    }
+
     fun onClickBackButton() {
         _clickBackButton.value = Once(true)
     }
