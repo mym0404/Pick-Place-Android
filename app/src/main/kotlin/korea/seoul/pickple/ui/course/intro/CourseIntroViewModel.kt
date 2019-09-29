@@ -9,17 +9,14 @@ import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.util.toTagList
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.entity.Location
 import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.entity.Review
 import korea.seoul.pickple.data.enumerator.ReviewType
-import korea.seoul.pickple.data.repository.fake.FakeCourseRepository
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import korea.seoul.pickple.data.repository.interfaces.ReviewRepository
 import korea.seoul.pickple.ui.BaseViewModel
 import kotlin.concurrent.thread
-import kotlin.random.Random
 
 class CourseIntroViewModel(
     private val courseRepository: CourseRepository,
@@ -135,14 +132,14 @@ class CourseIntroViewModel(
      * */
     val currentPlace: MediatorLiveData<Place> by lazy {
         MediatorLiveData<Place>().apply {
-            addSource(_places) {
+            addSource(places) {
                 try {
                     currentPlace.value = it[0]
                 }catch(t: Throwable) {
 
                 }
             }
-            addSource(_index) {
+            addSource(index) {
                 try {
                     currentPlace.value = _places.value?.get(it - 1)
                 }catch(t: Throwable) {
@@ -196,28 +193,6 @@ class CourseIntroViewModel(
 
                 // place가 세팅될때, index를 초기화 해야한다.
                 _index.value = 1
-                _places.value = List(placesIdx.size) {
-                    Place(
-                        id = 1,
-                        type = Place.Type.FOOD,
-                        name = "${listOf("명주","수민","승민","소민").random()}네 집",
-                        description = "${listOf("깨끗","아늑","더럽기까지","기괴","심심").random()}함",
-                        phoneNumber = "010-${Random.nextInt(1000,10000)}-${Random.nextInt(1000,10000)}",
-                        location = listOf(
-                            Location(37.6371,127.0247,""),
-                            Location(37.4766,126.9816, ""),
-                            Location(37.4626,126.9383, "")
-                        ).random(),
-                        price = Random.nextInt(5000,300000000),
-                        likeCount = 999,
-                        thumbnail = listOf(
-                            "https://previews.123rf.com/images/beholdereye/beholdereye1305/beholdereye130500006/19454749-sound-waves-oscillating-on-black-background-vector-file-included.jpg",
-                            "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Sabrina-lowres-.jpg",
-                            "https://cdn.thewirecutter.com/wp-content/uploads/2018/06/unexpectedpetaccessories-Tim-B-lowres-.jpg",
-                            "https://i.ytimg.com/vi/MBtJdkiEhBk/maxresdefault.jpg"
-                        ).random()
-                    )
-                }
 
                 thread {
 
@@ -228,9 +203,9 @@ class CourseIntroViewModel(
                                 Log.d("seungmin", "sync place : $placeId , $it")
                                 places += it.copy(id = placeId)
                             }
-
                         }
                         _places.postValue(places)
+                        debugE(TAG,places)
                     }catch(t : Throwable) {
                         debugE("seungmin",t)
                     }

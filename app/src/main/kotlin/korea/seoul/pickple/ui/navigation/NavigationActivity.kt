@@ -91,9 +91,9 @@ class NavigationActivity : AppCompatActivity() {
                 }
             }
             clickCourse.observeOnce(this@NavigationActivity) {course->
-                navigate(this@NavigationActivity,NavigationArgs.CourseCreateArgs(
-                    course.cName,Uri.parse(course.cThumbnail),"",listOf(),true,course.courseIdx
-                ))
+
+                navigate(this@NavigationActivity,NavigationArgs.CourseIntroArg(course.courseIdx))
+
             }
             clickPlace.observeOnce(this@NavigationActivity) {
             }
