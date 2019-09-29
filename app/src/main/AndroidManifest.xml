@@ -105,7 +105,6 @@
         <activity android:name=".ui.setting.SettingMemberInfoChangePasswordActivity" />
         <activity android:name=".ui.setting.SettingMemberInfoEditNicknameActivity" />
         <activity android:name=".ui.navigation.pickplace.NavigationPickPlaceActivity"/>
-        <activity android:name=".ui.setting.OpenSourcesActivity"/>
     </application>
 
 </manifest>
