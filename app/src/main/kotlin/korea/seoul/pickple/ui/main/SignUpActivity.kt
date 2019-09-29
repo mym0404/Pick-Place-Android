@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.callback
+import korea.seoul.pickple.common.widget.AsteriskPasswordTransformationMethod
 import korea.seoul.pickple.data.repository.interfaces.UserRepository
 import korea.seoul.pickple.ui.login.TosActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
@@ -26,6 +27,9 @@ class SignUpActivity : AppCompatActivity() {
         var chechkValid_nickname: Boolean = false
         var checkValid_pw: Boolean = false
         var checkValid_pwCheck: Boolean = false
+
+        tiet_signup_pw.transformationMethod = AsteriskPasswordTransformationMethod()
+        tiet_signup_pw_check.transformationMethod = AsteriskPasswordTransformationMethod()
 
         tiet_signup_email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
