@@ -27,7 +27,7 @@ data class PlaceDTO(
     var fee: String?,
     var businessHour: String?,
     var location: Location,
-    val isLiked: Int
+    val isLiked: Int? = 0
 ) : Parcelable {
     fun toEntity() : Place {
         return Place(

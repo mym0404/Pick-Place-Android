@@ -143,6 +143,7 @@ class CourseIntroViewModel(
                 try {
                     currentPlace.value = _places.value?.get(it - 1)
                 }catch(t: Throwable) {
+                    Log.d("seungmin", "set current place error $t")
                 }
             }
         }
@@ -207,7 +208,7 @@ class CourseIntroViewModel(
                         _places.postValue(places)
                         debugE(TAG,places)
                     }catch(t : Throwable) {
-                        debugE("seungmin",t)
+                        debugE("seungmin","place load failed $t")
                     }
                 }
             }
@@ -216,6 +217,8 @@ class CourseIntroViewModel(
         // 현재 장소에 맞는 리뷰를 갱신해줌
         // TODO 매번 비동기 통신을 하기보다, 캐싱 해놓으면 좋을 것 같아.
         currentPlace.managedObserve {
+            if (it == null) return@managedObserve
+
             it?.also { place ->
                 updateReview(ReviewType.PLACE, place.id)
             }
