@@ -177,6 +177,20 @@ class CourseIntroViewModel(
     val currentPlaceLiked: MutableLiveData<Boolean> = MutableLiveData()
 
     /**
+     * 현재 선택한 Place의 영업시간
+     * */
+    val currentPlaceHours: LiveData<String> = Transformations.map(currentPlace){
+        "영업시간 : ${it?.busHours}"
+    }
+
+    /**
+     * 현재 선택한 Place의 전화번호
+     * */
+    val currentPlaceNumber: LiveData<String> = Transformations.map(currentPlace){
+        "전화번호 : ${it?.phoneNumber}"
+    }
+
+    /**
     * 후기의 Emoticon
     * */
     private val _currentEmotion: MutableLiveData<Review.Emoticon> = MutableLiveData()
