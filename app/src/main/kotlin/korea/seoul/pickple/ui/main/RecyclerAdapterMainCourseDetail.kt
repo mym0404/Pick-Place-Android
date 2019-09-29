@@ -74,6 +74,8 @@ class RecyclerAdapterMainCourseDetail(val ctx: Context, var data: List<Course>) 
             course_share_btn.setOnClickListener {
                 intentUtil.share(ctx as Activity, "https://pickple.page.link/jTpt", "코스를 공유하세요")
             }
+
+            course_places.text = currentItem.totalHours ?: ""
         }
     }
 

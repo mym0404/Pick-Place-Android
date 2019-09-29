@@ -85,7 +85,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
-                    android:fontFamily="@font/nanum_square_regular"
+                    android:fontFamily="@font/nanum_square_bold"
                     android:id="@+id/item_main_course_detail_tv_course_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -95,7 +95,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="16dp"
                     android:textColor="#666666"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
 
                 <TextView
                     android:fontFamily="@font/nanum_square_regular"
