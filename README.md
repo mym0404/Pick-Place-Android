@@ -6,10 +6,6 @@ Android Studio project using native Android development
 
 * <a href="https://github.com/mym0404/GFree-Android">Android  ![Progress](http://progressed.io/bar/64)  </a>
 
-
-
-<a href="https://play.google.com/store/apps/details?id=org.mjstudio.ggonggang"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=72px /></a>
-
 App Store(iOS) pending...
 
 Android Studio project using native Android development
@@ -36,9 +32,12 @@ Android Studio project using native Android development
 8. 서울시 문화행사 정보 조회
 
 ----
-## UI Navigation Flow ~
+## UI Navigation Flow 
 
+<img alt="Get it on Google Play" src="https://github.com/mym0404/Pick-Place-Android/blob/master/data.png" height=400px />
 
+----
+## 
 
 ----
 ## Android
