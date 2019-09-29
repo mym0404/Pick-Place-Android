@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -146,6 +147,7 @@
                 tools:text="편집" />
 
             <androidx.recyclerview.widget.RecyclerView
+                tools:visibility="gone"
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
 
@@ -163,6 +165,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/materialButton2"
+
+                tools:alpha="0.5"
+                android:alpha="@{vm.places.size() &lt; 6 ? 1.0f : 0.5f }"
+                android:clickable="@{vm.places.size() &lt; 6}"
 
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
@@ -237,7 +243,23 @@
 
             <!--            DETAIL-->
 
+            <happy.mjstudio.widget.numbermarbleview.NumberMarbleView
+                tools:visibility="visible"
+                android:visibility="@{vm.detailMode ?? false}"
+                android:id="@+id/numberMarbleView"
+                app:marble_orientation_vertical="false"
+                app:marble_marble_count="5"
+                app:marble_marble_radius="12dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                app:marble_line_color="@color/colorBlack"
+                app:layout_constraintLeft_toLeftOf="@id/detailPager"
+                app:layout_constraintBottom_toTopOf="@id/detailPager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <androidx.viewpager2.widget.ViewPager2
+                tools:visibility="visible"
                 android:id="@+id/detailPager"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -248,6 +270,7 @@
 
 
             <FrameLayout
+
                 android:elevation="10dp"
                 android:outlineProvider="none"
                 android:layout_width="wrap_content"
@@ -259,7 +282,6 @@
                 app:layout_constraintTop_toBottomOf="@id/detailPager">
 
                 <com.rd.PageIndicatorView
-
 
                     android:id="@+id/pageIndicatorView"
                     android:layout_width="wrap_content"

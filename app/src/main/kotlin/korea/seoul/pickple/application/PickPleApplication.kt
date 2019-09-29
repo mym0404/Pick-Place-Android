@@ -1,6 +1,7 @@
 package korea.seoul.pickple.application
 
 import android.app.Application
+import android.net.Uri
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import korea.seoul.pickple.common.util.*
@@ -137,7 +138,7 @@ class PickPleApplication : Application() {
 
         single { ReviewRepositoryImpl(get()) as ReviewRepository }
         single { PlaceRepositoryImpl(get(), get()) } bind PlaceRepository::class
-        single { CourseRepositoryImpl(get()) } bind CourseRepository::class
+        single { CourseRepositoryImpl(get(),get()) } bind CourseRepository::class
 
         single { DirectionsRepositoryImpl(get()) } bind DirectionsRepository::class
         single { UserRepositoryImpl(get(), get()) } bind UserRepository::class
@@ -148,7 +149,7 @@ class PickPleApplication : Application() {
 
     private val viewModelModule = module {
         viewModel { (course: Course) -> MapViewModel(get(), get(), course) }
-        viewModel { CourseCreateViewModel(get(), get()) }
+        viewModel { (mapKey : String,title : String?, description : String, tags : List<String>?,thumbnail : Uri?) -> CourseCreateViewModel(get(), get(),get(),mapKey,title,description,tags,thumbnail) }
         viewModel { CourseIntroViewModel(get(), get(), get()) }
         viewModel { CourseCreateSearchViewModel(get()) }
         viewModel { CourseCreateIntroViewModel() }

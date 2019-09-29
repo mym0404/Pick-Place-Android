@@ -55,7 +55,7 @@ data class CourseInfoResponse(
         var cLikeCount: Int,
         @SerializedName("totalHour")
         @Expose(serialize = true, deserialize = true)
-        var totalHour: String,
+        var totalHour: String?,
         @SerializedName("cReviewCount")
         @Expose(serialize = true, deserialize = true)
         var cReviewCount: Int,
@@ -83,7 +83,7 @@ data class CourseInfoResponse(
                 cLikeCount,
                 tagIdx,
                 cThumbnail,
-                totalHour,
+                totalHour ?: "",
                 cReviewCount,
                 isLiked == 1
             )

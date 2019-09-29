@@ -1,18 +1,13 @@
 package korea.seoul.pickple.data.repository.fake
 
-import korea.seoul.pickple.data.api.response.BaseResponse
-import korea.seoul.pickple.data.api.response.course.CourseInfoResponse
-import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
-import korea.seoul.pickple.data.entity.Place
 import korea.seoul.pickple.data.enumerator.SeoulDistrict
-import korea.seoul.pickple.data.repository.interfaces.CourseRepository
 import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import retrofit2.Call
 import retrofit2.mock.Calls
 import kotlin.random.Random
 
-class FakeCourseRepository(private val placeRepository: PlaceRepository) : CourseRepository {
+class FakeCourseRepository(private val placeRepository: PlaceRepository) {
 
 
     companion object {
@@ -72,25 +67,9 @@ class FakeCourseRepository(private val placeRepository: PlaceRepository) : Cours
 //        TODO()
 //    }
 
-    override fun getAllCourses(): Call<List<Course>> {
+    fun getAllCourses(): Call<List<Course>> {
         return Calls.response(
             List(10) { fakeCourse }
         )
-    }
-
-    override fun getHashTags(tagName: String): Call<GetHashTagResponse> {
-        TODO()
-    }
-
-    override fun getCourseInfo(idx: Int): Call<CourseInfoResponse> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun likeCourse(idx: Int): Call<BaseResponse> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun unlikeCourse(idx: Int): Call<BaseResponse> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
