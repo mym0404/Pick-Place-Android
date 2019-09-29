@@ -5,9 +5,9 @@ import android.os.Bundle
 import korea.seoul.pickple.R
 import korea.seoul.pickple.databinding.ActivityUniteCourseBinding
 import korea.seoul.pickple.ui.BaseFragment
+import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.course.intro.CourseIntroViewModel
 import korea.seoul.pickple.ui.course.intro.review.ReviewFragment
-import korea.seoul.pickple.ui.NavigationArgs
 import korea.seoul.pickple.ui.navigate
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -38,6 +38,8 @@ class UniteCourseActivity : BaseFragment<ActivityUniteCourseBinding>(R.layout.ac
                     arg = NavigationArgs.MapActivityArg(mCourseIntroViewModel.course.value)
                 )
             }
+
+            mBinding
 
             mBinding.btnUniteCourseCourseDetail.setOnClickListener {
                 mCourseIntroViewModel.course.value?.let { course ->

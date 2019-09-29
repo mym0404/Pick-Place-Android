@@ -2,14 +2,12 @@ package korea.seoul.pickple.ui.course.intro
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
 import androidx.viewpager.widget.ViewPager
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import korea.seoul.pickple.R
-import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.databinding.ActivityCourseIntroBinding
 import korea.seoul.pickple.ui.BaseActivity
 import korea.seoul.pickple.ui.NavigationArgs
@@ -39,6 +37,7 @@ class CourseIntroActivity : BaseActivity<ActivityCourseIntroBinding>(R.layout.ac
                         0 -> {
                             // appbar 끔
                             supportActionBar?.hide()
+
                         }
                         1 -> {
                             // course에 관련된 appbar

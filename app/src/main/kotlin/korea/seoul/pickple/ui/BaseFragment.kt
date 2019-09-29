@@ -16,7 +16,7 @@ open class BaseFragment<T: ViewDataBinding>(
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        mBinding.lifecycleOwner = this
+        mBinding.lifecycleOwner = viewLifecycleOwner
         return mBinding.root
     }
 }

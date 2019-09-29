@@ -15,7 +15,6 @@ import korea.seoul.pickple.ui.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-import java.lang.ref.WeakReference
 
 /**
  * Activity for Course Google Map API representation
@@ -95,8 +94,9 @@ class MapActivity : AppCompatActivity() {
 
             select.observe(this@MapActivity, Observer {
                 mMapFragment?.getController()?.let{controller->
-                    controller.setLocation(it.location,true)
                     controller.setZoom(15f)
+                    controller.setLocation(it.location,true)
+
                 }
             })
         }
