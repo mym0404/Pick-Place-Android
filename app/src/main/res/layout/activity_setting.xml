@@ -242,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="start"
-            android:hint="불편한 사항이 있으면 작성하신 후, 문의하기 버튼을 눌러주세요."
+            android:hint="탈퇴 혹은 불편한 사항이 있으면 작성하신 후, 문의하기 버튼을 눌러주세요."
              />
     </com.google.android.material.textfield.TextInputLayout>
 

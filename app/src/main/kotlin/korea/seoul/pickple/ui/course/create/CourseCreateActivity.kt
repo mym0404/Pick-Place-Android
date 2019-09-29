@@ -10,9 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.model.Marker
+import korea.seoul.pickple.R
 import korea.seoul.pickple.common.extensions.showSnackBar
 import korea.seoul.pickple.common.util.MapUtil
 import korea.seoul.pickple.common.util.getPixelFromDP
+import korea.seoul.pickple.common.widget.ShareDialog
 import korea.seoul.pickple.common.widget.SimpleItemTouchHelperCallback
 import korea.seoul.pickple.common.widget.observeOnce
 import korea.seoul.pickple.data.entity.Place
@@ -24,6 +26,7 @@ import korea.seoul.pickple.ui.parseIntent
 import korea.seoul.pickple.view.PickpleMapFragment
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.lang.ref.WeakReference
 
 class CourseCreateActivity : AppCompatActivity() {
@@ -32,7 +35,16 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityCourseCreateBinding
 
-    private val mViewModel: CourseCreateViewModel by viewModel()
+    private val mViewModel: CourseCreateViewModel by viewModel {
+        val args = parseIntent(intent)
+        parametersOf(
+            getString(R.string.google_maps_key),
+            args.title,
+            args.description,
+            args.tagList,
+            args.thumbnail
+        )
+    }
 
     private var mMapFragment: WeakReference<PickpleMapFragment?> = WeakReference(null)
 
@@ -49,7 +61,7 @@ class CourseCreateActivity : AppCompatActivity() {
         initRecyclerView()
         initMarbleView()
 
-        mViewModel.onSetDatas(args.title, args.onlyShow, args.course)
+        mViewModel.onSetDatas(args.onlyShow, args.course)
 
         mBinding.lifecycleOwner = this
         mBinding.vm = this.mViewModel
@@ -116,6 +128,15 @@ class CourseCreateActivity : AppCompatActivity() {
 
     private fun observeViewModel() {
         mViewModel.apply {
+
+            courseCreateSuccess.observeOnce(this@CourseCreateActivity) {
+                val dialog = ShareDialog()
+                dialog.show(supportFragmentManager,dialog.tag)
+            }
+
+            snackbarMsg.observeOnce(this@CourseCreateActivity) {
+                mBinding.root.showSnackBar(it)
+            }
 
             clickBackButton.observeOnce(this@CourseCreateActivity) {
                 onBackPressed()

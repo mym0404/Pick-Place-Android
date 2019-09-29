@@ -107,7 +107,7 @@ data class Course(
     @SerializedName("course_hours")
     @Expose(serialize = true,deserialize = true)
     @ColumnInfo(name="course_hours")
-    val totalHours : String = "",
+    val totalHours : String? = "",
 
     @SerializedName("review_count")
     @Expose(serialize = true,deserialize = true)

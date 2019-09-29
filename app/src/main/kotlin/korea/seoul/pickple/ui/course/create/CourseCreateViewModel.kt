@@ -3,6 +3,7 @@ package korea.seoul.pickple.ui.course.create
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.net.Uri
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
@@ -10,12 +11,23 @@ import androidx.lifecycle.*
 import korea.seoul.pickple.common.util.callback
 import korea.seoul.pickple.common.util.debugE
 import korea.seoul.pickple.common.widget.Once
+import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.entity.Place
+import korea.seoul.pickple.data.enumerator.SeoulDistrict
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import korea.seoul.pickple.data.repository.interfaces.DirectionsRepository
 import korea.seoul.pickple.data.repository.interfaces.PlaceRepository
 import kotlin.concurrent.thread
 
-class CourseCreateViewModel(private val courseRepository: CourseRepository,private val placeRepository: PlaceRepository) : ViewModel() {
+class CourseCreateViewModel(
+    private val directionsRepository: DirectionsRepository,
+    private val courseRepository: CourseRepository,
+    private val placeRepository: PlaceRepository,
+    private val mapKey : String,
+     val title : String?,
+    private val description : String?,
+    private val tags : List<String>?,
+    private val thumbnail : Uri?) : ViewModel() {
 
     private val TAG = CourseCreateViewModel::class.java.simpleName
 
@@ -50,9 +62,6 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
 
     //region Data
     
-    private val _title : MutableLiveData<String> = MutableLiveData("")
-    val title : LiveData<String>
-        get() = _title
 
     private val _onlyShow : MutableLiveData<Boolean> = MutableLiveData(false)
     val onlyShow : LiveData<Boolean>
@@ -70,6 +79,14 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
     //endregion
 
     //region Event
+    private val _snackbarMsg : MutableLiveData<Once<String>> = MutableLiveData()
+    val snackbarMsg : LiveData<Once<String>>
+        get() = _snackbarMsg
+
+    private val _courseCreateSuccess : MutableLiveData<Once<Unit>> = MutableLiveData()
+    val courseCreateSuccess : LiveData<Once<Unit>>
+        get() = _courseCreateSuccess
+    
     private val _clickBackButton : MutableLiveData<Once<Boolean>> = MutableLiveData()
     val clickBackButton : LiveData<Once<Boolean>>
         get() = _clickBackButton
@@ -120,8 +137,7 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
         _places.value = items
     }
 
-    fun onSetDatas(title : String, onlyShow : Boolean, courseId : Int = -1) {
-        _title.value = title
+    fun onSetDatas(onlyShow : Boolean, courseId : Int = -1) {
         _onlyShow.value = onlyShow
 
         if(onlyShow && courseId != -1) {
@@ -189,6 +205,49 @@ class CourseCreateViewModel(private val courseRepository: CourseRepository,priva
 
     fun onClickCourseSaveButton() {
         _syncData.value = Once(true)
+
+        if((places.value?.size ?: 0) < 2) {
+            _snackbarMsg.value = Once("최소 두 개의 장소를 추가해야 합니다.")
+            return
+        }
+
+
+        thread {
+
+            try {
+
+                val name = this.title ?: ""
+                val description = this.description ?: ""
+                val tagList = this.tags ?: listOf()
+
+                var distances: List<Float> = listOf()
+
+                repeat(places.value?.size?.minus(1) ?: 0) {
+                    val p1 = places.value?.get(it)!!
+                    val p2 = places.value?.get(it + 1)!!
+
+                    val body = directionsRepository.getRouteFromTwoPlace(p1.location, p2.location, mapKey).execute().body()!!
+                    val route = body.routes
+                    val distanceMeter = route[0].legs[0].steps[0].distance.value
+                    distances = distances + distanceMeter.toFloat()
+                }
+
+                courseRepository.createCourse(
+                    name, description, thumbnail!!, places.value!!.map { it.id }, distances, tagList, SeoulDistrict.DONGJAK, Course.Type.CUSTOM
+                ).callback({
+                    _snackbarMsg.postValue(Once("코스 만들기 완료"))
+                    _courseCreateSuccess.postValue(Once(Unit))
+                }, {
+
+                }, {
+
+                })
+            }catch(t : Throwable) {
+                debugE(TAG,t)
+            }
+        }
+
+
 
 
     }

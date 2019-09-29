@@ -13,6 +13,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -164,6 +165,10 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/materialButton2"
+
+                tools:alpha="0.5"
+                android:alpha="@{vm.places.size() &lt; 6 ? 1.0f : 0.5f }"
+                android:clickable="@{vm.places.size() &lt; 6}"
 
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
