@@ -46,3 +46,9 @@ Node.js API Server
 
 <img alt="" src="https://github.com/mym0404/Pick-Place-Android/blob/master/123123.png" height=400px />
 
+----
+## Developer
+* **문명주(mym0404)** 
+* **신승민(greedy0110)**
+* **이소민(chloe73)**
+* **조수민(ChoSooMin)**
