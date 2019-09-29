@@ -57,15 +57,15 @@
              />
 
         <TextView
+            android:layout_marginLeft="72dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
             android:text="회원정보"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/image1"
-            app:layout_constraintLeft_toRightOf="@id/image1"
             app:layout_constraintTop_toTopOf="@id/image1" />
         <TextView
             android:id="@+id/email"
@@ -105,15 +105,15 @@
             />
 
         <TextView
+            android:layout_marginLeft="72dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
             android:text="이용약관"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/image2"
-            app:layout_constraintLeft_toRightOf="@id/image2"
             app:layout_constraintTop_toTopOf="@id/image2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,15 +139,15 @@
             />
 
         <TextView
+            android:layout_marginLeft="72dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
             android:text="버전정보"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/image3"
-            app:layout_constraintLeft_toRightOf="@id/image3"
             app:layout_constraintTop_toTopOf="@id/image3" />
         <TextView
             android:id="@+id/version"
@@ -188,15 +188,16 @@
             />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="23dp"
             android:text="문의하기"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginLeft="72dp"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/image4"
-            app:layout_constraintLeft_toRightOf="@id/image4"
             app:layout_constraintTop_toTopOf="@id/image4" />
 
         <ImageButton
@@ -266,5 +267,32 @@
         app:layout_constraintLeft_toLeftOf="@id/textField"
         app:layout_constraintRight_toRightOf="@id/textField"
         app:layout_constraintTop_toBottomOf="@id/textField" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="32dp"
+        android:animateLayoutChanges="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/container5"
+        app:layout_constraintTop_toBottomOf="@id/contactButton"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:text="로그아웃"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
