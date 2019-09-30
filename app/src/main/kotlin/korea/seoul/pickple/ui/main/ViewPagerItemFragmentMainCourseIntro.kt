@@ -20,7 +20,7 @@ class ViewPagerItemFragmentMainCourseIntro(private val resId : Int,private val p
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewpager_item_img_course.setOnClickListener {
-            (this.activity as? MainActivity)?.onClickIntroPage(page)
+//            (this.activity as? MainActivity)?.onClickIntroPage(page)
         }
     }
 }

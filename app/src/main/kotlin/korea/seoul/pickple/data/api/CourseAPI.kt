@@ -5,6 +5,7 @@ import korea.seoul.pickple.data.api.response.BaseResponse
 import korea.seoul.pickple.data.api.response.course.CourseInfoResponse
 import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -26,7 +27,7 @@ interface CourseAPI {
     @POST("course/edit")
     @Multipart
     fun createCourse(
-        @PartMap() params : HashMap<String,Any>,
+        @PartMap params : HashMap<String,RequestBody>,
         @Part thumbnail: MultipartBody.Part
     ) : Call<BaseResponse>
 

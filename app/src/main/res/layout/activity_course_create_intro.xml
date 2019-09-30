@@ -219,7 +219,7 @@
                     app:boxCornerRadiusTopEnd="23dp"
                     app:boxCornerRadiusTopStart="23dp"
 
-                    android:hint="#1개의 태그를 입력해주세요."
+                    android:hint="#으로 구분해서 해시태그를 입력해주세요"
                     app:hintEnabled="true"
                     app:hintAnimationEnabled="true"
                     android:layout_marginTop="10dp"

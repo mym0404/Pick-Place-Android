@@ -44,19 +44,6 @@
         app:layout_constraintStart_toEndOf="@id/act_navi_review_list_img_review"
         app:layout_constraintTop_toTopOf="@id/act_navi_review_list_img_review" />
 
-    <TextView
-        android:fontFamily="@font/nanum_square_regular"
-        android:id="@+id/act_navi_review_list_tv_review_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="120"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/act_navi_review_list_tv_my_review"
-        app:layout_constraintStart_toEndOf="@id/act_navi_review_list_tv_my_review"
-        app:layout_constraintTop_toTopOf="@id/act_navi_review_list_tv_my_review" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/act_navi_review_list_recycler_review"

@@ -10,6 +10,7 @@ import korea.seoul.pickple.data.api.response.course.GetHashTagResponse
 import korea.seoul.pickple.data.entity.Course
 import korea.seoul.pickple.data.enumerator.SeoulDistrict
 import korea.seoul.pickple.data.repository.interfaces.CourseRepository
+import okhttp3.RequestBody
 import retrofit2.Call
 
 class CourseRepositoryImpl (private val courseAPI : CourseAPI,private val multiPartUtil: MultiPartUtil) : CourseRepository {
@@ -17,7 +18,7 @@ class CourseRepositoryImpl (private val courseAPI : CourseAPI,private val multiP
 
     override fun createCourse(name: String, description: String, thumbnail: Uri, places: List<Int>, distances: List<Float>, tags: List<String>, district: SeoulDistrict, type: Course.Type) : Call<BaseResponse> {
 
-        val params = hashMapOf(
+        val params: HashMap<String, RequestBody> = hashMapOf(
             "courseName" to name,
             "description" to description,
             "place[0]" to places.getOrNull(0),
@@ -37,7 +38,10 @@ class CourseRepositoryImpl (private val courseAPI : CourseAPI,private val multiP
             "district" to district.code,
             "type" to type.type,
             "icon" to type.type
-        ).filter { it.value != null } as HashMap<String,Any>
+        ).filter { it.value != null }.mapValues {
+
+            multiPartUtil.stringToPart(it.value.toString())
+        } as HashMap<String,RequestBody>
 
         return courseAPI.createCourse(
             params,

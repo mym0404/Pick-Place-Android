@@ -68,8 +68,9 @@ class CourseCreateIntroActivity : AppCompatActivity() {
                 val title = pair1.first
                 val thumbnail = pair1.second
                 val description = pair2.first
-                val tagString = pair2.second
+                var tagString = pair2.second
 
+                if(tagString.firstOrNull() == '#') tagString = tagString.drop(1)
                 val tagList = tagString.filterNot { it == ',' || it == ' ' }.split('#')
 
                 navigate(this@CourseCreateIntroActivity, NavigationArgs.CourseCreateArgs(title, thumbnail, description, tagList,false))

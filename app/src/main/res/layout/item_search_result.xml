@@ -56,9 +56,13 @@
                     android:textSize="8dp"/>
 
                 <TextView
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:fontFamily="@font/nanum_square_regular"
                     android:id="@+id/item_search_result_course_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="청춘공감\n세대공감길"
                     android:gravity="center_horizontal"
@@ -82,8 +86,8 @@
 
                     <ImageView
                         android:id="@+id/item_search_result_img_review"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:src="@drawable/more_btn_review"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -100,7 +104,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:text="122의 후기"
                         android:layout_marginStart="6dp"
-                        android:textSize="6sp"/>
+                        android:textSize="12sp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,25 +117,25 @@
 
                     <ImageView
                         android:id="@+id/item_search_result_img_heart"
-                        android:layout_width="8dp"
-                        android:layout_height="8dp"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
                         android:src="@drawable/more_btn_heart"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
                     <TextView
-                        android:fontFamily="@font/nanum_square_regular"
                         android:id="@+id/item_search_result_tv_heart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toEndOf="@id/item_search_result_img_heart"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="80"
                         android:layout_marginStart="6dp"
-                        android:textSize="7sp"/>
+                        android:fontFamily="@font/nanum_square_regular"
+                        android:text="80"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/item_search_result_img_heart"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

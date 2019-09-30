@@ -43,9 +43,11 @@ class ViewPagerItemFragmentMainCourseDetail: Fragment() {
         mainAPI.listMainCourses(currentPosition).callback(
             successCallback = {
 
-                var courseList = it.data?.getOrNull(0)?.info?.map {
-                    it.toEntity()
-                } ?: listOf()
+                var courseList = it?.data?.map {
+                    it.info?.getOrNull(0)?.toEntity()
+                }?.filterNotNull() ?: listOf()
+
+
 
                 courseLatestList = courseList // 최신순 리스트에 넣기
 
