@@ -1,5 +1,7 @@
 # PickPle [픽플레이스]
 
+<img alt="" src="https://github.com/mym0404/Pick-Place-Android/blob/master/1.jpeg" />
+
 ----
 ## PickPle Project Repositories
 
