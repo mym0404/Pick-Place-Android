@@ -22,6 +22,16 @@ android {
 
     compileSdkVersion constants.targetSdkVersion
 
+    signingConfigs {
+        release {
+            storeFile = file("/Users/mj/Library/Mobile Documents/com~apple~CloudDocs/KEYSTORE/PICKPLE/PICKPLE")
+            storePassword = "ansaudwn123"
+            keyAlias = "PICKPLE"
+            keyPassword = "ansaudwn123"
+
+        }
+    }
+
     defaultConfig {
         applicationId constants.packageName
         minSdkVersion constants.minSdkVersion
@@ -53,8 +63,10 @@ android {
              * Release 빌드에서 코드의 shrink를 허용합니다.
              * 3.4부터 R8이 Proguard 대신 default로 사용되고 Proguard는 쓰이지 않습니다.
              */
-            minifyEnabled true
+            signingConfig = signingConfigs.release
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable = true
         }
     }
     /**
@@ -82,6 +94,8 @@ android {
             includeAndroidResources = true
         }
     }
+
+
 
 }
 
