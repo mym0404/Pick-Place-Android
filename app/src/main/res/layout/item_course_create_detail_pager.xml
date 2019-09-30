@@ -6,6 +6,11 @@
     >
 
     <data>
+
+        <variable
+            name="vm"
+            type="korea.seoul.pickple.ui.course.create.CourseCreateViewModel" />
+
         <variable
             name="item"
             type="korea.seoul.pickple.data.entity.Place" />
@@ -14,6 +19,9 @@
 
 
     <androidx.cardview.widget.CardView
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> vm.onClickPlaceDetail(item)}"
         app:cardUseCompatPadding="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

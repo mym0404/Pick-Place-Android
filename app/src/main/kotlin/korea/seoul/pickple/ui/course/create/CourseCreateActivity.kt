@@ -129,6 +129,10 @@ class CourseCreateActivity : AppCompatActivity() {
     private fun observeViewModel() {
         mViewModel.apply {
 
+            clickPlaceDetail.observeOnce(this@CourseCreateActivity) {
+//                navigate(this@CourseCreateActivity,NavigationArgs.
+            }
+
             courseCreateSuccess.observeOnce(this@CourseCreateActivity) {
                 val dialog = ShareDialog()
                 dialog.show(supportFragmentManager,dialog.tag)

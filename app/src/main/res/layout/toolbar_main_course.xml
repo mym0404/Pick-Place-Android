@@ -73,6 +73,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
         android:id="@+id/toolbar_main_course_tv_course_name"
         android:visibility="gone"
         android:layout_width="wrap_content"

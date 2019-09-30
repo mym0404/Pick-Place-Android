@@ -50,6 +50,8 @@
 
 
                 <EditText
+                    android:lines="1"
+                    android:maxLines="1"
                     android:fontFamily="@font/nanum_square_regular"
                     android:textCursorDrawable="@null"
                     android:textColor="@color/colorBlack"
@@ -232,6 +234,8 @@
                     android:layout_width="0dp"
                     android:layout_height="46dp">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:maxLines="1"
+                        android:lines="1"
                         android:fontFamily="@font/nanum_square_regular"
                         android:textSize="13sp"
                         android:singleLine="true"

@@ -29,10 +29,16 @@ class MainActivity : AppCompatActivity() {
         initVerticalViewPager()
         setVerticalViewPagerPageChangeListener()
         setToolbarClickListener()
+
+        toolbar_main_course_tv_course_name.setOnClickListener {
+            act_main_viewpager2_vertical.currentItem = 0
+        }
     }
 
     private fun initVerticalViewPager() {
-        act_main_viewpager2_vertical.apply { // 이렇게 하면 코틀린 좀 쓰는 놈인가 하고 반한다 사람들이 ,,
+        act_main_viewpager2_vertical.apply {
+            // 이렇게 하면 코틀린 좀 쓰는 놈인가 하고 반한다 사람들이 ,,
+            isUserInputEnabled = false
             orientation = ViewPager2.ORIENTATION_VERTICAL // 뷰페이저를 수직으로 설정
             adapter = FragmentAdatperMainVertical(this@MainActivity) // 어댑터 설정
             offscreenPageLimit = 2
@@ -64,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
                         toolbar_main_img_logo.visibility = View.VISIBLE
                     }
-                    1-> {
+                    1 -> {
                         toolbar_main_course_tv_course_name.visibility = View.VISIBLE
                         toolbar_main_course_indicator_view.visibility = View.VISIBLE
 
@@ -92,11 +98,10 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
 
 
-        if(act_main_viewpager2_vertical.currentItem == 1) {
+        if (act_main_viewpager2_vertical.currentItem == 1) {
             act_main_viewpager2_vertical.currentItem = 0
-        }
-        else if(!isShowingSnackBar) {
-            val sb = Snackbar.make(root,"정말 Pickple을 종료하시겠습니까?",Snackbar.LENGTH_LONG)
+        } else if (!isShowingSnackBar) {
+            val sb = Snackbar.make(root, "정말 Pickple을 종료하시겠습니까?", Snackbar.LENGTH_LONG)
             sb.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                 override fun onShown(transientBottomBar: Snackbar?) {
                     super.onShown(transientBottomBar)
@@ -109,14 +114,13 @@ class MainActivity : AppCompatActivity() {
                 }
             })
             sb.show()
-        }
-        else {
+        } else {
 
             super.onBackPressed()
         }
     }
 
-    fun onClickIntroPage(position : Int) {
-        navigate(this,NavigationArgs.NavigationCourseArg(Course.Type.parse(position)))
+    fun onClickIntroPage(position: Int) {
+        navigate(this, NavigationArgs.NavigationCourseArg(Course.Type.parse(position)))
     }
 }

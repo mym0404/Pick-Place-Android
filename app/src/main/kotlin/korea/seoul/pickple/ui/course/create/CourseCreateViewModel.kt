@@ -117,6 +117,10 @@ class CourseCreateViewModel(
     private val _clickPlaceBackground : MutableLiveData<Once<Place>> = MutableLiveData()
     val clickPlaceBackground : LiveData<Once<Place>>
         get() = _clickPlaceBackground
+
+    private val _clickPlaceDetail : MutableLiveData<Once<Place>> = MutableLiveData()
+    val clickPlaceDetail : LiveData<Once<Place>>
+        get() = _clickPlaceDetail
     //endregion
 
 
@@ -178,6 +182,11 @@ class CourseCreateViewModel(
     }
 
     //region Event
+
+    fun onClickPlaceDetail(place : Place) {
+        _clickPlaceDetail.value = Once(place)
+    }
+
     fun onClickMarble(position : Int) {
         try {
             curPlace.value = places.value?.getOrNull(position)
